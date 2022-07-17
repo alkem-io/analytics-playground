@@ -3,3 +3,12 @@
 /node_modules
 
 /docs/diagrams/.$*
+
+*.log
+.env
+.env.local
+.env.dev
+.DS_Store
+dist
+secrets/*.json
+.~*

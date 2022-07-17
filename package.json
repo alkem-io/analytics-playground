@@ -1,0 +1,59 @@
+{
+  "name": "@alkemio/analytics-playground",
+  "version": "0.1.0",
+  "description": "Alkemio Analytics playground, for evaluating new ways of extracting value from the Alkemio domain model data",
+  "author": "Alkemio Foundation",
+  "private": false,
+  "license": "EUPL-1.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "d3",
+    "graph"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.prod.json",
+    "prebuild": "npm run clean",
+    "clean": "rimraf ./dist",
+    "format": "prettier --write src/**/*.ts",
+    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
+    "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
+    "nodemon": "nodemon",
+    "generate-graph": "ts-node-dev src/generate-graph.ts",
+    "generate-visualisation": "ts-node-dev src/generate-visualisation.ts",
+    "start": "npm run generate-graph",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alkem-io/analytics-playground.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techsmyth/btc-tx-graph/issues"
+  },
+  "homepage": "https://github.com/alkem-io/analytics-playground",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^14.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.5.1",
+    "ts-node-dev": "^1.1.7"
+  },
+  "dependencies": {
+    "@alkemio/client-lib": "^0.14.9",
+    "dotenv": "^8.2.0",
+    "jsonpath": "^1.0.2",
+    "nodemon": "^2.0.6",
+    "promisify-child-process": "^4.1.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.3",
+    "winston": "^3.3.3"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}

@@ -1,0 +1,30 @@
+query {
+  hubs {
+    id
+    nameID
+    displayName
+    challenges {
+      id
+      nameID
+      displayName
+      community {
+        memberUsers {
+          id
+          nameID
+        }
+        memberOrganizations {
+          id
+          nameID
+        }
+        leadOrganizations {
+          id
+          nameID
+        }
+        leadUsers {
+          id
+          nameID
+        }
+      }
+    }
+  }
+}

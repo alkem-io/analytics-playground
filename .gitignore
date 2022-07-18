@@ -1,5 +1,15 @@
 # compiled output
 /dist
 /node_modules
+/output
 
 /docs/diagrams/.$*
+
+*.log
+.env
+.env.local
+.env.dev
+.DS_Store
+dist
+secrets/*.json
+.~*

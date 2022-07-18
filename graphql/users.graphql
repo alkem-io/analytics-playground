@@ -1,0 +1,13 @@
+query {
+  users {
+    id
+    nameID
+    displayName
+    profile {
+      location {
+        country
+        city
+      }
+    }
+  }
+}

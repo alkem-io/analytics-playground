@@ -5,7 +5,7 @@ const main = async () => {
   dotenv.config();
   const alkemioAdapter = new AlkemioAdapter();
 
-  alkemioAdapter.generateVisualisation();
+  alkemioAdapter.generateVizualization();
 };
 
 main().catch(error => {

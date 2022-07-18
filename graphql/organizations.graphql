@@ -1,0 +1,13 @@
+query {
+  organizations {
+    id
+    nameID
+    displayName
+    profile {
+      location {
+        country
+        city
+      }
+    }
+  }
+}

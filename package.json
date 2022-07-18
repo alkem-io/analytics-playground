@@ -20,7 +20,7 @@
     "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
     "nodemon": "nodemon",
     "generate-graph": "ts-node-dev src/generate-graph.ts",
-    "generate-visualisation": "ts-node-dev src/generate-visualisation.ts",
+    "generate-vizualization": "ts-node-dev src/generate-vizualization.ts",
     "start": "npm run generate-graph",
     "prepublishOnly": "npm run build"
   },

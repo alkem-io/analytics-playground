@@ -1,0 +1,29 @@
+query {
+  hubs {
+    id
+    nameID
+    displayName
+    community {
+      memberUsers {
+        id
+        nameID
+      }
+      memberOrganizations {
+        id
+        nameID
+      }
+      leadOrganizations {
+        id
+        nameID
+      }
+      leadUsers {
+        id
+        nameID
+      }
+    }
+    host {
+      id
+      nameID
+    }
+  }
+}

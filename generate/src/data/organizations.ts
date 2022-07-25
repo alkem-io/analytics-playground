@@ -6,6 +6,9 @@ export const organizationsGraphql = {
         "nameID": "enpuls",
         "displayName": "Enpuls",
         "profile": {
+          "avatar": {
+            "uri": "https://newenergycoalition.org/custom/uploads/2019/09/Enpuls.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -17,6 +20,9 @@ export const organizationsGraphql = {
         "nameID": "microsoft-azure",
         "displayName": "Microsoft Azure",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/1200px-Microsoft_Azure.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -28,6 +34,9 @@ export const organizationsGraphql = {
         "nameID": "novum",
         "displayName": "NOVUM",
         "profile": {
+          "avatar": {
+            "uri": "https://content.presspage.com/uploads/1484/1920_novum-221094.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -39,6 +48,9 @@ export const organizationsGraphql = {
         "nameID": "politie",
         "displayName": "Politie",
         "profile": {
+          "avatar": {
+            "uri": "https://www.politie.nl/politie2014/img/politie_logo.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -50,6 +62,9 @@ export const organizationsGraphql = {
         "nameID": "codefornl",
         "displayName": "Code for NL",
         "profile": {
+          "avatar": {
+            "uri": "https://raw.githubusercontent.com/codefornl/assets/main/code-for-nl/modern-2021/code-for-nl-logo-g919.png"
+          },
           "location": {
             "country": "NL",
             "city": ""
@@ -61,6 +76,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-den-bosch",
         "displayName": "Gemeente Den Bosch",
         "profile": {
+          "avatar": {
+            "uri": "https://i1.wp.com/romagazine.nl/14nwsite/wp-content/uploads/2018/08/Logo-Gemeente-Den-Bosch.jpg?fit=960%2C248"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -72,6 +90,9 @@ export const organizationsGraphql = {
         "nameID": "waternet",
         "displayName": "Waternet",
         "profile": {
+          "avatar": {
+            "uri": "https://innovatiepartners.nl/strapi//uploads/thumbnail_Logo_Waternet_af55fff225.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -83,6 +104,9 @@ export const organizationsGraphql = {
         "nameID": "siemens",
         "displayName": "Siemens",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmQR86QeWUYm5psRSQx65xHRWWLqaLa1tDdJ3fwRdgEVw9"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -94,6 +118,9 @@ export const organizationsGraphql = {
         "nameID": "rvo",
         "displayName": "RVO",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmPmnawhAMNLwdnwfBFc1vHVWQFEoS7DAkZ1WGGANSqcsU"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -105,6 +132,9 @@ export const organizationsGraphql = {
         "nameID": "citycentrum-zwolle",
         "displayName": "Citycentrum Zwolle",
         "profile": {
+          "avatar": {
+            "uri": "https://c8.alamy.com/comp/2D20WXX/zwolle-netherlands-september-26-2020-citycentre-of-zwolle-with-canals-old-historic-ships-and-houses-and-bridge-2D20WXX.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -116,6 +146,9 @@ export const organizationsGraphql = {
         "nameID": "amsterdamt3d",
         "displayName": "Gemeente Amsterdam - T3D",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmTjXQ7gBqzcupHGnioUey7HnjWRjMW1UkLvjDuqTTogLg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -127,6 +160,9 @@ export const organizationsGraphql = {
         "nameID": "waterschap-vallei",
         "displayName": "Waterschap Vallei",
         "profile": {
+          "avatar": {
+            "uri": "https://www.coebbe.nl/app/uploads/2020/01/logos-waterschap-vallei-en-veluwe.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -138,6 +174,9 @@ export const organizationsGraphql = {
         "nameID": "breda-univsersity",
         "displayName": "Breda University of Applied Sciences",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Breda_University_of_Applied_Sciences_Logo.svg/1200px-Breda_University_of_Applied_Sciences_Logo.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -149,6 +188,9 @@ export const organizationsGraphql = {
         "nameID": "benchmark-electronics",
         "displayName": "Benchmark Electronics",
         "profile": {
+          "avatar": {
+            "uri": "https://findlogovector.com/wp-content/uploads/2018/12/benchmark-electronics-logo-vector.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -160,6 +202,9 @@ export const organizationsGraphql = {
         "nameID": "org-woningbouwatelier",
         "displayName": "Organisatie Wonigbouwatelier",
         "profile": {
+          "avatar": {
+            "uri": "https://stadszaken.nl/upload/images/201205-ff42-1015_729x243%281%29.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -171,6 +216,9 @@ export const organizationsGraphql = {
         "nameID": "ministerie-van-landbouw",
         "displayName": "Ministerie van Landbouw",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/4/44/Ministerie_van_Landbouw%2C_Natuur_en_Voedselkwaliteit_Logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -182,6 +230,9 @@ export const organizationsGraphql = {
         "nameID": "luchthaven-schiphol",
         "displayName": "Luchthaven Schiphol",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWqU8YKYw8HPGZgtt524ygaBz8Luw5WQrbiV5QQx1kH2u"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -193,6 +244,9 @@ export const organizationsGraphql = {
         "nameID": "tec",
         "displayName": "TEC",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmP1uH7ZpLyuyimQHW8C2typyCBikdNLa4Ua7NyQq1mPWv"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -204,6 +258,9 @@ export const organizationsGraphql = {
         "nameID": "anivizzion",
         "displayName": "Anivizzion",
         "profile": {
+          "avatar": {
+            "uri": "http://scad-rev.com/wp-content/uploads/2015/04/cropped-cropped-anivizzion-logo1.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -215,6 +272,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-breda",
         "displayName": "Gemeente Breda",
         "profile": {
+          "avatar": {
+            "uri": "https://svgarchive.com/wp-content/uploads/gemeente-breda.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -226,6 +286,9 @@ export const organizationsGraphql = {
         "nameID": "inter-act",
         "displayName": "Inter Act",
         "profile": {
+          "avatar": {
+            "uri": "https://www.interact5170.org/wp-content/uploads/2018/01/25993475_1534872439921744_359198874_o.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -237,6 +300,9 @@ export const organizationsGraphql = {
         "nameID": "belastingdienst",
         "displayName": "Belastingdienst",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmZ5euraYYgeYs79MWAq87JoG9ec2MrNBjsGtYLxo62nCY"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -248,6 +314,9 @@ export const organizationsGraphql = {
         "nameID": "huawei",
         "displayName": "Huawei",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Huawei_Standard_logo.svg/1200px-Huawei_Standard_logo.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -259,6 +328,9 @@ export const organizationsGraphql = {
         "nameID": "ictu",
         "displayName": "ICTU",
         "profile": {
+          "avatar": {
+            "uri": "https://www.ictu.nl/themes/custom/ictu_theme/assets/images/logo.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -270,6 +342,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-drente",
         "displayName": "Provincie Drente",
         "profile": {
+          "avatar": {
+            "uri": "https://cdn.freebiesupply.com/logos/large/2x/provincie-drenthe-logo-svg-vector.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -281,6 +356,9 @@ export const organizationsGraphql = {
         "nameID": "twinsense360",
         "displayName": "Twinsense360",
         "profile": {
+          "avatar": {
+            "uri": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/7ceef08054b93a8deeea"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -292,6 +370,9 @@ export const organizationsGraphql = {
         "nameID": "c-cube",
         "displayName": "C-Cube",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWFKz8WRoJzo7Qfq1GHXm5CEE24FMke1ZXoxFMcaB9MYM"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -303,6 +384,9 @@ export const organizationsGraphql = {
         "nameID": "havenbedrijf-rotterdam",
         "displayName": "Havenbedrijf Rotterdam",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmU3cncoj8cpNWWx7K2FcQeTEGQsUjy8pF2U7nCWJuKWRk"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -314,6 +398,9 @@ export const organizationsGraphql = {
         "nameID": "antea-group",
         "displayName": "Antea Group",
         "profile": {
+          "avatar": {
+            "uri": "https://californiacraftbeer.com/wp-content/uploads/2012/04/Antea-Group-Logo-Standard.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -325,6 +412,9 @@ export const organizationsGraphql = {
         "nameID": "cesium",
         "displayName": "Cesium",
         "profile": {
+          "avatar": {
+            "uri": "https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -336,6 +426,9 @@ export const organizationsGraphql = {
         "nameID": "green-land",
         "displayName": "Green Land",
         "profile": {
+          "avatar": {
+            "uri": "https://thumbs.dreamstime.com/z/green-land-logo-4686534.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -347,6 +440,9 @@ export const organizationsGraphql = {
         "nameID": "min-i-en-w",
         "displayName": "Ministerie van Infrastructuur en Waterstaat",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmawTuBgbSRzbp6btqsxeSQ6bSywwoH2eWEi6ea4X2qxn9"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -358,6 +454,9 @@ export const organizationsGraphql = {
         "nameID": "pzh",
         "displayName": "Provincie Zuid-Holland",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmdjCV5EHcriPrgATDfGoRTd9bC64kuBMCjNwsjrfn4JLn"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -369,6 +468,9 @@ export const organizationsGraphql = {
         "nameID": "eyefly",
         "displayName": "Eyefly",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmY57EKbBv3vVZF9qqphiw3N7nsqfY8f2hBpzNt32gjGso"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -380,6 +482,9 @@ export const organizationsGraphql = {
         "nameID": "nldig",
         "displayName": "NLdigital",
         "profile": {
+          "avatar": {
+            "uri": "https://www.nederlanddigitaal.nl/binaries/content/gallery/nederlanddigitaal-nl/channel-afbeeldingen/logo-nederland-digitaal.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -391,6 +496,9 @@ export const organizationsGraphql = {
         "nameID": "kadaster",
         "displayName": "Kadaster",
         "profile": {
+          "avatar": {
+            "uri": "https://seeklogo.com/images/K/kadaster-logo-5800931614-seeklogo.com.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -402,6 +510,9 @@ export const organizationsGraphql = {
         "nameID": "50-tinten-groen",
         "displayName": "50 tinten groen Assendorp",
         "profile": {
+          "avatar": {
+            "uri": "https://50tintengroenassendorp.nl/wp-content/uploads/2021/04/50T-LOGO.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -413,6 +524,9 @@ export const organizationsGraphql = {
         "nameID": "analyze",
         "displayName": "Analyze",
         "profile": {
+          "avatar": {
+            "uri": "https://thumbs.dreamstime.com/z/analyze-linear-icon-modern-outline-logo-concept-whit-white-background-productivity-collection-suitable-use-web-apps-133523504.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -424,6 +538,9 @@ export const organizationsGraphql = {
         "nameID": "rijksvastgoedbedrijf",
         "displayName": "Rijksvastgoedbedrijf",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Logo_rijksvastgoedbedrijf.svg/1200px-Logo_rijksvastgoedbedrijf.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -435,6 +552,9 @@ export const organizationsGraphql = {
         "nameID": "inertia-technology",
         "displayName": "Inertia Technology",
         "profile": {
+          "avatar": {
+            "uri": "https://inertia-technology.com/wp-content/uploads/2016/06/inertia_logo-1.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -446,6 +566,9 @@ export const organizationsGraphql = {
         "nameID": "dura-vermeer",
         "displayName": "Dura Vermeer",
         "profile": {
+          "avatar": {
+            "uri": "https://static.cdnlogo.com/logos/d/91/dura-vermeer.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -457,6 +580,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-helmond",
         "displayName": "Gemeente Helmond",
         "profile": {
+          "avatar": {
+            "uri": "https://www.ctmsolution.nl/wp-content/uploads/2020/01/logo-gemeente-helmond.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -468,6 +594,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-rotterdam",
         "displayName": "Gemeente Rotterdam",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmUwu4evUpPevoNXb7oUPfJYcGvTxcbnVj7AGYLEpTcy9K"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -479,6 +608,9 @@ export const organizationsGraphql = {
         "nameID": "mob-inno-delft",
         "displayName": "Mobility Innovation Centre Delft",
         "profile": {
+          "avatar": {
+            "uri": "https://micd.tudelftcampus.nl/wp-content/uploads/sites/3/2021/03/MICD_logo_RGB_Color.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -490,6 +622,9 @@ export const organizationsGraphql = {
         "nameID": "twente-university",
         "displayName": "Twente University",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmcK95QGvx2GVirUoMMEA8uodUEWZYHfWhWcLmdXGNXmLb"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -501,6 +636,9 @@ export const organizationsGraphql = {
         "nameID": "amsterdam",
         "displayName": "Gemeente Amsterdam ",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmU7ujzuGbDAw2my8bXKa6ubZFykZ1NZvuhQBmb5kDfj6J"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -512,6 +650,9 @@ export const organizationsGraphql = {
         "nameID": "tygron-platform",
         "displayName": "Tygron Platform",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmQgiRru85iSaXRz6ZjonZXHPEYwWkoMoTFY2MWXneAVy6"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -523,6 +664,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-almelo",
         "displayName": "Gemeente Almelo",
         "profile": {
+          "avatar": {
+            "uri": "https://cdn.worldvectorlogo.com/logos/gemeente-almelo.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -534,6 +678,9 @@ export const organizationsGraphql = {
         "nameID": "royal-haskoningdhv",
         "displayName": "Royal HaskoningDHV",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/Qmao7SrtandTtggWEpc7xpN9YE9mkBTga9nwbqjbHUyEqN"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -545,6 +692,9 @@ export const organizationsGraphql = {
         "nameID": "denk-aan-morgen",
         "displayName": "Denk aan morgen",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmarFQdvtbMnwVUDD92Guu3Pd1anHyxjJgk5471EveA7NC"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -556,6 +706,9 @@ export const organizationsGraphql = {
         "nameID": "climate-campus",
         "displayName": "Climate Campus",
         "profile": {
+          "avatar": {
+            "uri": "https://myusf.usfca.edu/sites/default/files/images/DECO/OMC_18f_CampusClimateSurvey_600x380_9789_R1.gif"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -567,6 +720,9 @@ export const organizationsGraphql = {
         "nameID": "infranea",
         "displayName": "Infranea",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmeZT9LCCD6BerZWU36nwKuqUUMYfmy84TYFKKFG4QRL52"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -578,6 +734,9 @@ export const organizationsGraphql = {
         "nameID": "universiteit-twente",
         "displayName": "Universiteit Twente",
         "profile": {
+          "avatar": {
+            "uri": "https://www.utwente.nl/logo-stacked.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -589,6 +748,9 @@ export const organizationsGraphql = {
         "nameID": "power-bi",
         "displayName": "Power BI",
         "profile": {
+          "avatar": {
+            "uri": "https://powerbi.microsoft.com/pictures/shared/social/social-default-image.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -600,6 +762,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-noord-holland",
         "displayName": "Provincie Noord-Holland",
         "profile": {
+          "avatar": {
+            "uri": "https://www.noord-holland.nl/Over_de_provincie/Logo/Afbeeldingen/Logo.std?disposition=inline"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -611,6 +776,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-groningen",
         "displayName": "Gemeente Groningen",
         "profile": {
+          "avatar": {
+            "uri": "https://www.amberscript.com/wp-content/uploads/2021/04/Logo-gemeente-Groningen-rood-zwart.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -622,6 +790,9 @@ export const organizationsGraphql = {
         "nameID": "fm-electronic",
         "displayName": "fm electronic",
         "profile": {
+          "avatar": {
+            "uri": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=117488263401982"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -633,6 +804,9 @@ export const organizationsGraphql = {
         "nameID": "rws-zee-delta",
         "displayName": "Rijkswaterstaat Zee en Delta",
         "profile": {
+          "avatar": {
+            "uri": "https://www.informatiehuismarien.nl/publish/pages/113903/rijkswaterstaat.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -644,6 +818,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-flevoland",
         "displayName": "Provincie Flevoland",
         "profile": {
+          "avatar": {
+            "uri": "https://www.tekkoo.nl/wp-content/uploads/2021/03/logo-provincie-flevoland.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -655,6 +832,9 @@ export const organizationsGraphql = {
         "nameID": "nwo",
         "displayName": "NWO",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/Qmab2bhWZFVFkTxZPzcZN83Wz1nfT161Wbn3A6s4KrJG8R"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -666,6 +846,9 @@ export const organizationsGraphql = {
         "nameID": "collaborall",
         "displayName": "CollaborAll",
         "profile": {
+          "avatar": {
+            "uri": "https://pr1.nicelocal.co.nl/dpU3cRI5tjOWUjw_prj1tA/630x384,q85/4px-BW84_n0QJGVPszge3NRBsKw-2VcOifrJIjPYFYkOtaCZxxXQ2d66Nlp3C9uVJSjWGPnOAmkHL11zGwueEbP0yl-I-Apq0bZmJmushMZm9Pcam6lkog"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -677,6 +860,9 @@ export const organizationsGraphql = {
         "nameID": "brainport-eindhoven",
         "displayName": "Brainport Eindhoven",
         "profile": {
+          "avatar": {
+            "uri": "https://assets.fontsinuse.com/static/use-media-items/86/85980/full-1700x1000/5c9b3f9c/Untitled-5.jpeg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -688,6 +874,9 @@ export const organizationsGraphql = {
         "nameID": "deltares",
         "displayName": "Deltares",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmV3QasE6DwYcbFXB8QMwaN2jdSi2EdssUGJcdnmCGGq7u"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -699,6 +888,9 @@ export const organizationsGraphql = {
         "nameID": "overmorgen",
         "displayName": "OverMorgen",
         "profile": {
+          "avatar": {
+            "uri": "https://penrose.law/wp-content/uploads/Logo-Overmorgen.jpg.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -710,6 +902,9 @@ export const organizationsGraphql = {
         "nameID": "the-imagineers",
         "displayName": "The Imagineers",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmaXkDDRogug6jMoVYtaaw222wWgsVKp7BYmoXs1Wg4xxG"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -721,6 +916,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-groningen",
         "displayName": "Provincie Groningen",
         "profile": {
+          "avatar": {
+            "uri": "https://cdn.bullit.digital/kbase/sites/3/20200924094423/Provincie-Groningen-logo.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -732,6 +930,9 @@ export const organizationsGraphql = {
         "nameID": "novi",
         "displayName": "NOVI",
         "profile": {
+          "avatar": {
+            "uri": "https://1000logos.net/wp-content/uploads/2021/11/Novi-Logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -743,6 +944,9 @@ export const organizationsGraphql = {
         "nameID": "tu-eindhoven",
         "displayName": "TU Eindhoven",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWj6axWVWMykHWZh8uSvYqDRbKxcQfCunC5hmYUG1nATW"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -754,6 +958,9 @@ export const organizationsGraphql = {
         "nameID": "data-science-lab",
         "displayName": "Data Science Lab",
         "profile": {
+          "avatar": {
+            "uri": "https://thedesignlove.com/wp-content/uploads/2018/04/338-Data-Science-Lab-Logo-Template.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -765,6 +972,9 @@ export const organizationsGraphql = {
         "nameID": "rws",
         "displayName": "Rijkswaterstaat",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmZBM3kd1X5vsm2cnS793i1Z1TDDJbhXPcWYn4re5erjyX"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -776,6 +986,9 @@ export const organizationsGraphql = {
         "nameID": "water-veluwe",
         "displayName": "Waterschapsbedrijf Veluwe",
         "profile": {
+          "avatar": {
+            "uri": "https://www.h2owaternetwerk.nl/images/2019/januari/Waterschapsbedrijf-Limburg-Waterschap_vallei_en_veluwe-16x9-.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -787,6 +1000,9 @@ export const organizationsGraphql = {
         "nameID": "hogeschool-saxion",
         "displayName": "Hogeschool Saxion",
         "profile": {
+          "avatar": {
+            "uri": "https://d2zzsyfg2u12dx.cloudfront.net/mediaqube/chaincompany/saxion/lg-saxion-rgb.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -798,6 +1014,9 @@ export const organizationsGraphql = {
         "nameID": "vng",
         "displayName": "VNG",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmbpHaBfhm9uJDJXsqdJM5Je5dqVvSWXkcTKHW59RKsuEh"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -809,6 +1028,9 @@ export const organizationsGraphql = {
         "nameID": "witteveenbos",
         "displayName": "Witteveen+Bos",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Logo_Witteveen%2BBos.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -820,6 +1042,9 @@ export const organizationsGraphql = {
         "nameID": "het-stedelijk-museum",
         "displayName": "Het Stedelijk Museum",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmU7ujzuGbDAw2my8bXKa6ubZFykZ1NZvuhQBmb5kDfj6J"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -831,6 +1056,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-ede",
         "displayName": "Gemeente Ede",
         "profile": {
+          "avatar": {
+            "uri": "https://static.cdnlogo.com/logos/g/41/gemeente-ede.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -842,6 +1070,9 @@ export const organizationsGraphql = {
         "nameID": "dchi",
         "displayName": "Dutch Coalition for Humanitarian Innovation",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmYoiyjR2urj7URJTsU1KhQ36gh8qSp1vtdDYnan2kZSqU"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -853,6 +1084,9 @@ export const organizationsGraphql = {
         "nameID": "geonovum",
         "displayName": "Geonovum",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWADwmyWeKTJnzEx9GHVYvg5NBwqJkkUhuqGMviCFwEZ1"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -864,6 +1098,9 @@ export const organizationsGraphql = {
         "nameID": "akkerweb",
         "displayName": "Akkerweb",
         "profile": {
+          "avatar": {
+            "uri": "https://www.wur.nl/upload_mm/b/a/7/39abadf9-8c5f-411a-8118-dda6e85bfcc2_akkerweblogo_ec122fb0_670x418.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -875,6 +1112,9 @@ export const organizationsGraphql = {
         "nameID": "rijks-innovatie-community",
         "displayName": "Rijks Innovatie Community",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmSJ5Hce6XmfnaNvmUKiSpx8PTHtkSgmiEdBnQzVuCVLX8"
+          },
           "location": {
             "country": "NL",
             "city": "NOORDWIJK"
@@ -886,6 +1126,9 @@ export const organizationsGraphql = {
         "nameID": "kade-inspectie",
         "displayName": "Kade-Inspectie",
         "profile": {
+          "avatar": {
+            "uri": "https://www.climatescan.org/uploads/projects/2274/images/2343/Picture15.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -897,6 +1140,9 @@ export const organizationsGraphql = {
         "nameID": "groenbedrijf-deventer",
         "displayName": "Groenbedrijf Deventer",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmdJ9p8z4bbvDJCejDkh291HtQBvzrn92vDVN4Q7B7EeVD"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -908,6 +1154,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-utrecht",
         "displayName": "Provincie Utrecht",
         "profile": {
+          "avatar": {
+            "uri": "https://cdn.freebiesupply.com/logos/large/2x/provincie-utrecht-logo-png-transparent.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -919,6 +1168,9 @@ export const organizationsGraphql = {
         "nameID": "iv-infra",
         "displayName": "IV-Infra",
         "profile": {
+          "avatar": {
+            "uri": "https://zenprospect-production.s3.amazonaws.com/uploads/pictures/616ea3eb41e8c9000147b7cc/picture"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -930,6 +1182,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-den-haag",
         "displayName": "Gemeente Den Haag",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/Qmdw6gd8KhaTi8ESLYJAAEjkETckrMPtKxCCxKU16zfPib"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -941,6 +1196,9 @@ export const organizationsGraphql = {
         "nameID": "denhaag",
         "displayName": "Gemeente Den Haag - T3D",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmfKrohpewGWgUGPfDS8QaqkAbfDpzehT98ANV8Wt2YDMC"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -952,6 +1210,9 @@ export const organizationsGraphql = {
         "nameID": "nda",
         "displayName": "Nederlandse Defensie Academie",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmRphx9XQeVHCT2KahFy1YRDdVb4SfapLvhf2ETUSgva7B"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -963,6 +1224,9 @@ export const organizationsGraphql = {
         "nameID": "commondatafactory",
         "displayName": "Commondatafactory",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWo5AqExEpEqo33i4wSdmwnd6JhCwpvYK5NFMnSPiBFx7"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -974,6 +1238,9 @@ export const organizationsGraphql = {
         "nameID": "climate-adaptation",
         "displayName": "Stichting Climate Adaptation Services",
         "profile": {
+          "avatar": {
+            "uri": "https://zenprospect-production.s3.amazonaws.com/uploads/pictures/6054035a73090600019dc7df/picture"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -985,6 +1252,9 @@ export const organizationsGraphql = {
         "nameID": "bam",
         "displayName": "BAM",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmcMp9QY9Z64M3HMSXbTz3HX26ThxNFLL7dfJZGY8sjvzM"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -996,6 +1266,9 @@ export const organizationsGraphql = {
         "nameID": "universiteit-utrecht",
         "displayName": "Universiteit Utrecht",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmVhgkL8ahgjxuuvnUXmqrYgHYP1GcDTBvmPoP59sdu9Jw"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1007,6 +1280,9 @@ export const organizationsGraphql = {
         "nameID": "drents-ov-delta",
         "displayName": "Drents Overijsselse Delta",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/6/66/Drents_Overijsselse_Delta.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1018,6 +1294,9 @@ export const organizationsGraphql = {
         "nameID": "agrifirm",
         "displayName": "Agrifirm",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmbFQhfpVTvuKMYzZiTNKBmKRDmwYEKzuVupxtPdDTiwoG"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1029,6 +1308,9 @@ export const organizationsGraphql = {
         "nameID": "strukton",
         "displayName": "Strukton",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmQ36br9LrVUYtjRd9TEipsNYf7cvP4RSKemT6hCHmTsgp"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1040,6 +1322,9 @@ export const organizationsGraphql = {
         "nameID": "van-heteren",
         "displayName": "Van Heteren",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmRvGDMaR6v9XL4ZQPJx3JMow2RjpeiejtWxPYx8eWG3FF"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1051,6 +1336,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-amersfoort",
         "displayName": "Gemeente Amersfoort",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmQVpduc4xZCifJ8V3VGMPuLGUVLgsJ7JxGWXCv3eDPhDW"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1062,6 +1350,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-zwolle",
         "displayName": "Gemeente Zwolle",
         "profile": {
+          "avatar": {
+            "uri": "https://jester.nl/wp-content/uploads/2016/03/Gemeente-Zwolle.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1073,6 +1364,9 @@ export const organizationsGraphql = {
         "nameID": "de-johan-cruiff-arena",
         "displayName": "De Johan Cruiff Arena",
         "profile": {
+          "avatar": {
+            "uri": "https://johancruyffinstitute.com/wp-content/uploads/2021/04/Interior-del-estadio-1.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1084,6 +1378,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-capelle",
         "displayName": "Gemeente Capelle aan den IJssel",
         "profile": {
+          "avatar": {
+            "uri": "https://www.capelleaandenijssel.nl/_flysystem/media/capelle-logo-fc.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1095,6 +1392,9 @@ export const organizationsGraphql = {
         "nameID": "kbenp",
         "displayName": "KBenP",
         "profile": {
+          "avatar": {
+            "uri": "https://media.glassdoor.com/sqll/422651/kbenp-squarelogo-1426754313053.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1106,6 +1406,9 @@ export const organizationsGraphql = {
         "nameID": "hz-university",
         "displayName": "HZ University of Applied Sciences",
         "profile": {
+          "avatar": {
+            "uri": "https://logos-download.com/wp-content/uploads/2019/01/HZ_University_of_Applied_Sciences_Logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1117,6 +1420,9 @@ export const organizationsGraphql = {
         "nameID": "next-gen-infra",
         "displayName": "Next Generation Infrastructures",
         "profile": {
+          "avatar": {
+            "uri": "https://isngi.org/wp-content/uploads/2020/01/NGinfra-logo-1.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1128,6 +1434,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-fryslan",
         "displayName": "Provincie Fryslân",
         "profile": {
+          "avatar": {
+            "uri": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0012/7391/brand.gif?itok=BxUOqxU-"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1139,6 +1448,9 @@ export const organizationsGraphql = {
         "nameID": "tauw",
         "displayName": "TAUW",
         "profile": {
+          "avatar": {
+            "uri": "https://www.tauw.com/static/default/media/images/tauw-logo.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1150,6 +1462,9 @@ export const organizationsGraphql = {
         "nameID": "jcr-european-commision",
         "displayName": "JCR European Commision",
         "profile": {
+          "avatar": {
+            "uri": "https://joint-research-centre.ec.europa.eu/themes/contrib/oe_theme/dist/ec/images/logo/positive/logo-ec--en.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1161,6 +1476,9 @@ export const organizationsGraphql = {
         "nameID": "rotterdamt3d",
         "displayName": "Gemeente Rotterdam - T3D",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmRhetSqWEKG9VrWdvsGnb8N7DjgAfcTd1LW5DuLNQDW9t"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1172,6 +1490,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-papendrecht",
         "displayName": "Gemeente Papendrecht",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmTz4BhrWp6FMcAh8jQ4Lyz123P5P2E2WSkUBWqbQkggXD"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1183,6 +1504,9 @@ export const organizationsGraphql = {
         "nameID": "aeroscan",
         "displayName": "Aeroscan",
         "profile": {
+          "avatar": {
+            "uri": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/gnnovbi0yrpux9znz9tc"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1194,6 +1518,9 @@ export const organizationsGraphql = {
         "nameID": "knmi",
         "displayName": "KNMI",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmbysKc1nK8c4x89aBy5ghi9s2htcVvXRsknsbbPcJY8dE"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1205,6 +1532,9 @@ export const organizationsGraphql = {
         "nameID": "wur",
         "displayName": "Wageningen University and Research",
         "profile": {
+          "avatar": {
+            "uri": "https://www.wur.nl/upload/99f85964-d53b-4dc7-b3ff-fb62abc648ce_WUR_RGB_standard_2021-site.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1216,6 +1546,9 @@ export const organizationsGraphql = {
         "nameID": "veiligheidsregio-zeeland",
         "displayName": "Veiligheidsregio Zeeland",
         "profile": {
+          "avatar": {
+            "uri": "https://www.weleurn.com/storage/Z9dHlR3RXfrk8tYNy0A8wN4yebZJY2Zt4XAr0hRK.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1227,6 +1560,9 @@ export const organizationsGraphql = {
         "nameID": "concilium-zwolle",
         "displayName": "Concilium Zwolle",
         "profile": {
+          "avatar": {
+            "uri": "https://newrealities.eu/uploads/_w1100/Pano_NL_Cropped.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1238,6 +1574,9 @@ export const organizationsGraphql = {
         "nameID": "de-groene-boog",
         "displayName": "De Groene Boog",
         "profile": {
+          "avatar": {
+            "uri": "https://press.besix.com/-/media/images/news/besix-nl/a16/de_groene_boog-01.jpg?mh=400&h=400&w=1737&la=en&hash=4BEC2987E2CFA80BE13C2522A2978324"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1249,6 +1588,9 @@ export const organizationsGraphql = {
         "nameID": "philips",
         "displayName": "Philips",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/Qma3BRyPxWUFFML8cqoATcphFpsZG9zTvEzmPpGzitfc9J"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1260,6 +1602,9 @@ export const organizationsGraphql = {
         "nameID": "waterschapshuis",
         "displayName": "Waterschapshuis",
         "profile": {
+          "avatar": {
+            "uri": "https://eafip.eu/wp-content/uploads/2016/12/logo-waterschapshuis.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1271,6 +1616,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-noord-brabant",
         "displayName": "Provincie Noord-Brabant",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmduxNaDZMrw63TTsyGVBqecREFgsFExdk5V4AoHwNwEd4"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1282,6 +1630,9 @@ export const organizationsGraphql = {
         "nameID": "centre-expertise",
         "displayName": "Centre of Expertise Tech For Future",
         "profile": {
+          "avatar": {
+            "uri": "https://assets.bizclikmedia.net/320/e0ee35b707defb5cd2a7398463365603:29202573dff7a1462560a8f4068e41e1/screenshot-20-28163-29-png.webp"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1293,6 +1644,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-utrecht",
         "displayName": "Gemeente Utrecht",
         "profile": {
+          "avatar": {
+            "uri": "https://platform-duic.imgix.net/app/uploads/sites/2/2020/02/logo-gemeente-utrecht-nederlands-groot-1200.png?auto=format&ch=Width%2CDPR%2CSave-Data&fit=max&ixlib=php-1.2.1&q=80"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1304,6 +1658,9 @@ export const organizationsGraphql = {
         "nameID": "bdr-thermea-group",
         "displayName": "BDR Thermea Group",
         "profile": {
+          "avatar": {
+            "uri": "https://mediacdn.bdrthermeagroup.com/-/media/themes/bdrthermeagroup/img/logo.svg?v=1&d=20200216T165751Z&la=en&hash=F4B96B172618A3A2121FD7EDDECB90B7"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1315,6 +1672,9 @@ export const organizationsGraphql = {
         "nameID": "windesheim",
         "displayName": "Windesheim",
         "profile": {
+          "avatar": {
+            "uri": "https://cdn.freebiesupply.com/logos/thumbs/2x/windesheim-logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1326,6 +1686,9 @@ export const organizationsGraphql = {
         "nameID": "johan-cruijff-arena",
         "displayName": "Johan Cruijff Arena",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmYyzmEU1AGMEeDSf8Np23F2YkAECr48Lms4DzJyN8NAn6"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1337,6 +1700,9 @@ export const organizationsGraphql = {
         "nameID": "radboud-universiteit",
         "displayName": "Radboud Universiteit",
         "profile": {
+          "avatar": {
+            "uri": "https://globaltalentmentoring.org/wp-content/uploads/2020/05/radboud-uni.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1348,6 +1714,9 @@ export const organizationsGraphql = {
         "nameID": "tno",
         "displayName": "TNO",
         "profile": {
+          "avatar": {
+            "uri": "https://www.tno.nl/media/7665/tno_logo_zwart_400.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1359,6 +1728,9 @@ export const organizationsGraphql = {
         "nameID": "stabialert",
         "displayName": "StabiAlert",
         "profile": {
+          "avatar": {
+            "uri": "https://service.stabialert.nl/fileadmin/stabialert2017/images/general/SA_Logo2014Small.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1370,6 +1742,9 @@ export const organizationsGraphql = {
         "nameID": "ipo",
         "displayName": "IPO",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmSd2cM6PPiAbc1m1SbbwbgUBa2wYiZpLSr1ebKU8Q1uCk"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1381,6 +1756,9 @@ export const organizationsGraphql = {
         "nameID": "goede-stede-en-trebe",
         "displayName": "Goede Stede en Trebe",
         "profile": {
+          "avatar": {
+            "uri": "https://c8.alamy.com/comp/2CEM7XW/oud-nederlandsche-steden-in-haar-ontstaan-groei-en-ontwikkeling-stedevrijheid-en-toen-later-die-stede-vrijheid-bijna-nimmer-meeraangevochten-een-vanzelfsprekend-iets-was-gewordenbleef-men-uit-gewoonte-tochnog-hechten-aan-die-gekan-teelde-weergangen-met-hunrondeelen-tot-ze-eindelijkspeel-of-siervormen-gewor-den-veranderden-in-opengewerkte-goot-balustrades-de-vensters-werden-groo-ter-en-bleven-nu-on-getraliedde-ingangen-werden-ruimeren-namen-toe-in-aantal-ende-eerst-massieve-toren-neemt-nu-een-steeds-luchter-en-eleganter-vorm-aan-ten-behoeve-van-het-klokken-spel-soms-overgaa-2CEM7XW.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1392,6 +1770,9 @@ export const organizationsGraphql = {
         "nameID": "t-systems",
         "displayName": "T-Systems",
         "profile": {
+          "avatar": {
+            "uri": "https://www.t-systems.com/resource/crblob/218588/b0e71f03622a178044f0a0f7e3f1f391/logo-t-systems-magenta.svg-data.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1403,6 +1784,9 @@ export const organizationsGraphql = {
         "nameID": "logius",
         "displayName": "Logius",
         "profile": {
+          "avatar": {
+            "uri": "https://digicampus.tech/wp-content/uploads/2020/04/logos-01-max-w300.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1414,6 +1798,9 @@ export const organizationsGraphql = {
         "nameID": "ministerie-ezk",
         "displayName": "Ministerie EZK",
         "profile": {
+          "avatar": {
+            "uri": "https://www.boip.int/uploads/inline/Logo-EZK.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1425,6 +1812,9 @@ export const organizationsGraphql = {
         "nameID": "van-hattum",
         "displayName": "Van Hattum en Blankevoort",
         "profile": {
+          "avatar": {
+            "uri": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/012011/logo_vhb-converted.png?itok=cCeVi5E3"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1436,6 +1826,9 @@ export const organizationsGraphql = {
         "nameID": "alkemio",
         "displayName": "Alkemio Foundation",
         "profile": {
+          "avatar": {
+            "uri": "https://alkem.io/ipfs/QmfVvpUmKkQMW5E95az43UsCmH2k6bwayLALtFVgwETHDc"
+          },
           "location": {
             "country": "NL",
             "city": "Den Haag"
@@ -1447,6 +1840,9 @@ export const organizationsGraphql = {
         "nameID": "nelen-en-schuurmans",
         "displayName": "Nelen & Schuurmans",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmRFKVKX2WeSMvjAiRcs6mgnFJVEQxFgDRzDmXtALNNmVw"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1458,6 +1854,9 @@ export const organizationsGraphql = {
         "nameID": "gdh-hho",
         "displayName": "Den Haag - Handhavers",
         "profile": {
+          "avatar": {
+            "uri": "https://www.denhaag.nl/static/denhaagrestylepresentation/images/DH-NL-Rgb-CS6.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1469,6 +1868,9 @@ export const organizationsGraphql = {
         "nameID": "vodafone",
         "displayName": "Vodafone",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmZN42uWKDRf9U6o6pXWEGeeZKTsFSnjJVnYQUSCaZWAWb"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1480,6 +1882,9 @@ export const organizationsGraphql = {
         "nameID": "layhgo",
         "displayName": "Layhgo",
         "profile": {
+          "avatar": {
+            "uri": "https://www.festivak.nl/sites/default/files/styles/medium/public/exhibitors/logos/Layhgo.png?itok=GTzEIlh9"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1491,6 +1896,9 @@ export const organizationsGraphql = {
         "nameID": "water-limburg",
         "displayName": "Waterschapsbedrijf Limburg",
         "profile": {
+          "avatar": {
+            "uri": "https://getlogovector.com/wp-content/uploads/2021/03/wbl-waterschapsbedrijf-limburg-logo-vector.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1502,6 +1910,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-almere",
         "displayName": "Gemeente Almere",
         "profile": {
+          "avatar": {
+            "uri": "https://www.infinitcare.com/wp-content/uploads/2020/11/gemeentelogo-PNG-01_Almere_.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1513,6 +1924,9 @@ export const organizationsGraphql = {
         "nameID": "amsterdam-vervoer-regio",
         "displayName": "Vervoerregio Amsterdam",
         "profile": {
+          "avatar": {
+            "uri": "https://innovatiepartners.nl/strapi//uploads/thumbnail_4387f0fd_fa0f_4885_a50e_41dc39679227_0be1ae9c47.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1524,6 +1938,9 @@ export const organizationsGraphql = {
         "nameID": "reseno",
         "displayName": "Reseno",
         "profile": {
+          "avatar": {
+            "uri": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=102136074546663"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1535,6 +1952,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-goeree",
         "displayName": "Gemeente Goeree-Overflakkee",
         "profile": {
+          "avatar": {
+            "uri": "https://w7.pngwing.com/pngs/356/887/png-transparent-gemeente-goeree-overflakkee-oostflakkee-goedereede-dirksland-den-bommel-others-logo-android-travel.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1546,6 +1966,9 @@ export const organizationsGraphql = {
         "nameID": "min-bzk",
         "displayName": "Ministerie BZK",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/2/26/Ministerie_van_Binnenlandse_Zaken_en_Koninkrijksrelaties_Logo.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1557,6 +1980,9 @@ export const organizationsGraphql = {
         "nameID": "nl-spoorwegen",
         "displayName": "NS",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmaGqrJwMua2tkprrDUt8QGMgHVSXzFotfB6c149FeBf93"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1568,6 +1994,9 @@ export const organizationsGraphql = {
         "nameID": "croonwolter-dros",
         "displayName": "Croonwolter&dros",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmQxcgoucYhQkMJbmpq7gMpzwo9G7hCxckhLdu4eEJmTTj"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1579,6 +2008,9 @@ export const organizationsGraphql = {
         "nameID": "roc-twente",
         "displayName": "ROC Twente",
         "profile": {
+          "avatar": {
+            "uri": "https://impactyou.nl/wp-content/uploads/2021/03/roc-van-twente_logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1590,6 +2022,9 @@ export const organizationsGraphql = {
         "nameID": "minbzk-dg-bestuur",
         "displayName": "Ministerie van BZK - Directoraat-Generaal Bestuur",
         "profile": {
+          "avatar": {
+            "uri": "https://images-na.ssl-images-amazon.com/images/I/61AIGQW6ZEL.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1601,6 +2036,9 @@ export const organizationsGraphql = {
         "nameID": "tennet",
         "displayName": "TenneT",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmcWBBBVQTeGkszHVpcBowMqQtxTVXrsEvssAc5x68kREj"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1612,6 +2050,9 @@ export const organizationsGraphql = {
         "nameID": "yesdelft",
         "displayName": "YES!Delft",
         "profile": {
+          "avatar": {
+            "uri": "https://www.yesdelft.com/wp-content/uploads/2020/05/Algemeen-logo_blauw.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1623,6 +2064,9 @@ export const organizationsGraphql = {
         "nameID": "breman-installatiegroep",
         "displayName": "Breman Installatiegroep",
         "profile": {
+          "avatar": {
+            "uri": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/qluvbwpoxtneftgwdzhu"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1634,6 +2078,9 @@ export const organizationsGraphql = {
         "nameID": "jads",
         "displayName": "Jeronimus Bosch Academy for Digital Science",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmaG2V9unsHadaVoE8FvWfqma41fJGfFEYXVcFSmZKbpKH"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1645,6 +2092,9 @@ export const organizationsGraphql = {
         "nameID": "axians",
         "displayName": "Axians",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmTiUwWhNSkjR1ALMWxn4Gb2yB5k8szDrhviNJ2pQ7pDDq"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1656,6 +2106,9 @@ export const organizationsGraphql = {
         "nameID": "dbc",
         "displayName": "Dutch Blockchain Coalition",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmV1rr6xRsVCXPSyX5UzJjQ6aiff7iWQLG8WoXP5jsZgdz"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1667,6 +2120,9 @@ export const organizationsGraphql = {
         "nameID": "argaleo",
         "displayName": "Argaleo",
         "profile": {
+          "avatar": {
+            "uri": "https://www.argaleo.com/wp-content/uploads/2019/10/argaleo_linkedin.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1678,6 +2134,9 @@ export const organizationsGraphql = {
         "nameID": "phinion",
         "displayName": "Phinion",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmcnmTg5ALrpCKc4KxFKAZ9Wi72FKWJKEgCExUnSGJ8Efd"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1689,6 +2148,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-hilversum",
         "displayName": "Gemeente Hilversum",
         "profile": {
+          "avatar": {
+            "uri": "https://images.squarespace-cdn.com/content/v1/5c34c7e925bf026bea5472e9/1598519298117-LBD10LUT76A65ONJLDS7/Logo-Gemeente-Hilversum.png?format=1500w"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1700,6 +2162,9 @@ export const organizationsGraphql = {
         "nameID": "programma-bro",
         "displayName": "Programma BRO",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmYMUXbZSTZTkDrbmQzMeokLRFPtCMxowj1yrBgsWNhTra"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1711,6 +2176,9 @@ export const organizationsGraphql = {
         "nameID": "dh-lls",
         "displayName": "Living Lab Scheveningen",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmauCimqtyFVzmd7Zgs8bsMuy1VUttCFidGksuBAQ2k8z9"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1722,6 +2190,9 @@ export const organizationsGraphql = {
         "nameID": "dunea",
         "displayName": "Dunea",
         "profile": {
+          "avatar": {
+            "uri": "https://www.dunea.nl/over-dunea/-/media/images/over-dunea/pers-en-publiciteit/logo-rgb-dunea.ashx"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1733,6 +2204,9 @@ export const organizationsGraphql = {
         "nameID": "min-jenv",
         "displayName": "Ministerie J & V",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Ministerie_van_Justitie_en_Veiligheid_Logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1744,6 +2218,9 @@ export const organizationsGraphql = {
         "nameID": "prorail",
         "displayName": "Prorail",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmVAH1go75SfXjQgBXudK8SHB563dC8eTBaaKJsFKiHDLQ"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1755,6 +2232,9 @@ export const organizationsGraphql = {
         "nameID": "future-city-foundation",
         "displayName": "Future City Foundation",
         "profile": {
+          "avatar": {
+            "uri": "https://civity.nl/wp-content/uploads/2019/10/future-city-foundation-450px.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1766,6 +2246,9 @@ export const organizationsGraphql = {
         "nameID": "stopthetraffik",
         "displayName": "Stop the Traffik",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmRTQoD4rRgjakD9s5hKkJyP2b3QTYAwiafKZUdB8Zx51D"
+          },
           "location": {
             "country": "GB",
             "city": "London"
@@ -1777,6 +2260,9 @@ export const organizationsGraphql = {
         "nameID": "shell",
         "displayName": "Shell",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/1200px-Shell_logo.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1788,6 +2274,9 @@ export const organizationsGraphql = {
         "nameID": "wetterskip-fryslan",
         "displayName": "Wetterskip Fryslân",
         "profile": {
+          "avatar": {
+            "uri": "https://www.agrisource.org/medias/7c7c996d-4313-4b40-a907-59f044522e73.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1799,6 +2288,9 @@ export const organizationsGraphql = {
         "nameID": "knvb",
         "displayName": "KNVB",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Royal_Netherlands_Football_Association_Logo.svg/1200px-Royal_Netherlands_Football_Association_Logo.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1810,6 +2302,9 @@ export const organizationsGraphql = {
         "nameID": "digicampus",
         "displayName": "Digicampus",
         "profile": {
+          "avatar": {
+            "uri": "https://digicampus.tech/wp-content/uploads/2020/04/digicampus-website-icon.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1821,6 +2316,9 @@ export const organizationsGraphql = {
         "nameID": "woonfabriek-zwolle",
         "displayName": "Woonfabriek Zwolle",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmPN5McYcS56JMM2k5qG9G5aY95FsBu3FYXEwkYcrmbQTV"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1832,6 +2330,9 @@ export const organizationsGraphql = {
         "nameID": "esri",
         "displayName": "Esri",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmSyz9BniR4MwmvrTazrmSGTa9aUGJJQ6AydYChurN5fBt"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1843,6 +2344,9 @@ export const organizationsGraphql = {
         "nameID": "logistics-brabant",
         "displayName": "Logistics Community Brabant",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/Qmc7xwFWAftoSyv9ygZHpSip6bEwSEKVufRGPZCUJEZHea"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1854,6 +2358,9 @@ export const organizationsGraphql = {
         "nameID": "saxion",
         "displayName": "Saxion",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Saxion_University_of_Applied_Sciences_logo.svg/1280px-Saxion_University_of_Applied_Sciences_logo.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1865,6 +2372,9 @@ export const organizationsGraphql = {
         "nameID": "rvig",
         "displayName": "Rijksdienst voor Identiteitsgegevens",
         "profile": {
+          "avatar": {
+            "uri": "https://nvvb.nl/media/filer_public_thumbnails/filer_public/f7/90/f790587b-4e61-4df6-aecf-45848d8c8199/logo-rvig.png__650x1000_q85_subsampling-2.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1876,6 +2386,9 @@ export const organizationsGraphql = {
         "nameID": "arcadis",
         "displayName": "Arcadis",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmZxDbhCPvBnTdMN2Ct5xjZNEjCVUT23RrRMNFuJi6jGkA"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1887,6 +2400,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-schouwen",
         "displayName": "Gemeente Schouwen-Duiveland",
         "profile": {
+          "avatar": {
+            "uri": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0017/3234/brand.gif?itok=lIG9mQZS"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1898,6 +2414,9 @@ export const organizationsGraphql = {
         "nameID": "istimewa",
         "displayName": "Istimewa",
         "profile": {
+          "avatar": {
+            "uri": "https://cdn.dribbble.com/users/1379307/screenshots/5124463/media/94170a467101fe0669e071b42a48d83f.jpg?compress=1&resize=400x300"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1909,6 +2428,9 @@ export const organizationsGraphql = {
         "nameID": "cyclomedia",
         "displayName": "Cyclomedia",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWVJEhuSWVYQUXDLysfm1K4nSdtbFAVunMNKu9k692Sfs"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1920,6 +2442,9 @@ export const organizationsGraphql = {
         "nameID": "zwollefonds",
         "displayName": "Zwollefonds",
         "profile": {
+          "avatar": {
+            "uri": "https://www.blauwvingerdagenzwolle.nl/wp-content/uploads/2015/03/Logo-ZF-Positief.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1931,6 +2456,9 @@ export const organizationsGraphql = {
         "nameID": "futureinsight-bv",
         "displayName": "FutureInsight BV",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmTX32XPmNHapLbD52S3KvFncnmn46ZnwsbExkoWTEBVLg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1942,6 +2470,9 @@ export const organizationsGraphql = {
         "nameID": "vialis",
         "displayName": "Vialis",
         "profile": {
+          "avatar": {
+            "uri": "https://i.ytimg.com/vi/NL6LhKDJwng/maxresdefault.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1953,6 +2484,9 @@ export const organizationsGraphql = {
         "nameID": "unity",
         "displayName": "Unity",
         "profile": {
+          "avatar": {
+            "uri": "https://1000logos.net/wp-content/uploads/2021/10/Unity-logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1964,6 +2498,9 @@ export const organizationsGraphql = {
         "nameID": "world-class-maintenance",
         "displayName": "World Class Maintenance",
         "profile": {
+          "avatar": {
+            "uri": "https://img1.wsimg.com/isteam/ip/0f00c7d8-26a3-46b7-b4ee-380ee3aecae7/WCM%20Website%20Logo.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1975,6 +2512,9 @@ export const organizationsGraphql = {
         "nameID": "wonen-en-ruimte",
         "displayName": "Wonen en Ruimte",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmQKeaDi1P34S7YpcyuBgAwyXjkKRxAzMVZMGspqovk5XP"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1986,6 +2526,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-alkmaar",
         "displayName": "Gemeente Alkmaar",
         "profile": {
+          "avatar": {
+            "uri": "https://www.alkmaar.nl/wp-content/uploads/2020/06/alkmaar.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -1997,6 +2540,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-eindhoven",
         "displayName": "Gemeente Eindhoven",
         "profile": {
+          "avatar": {
+            "uri": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/032014/eindhoven_pms485_liggend_bb-converted.png?itok=AXRWG2PP"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2008,6 +2554,9 @@ export const organizationsGraphql = {
         "nameID": "hoogh-stichtse",
         "displayName": "Hoogheermanschap De Stichtse Rijnlanden",
         "profile": {
+          "avatar": {
+            "uri": "https://www.hdsr.nl/publish/pages/110833/logo-hdsr.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2019,6 +2568,9 @@ export const organizationsGraphql = {
         "nameID": "geomaat",
         "displayName": "Geomaat",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmWp7a4EYKp1fca9YWygtaobrvuKaRiwwp6AUMLajSTVRy"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2030,6 +2582,9 @@ export const organizationsGraphql = {
         "nameID": "cgi",
         "displayName": "CGI",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmUM1mnhpBPqr86KbCz2ujD3CJ99JmTVMJ5vAp53p5286D"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2041,6 +2596,9 @@ export const organizationsGraphql = {
         "nameID": "datastad-den-bosch",
         "displayName": "Datastad Den Bosch",
         "profile": {
+          "avatar": {
+            "uri": "https://play-lh.googleusercontent.com/pdCqEZmV35nqBloE6eEqvNJv0QH4bEfz1gaxknIl3HPGTmphnuDtLs0gEnKwvyirIqa2"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2052,6 +2610,9 @@ export const organizationsGraphql = {
         "nameID": "pelle-loonbedrijf",
         "displayName": "Pelle Loonbedrijf",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmP2dVs5RJYEPsmX6oa3P4xWpkr66aFpWKtiLPYq7epV2k"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2063,6 +2624,9 @@ export const organizationsGraphql = {
         "nameID": "ibm",
         "displayName": "IBM",
         "profile": {
+          "avatar": {
+            "uri": "https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f1/01_8-bar-positive.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2074,6 +2638,9 @@ export const organizationsGraphql = {
         "nameID": "de-stripmaker",
         "displayName": "De Stripmaker",
         "profile": {
+          "avatar": {
+            "uri": "https://appassets.mvtdev.com/map/41/s/101/162239118.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2085,6 +2652,9 @@ export const organizationsGraphql = {
         "nameID": "port-amsterdam",
         "displayName": "Port of Amsterdam",
         "profile": {
+          "avatar": {
+            "uri": "https://innovatiepartners.nl/strapi//uploads/thumbnail_Port_of_Amsterdam_logo_primair_1aa9ce4af1.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2096,6 +2666,9 @@ export const organizationsGraphql = {
         "nameID": "de-4daagse",
         "displayName": "De 4Daagse",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmPzLdNZFZi8nyYxNBK2ChjCSrTgrHfnJhpEk9XgfakQAb"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2107,6 +2680,9 @@ export const organizationsGraphql = {
         "nameID": "geodan",
         "displayName": "Geodan",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmW1PXeiAVPqQTC4x3vkEkp7Z6TNnQq6YSn4X5H2SMZuRj"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2118,6 +2694,9 @@ export const organizationsGraphql = {
         "nameID": "nioo",
         "displayName": "NIOO",
         "profile": {
+          "avatar": {
+            "uri": "https://frontiersinblog.files.wordpress.com/2018/05/nioo20logo20gestapeld20engels202.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2129,6 +2708,9 @@ export const organizationsGraphql = {
         "nameID": "hogeschool-amsterdam",
         "displayName": "Hogeschool van Amsterdam",
         "profile": {
+          "avatar": {
+            "uri": "https://innovatiepartners.nl/strapi//uploads/thumbnail_Hv_A_logo_d5bac671d5.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2140,6 +2722,9 @@ export const organizationsGraphql = {
         "nameID": "energq",
         "displayName": "EnerGQ",
         "profile": {
+          "avatar": {
+            "uri": "https://ispt.eu/media/Partner-logo-enerGQ-1-360x360.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2151,6 +2736,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-zeeland",
         "displayName": "Provincie Zeeland",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/d/df/Logo_ZeelandProvince.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2162,6 +2750,9 @@ export const organizationsGraphql = {
         "nameID": "ke-works",
         "displayName": "Ke-works",
         "profile": {
+          "avatar": {
+            "uri": "https://www.yesdelft.com/wp-content/themes/yootheme/cache/KE-works-768x543-376dc305.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2173,8 +2764,25 @@ export const organizationsGraphql = {
         "nameID": "cbs",
         "displayName": "CBS",
         "profile": {
+          "avatar": {
+            "uri": "https://www.cbs.nl/Content/images/cbs-brand.svg"
+          },
           "location": {
             "country": "",
+            "city": ""
+          }
+        }
+      },
+      {
+        "id": "e870d667-c2c7-4ddb-967c-b0695a202fcc",
+        "nameID": "wdc",
+        "displayName": "Western Development Commission",
+        "profile": {
+          "avatar": {
+            "uri": "https://alkem.io/ipfs/QmNiHeE3ANRG9wYiEZz7rrCgvXGn5VTRTWWUfcSVdjxPq9"
+          },
+          "location": {
+            "country": "IE",
             "city": ""
           }
         }
@@ -2184,6 +2792,9 @@ export const organizationsGraphql = {
         "nameID": "startup-in-residence",
         "displayName": "Startup in Residence",
         "profile": {
+          "avatar": {
+            "uri": "https://yt3.ggpht.com/ytc/AKedOLT4sBmAGykIhDHnchHoM_OUlYEr1sWASfuMt1Y_=s900-c-k-c0x00ffffff-no-rj"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2195,6 +2806,9 @@ export const organizationsGraphql = {
         "nameID": "gdh-dso-mob",
         "displayName": "Den Haag - Dienst Stedelijke Ontwikkeling (DSO)",
         "profile": {
+          "avatar": {
+            "uri": "https://www.denhaag.nl/static/denhaagrestylepresentation/images/DH-NL-Rgb-CS6.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2206,6 +2820,9 @@ export const organizationsGraphql = {
         "nameID": "dutch-drone-delta",
         "displayName": "Dutch Drone Delta",
         "profile": {
+          "avatar": {
+            "uri": "https://www.atc-network.com/Upload/Editor/Dutch%20Drone%20Data/Dutch%20Drone%20Data.JPG"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2217,6 +2834,9 @@ export const organizationsGraphql = {
         "nameID": "hogeschool-utrecht",
         "displayName": "Hogeschool Utrecht",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmZactEmJhX58RkS65hGysUHaK3bt9p7P9SHiQc5NyyCSt"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2228,6 +2848,9 @@ export const organizationsGraphql = {
         "nameID": "dronexpert",
         "displayName": "DRONExpert",
         "profile": {
+          "avatar": {
+            "uri": "https://dronexpert.nl/wp-content/uploads/2018/11/dronexpert-logo-2.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2239,6 +2862,9 @@ export const organizationsGraphql = {
         "nameID": "kws-infra",
         "displayName": "KWS Infra",
         "profile": {
+          "avatar": {
+            "uri": "https://www.kws.nl/images/graphlogo/vw_kws_logo.jpg?nocache"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2250,6 +2876,9 @@ export const organizationsGraphql = {
         "nameID": "soltegro",
         "displayName": "Soltegro",
         "profile": {
+          "avatar": {
+            "uri": "https://account.thethingsnetwork.org/api/v2/users/Soltegro/picture.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2261,6 +2890,9 @@ export const organizationsGraphql = {
         "nameID": "provincie-overijssel",
         "displayName": "Provincie Overijssel",
         "profile": {
+          "avatar": {
+            "uri": "https://www.overijssel.nl/publish/pages/143537/logo_provincie_overijssel.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2272,6 +2904,9 @@ export const organizationsGraphql = {
         "nameID": "uwv",
         "displayName": "UWV",
         "profile": {
+          "avatar": {
+            "uri": "https://www.uwv.nl/include/images/logo-uwv.svg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2283,6 +2918,9 @@ export const organizationsGraphql = {
         "nameID": "tud",
         "displayName": "TU Delft",
         "profile": {
+          "avatar": {
+            "uri": "https://seeklogo.com/images/T/TU_Delft-logo-D6086E1A70-seeklogo.com.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2294,6 +2932,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-vlaardingen",
         "displayName": "Gemeente Vlaardingen",
         "profile": {
+          "avatar": {
+            "uri": "https://vdi-appliance.com/wp-content/uploads/2020/10/Logo-Gemeente-Vlaardingen-PNG-3.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2305,6 +2946,9 @@ export const organizationsGraphql = {
         "nameID": "cisco",
         "displayName": "Cisco",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/2560px-Cisco_logo_blue_2016.svg.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2316,6 +2960,9 @@ export const organizationsGraphql = {
         "nameID": "het-waterschapshuis",
         "displayName": "het Waterschapshuis",
         "profile": {
+          "avatar": {
+            "uri": "https://eafip.eu/wp-content/uploads/2016/12/logo-waterschapshuis.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2327,6 +2974,9 @@ export const organizationsGraphql = {
         "nameID": "dwa",
         "displayName": "DWA",
         "profile": {
+          "avatar": {
+            "uri": "https://mma.prnewswire.com/media/336726/dwa_logo.jpg?p=facebook"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2338,6 +2988,9 @@ export const organizationsGraphql = {
         "nameID": "hogeschool-windesheim",
         "displayName": "Hogeschool Windesheim",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/5/53/Logo_Windesheim_Flevoland.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2349,6 +3002,9 @@ export const organizationsGraphql = {
         "nameID": "tilburg-university",
         "displayName": "Tilburg University",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/QmVdoGYCXHJbU9ydq9bdDh5Z1KLVBL1P8i2WqBMFqj1bTR"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2360,6 +3016,9 @@ export const organizationsGraphql = {
         "nameID": "rivm",
         "displayName": "RIVM",
         "profile": {
+          "avatar": {
+            "uri": "https://www.iops.nl/wp-content/uploads/2021/01/RIVM-logo.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2371,6 +3030,9 @@ export const organizationsGraphql = {
         "nameID": "waterschap-vechtstromen",
         "displayName": "Waterschap Vechtstromen",
         "profile": {
+          "avatar": {
+            "uri": "https://getlogo.net/wp-content/uploads/2020/01/waterschap-vechtstromen-logo-vector.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2382,6 +3044,9 @@ export const organizationsGraphql = {
         "nameID": "waterschap-vallei-veluwe",
         "displayName": "Het waterschap Vallei en Veluwe",
         "profile": {
+          "avatar": {
+            "uri": "https://www.vallei-veluwe.nl/publish/pages/20997/logos-waterschap-vallei-en-veluwe.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2393,6 +3058,9 @@ export const organizationsGraphql = {
         "nameID": "kpn",
         "displayName": "KPN",
         "profile": {
+          "avatar": {
+            "uri": "https://hub.alkem.io/ipfs/Qmf89WKc6wwWxsEuV2TFtydbx71FW5aQ2FrW1g97JnqtcT"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2404,6 +3072,9 @@ export const organizationsGraphql = {
         "nameID": "vrije-universiteit",
         "displayName": "Vrije Universiteit",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/3/39/VU_logo.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2415,6 +3086,9 @@ export const organizationsGraphql = {
         "nameID": "prog-basis-ondergrond",
         "displayName": "Programma Basis Ondergrond",
         "profile": {
+          "avatar": {
+            "uri": "https://humanspace.weblog.tudelft.nl/files/2021/10/City-x-Space-Maurice-Harteveld.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2426,6 +3100,9 @@ export const organizationsGraphql = {
         "nameID": "gemeente-nijmegen",
         "displayName": "Gemeente Nijmegen",
         "profile": {
+          "avatar": {
+            "uri": "https://bmwvoorelkaar.nl/wp-content/uploads/2022/02/gemeentelogo-Nijmegen.png"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2437,6 +3114,9 @@ export const organizationsGraphql = {
         "nameID": "waterschap-drents",
         "displayName": "Waterschap Drents Overijsselse Delta",
         "profile": {
+          "avatar": {
+            "uri": "https://upload.wikimedia.org/wikipedia/commons/6/66/Drents_Overijsselse_Delta.jpg"
+          },
           "location": {
             "country": "",
             "city": ""
@@ -2448,6 +3128,9 @@ export const organizationsGraphql = {
         "nameID": "vvs",
         "displayName": "Vereniging van Strandtent Eigenaren",
         "profile": {
+          "avatar": {
+            "uri": "https://media.indebuurt.nl/denhaag/2017/10/21004810/16835814_1460869003924845_271795410267526820_o-e1507293272676.jpg"
+          },
           "location": {
             "country": "",
             "city": ""

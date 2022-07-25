@@ -4,6 +4,9 @@ query {
     nameID
     displayName
     profile {
+      avatar {
+        uri
+      }
       location {
         country
         city

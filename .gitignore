@@ -13,3 +13,6 @@
 dist
 secrets/*.json
 .~*
+
+/generate/src/data/*.bak
+/display/bak

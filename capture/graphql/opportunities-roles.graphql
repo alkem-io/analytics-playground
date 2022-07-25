@@ -1,4 +1,4 @@
-query {
+query opportunityRoles {
   hubs {
     id
     nameID
@@ -13,19 +13,15 @@ query {
         community {
           memberUsers {
             id
-            nameID
           }
           memberOrganizations {
             id
-            nameID
           }
           leadOrganizations {
             id
-            nameID
           }
           leadUsers {
             id
-            nameID
           }
         }
       }

@@ -3,17 +3,13 @@ import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
-
 import { usersGraphql } from './data/users';
 import { organizationsGraphql } from './data/organizations';
 import { hubsGraphql } from './data/hubs-roles';
 import { challengesGraphql } from './data/challenges-roles';
 import { opportunitiesGraphql } from './data/opportunities-roles';
 
-const NODES_CHALLENGES_FILE = './output/graph-nodes-challenges.json';
-const NODES_CONTRIBUTORS_FILE = './output/graph-nodes-contributors.json';
-const EDGES_FILE = './output/graph-edges.json';
-const TEMPLATE_FILE = './src/display/page-template.html';
+const DATA_FILE = './display/data/data.json';
 
 export class AlkemioAdapter {
   logger;
@@ -149,10 +145,16 @@ export class AlkemioAdapter {
       }}
     }
 
+    const data = {
+      edges: edges,
+      nodes: {
+        contributors: contributorNodes,
+        challenges: challengeNodes
+      }
+    }
+
     // save the results to files
-    fs.writeFileSync(EDGES_FILE, JSON.stringify(edges));
-    fs.writeFileSync(NODES_CONTRIBUTORS_FILE, JSON.stringify(contributorNodes));
-    fs.writeFileSync(NODES_CHALLENGES_FILE, JSON.stringify(challengeNodes));
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data));
   }
 
   addCommunityRoleEdges(parent: any, contributors: any[], edges: Edge[]) {
@@ -162,34 +164,4 @@ export class AlkemioAdapter {
     }
   }
 
-  async generateVizualization() {
-    const htmlTemplateFileStr = fs.readFileSync(TEMPLATE_FILE).toString();
-
-    // Load the raw files
-    const nodesChallengesJsonStr = fs
-      .readFileSync(NODES_CHALLENGES_FILE)
-      .toString();
-    const nodesContributosJsonStr = fs
-      .readFileSync(NODES_CONTRIBUTORS_FILE)
-      .toString();
-    const edgesJsonStr = fs.readFileSync(EDGES_FILE).toString();
-
-    let updatedFileStr = htmlTemplateFileStr.replace('$$EDGES$$', edgesJsonStr);
-    updatedFileStr = updatedFileStr.replace(
-      '$$CONTRIBUTOR_NODES$$',
-      nodesContributosJsonStr
-    );
-    updatedFileStr = updatedFileStr.replace(
-      '$$CHALLENGE_NODES$$',
-      nodesChallengesJsonStr
-    );
-
-    const date = new Date();
-    const fileName = `./output/graph-display-${
-      date.toISOString().split('T')[0]
-    }.html`;
-
-    fs.writeFileSync(fileName, updatedFileStr);
-    this.logger.info(`Generated visualisation in: ${fileName}`);
-  }
 }

@@ -19,17 +19,13 @@
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
     "nodemon": "nodemon",
-    "generate-graph": "ts-node-dev src/generate-graph.ts",
-    "generate-vizualization": "ts-node-dev src/generate-vizualization.ts",
-    "start": "npm run generate-graph",
+    "generate-graph-data": "ts-node-dev generate/src/generate-graph-data.ts",
+    "start": "http-server",
     "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alkem-io/analytics-playground.git"
-  },
-  "bugs": {
-    "url": "https://github.com/techsmyth/btc-tx-graph/issues"
   },
   "homepage": "https://github.com/alkem-io/analytics-playground",
   "devDependencies": {
@@ -40,11 +36,11 @@
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "http-server": "^0.11.1",
     "prettier": "^2.5.1",
     "ts-node-dev": "^1.1.7"
   },
   "dependencies": {
-    "@alkemio/client-lib": "^0.14.9",
     "dotenv": "^8.2.0",
     "jsonpath": "^1.0.2",
     "nodemon": "^2.0.6",

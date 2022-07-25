@@ -14,6 +14,8 @@ This repository is for exploring ways for extracting value from this data. This 
 
 The implementation in this repository is a such that the vizualization can be created / extended separate from the Alkemio server / client - to allow for rapid experimentation.
 
+The layout of this simple demonstration takes inspiration from https://github.com/danielstern/force-graph-example.
+
 ## Usage
 There are three steps to running this demonstration:
 * **Capture**: Interact with the Alkemio graphql api to capture the data.

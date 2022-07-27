@@ -21,11 +21,12 @@ There are three steps to running this demonstration:
 * **Capture**: Interact with the Alkemio graphql api to capture the data.
   * Run each of the queries under `capture/graphql` and save the results from each as the data for the exported file with the same name under `generate/src/data`
 * **Generate**: Create the graph data suitable for usage in D3 display from the raw Alkemio json data
+  * Move to the `generate` folder: `cd generate`
   * Run the script to convert the data using `npm run generate-graph-data`
   * This script places the resulting graph data in the following file: `display/data/data.json`
 * **Display**: View the results
-  * Launch the http server using `npm start`
-  * Open up a browser and navigate to `http://127.0.0.1:8080/display/index.html`
+  * Move to the `display` folder: `cd display`
+  * Launch the web dev server using `npm start`, a browser will open to `http://localhost:8000/` + display the visualization
 
 The connectivity graph is meant to provide a way of navigating the connectivity within the Hubs and Challenges hosted on Alkemio.
 

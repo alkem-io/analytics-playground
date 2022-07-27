@@ -6,7 +6,7 @@
     "lib": ["es2018", "esnext.asynciterable"],
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "generate/src",
+    "rootDir": "src",
     "removeComments": true,
     "strict": true,
     "baseUrl": "./",
@@ -19,5 +19,5 @@
     "resolveJsonModule": true
   },
   "exclude": ["./node_modules"],
-  "include": ["generate/src/**/*.ts", "generate/data/*.ts"]
+  "include": ["src/**/*.ts", "data/*.ts"]
 }

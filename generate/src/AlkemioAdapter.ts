@@ -9,7 +9,7 @@ import { hubsGraphql } from './data/hubs-roles';
 import { challengesGraphql } from './data/challenges-roles';
 import { opportunitiesGraphql } from './data/opportunities-roles';
 
-const DATA_FILE = './display/data/data.json';
+const DATA_FILE = '../display/data/data.json';
 
 export class AlkemioAdapter {
   logger;

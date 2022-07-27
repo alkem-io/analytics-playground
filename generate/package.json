@@ -1,5 +1,5 @@
 {
-  "name": "@alkemio/analytics-playground",
+  "name": "@alkemio/analytics-playground-generate",
   "version": "0.1.0",
   "description": "Alkemio Analytics playground, for evaluating new ways of extracting value from the Alkemio domain model data",
   "author": "Alkemio Foundation",
@@ -19,8 +19,8 @@
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
     "nodemon": "nodemon",
-    "generate-graph-data": "ts-node-dev generate/src/generate-graph-data.ts",
-    "start": "http-server",
+    "generate-graph-data": "ts-node-dev src/generate-graph-data.ts",
+    "start": "npm generate-graph-data",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -36,13 +36,11 @@
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "http-server": "^0.11.1",
     "prettier": "^2.5.1",
     "ts-node-dev": "^1.1.7"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "jsonpath": "^1.0.2",
     "nodemon": "^2.0.6",
     "promisify-child-process": "^4.1.1",
     "rimraf": "^3.0.2",

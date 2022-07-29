@@ -7,9 +7,6 @@ const contributorNodes = data.nodes.contributors;
 const challengeNodes = data.nodes.challenges;
 const eges = data.edges;
 
-
-
-
 // Where to draw
 var svg = d3.select('#Target');
 
@@ -38,11 +35,22 @@ var svg = d3.select('#Target');
 // updateLegend(initialValues);
 
 // // handle on click event
-// d3.select('#opts')
-// .on('change', function() {
-//   var newData = eval(d3.select(this).property('value'));
-//   updateLegend(newData);
-// });
+const hubSelector = d3.select('#HubSelector');
+hubSelector.on('change', function() {
+    console.log(`Hub selected: ${d3.select(this).property('value')}`);
+      // var newData = eval(d3.select(this).property('value'));
+      // updateLegend(newData);
+    });
+
+// Add in a Hub selection for each Hub in the data set
+const hubNodes = challengeNodes.filter(node => node.group === 'hub');
+hubSelector
+  .selectAll('option')
+  .data(hubNodes)
+  .join('option')
+  .attr('id', d => d.id)
+  .attr('value', d => d.title)
+  .text(d => d.title);
 
 // Start the visualization
 const d3Category10 = d3.schemeCategory10;
@@ -113,7 +121,7 @@ const node = svg
   .attr('stroke-width', 4)
   .on('mouseover', mouseOverNode)
   .on('mouseout', function (d) {
-    div.transition().duration(500).style('opacity', 0);
+    //div.transition().duration(500).style('opacity', 0);
   })
   .call(drag(graphLayout));
 
@@ -179,7 +187,7 @@ function mouseOverNode(d) {
   const nodeData = this.__data__;
   const leftPosition = d.pageX + 'px';
   const topPosition = d.pageY - 28 + 'px';
-  div.transition().duration(200).style('opacity', 0.9);
+  //div.transition().duration(200).style('opacity', 0.9);
   var labelText = '';
   if (nodeData.group === 'hub') {
     labelText = `<b>${nodeData.label}</b><br/>Lead orgs count: ${nodeData.leadOrgsCount}`;

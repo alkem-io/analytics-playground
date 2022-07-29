@@ -3,11 +3,11 @@ import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
-import organizationsData from './data/organizations.json';
-import usersData from './data/users.json';
-import hubsData from './data/hubs-roles.json';
-import challengesData from './data/challenges-roles.json';
-import opportunitiesData from './data/opportunities-roles.json';
+import organizationsData from './acquired-data/organizations.json';
+import usersData from './acquired-data/users.json';
+import hubsData from './acquired-data/hubs-roles.json';
+import challengesData from './acquired-data/challenges-roles.json';
+import opportunitiesData from './acquired-data/opportunities-roles.json';
 
 const TRANSFORMED_DATA_FILE = '../display/data/transformed-data.json';
 

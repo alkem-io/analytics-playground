@@ -23,7 +23,7 @@ There are three steps to running this demonstration:
 * **Transform**: Transform the raw data, combining if needed other data, to create the graph data suitable for usage in D3 display
   * Move to the `transform` folder: `cd transform`
   * Run the script to convert the data using `npm run transform-data`
-  * This script places the resulting graph data in the following file: `display/data/data.json`
+  * This script places the resulting graph data in the following file: `display/data/transformed-data.json`
 * **Display**: View the results
   * Move to the `display` folder: `cd display`
   * Launch the web dev server using `npm start`, a browser will open to `http://localhost:8000/` + display the visualization

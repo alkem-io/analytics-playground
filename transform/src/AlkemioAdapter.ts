@@ -3,13 +3,13 @@ import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
-import { usersGraphql } from './data/users';
-import { organizationsGraphql } from './data/organizations';
-import { hubsGraphql } from './data/hubs-roles';
-import { challengesGraphql } from './data/challenges-roles';
-import { opportunitiesGraphql } from './data/opportunities-roles';
+import organizationsData from './acquired-data/organizations.json';
+import usersData from './acquired-data/users.json';
+import hubsData from './acquired-data/hubs-roles.json';
+import challengesData from './acquired-data/challenges-roles.json';
+import opportunitiesData from './acquired-data/opportunities-roles.json';
 
-const DATA_FILE = '../display/data/data.json';
+const TRANSFORMED_DATA_FILE = '../display/data/transformed-data.json';
 
 export class AlkemioAdapter {
   logger;
@@ -18,14 +18,14 @@ export class AlkemioAdapter {
     this.logger = createLogger();
   }
 
-  generateGraphData() {
+  transformData() {
     // create the graph
     const challengeNodes: NodeChallenge[] = [];
     const contributorNodes: NodeContributor[] = [];
     const edges: Edge[] = [];
 
     // Nodes for users + orgs
-    const users = usersGraphql.data.users;
+    const users = usersData.data.users;
     for (let i = 0; i < users.length; i++) {
       const contributor = users[i];
       const contributorNode = new NodeContributor(
@@ -37,7 +37,7 @@ export class AlkemioAdapter {
       contributorNodes.push(contributorNode);
     }
 
-    const organizations = organizationsGraphql.data.organizations;
+    const organizations = organizationsData.data.organizations;
     for (let i = 0; i < organizations.length; i++) {
       const contributor = organizations[i];
       const contributorNode = new NodeContributor(
@@ -50,7 +50,7 @@ export class AlkemioAdapter {
     }
 
     // Process Hubs
-    for (const hub of hubsGraphql.data.hubs) {
+    for (const hub of hubsData.data.hubs) {
       const hubNode = new NodeChallenge(
         hub.id,
         `Hub '${hub.nameID}'`,
@@ -67,7 +67,7 @@ export class AlkemioAdapter {
     }
 
     // Process Challenges
-    for (const hub of challengesGraphql.data.hubs) {
+    for (const hub of challengesData.data.hubs) {
       for (const challenge of hub.challenges) {
         const challengeNode = new NodeChallenge(
           challenge.id,
@@ -106,7 +106,7 @@ export class AlkemioAdapter {
     }
 
     // Process Opportunities
-    for (const hub of opportunitiesGraphql.data.hubs) {
+    for (const hub of opportunitiesData.data.hubs) {
       for (const challenge of hub.challenges) {
         for (const opportunity of challenge.opportunities) {
         const opportunityNode = new NodeChallenge(
@@ -154,7 +154,7 @@ export class AlkemioAdapter {
     }
 
     // save the results to files
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data));
+    fs.writeFileSync(TRANSFORMED_DATA_FILE, JSON.stringify(data));
   }
 
   addCommunityRoleEdges(parent: any, contributors: any[], edges: Edge[]) {

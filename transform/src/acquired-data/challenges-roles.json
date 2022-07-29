@@ -1,4 +1,4 @@
-export const challengesGraphql = {
+{
   "data": {
     "hubs": [
       {

@@ -2,12 +2,16 @@
 # Display specific
 /display/node_modules
 /display/bak
+/display/data/*.json
 
 # Generate specific
-/generate/node_modules
-/generate/dist
-/generate/src/data/*.bak
-/generate/*.log
+/transform/node_modules
+/transform/dist
+/transform/src/data/*.bak
+/transform/*.log
+# Ensure do not accidentially upload real users data
+/transform/src/data/users-full.json
+/transform/src/data/users.json
 
 # Common
 /docs/diagrams/.$*

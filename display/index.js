@@ -1,5 +1,5 @@
 import { width, height } from './config.js';
-import data from './data/data.json' assert { type: 'json'};
+import data from './data/transformed-data.json' assert { type: 'json'};
 import * as d3 from 'd3';
 
 // The raw data
@@ -7,8 +7,42 @@ const contributorNodes = data.nodes.contributors;
 const challengeNodes = data.nodes.challenges;
 const eges = data.edges;
 
+
+
+
 // Where to draw
 var svg = d3.select('#Target');
+
+
+// // function that wraps around the d3 pattern (bind, add, update, remove)
+// function updateLegend(newData) {
+
+//   // bind data
+//   var appending = canvas.selectAll('rect')
+//      .data(newData);
+
+//   // add new elements
+//   appending.enter().append('rect');
+
+//   // update both new and existing elements
+//   appending.transition()
+//       .duration(0)
+//       .attr("width",function (d) {return d.y; });
+
+//   // remove old elements
+//   appending.exit().remove();
+
+// }
+
+// // generate initial legend
+// updateLegend(initialValues);
+
+// // handle on click event
+// d3.select('#opts')
+// .on('change', function() {
+//   var newData = eval(d3.select(this).property('value'));
+//   updateLegend(newData);
+// });
 
 // Start the visualization
 const d3Category10 = d3.schemeCategory10;

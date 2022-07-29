@@ -19,8 +19,8 @@
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
     "nodemon": "nodemon",
-    "generate-graph-data": "ts-node-dev src/generate-graph-data.ts",
-    "start": "npm generate-graph-data",
+    "transform-data": "ts-node-dev src/transform-data.ts",
+    "start": "npm transform-data",
     "prepublishOnly": "npm run build"
   },
   "repository": {

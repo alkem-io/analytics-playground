@@ -8,7 +8,7 @@ const main = async () => {
 
   logger.info('Generating graph data using graphql query inputs');
   const alkemioAdapter = new AlkemioAdapter();
-  alkemioAdapter.generateGraphData();
+  alkemioAdapter.transformData();
 };
 
 main().catch(error => {

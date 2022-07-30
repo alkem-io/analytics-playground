@@ -3,14 +3,14 @@
  */
 
 import * as d3 from "d3";
-import {data, svg} from "../config";
+import {edges, svg} from "../config";
 
 /**
  * Define a width scale for the lines. Higher weight means thicker links.
  */
 const linkWidthScale = d3
     .scaleLinear()
-    .domain([0, d3.max(data.links.map((link) => link.weight))])
+    .domain([0, d3.max(edges.map((link) => link.weight))])
     .range([0.5, 1.5]);
 
 /**
@@ -23,7 +23,7 @@ const linkDashScale = d3
 
 export const link = svg
     .selectAll("path.link")
-    .data(data.links)
+    .data(edges)
     .enter()
     .append("path")
     .attr("stroke", "#999")

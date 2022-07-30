@@ -1,15 +1,10 @@
-export class NodeChallenge {
-  label: string;
-  id: string;
-  title: string;
-  group: string;
+import { Node } from "./node";
+
+export class NodeChallenge extends Node {
   leadOrgsCount: number;
 
-  constructor(id: string, label: string, title: string, group: string, leadOrgsCount: number) {
-    this.id = id;
-    this.label = label;
-    this.title = title;
-    this.group = group;
+  constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number, leadOrgsCount: number) {
+    super(id, nameID, displayName, type, group, weight);
     this.leadOrgsCount = leadOrgsCount;
   }
 }

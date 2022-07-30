@@ -3,10 +3,8 @@
  * that the Node is arranged by the force directed graph.
  */
 import * as d3 from "d3";
-import {data, svg} from "../config";
+import {nodes, svg} from "../config";
 import {nodeScale} from "./node";
-
-const {nodes} = data;
 
 const fontSizeScale = d3.scaleLinear()
     .domain([0, d3.max(nodes.map((node) => node.influence))])

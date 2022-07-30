@@ -6,7 +6,7 @@ const main = async () => {
   dotenv.config();
   const logger = createLogger();
 
-  logger.info('Generating graph data using graphql query inputs');
+  logger.info('Tranforming acquired data into a graph for display with D3');
   const alkemioAdapter = new AlkemioAdapter();
   alkemioAdapter.transformData();
 };

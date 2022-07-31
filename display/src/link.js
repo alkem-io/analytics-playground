@@ -3,15 +3,15 @@
  */
 
 import * as d3 from "d3";
-import {data, svg} from "../config";
+import {edges, svg} from "../config";
 
 /**
  * Define a width scale for the lines. Higher weight means thicker links.
  */
 const linkWidthScale = d3
     .scaleLinear()
-    .domain([0, d3.max(data.links.map((link) => link.weight))])
-    .range([0.5, 1.5]);
+    .domain([0, d3.max(edges.map((link) => link.weight))])
+    .range([0.5, 5]);
 
 /**
  * Define how the dashes will work. Extra light and light weight lines get dashes, anything heavier is solid.
@@ -22,8 +22,10 @@ const linkDashScale = d3
     .range(["4 2", "2 2", null]);
 
 export const link = svg
+    .append('g')
+    .attr('class', 'links')
     .selectAll("path.link")
-    .data(data.links)
+    .data(edges)
     .enter()
     .append("path")
     .attr("stroke", "#999")
@@ -39,7 +41,7 @@ export const link = svg
 
         switch (d.type) {
 
-        case "SUPERVISORY":
+        case "lead":
             return "url(#markerArrow)";
 
         default:

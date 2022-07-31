@@ -1,13 +1,8 @@
-export class NodeContributor {
-  label: string;
-  id: string;
-  title: string;
-  group: string;
+import { Node } from "./node";
 
-  constructor(id: string, label: string, title: string, group: string) {
-    this.id = id;
-    this.label = label;
-    this.title = title;
-    this.group = group;
+export class NodeContributor extends Node {
+
+  constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number) {
+    super(id, nameID, displayName, type, group, weight);
   }
 }

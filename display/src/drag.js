@@ -9,34 +9,34 @@ export const drag = (simulation) => {
 
     const dragstarted = (d) => {
 
-        if (!d3.event.active) {
+        if (!d.active) {
 
             simulation.alphaTarget(0.3).restart();
 
         }
 
-        d.fx = d.x;
-        d.fy = d.y;
+        d.subject.fx = d.x;
+        d.subject.fy = d.y;
 
     };
 
     const dragged = (d) => {
 
-        d.fx = d3.event.x;
-        d.fy = d3.event.y;
+        d.subject.fx = d.x;
+        d.subject.fy = d.y;
 
     };
 
     const dragended = (d) => {
 
-        if (!d3.event.active) {
+        if (!d.active) {
 
             simulation.alphaTarget(0);
 
         }
 
-        d.fx = null;
-        d.fy = null;
+        d.subject.fx = null;
+        d.subject.fy = null;
 
     };
 

@@ -1,18 +1,24 @@
 /**
  * Defines independent hovercard component for force directed graph.
  * Whenever Node is hovered over, as defined in different file, hovercard is moved to that location and updated with relevant text.
+ * Note: need to have two levels of translation: one for zooming and one for the card position when displaying
+ * relative to the node being explored
  */
 
-import * as d3 from "d3";
+
 import {node} from "./node";
 import {simulation} from "./simulation";
 import {svg} from "../config";
 
 let currentTarget = null;
 
-const card = svg
+const cardContainer = svg
     .append("g")
+    .attr('class', 'hovercard')
     .attr("pointer-events", "none")
+
+const card = cardContainer
+    .append("g")
     .attr("display", "none");
 
 const cardBackground = card.append("rect")
@@ -31,16 +37,16 @@ const cardTextPosition = card
     .attr("font-size", "10")
     .attr("transform", "translate(8, 35)");
 
-node.on("mouseover", (datum) => {
+node.on("mouseover", (event, d) => {
     /**
      * On mouse over any node, draw the tooltip in that place.
      */
 
-    currentTarget = d3.event.target;
+    currentTarget = event.target;
     card.attr("display", "block");
 
-    cardTextName.text(datum.name);
-    cardTextPosition.text(datum.role);
+    cardTextName.text(d.displayName);
+    cardTextPosition.text(d.nameID);
 
     /**
      * Automatically size the card to the widest of: the personnel name, personnel role.

@@ -51,10 +51,6 @@ hubSelector
   .attr('value', d => d.displayName)
   .text(d => d.displayName);
 
-// Start the visualization
-const d3Category10 = d3.schemeCategory10;
-var color = d3.scaleOrdinal(d3Category10);
-
 simulation.on("tick", () => {
 
   /**
@@ -90,49 +86,6 @@ simulation.on("tick", () => {
 //       })
 //       .strength(-10)
 //   );
-
-// const node = svg
-//   .append('g')
-//   .attr('class', 'nodes')
-//   .attr('stroke', '#fff')
-//   .attr('stroke-width', 1.5)
-//   .selectAll('circle')
-//   .data(graphData.nodes)
-//   .join('circle')
-//   .attr('r', function (d, i) {
-//     if (d.type === 'hub') return 50;
-//     if (d.type === 'challenge') return 30;
-//     if (d.type === 'opportunity') return 20;
-//     if (d.type === 'organization') return 10;
-//     if (d.type === 'user') return 5;
-//     // ??
-//     return 15;
-//   })
-//   .attr('fill', function (d, i) {
-//     if (d.type === 'hub') return 'black';
-//     if (d.type === 'challenge') return 'red';
-//     if (d.type === 'opportunity') return 'blue';
-//     if (d.type === 'user') return 'green';
-//     if (d.type === 'organization') return 'green';
-//     return color(d.type);
-//   })
-//   .attr('stroke', function (d, i) {
-//     if (d.type === 'hub') return 'black';
-//     if (d.type === 'challenge') return 'red';
-//     if (d.type === 'opportunity') return 'blue';
-//     if (d.type === 'user') return 'green';
-//     if (d.type === 'organization') return 'black';
-//     // is a utxo
-//     return color(`${d.who}-xxx`);
-//   })
-//   .attr('stroke-width', 4)
-//   .on('mouseover', mouseOverNode)
-//   .on('mouseout', function (d) {
-//     div.transition().duration(500).style('opacity', 0);
-//   })
-//   .call(drag(graphLayout));
-
-
 
 // allow zooming
 function handleZoom(e) {

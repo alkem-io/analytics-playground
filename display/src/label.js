@@ -11,6 +11,8 @@ const fontSizeScale = d3.scaleLinear()
     .range([7, 12]);
 
 const textContainer = svg
+    .append('g')
+    .attr('class', 'textContainer')
     .selectAll("g.label")
     .data(nodes)
     .enter()

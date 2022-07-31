@@ -16,9 +16,19 @@ const forceManyBody = d3.forceManyBody()
 
 const forceLink = d3.forceLink(edges)
     .id((d) => d.id)
-    .distance(50);
+    .distance(150)
+    .strength(0.7);
+
+const forceCollision = d3.forceCollide()
+        .radius(function (d) {
+          return d.radius;
+        })
+        .strength(-10);
 
 export const simulation = d3.forceSimulation(nodes)
     .force("link", forceLink)
     .force("charge", forceManyBody)
+    .force("collision", forceCollision)
     .force("center", d3.forceCenter(width / 2, height / 2));
+
+

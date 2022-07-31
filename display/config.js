@@ -14,7 +14,9 @@ export const hubSelector = d3.select('#HubSelector');
 
 // Make the data available
 export const contributorNodes = data.nodes.contributors;
+export const hubNodes = data.nodes.hubs;
 export const challengeNodes = data.nodes.challenges;
-export const nodes = contributorNodes.concat(challengeNodes);
+export const opportunityNodes = data.nodes.opportunities;
+export const nodes = hubNodes.concat(challengeNodes).concat(opportunityNodes).concat(contributorNodes);
 export const edges = data.edges;
 

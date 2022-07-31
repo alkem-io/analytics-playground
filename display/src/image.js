@@ -7,6 +7,8 @@ import {nodeScale} from './node';
 
 export const imageContainer =
     svg
+    .append("g")
+    .attr("class", "imagecontainer")
         .selectAll("g.imageContainer")
         .data(nodes)
         .enter()

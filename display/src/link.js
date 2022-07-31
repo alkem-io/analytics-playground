@@ -22,6 +22,8 @@ const linkDashScale = d3
     .range(["4 2", "2 2", null]);
 
 export const link = svg
+    .append('g')
+    .attr('class', 'links')
     .selectAll("path.link")
     .data(edges)
     .enter()

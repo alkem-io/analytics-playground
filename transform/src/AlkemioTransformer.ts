@@ -25,7 +25,9 @@ export class AlkemioTransformer {
 
   transformData() {
     // create the graph
+    const hubNodes: NodeChallenge[] = [];
     const challengeNodes: NodeChallenge[] = [];
+    const opportunityNodes: NodeChallenge[] = [];
     const contributorNodes: NodeContributor[] = [];
     const edges: Edge[] = [];
 
@@ -70,7 +72,7 @@ export class AlkemioTransformer {
         1
       );
 
-      challengeNodes.push(hubNode);
+      hubNodes.push(hubNode);
       this.addCommunityRoleEdges(
         hub,
         hub.community.memberUsers,
@@ -161,7 +163,7 @@ export class AlkemioTransformer {
             opportunity.community.leadOrganizations.length
           );
 
-          challengeNodes.push(opportunityNode);
+          opportunityNodes.push(opportunityNode);
 
           const edge = new Edge(
             opportunity.id,
@@ -203,7 +205,9 @@ export class AlkemioTransformer {
       edges: edges,
       nodes: {
         contributors: contributorNodes,
+        hubs: hubNodes,
         challenges: challengeNodes,
+        opportunities: opportunityNodes
       },
     };
 

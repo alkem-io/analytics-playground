@@ -14,9 +14,9 @@ export const imageContainer =
 
 export const image = imageContainer
     .append("image")
-    .attr("height", (d) => nodeScale(d.influence))
-    .attr("width", (d) => nodeScale(d.influence))
-    .attr("transform", (d) =>`translate(${-nodeScale(d.influence)/2}, ${-nodeScale(d.influence)/2})`)
+    .attr("height", (d) => nodeScale(d.weight))
+    .attr("width", (d) => nodeScale(d.weight))
+    .attr("transform", (d) =>`translate(${-nodeScale(d.weight)/2}, ${-nodeScale(d.weight)/2})`)
     .attr("href", (d, i) => `image/img-0.png`);
 
 export const animate = () => {

@@ -31,16 +31,16 @@ const cardTextPosition = card
     .attr("font-size", "10")
     .attr("transform", "translate(8, 35)");
 
-node.on("mouseover", (datum) => {
+node.on("mouseover", (event, d) => {
     /**
      * On mouse over any node, draw the tooltip in that place.
      */
 
-    currentTarget = d3.event.target;
+    currentTarget = event.target;
     card.attr("display", "block");
 
-    cardTextName.text(datum.name);
-    cardTextPosition.text(datum.role);
+    cardTextName.text(d.displayName);
+    cardTextPosition.text(d.nameID);
 
     /**
      * Automatically size the card to the widest of: the personnel name, personnel role.

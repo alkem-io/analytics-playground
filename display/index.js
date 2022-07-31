@@ -132,117 +132,12 @@ simulation.on("tick", () => {
 //   })
 //   .call(drag(graphLayout));
 
-// const link = svg
-//   .append('g')
-//   .attr('class', 'links')
-//   .attr('stroke', '#999')
-//   .attr('stroke-opacity', 0.6)
-//   .selectAll('line')
-//   .data(graphData.links)
-//   .join('line')
-//   .attr('stroke-width', 1)
-//   .attr('marker-end', 'url(#arrowhead)');
 
-// graphLayout
-//   .nodes(nodes)
-//   .on('tick', ticked)
-//   .force('link')
-//   .links(links);
 
-// function ticked() {
-//   link
-//     .attr('x1', function (d, i) {
-//       if (d.source.group === 'challenge') {
-//         return d.source.x;
-//       }
-//       return d.source.x;
-//     })
-//     .attr('y1', function (d, i) {
-//       if (d.source.group === 'challenge') {
-//         return d.source.y;
-//       }
-//       return d.source.y;
-//     })
-//     .attr('x2', function (d, i) {
-//       if (d.target.group === 'challenge') {
-//         return d.target.x;
-//       }
-//       return d.target.x;
-//     })
-//     .attr('y2', function (d, i) {
-//       if (d.target.group === 'challenge') {
-//         return d.target.y;
-//       }
-//       return d.target.y;
-//     });
-//   node
-//     .attr('cx', function (d, i) {
-//       if (d.type === 'challenge') {
-//         return d.x;
-//       }
-//       return d.x;
-//     })
-//     .attr('cy', function (d, i) {
-//       if (d.type === 'challenge') {
-//         return d.y;
-//       }
-//       return d.y;
-//     });
-// }
+// allow zooming
+function handleZoom(e) {
+  d3.select('svg').selectAll('g').attr('transform', e.transform);
+}
+let zoom = d3.zoom().on('zoom', handleZoom);
 
-// function mouseOverNode(d) {
-//   const nodeData = this.__data__;
-//   const leftPosition = d.pageX + 'px';
-//   const topPosition = d.pageY - 28 + 'px';
-//   div.transition().duration(200).style('opacity', 0.9);
-//   var labelText = '';
-//   if (nodeData.group === 'hub') {
-//     labelText = `<b>${nodeData.nameID}</b><br/>Lead orgs count: ${nodeData.leadOrgsCount}`;
-//   } else if (nodeData.group === 'challenge') {
-//     labelText = `<b>${nodeData.nameID}</b><br/>Lead orgs count: ${nodeData.leadOrgsCount}`;
-//   } else if (nodeData.group === 'opportunity') {
-//     labelText = `<b>${nodeData.nameID}</b><br/>Lead orgs count: ${nodeData.leadOrgsCount}`;
-//   } else {
-//     labelText = `<b>${nodeData.nameID}</b><br/>group: ${nodeData.group}`;
-//   }
-//   div.html(labelText).style('left', leftPosition).style('top', topPosition);
-// }
-
-// function click() {
-//   if (d3.select(this).attr('class') == 'nodes') {
-//     // do something
-//   }
-// }
-
-// function drag(graphLayout) {
-//   function dragstarted(event) {
-//     if (!event.active) graphLayout.alphaTarget(0.3).restart();
-//     event.subject.fx = event.subject.x;
-//     event.subject.fy = event.subject.y;
-//   }
-
-//   function dragged(event) {
-//     event.subject.fx = event.x;
-//     event.subject.fy = event.y;
-//   }
-
-//   function dragended(event) {
-//     if (!event.active) graphLayout.alphaTarget(0);
-//     event.subject.fx = null;
-//     event.subject.fy = null;
-//   }
-
-//   return d3
-//     .drag()
-//     .on('start', dragstarted)
-//     .on('drag', dragged)
-//     .on('end', dragended);
-// }
-
-// // allow zooming
-// function handleZoom(e) {
-//   d3.select('svg').selectAll('g').attr('transform', e.transform);
-// }
-// let zoom = d3.zoom().on('zoom', handleZoom);
-
-// d3.select('svg').call(zoom);
+d3.select('svg').call(zoom);

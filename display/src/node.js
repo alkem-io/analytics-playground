@@ -18,7 +18,7 @@ export const node = svg
     .enter()
     .append("circle")
     .attr("r", (d) => nodeScale(d.weight))
-    .attr("stroke", "#ccc")
+    .attr("stroke", "#251607 ")
     .attr("stroke-width", function (d) {
       if (d.type === 'organization') return 2.0;
       return 0.5;

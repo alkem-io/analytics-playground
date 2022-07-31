@@ -16,7 +16,7 @@ import { EdgeType } from './common/edge.type';
 
 const TRANSFORMED_DATA_FILE = '../display/data/transformed-data.json';
 
-export class AlkemioAdapter {
+export class AlkemioTransformer {
   logger;
 
   constructor() {
@@ -102,7 +102,7 @@ export class AlkemioAdapter {
       for (const challenge of hub.challenges) {
         const challengeNode = new NodeChallenge(
           challenge.id,
-          `${hub.nameID}`,
+          `${challenge.nameID}`,
           `${challenge.displayName}`,
           NodeType.CHALLENGE,
           hub.nameID,

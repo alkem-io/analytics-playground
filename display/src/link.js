@@ -11,7 +11,7 @@ import {edges, svg} from "../config";
 const linkWidthScale = d3
     .scaleLinear()
     .domain([0, d3.max(edges.map((link) => link.weight))])
-    .range([0.5, 1.5]);
+    .range([0.5, 5]);
 
 /**
  * Define how the dashes will work. Extra light and light weight lines get dashes, anything heavier is solid.
@@ -39,7 +39,7 @@ export const link = svg
 
         switch (d.type) {
 
-        case "SUPERVISORY":
+        case "lead":
             return "url(#markerArrow)";
 
         default:

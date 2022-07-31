@@ -7,7 +7,7 @@ import {nodes, svg} from "../config";
 import {nodeScale} from "./node";
 
 const fontSizeScale = d3.scaleLinear()
-    .domain([0, d3.max(nodes.map((node) => node.influence))])
+    .domain([0, d3.max(nodes.map((node) => node.weight))])
     .range([7, 12]);
 
 const textContainer = svg
@@ -19,10 +19,10 @@ const textContainer = svg
 textContainer
     .append("text")
     .text((d) => d.name)
-    .attr("font-size", (d) => fontSizeScale(d.influence))
+    .attr("font-size", (d) => fontSizeScale(d.weight))
     .attr("transform", (d) => {
 
-        const scale = nodeScale(d.influence);
+        const scale = nodeScale(d.weight);
         const x = scale + 2;
         const y = scale + 4;
         return `translate(${x}, ${y})`;

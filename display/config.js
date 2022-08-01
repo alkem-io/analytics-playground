@@ -20,3 +20,21 @@ export const opportunityNodes = data.nodes.opportunities;
 export const nodes = hubNodes.concat(challengeNodes).concat(opportunityNodes).concat(contributorNodes);
 export const edges = data.edges;
 
+let selectedHubID = '';
+
+export const filterToHub = (hubID) => {
+  selectedHubID = hubID;
+}
+
+export const filteredNodes = () => {
+  console.log(`filtering to hub with ID: ${selectedHubID}`);
+  if (selectedHubID === '') return nodes;
+  return nodes.filter(node => node.group === selectedHubID);
+};
+
+export const filteredEdges = () => {
+  console.log(`filtering edges to hub with ID: ${selectedHubID}`);
+  if (selectedHubID === '') return edges;
+  return edges.filter(edge => edge.group === selectedHubID);
+};
+

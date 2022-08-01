@@ -2,7 +2,7 @@
  * Simple component which draws a circle for each node wherever it is arranged by the simulation.
  */
 import * as d3 from "d3";
-import { nodes, svg } from "../config";
+import { filteredNodes, svg } from "../config";
 import { drag } from "./drag";
 import { simulation } from "./simulation";
 
@@ -10,14 +10,14 @@ const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
 export const nodeScale = d3
   .scaleLinear()
-  .domain([0, d3.max(nodes.map((node) => node.weight))])
+  .domain([0, d3.max(filteredNodes().map((node) => node.weight))])
   .range([8, 20]);
 
 export const node = svg
   .append("g")
   .attr("class", "nodes")
   .selectAll("circle")
-  .data(nodes)
+  .data(filteredNodes())
   .enter()
   .append("circle")
   .attr("r", (d) => nodeScale(d.weight))

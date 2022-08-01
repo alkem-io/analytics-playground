@@ -64,10 +64,10 @@ export class AlkemioTransformer {
     for (const hub of hubsData.data.hubs) {
       const hubNode = new NodeChallenge(
         hub.id,
-        `'${hub.nameID}'`,
-        `${hub.nameID}`,
-        NodeType.HUB,
         hub.nameID,
+        hub.displayName,
+        NodeType.HUB,
+        hub.id,
         NodeWeight.HUB,
         1
       );
@@ -77,25 +77,29 @@ export class AlkemioTransformer {
         hub,
         hub.community.memberUsers,
         edges,
-        EdgeType.MEMBER
+        EdgeType.MEMBER,
+        hub.id
       );
       this.addCommunityRoleEdges(
         hub,
         hub.community.memberOrganizations,
         edges,
-        EdgeType.MEMBER
+        EdgeType.MEMBER,
+        hub.id
       );
       this.addCommunityRoleEdges(
         hub,
         hub.community.leadOrganizations,
         edges,
-        EdgeType.LEAD
+        EdgeType.LEAD,
+        hub.id
       );
       this.addCommunityRoleEdges(
         hub,
         hub.community.leadUsers,
         edges,
-        EdgeType.LEAD
+        EdgeType.LEAD,
+        hub.id
       );
     }
 
@@ -104,10 +108,10 @@ export class AlkemioTransformer {
       for (const challenge of hub.challenges) {
         const challengeNode = new NodeChallenge(
           challenge.id,
-          `${challenge.nameID}`,
-          `${challenge.displayName}`,
+          challenge.nameID,
+          challenge.displayName,
           NodeType.CHALLENGE,
-          hub.nameID,
+          hub.id,
           NodeWeight.CHALLENGE,
           challenge.community.leadOrganizations.length
         );
@@ -118,7 +122,8 @@ export class AlkemioTransformer {
           challenge.id,
           hub.id,
           EdgeWeight.CHILD,
-          EdgeType.CHILD
+          EdgeType.CHILD,
+          hub.id
         );
         edges.push(edge);
 
@@ -126,25 +131,29 @@ export class AlkemioTransformer {
           challenge,
           challenge.community.memberUsers,
           edges,
-          EdgeType.MEMBER
+          EdgeType.MEMBER,
+          hub.id
         );
         this.addCommunityRoleEdges(
           challenge,
           challenge.community.memberOrganizations,
           edges,
-          EdgeType.MEMBER
+          EdgeType.MEMBER,
+          hub.id
         );
         this.addCommunityRoleEdges(
           challenge,
           challenge.community.leadOrganizations,
           edges,
-          EdgeType.LEAD
+          EdgeType.LEAD,
+          hub.id
         );
         this.addCommunityRoleEdges(
           challenge,
           challenge.community.leadUsers,
           edges,
-          EdgeType.LEAD
+          EdgeType.LEAD,
+          hub.id
         );
       }
     }
@@ -155,10 +164,10 @@ export class AlkemioTransformer {
         for (const opportunity of challenge.opportunities) {
           const opportunityNode = new NodeChallenge(
             opportunity.id,
-            `'${opportunity.nameID}'`,
-            `${opportunity.displayName}`,
+            opportunity.nameID,
+            opportunity.displayName,
             NodeType.OPPORTUNITY,
-            hub.nameID,
+            hub.id,
             NodeWeight.OPPORTUNITY,
             opportunity.community.leadOrganizations.length
           );
@@ -169,7 +178,8 @@ export class AlkemioTransformer {
             opportunity.id,
             challenge.id,
             EdgeWeight.CHILD,
-            EdgeType.CHILD
+            EdgeType.CHILD,
+            hub.id
           );
           edges.push(edge);
 
@@ -177,25 +187,29 @@ export class AlkemioTransformer {
             opportunity,
             opportunity.community.memberUsers,
             edges,
-            EdgeType.MEMBER
+            EdgeType.MEMBER,
+            hub.id
           );
           this.addCommunityRoleEdges(
             opportunity,
             opportunity.community.memberOrganizations,
             edges,
-            EdgeType.MEMBER
+            EdgeType.MEMBER,
+            hub.id
           );
           this.addCommunityRoleEdges(
             opportunity,
             opportunity.community.leadOrganizations,
             edges,
-            EdgeType.LEAD
+            EdgeType.LEAD,
+            hub.id
           );
           this.addCommunityRoleEdges(
             opportunity,
             opportunity.community.leadUsers,
             edges,
-            EdgeType.LEAD
+            EdgeType.LEAD,
+            hub.id
           );
         }
       }
@@ -219,12 +233,13 @@ export class AlkemioTransformer {
     parent: any,
     contributors: any[],
     edges: Edge[],
-    type: EdgeType
+    type: EdgeType,
+    group: string
   ) {
     for (const contributor of contributors) {
       let weight = EdgeWeight.MEMBER;
       if (type === EdgeType.LEAD) weight = EdgeWeight.LEAD;
-      const edge = new Edge(contributor.id, parent.id, weight, type);
+      const edge = new Edge(contributor.id, parent.id, weight, type, group);
       edges.push(edge);
     }
   }

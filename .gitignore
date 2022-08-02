@@ -2,7 +2,8 @@
 # Display specific
 /display/node_modules
 /display/bak
-/display/data/*.json
+/display/public/data/*.json
+/display/dist
 
 # Generate specific
 /transform/node_modules

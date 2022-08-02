@@ -1,51 +1,40 @@
-import { hubSelector, svg, dataLoader } from './config.js';
 import * as d3 from 'd3';
-import { animate as animateLink } from './link';
-//import {animate as animateLabel} from "./src/label";
-//import {animate as animateImage} from "./src/image";
-import { animate as animateHovercard } from './hovercard';
-import { animate as animateNode } from './node';
-import { simulation } from './simulation';
+import { DataLoader } from './DataLoader';
+import { ForceGraph } from './ForceGraph';
 
-// Add in a Hub selection for each Hub in the data set
-hubSelector
-  .selectAll('option.hub')
-  .data(dataLoader.getHubNodes())
-  .join('option')
-  .attr('id', (d: any) => d.id)
-  .attr('class', 'hub')
-  .attr('value', (d: any) => d.id)
-  .text((d: any) => d.displayName);
+export const width = 800;
+export const height = 600;
 
-// // handle selecting a single Hub
+// Make the DOM locations available
+export const svg = d3.select("#Target");
+export const hubSelector = d3.select('#HubSelector');
+
+// Load
+export const dataLoader = new DataLoader();
+const data: any = await dataLoader.loadData();
+// const testHubID = '758452d0-7c07-4844-9c05-c93f9e35fbc2';
+// dataLoader.filterToHub(testHubID);
+
+export const forceGraph = new ForceGraph(svg, dataLoader, width, height);
+forceGraph.addHubSelector(hubSelector);
+forceGraph.setLinkScales();
+forceGraph.setNodeScales();
+forceGraph.displayNodes();
+forceGraph.displayLinks();
+
+
+forceGraph.hovercard.createHoverCard();
+forceGraph.hovercard.registerHovercard(forceGraph.node, forceGraph.simulation);
+forceGraph.simulate();
+forceGraph.registerZoom();
+
 hubSelector.on('change', function () {
   const selectedHubOption = d3.select(this);
   const selectedHubID = selectedHubOption.property('value');
   console.log(`Hub selected: ${selectedHubID}`);
   dataLoader.filterToHub(selectedHubID);
   const myNodes = dataLoader.getFilteredNodes();
-  console.log(`filter resulted in ${myNodes.length} nodes.`);
-
   const myEdges = dataLoader.getFilteredEdges();
-  console.log(`filter resulted in ${myEdges.length} edges.`);
 
-  simulation.restart();
+  //simulation.restart();
 });
-
-simulation.on('tick', () => {
-  animateNode();
-  animateLink();
-  animateHovercard();
-  //animateLabel();
-  //animateImage();
-});
-
-// allow zooming
-function handleZoom(e: any) {
-  svg.selectAll('.nodes').attr('transform', e.transform);
-  svg.selectAll('.links').attr('transform', e.transform);
-  svg.selectAll('.hovercard').attr('transform', e.transform);
-}
-let zoom = d3.zoom().on('zoom', handleZoom);
-
-svg.call(zoom);

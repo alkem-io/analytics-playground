@@ -8,9 +8,9 @@
 
 import {node} from "./node";
 import {simulation} from "./simulation";
-import {svg} from "../config";
+import {svg} from "./config";
 
-let currentTarget = null;
+let currentTarget: any = null;
 
 const cardContainer = svg
     .append("g")

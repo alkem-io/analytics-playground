@@ -4,34 +4,34 @@
 
 import * as d3 from "d3";
 import { filter } from "d3";
-import {edges, filteredEdges, svg} from "../config";
+import {dataLoader, svg} from "./config";
 
 /**
  * Define a width scale for the lines. Higher weight means thicker links.
  */
 const linkWidthScale = d3
     .scaleLinear()
-    .domain([0, d3.max(filteredEdges().map((link) => link.weight))])
+    .domain([0, d3.max(dataLoader.getFilteredEdges().map((link) => link.weight)) || 10])
     .range([0.5, 5]);
 
 /**
  * Define how the dashes will work. Extra light and light weight lines get dashes, anything heavier is solid.
  */
-const linkDashScale = d3
-    .scaleOrdinal()
-    .domain([0, 2, 3])
-    .range(["4 2", "2 2", null]);
+// const linkDashScale = d3
+//     .scaleOrdinal()
+//     .domain([0, 2, 3])
+//     .range(["4 2", "2 2", null]);
 
 export const link = svg
     .append('g')
     .attr('class', 'links')
     .selectAll("path.link")
-    .data(filteredEdges)
+    .data(dataLoader.getFilteredEdges())
     .enter()
     .append("path")
     .attr("stroke", "#999")
     .attr("stroke-opacity", 0.6)
-    .attr("stroke-dasharray", (d) => linkDashScale(d.weight))
+    //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
     .attr("stroke-width", (d) => linkWidthScale(d.weight))
     .attr("marker-mid", (d) => {
 
@@ -58,7 +58,7 @@ const lineGenerator = d3.line()
 
 export const animate = () => {
 
-    link.attr("d", (d) => {
+    link.attr("d", (d: any) => {
 
         const mid = [
             (d.source.x + d.target.x) / 2,
@@ -97,7 +97,7 @@ export const animate = () => {
 
         return lineGenerator([
             [d.source.x, d.source.y],
-            mid,
+            // mid,
             [d.target.x, d.target.y]
         ]);
 

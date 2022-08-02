@@ -14,7 +14,7 @@ import { NodeWeight } from './common/node.weight';
 import { EdgeWeight } from './common/edge.weight';
 import { EdgeType } from './common/edge.type';
 
-const TRANSFORMED_DATA_FILE = '../display/data/transformed-data.json';
+const TRANSFORMED_DATA_FILE = '../display/public/data/transformed-data.json';
 
 export class AlkemioTransformer {
   logger;

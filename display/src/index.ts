@@ -24,8 +24,9 @@ forceGraph.displayLinks();
 
 
 forceGraph.hovercard.createHoverCard();
-forceGraph.hovercard.registerHovercard(forceGraph.node, forceGraph.simulation);
 forceGraph.simulate();
+
+forceGraph.hovercard.registerHovercard(forceGraph.node, forceGraph.simulation);
 forceGraph.registerZoom();
 
 hubSelector.on('change', function () {

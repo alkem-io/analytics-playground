@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
-import { IData } from './model/data';
-import { IEdge } from './model/edge';
-import { INode } from './model/node';
+import { IData } from './model/data.interface';
+import { IEdge } from './model/edge.interface';
+import { INode } from './model/node.interface';
 
 export class DataLoader {
 

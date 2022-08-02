@@ -35,7 +35,7 @@ getFilteredNodes(): INode[] {
   if (!this.data) throw new Error('Not loaded');
   console.log(`filtering to hub with ID: ${this.selectedHubID}`);
   if (this.selectedHubID === '') return this.nodes;
-  const result = this.nodes.filter(node => node.group === this.selectedHubID);
+  const result = this.nodes.filter(node => node.group === this.selectedHubID || node.group === 'contributors');
 
   console.log(`filter resulted in ${result.length} nodes.`);
   return result;

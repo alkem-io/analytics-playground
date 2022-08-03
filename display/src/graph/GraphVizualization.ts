@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
-import { DataLoader } from './DataLoader';
+import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
 
-export class ForceGraph {
-  dataLoader: DataLoader;
+export class GraphVizualization {
+  dataLoader: GraphDataProvider;
   svg: any;
   node: any;
   nodeScale: any;
@@ -18,7 +18,7 @@ export class ForceGraph {
   lineGenerator = d3.line().curve(d3.curveCardinal);
   hovercard: any;
 
-  constructor(svg: any, dataLoader: DataLoader, width: number, height: number) {
+  constructor(svg: any, dataLoader: GraphDataProvider, width: number, height: number) {
     this.dataLoader = dataLoader;
     this.svg = svg;
     this.hovercard = new Hovercard(svg);

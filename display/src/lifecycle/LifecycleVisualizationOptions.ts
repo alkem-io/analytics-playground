@@ -1,7 +1,7 @@
 export class LifecycleVisualizationOptions {
-  strokeDefaultColor = 'blue';
-  strokePrimaryColor = 'blue';
-  font = 'blue';
-  fontSize = 'blue';
-  fillColor = 'blue';
+  strokeDefaultColor =  '#000';
+  strokePrimaryColor = '#068293';
+  font = '"Source Sans Pro"';
+  fontSize = 16;
+  fillColor = '#F9F9F9';
 }

@@ -1,5 +1,4 @@
 <head>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
       svg {
           width: 800px;
@@ -32,7 +31,8 @@
       <option id="all" value="">All</option>
     </select>
  </div>
-  <svg id="Target">
+ <div class="graph">
+  <svg id="svg-graph">
       <defs>
           <!-- Marker is defined that acts as arrow appearing in the middle of certain lines -->
           <marker id="markerArrow" markerWidth="7" markerHeight="7" refX="2" refY="2" orient="auto" markerUnits="strokeWidth">
@@ -41,7 +41,17 @@
       </defs>
   </svg>
 </div>
+<p></p>
+<br/>
+<p>Lifecycle</p>
 
-<script type="module" src="./index.js"></script>
+<div class="lifecycle">
+  <svg id="svg-lifecycle">
+      <defs>
+      </defs>
+  </svg>
+</div>
+
+<script type="module" src="./bundle.js"></script>
 
 </body>

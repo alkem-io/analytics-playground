@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { AlkemioTransformer } from './AlkemioTransformer';
+import { AlkemioGraphTransformer } from './AlkemioTransformer';
 import { createLogger } from './util/create-logger';
 
 const main = async () => {
@@ -7,7 +7,7 @@ const main = async () => {
   const logger = createLogger();
 
   logger.info('Tranforming acquired data into a graph for display with D3');
-  const alkemioAdapter = new AlkemioTransformer();
+  const alkemioAdapter = new AlkemioGraphTransformer();
   alkemioAdapter.transformData();
 };
 

@@ -1,29 +1,124 @@
 import * as d3 from 'd3';
 import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
+import { Selection } from 'd3';
 
 export class GraphVizualization {
   dataLoader: GraphDataProvider;
-  svg: any;
-  node: any;
-  nodeScale: any;
+  svg: Selection<any, any, any, any>;
+  graphGroup: Selection<any, any, any, any>;
+  node: any; // Selection<any, any, any, any>;
+  nodeScale: any; // d3.ScaleLinear<any, any>;
   nodeColorScale: any;
   width: number;
   height: number;
 
+  scale: any;
+  translate: any;
+
+  dragEnabled = false;
+
   link: any;
-  linkScale: any;
   linkWidthScale: any;
   simulation: any;
   lineGenerator = d3.line().curve(d3.curveCardinal);
-  hovercard: any;
+  hovercard: Hovercard;
 
-  constructor(svg: any, dataLoader: GraphDataProvider, width: number, height: number) {
+  defaultScale = 1;
+  defaultTranslation = [0, 0];
+
+  constructor(
+    svg: any,
+    dataLoader: GraphDataProvider,
+    width: number,
+    height: number
+  ) {
     this.dataLoader = dataLoader;
     this.svg = svg;
-    this.hovercard = new Hovercard(svg);
+
     this.width = width;
     this.height = height;
+
+    this.scale = this.defaultScale;
+    this.translate = this.defaultTranslation;
+
+    this.svg.style('width', width + 'px').style('height', height + 'px');
+
+    this.graphGroup = this.svg.append('g').attr('id', 'graph');
+
+    this.updateScales();
+    this.displayGraph();
+    this.registerZoom();
+
+    this.hovercard = new Hovercard(svg, 0, 0);
+    this.simulate();
+    this.registerHovercard(this.node, this.simulation);
+  }
+
+  displayGraph() {
+    this.displayNodes();
+    this.displayLinks();
+  }
+
+  private displayNodes() {
+    this.node = this.graphGroup
+      .append('g')
+      .attr('class', 'nodes')
+      .selectAll('circle')
+      .data(this.dataLoader.getFilteredNodes())
+      .enter()
+      .append('circle')
+      .attr('r', (d: any) => this.nodeScale(d.weight))
+      .attr('stroke', '#251607 ')
+      .attr('stroke-width', function (d: any) {
+        if (d.type === 'organization') return 2.0;
+        return 0.5;
+      })
+      .style('fill', (d: any) => this.nodeColorScale(d.group));
+  }
+
+  private displayLinks() {
+    this.link = this.graphGroup
+      .append('g')
+      .attr('class', 'links')
+      .selectAll('path.link')
+      .data(this.dataLoader.getFilteredEdges())
+      .enter()
+      .append('path')
+      .attr('stroke', '#999')
+      .attr('stroke-opacity', 0.6)
+      //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
+      .attr('stroke-width', (d: any) => this.linkWidthScale(d.weight))
+      .attr('marker-mid', (d: any) => {
+        /**
+         * Define a marker to indicate what kind of line it is.
+         * Currently defined: arrow for subordinate / supervisory relationship.
+         */
+        switch (d.type) {
+          case 'lead':
+            return 'url(#markerArrow)';
+
+          default:
+            return 'none';
+        }
+      })
+      .attr('fill', 'none');
+  }
+
+  updateScales() {
+    // Get max values
+    const maxNodeWeight =
+      d3.max(this.dataLoader.getFilteredNodes().map(node => node.weight)) || 10;
+    const maxLinkWeight =
+      d3.max(this.dataLoader.getFilteredEdges().map(link => link.weight)) || 10;
+
+    // Create the scales
+    this.nodeColorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    this.nodeScale = d3.scaleLinear().domain([0, maxNodeWeight]).range([8, 20]);
+    this.linkWidthScale = d3
+      .scaleLinear()
+      .domain([0, maxLinkWeight])
+      .range([0.5, 5]);
   }
 
   simulate() {
@@ -59,61 +154,38 @@ export class GraphVizualization {
     this.simulation.on('tick', () => {
       this.animateNode();
       this.animateLinks();
-      this.hovercard.animateHovercard();
     });
   }
 
-  addHubSelector(hubSelector: any) {
-    // Add in a Hub selection for each Hub in the data set
-    hubSelector
-      .selectAll('option.hub')
-      .data(this.dataLoader.getHubNodes())
-      .join('option')
-      .attr('id', (d: any) => d.id)
-      .attr('class', 'hub')
-      .attr('value', (d: any) => d.id)
-      .text((d: any) => d.displayName);
+  transformCoordinates(x: number, y: number) {
+    return [
+      this.scale * x + this.translate[0],
+      this.scale * y + this.translate[1],
+    ];
   }
+
   handleZoom = (e: any) => {
-    this.svg.selectAll('.nodes').attr('transform', e.transform);
-    this.svg.selectAll('.links').attr('transform', e.transform);
-    this.svg.selectAll('.hovercard').attr('transform', e.transform);
+    this.graphGroup.attr('transform', e.transform);
   };
 
   registerZoom() {
     let zoom = d3.zoom().on('zoom', this.handleZoom);
 
-    this.svg.call(zoom);
+    this.graphGroup.call(zoom);
   }
 
-  setNodeScales() {
-    this.nodeColorScale = d3.scaleOrdinal(d3.schemeCategory10);
+  updateGraph() {
+    this.graphGroup.remove();
+    this.simulation.stop();
 
-    const max =
-      d3.max(this.dataLoader.getFilteredNodes().map(node => node.weight)) || 10;
-    this.nodeScale = d3.scaleLinear().domain([0, max]).range([8, 20]);
-  }
+    this.graphGroup = this.svg.append('g').attr('id', 'graph');
+    // Scales may change
+    this.updateScales();
+    this.displayGraph();
+    this.registerZoom();
 
-  displayNodes() {
-    this.node = this.svg
-      .append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(this.dataLoader.getFilteredNodes())
-      .enter()
-      .append('circle')
-      .attr('r', (d: any) => this.nodeScale(d.weight))
-      .attr('stroke', '#251607 ')
-      .attr('stroke-width', function (d: any) {
-        if (d.type === 'organization') return 2.0;
-        return 0.5;
-      })
-      .style('fill', (d: any) => this.nodeColorScale(d.group));
-  }
-
-  animateNode() {
-    this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
-    this.node.call(this.drag());
+    this.simulate();
+    this.registerHovercard(this.node, this.simulation);
   }
 
   drag() {
@@ -147,62 +219,21 @@ export class GraphVizualization {
       .on('end', dragended);
   }
 
-  /**
-   * Define a width scale for the lines. Higher weight means thicker links.
-   */
-  setLinkScales() {
-    this.linkWidthScale = d3
-      .scaleLinear()
-      .domain([
-        0,
-        d3.max(this.dataLoader.getFilteredEdges().map(link => link.weight)) ||
-          10,
-      ])
-      .range([0.5, 5]);
-
-      /**
-   * Define how the dashes will work. Extra light and light weight lines get dashes, anything heavier is solid.
-   */
-  // this.linkDashScale = d3
-  //     .scaleOrdinal()
-  //     .domain([0, 2, 3])
-  //     .range(["4 2", "2 2", null]);
+  addDefs() {
+    // todo: replace inline html arrow head definition with code here
+    // <marker id="markerArrow" markerWidth="7" markerHeight="7" refX="2" refY="2" orient="auto" markerUnits="strokeWidth">
+    //           <path d="M0,0 L0,4 L4,2 z" fill="rgba(72, 72, 72, 0.35)" />
+    //       </marker>
   }
 
-
-
-  displayLinks() {
-    this.link = this.svg
-      .append('g')
-      .attr('class', 'links')
-      .selectAll('path.link')
-      .data(this.dataLoader.getFilteredEdges())
-      .enter()
-      .append('path')
-      .attr('stroke', '#999')
-      .attr('stroke-opacity', 0.6)
-      //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
-      .attr('stroke-width', (d: any) => this.linkWidthScale(d.weight))
-      .attr('marker-mid', (d: any) => {
-        /**
-         * Define a marker to indicate what kind of line it is.
-         * Currently defined: arrow for subordinate / supervisory relationship.
-         */
-
-        switch (d.type) {
-          case 'lead':
-            return 'url(#markerArrow)';
-
-          default:
-            return 'none';
-        }
-      })
-      .attr('fill', 'none');
+  animateNode() {
+    this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
+    if (this.dragEnabled) this.node.call(this.drag());
   }
 
   animateLinks() {
     this.link.attr('d', (d: any) => {
-      const mid = [
+      const mid: [number, number] = [
         (d.source.x + d.target.x) / 2,
         (d.source.y + d.target.y) / 2,
       ];
@@ -234,11 +265,32 @@ export class GraphVizualization {
         mid[1] -= curveSharpness * slopeX;
       }
 
-      return this.lineGenerator([
+      const linePoints: [number, number][] = [
         [d.source.x, d.source.y],
-        // mid,
+        mid,
         [d.target.x, d.target.y],
-      ]);
+      ];
+
+      return this.lineGenerator(linePoints);
+    });
+  }
+
+  registerHovercard(node: any, simulation: any) {
+    node.on('mouseover', (event: any, d: any) => {
+      console.log(`Node mouse over`);
+
+      const radius = event.target.r.baseVal.value;
+      const offset = radius + 3;
+      this.hovercard.moveTo(d.x + offset, d.y - offset, d);
+
+      simulation.alphaTarget(0).restart();
+    });
+
+    node.on('mouseout', () => {
+      /**
+       * When the mouse is moved off a node, hide the card.
+       */
+      this.hovercard.remove();
     });
   }
 }

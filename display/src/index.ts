@@ -1,13 +1,14 @@
 import * as d3 from 'd3';
 import { GraphDataProvider } from './graph/GraphDataProvider';
 import { GraphVizualization } from './graph/GraphVizualization';
+import { GraphVizualizationControls } from './graph/GraphVizualizationControls';
 import { LifecycleDataProvider } from './lifecycle/LifecycleDataProvider';
 import { LifecycleVisualization } from './lifecycle/LifecycleVisualization';
 
 
 // Make the DOM locations available
-const svgGraph = d3.select("#svg-graph");
-const svgLifecycle = d3.select("#svg-lifecycle");
+const graphSvg = d3.select("#graph-svg");
+const lifecycleSvg = d3.select("#lifecycle-svg");
 const hubSelector = d3.select('#HubSelector');
 
 
@@ -16,35 +17,21 @@ const graphDataFileLocation = 'data/transformed-graph-data.json';
 const graphDataProvider = new GraphDataProvider();
 await graphDataProvider.loadData(graphDataFileLocation);
 
-// const testHubID = '758452d0-7c07-4844-9c05-c93f9e35fbc2';
-// dataLoader.filterToHub(testHubID);
-
-const forceGraph = new GraphVizualization(svgGraph, graphDataProvider, 800, 600);
-forceGraph.addHubSelector(hubSelector);
-forceGraph.setLinkScales();
-forceGraph.setNodeScales();
-forceGraph.displayNodes();
-forceGraph.displayLinks();
-
-
-forceGraph.hovercard.createHoverCard();
-forceGraph.simulate();
-
-forceGraph.hovercard.registerHovercard(forceGraph.node, forceGraph.simulation);
-forceGraph.registerZoom();
+const graphControls = new GraphVizualizationControls(hubSelector, graphDataProvider);
+graphControls.logInfo();
+const forceGraph = new GraphVizualization(graphSvg, graphDataProvider, 900, 600);
+forceGraph.updateGraph();
 
 hubSelector.on('change', function () {
   const selectedHubOption = d3.select(this);
   const selectedHubID = selectedHubOption.property('value');
   console.log(`Hub selected: ${selectedHubID}`);
   graphDataProvider.filterToHub(selectedHubID);
-  const myNodes = graphDataProvider.getFilteredNodes();
-  const myEdges = graphDataProvider.getFilteredEdges();
-
-  //simulation.restart();
+  forceGraph.updateGraph();
 });
 
 const lifecycleData = new LifecycleDataProvider();
-await lifecycleData.loadData('data/innovation-flow.json');
-const lifecycleViz = new LifecycleVisualization(svgLifecycle, lifecycleData, 800, 600);
+await lifecycleData.loadData('data/lifecycle/innovation-flow.json');
+lifecycleData.updateState("awaitingApproval");
+const lifecycleViz = new LifecycleVisualization(lifecycleSvg, lifecycleData, 800, 600);
 lifecycleViz.displayLifecycle();

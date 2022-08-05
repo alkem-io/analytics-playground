@@ -36,7 +36,6 @@ export class GraphDataProvider {
 
   getFilteredNodes(): INode[] {
     if (!this.data) throw new Error('Not loaded');
-    console.log(`filtering to hub with ID: ${this.selectedHubID}`);
     if (this.selectedHubID === '') return this.nodes;
     const result = this.nodes.filter(
       node => node.group === this.selectedHubID || node.group === 'contributors'
@@ -48,7 +47,6 @@ export class GraphDataProvider {
 
   getFilteredEdges(): IEdge[] {
     if (!this.data) throw new Error('Not loaded');
-    console.log(`filtering edges to hub with ID: ${this.selectedHubID}`);
     if (this.selectedHubID === '') return this.data.edges;
     const result = this.data.edges.filter(
       edge => edge.group === this.selectedHubID

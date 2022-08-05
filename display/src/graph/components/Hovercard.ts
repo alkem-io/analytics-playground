@@ -1,32 +1,31 @@
-export class Hovercard {
+/**
+ * Defines independent hovercard component for force directed graph.
+ * Whenever Node is hovered over, as defined in different file, hovercard is moved to that location and updated with relevant text.
+ * Note: need to have two levels of translation: one for zooming and one for the card position when displaying
+ * relative to the node being explored
+ */ export class Hovercard {
   svg: any;
+  svgX: number;
+  svgY: number;
 
-  cardContainer: any;
-  card: any;
+  cardGroup: any;
   cardTextName: any;
   cardBackground: any;
   cardTextPosition: any;
   currentTarget: any;
 
-  constructor(svg: any) {
+  constructor(svg: any, svgX: number, svgY: number) {
+    this.svgX = svgX;
+    this.svgY = svgY;
     this.svg = svg;
-  }
-
-  /**
- * Defines independent hovercard component for force directed graph.
- * Whenever Node is hovered over, as defined in different file, hovercard is moved to that location and updated with relevant text.
- * Note: need to have two levels of translation: one for zooming and one for the card position when displaying
- * relative to the node being explored
- */
-  createHoverCard() {
-    this.cardContainer = this.svg
+    this.cardGroup = this.svg
       .append('g')
+      .attr('id', 'hovercard')
       .attr('class', 'hovercard')
-      .attr('pointer-events', 'none');
+      .attr('pointer-events', 'none')
+      .style('opacity', 0);
 
-    this.card = this.cardContainer.append('g').attr('display', 'none');
-
-    this.cardBackground = this.card
+    this.cardBackground = this.cardGroup
       .append('rect')
       .attr('width', 180)
       .attr('height', 45)
@@ -34,64 +33,53 @@ export class Hovercard {
       .attr('stroke', '#333')
       .attr('rx', 4);
 
-    this.cardTextName = this.card
+    this.cardTextName = this.cardGroup
       .append('text')
       .attr('transform', 'translate(8, 20)');
 
-    this.cardTextPosition = this.card
+    this.cardTextPosition = this.cardGroup
       .append('text')
       .attr('font-size', '10')
       .attr('transform', 'translate(8, 35)');
   }
 
+  moveTo(x: number, y: number, node: any) {
+    // Update the hovercard data
+    this.cardTextName.text(node.displayName);
+    this.cardTextPosition.text(node.nameID);
 
-  animateHovercard() {
-    if (this.currentTarget) {
-      /**
-       * Determine the position of whatever is being hovered over, and if it's a Node, move a hovercard there.
-       */
+    const nameWidth = this.cardTextName.node().getBBox().width;
+    const positionWidth = this.cardTextPosition.node().getBBox().width;
+    const cardWidth = Math.max(nameWidth, positionWidth);
 
-      const dist = this.currentTarget.r.baseVal.value + 3;
+    this.cardBackground.attr('width', cardWidth + 16);
 
-      const xPos = this.currentTarget.cx.baseVal.value + dist;
-      const yPos = this.currentTarget.cy.baseVal.value - dist;
+    // and display
+    const displayX =
 
-      this.card.attr('transform', `translate(${xPos}, ${yPos})`);
-    }
+    this.cardGroup.attr('transform', `translate(${x}, ${y})`);
+    // this.cardGroup
+    //   .style('left', x + this.svgX + 'px')
+    //   .style('top', x + this.svgX + 'px');
+    this.cardGroup.transition().duration(200).style('opacity', 1);
   }
 
-  registerHovercard(node: any, simulation: any) {
+  // animateHovercard() {
+  //   if (this.currentTarget) {
+  //     /**
+  //      * Determine the position of whatever is being hovered over, and if it's a Node, move a hovercard there.
+  //      */
 
-    node.on('mouseover', (event: any, d: any) => {
-      /**
-       * On mouse over any node, draw the tooltip in that place.
-       */
+  //     const dist = this.currentTarget.r.baseVal.value + 3;
 
-      this.currentTarget = event.target;
-      this.card.attr('display', 'block');
+  //     const xPos = this.currentTarget.cx.baseVal.value + dist;
+  //     const yPos = this.currentTarget.cy.baseVal.value - dist;
 
-      this.cardTextName.text(d.displayName);
-      this.cardTextPosition.text(d.nameID);
+  //     this.cardGroup.attr('transform', `translate(${xPos}, ${yPos})`);
+  //   }
+  // }
 
-      /**
-       * Automatically size the card to the widest of: the personnel name, personnel role.
-       */
-
-      const nameWidth = this.cardTextName.node().getBBox().width;
-      const positionWidth = this.cardTextPosition.node().getBBox().width;
-      const cardWidth = Math.max(nameWidth, positionWidth);
-
-      this.cardBackground.attr('width', cardWidth + 16);
-
-      simulation.alphaTarget(0).restart();
-    });
-
-    node.on('mouseout', () => {
-      /**
-       * When the mouse is moved off a node, hide the card.
-       */
-      this.card.attr('display', 'none');
-      this.currentTarget = null;
-    });
+  remove() {
+    this.cardGroup.style('opacity', 0);
   }
 }

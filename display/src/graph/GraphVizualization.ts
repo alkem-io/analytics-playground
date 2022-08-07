@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
 import { Selection, Simulation } from 'd3';
-import { INode } from './model/node.interface';
 import { addArrowHeadDef } from './util/VisualDefinitions';
 
 export class GraphVizualization {
@@ -19,7 +18,7 @@ export class GraphVizualization {
   scale: any;
   translate: any;
 
-  dragEnabled = false;
+  dragEnabled = true;
   defMarkerArrow = 'markerArrow';
 
   link: any;
@@ -57,6 +56,7 @@ export class GraphVizualization {
     this.updateScales();
     this.displayGraph();
     this.registerZoom();
+    if (this.dragEnabled) this.registerDrag();
 
     this.hovercard = new Hovercard(svg, 0, 0);
     this.simulate();
@@ -144,7 +144,7 @@ export class GraphVizualization {
     const forceLinkHubs = d3
       .forceLink(hubEdges)
       .id((d: any) => d.id)
-      .distance(300)
+      .distance(500)
       .strength(0.7);
 
     const forceCollision = d3
@@ -179,16 +179,6 @@ export class GraphVizualization {
     ];
   }
 
-  private handleZoom = (e: any) => {
-    this.graphGroup.attr('transform', e.transform);
-  };
-
-  private registerZoom() {
-    let zoom = d3.zoom().on('zoom', this.handleZoom);
-
-    this.graphGroup.call(zoom);
-  }
-
   updateGraph() {
     this.simulation.stop();
     this.linksGroup.remove();
@@ -198,45 +188,15 @@ export class GraphVizualization {
     this.updateScales();
     this.displayGraph();
     this.registerZoom();
+    if (this.dragEnabled) this.registerDrag();
 
     this.simulate();
     this.registerHovercard(this.node, this.simulation);
   }
 
-  private drag() {
-    const dragstarted = (d: any) => {
-      if (!d.active) {
-        this.simulation.alphaTarget(0.3).restart();
-      }
-
-      d.subject.fx = d.x;
-      d.subject.fy = d.y;
-    };
-
-    const dragged = (d: any) => {
-      d.subject.fx = d.x;
-      d.subject.fy = d.y;
-    };
-
-    const dragended = (d: any) => {
-      if (!d.active) {
-        this.simulation.alphaTarget(0);
-      }
-
-      d.subject.fx = null;
-      d.subject.fy = null;
-    };
-
-    return d3
-      .drag()
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended);
-  }
 
   private animateNode() {
     this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
-    if (this.dragEnabled) this.node.call(this.drag());
   }
 
   private animateLinks() {
@@ -273,6 +233,51 @@ export class GraphVizualization {
 
       return this.lineGenerator(linePoints);
     });
+  }
+
+  private handleZoom = (e: any) => {
+    this.graphGroup.attr('transform', e.transform);
+    console.log(`zoom called: ${e}`);
+  };
+
+  private registerZoom() {
+    let zoom = d3.zoom().on('zoom', this.handleZoom);
+    this.graphGroup.call(zoom);
+  }
+
+  private drag() {
+    const dragstarted = (d: any) => {
+      if (!d.active) {
+        this.simulation.alphaTarget(0.3).restart();
+      }
+
+      d.subject.fx = d.x;
+      d.subject.fy = d.y;
+    };
+
+    const dragged = (d: any) => {
+      d.subject.fx = d.x;
+      d.subject.fy = d.y;
+    };
+
+    const dragended = (d: any) => {
+      if (!d.active) {
+        this.simulation.alphaTarget(0);
+      }
+
+      d.subject.fx = null;
+      d.subject.fy = null;
+    };
+
+    return d3
+      .drag()
+      .on('start', dragstarted)
+      .on('drag', dragged)
+      .on('end', dragended);
+  }
+
+  private registerDrag() {
+    this.node.call(this.drag());
   }
 
   private registerHovercard(node: any, simulation: any) {

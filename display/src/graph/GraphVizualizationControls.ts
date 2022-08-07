@@ -16,11 +16,11 @@ export class GraphVizualizationControls {
 
     // Add in a Hub selection for each Hub in the data set
     this.container
-      .selectAll('option.hub')
+      .selectAll('option.hub-option')
       .data(this.dataLoader.getRawHubNodes())
       .join('option')
       .attr('id', (d: any) => d.id)
-      .attr('class', 'hub')
+      .attr('class', 'hub-option')
       .attr('value', (d: any) => d.id)
       .text((d: any) => d.displayName);
     }

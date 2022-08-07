@@ -10,6 +10,7 @@ export class GraphVizualization {
   svg: Selection<any, any, any, any>;
   graphGroup: Selection<any, any, any, any>;
   node: any; // Selection<any, any, any, any>;
+  nodesGroup: any;
   nodeScale: any; // d3.ScaleLinear<any, any>;
   nodeColorScale: any;
   width: number;
@@ -22,6 +23,7 @@ export class GraphVizualization {
   defMarkerArrow = 'markerArrow';
 
   link: any;
+  linksGroup: any;
   linkWidthScale: any;
   simulation: any;
   lineGenerator = d3.line().curve(d3.curveCardinal);
@@ -66,9 +68,10 @@ export class GraphVizualization {
   }
 
   private displayNodes() {
-    this.node = this.graphGroup
-      .append('g')
-      .attr('class', 'nodes')
+    this.nodesGroup = this.graphGroup
+    .append('g')
+    .attr('class', 'nodes');
+    this.node = this.nodesGroup
       .selectAll('circle')
       .data(this.dataLoader.getFilteredNodes(), (d: any) => d.id)
       .enter()
@@ -76,16 +79,18 @@ export class GraphVizualization {
       .attr('r', (d: any) => this.nodeScale(d.weight))
       .attr('stroke', '#251607 ')
       .attr('stroke-width', function (d: any) {
-        if (d.type === 'organization') return 2.0;
+        if (d.type === 'organization') return 3.0;
+        if (d.type === 'hub') return 3.0;
         return 0.5;
       })
       .style('fill', (d: any) => this.nodeColorScale(d.group));
   }
 
   private displayLinks() {
-    this.link = this.graphGroup
+    this.linksGroup = this.graphGroup
       .append('g')
       .attr('class', 'links')
+    this.link = this.linksGroup
       .selectAll('path')
       .data(this.dataLoader.getFilteredEdges(), (d: any) => d.id)
       .enter()
@@ -95,10 +100,9 @@ export class GraphVizualization {
       //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
       .attr('stroke-width', (d: any) => this.linkWidthScale(d.weight))
       .attr('marker-mid', (d: any) => {
-        /**
-         * Define a marker to indicate what kind of line it is.
-         * Currently defined: arrow for subordinate / supervisory relationship.
-         */
+
+         // Define a marker to indicate what kind of line it is.
+         // Currently defined: arrow for subordinate / supervisory relationship.
         switch (d.type) {
           case 'lead':
             return `url(#${this.defMarkerArrow})`;
@@ -144,9 +148,12 @@ export class GraphVizualization {
     const forceCollision = d3
       .forceCollide()
       .radius(function (d: any) {
+        if (d.type === "hub") {
+          return d.radius * 5;
+        }
         return d.radius;
       })
-      .strength(-10);
+      .strength(10);
 
     const filteredNodes: any = this.dataLoader.getFilteredNodes();
     this.simulation = d3
@@ -180,10 +187,10 @@ export class GraphVizualization {
   }
 
   updateGraph() {
-    this.graphGroup.remove();
     this.simulation.stop();
+    this.linksGroup.remove();
+    this.nodesGroup.remove();
 
-    this.graphGroup = this.svg.append('g').attr('id', 'graph');
     // Scales may change
     this.updateScales();
     this.displayGraph();
@@ -236,14 +243,9 @@ export class GraphVizualization {
         (d.source.y + d.target.y) / 2,
       ];
 
-      /**
-       * If two lines overlap with each other, curve one of the lines.
-       */
-
+      // If two lines overlap with each other, curve one of the lines.
       if (d.overlap > 0) {
         const index = d.overlap;
-
-        // console.log("Index?", index);
         // const index = d.overlap.filter((ol) => ol.weight > d.weight).length;
 
         const distance = Math.sqrt(
@@ -251,10 +253,7 @@ export class GraphVizualization {
             Math.pow(d.target.y - d.source.y, 2)
         );
 
-        /**
-         * The math below finds a point just off the center of the line.
-         */
-
+        //The math below finds a point just off the center of the line.
         const slopeX = (d.target.x - d.source.x) / distance;
         const slopeY = (d.target.y - d.source.y) / distance;
 

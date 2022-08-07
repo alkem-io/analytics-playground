@@ -23,6 +23,7 @@
       .attr('id', 'hovercard')
       .attr('class', 'hovercard')
       .attr('pointer-events', 'none')
+      .attr('z-index', "99")
       .style('opacity', 0);
 
     this.cardBackground = this.cardGroup

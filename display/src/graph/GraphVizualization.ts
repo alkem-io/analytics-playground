@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
-import { Selection } from 'd3';
+import { Selection, Simulation } from 'd3';
 import { INode } from './model/node.interface';
 import { addArrowHeadDef } from './util/VisualDefinitions';
 
@@ -25,7 +25,7 @@ export class GraphVizualization {
   link: any;
   linksGroup: any;
   linkWidthScale: any;
-  simulation: any;
+  simulation: Simulation<any, any>;
   lineGenerator = d3.line().curve(d3.curveCardinal);
   hovercard: Hovercard;
 
@@ -46,6 +46,7 @@ export class GraphVizualization {
 
     this.scale = this.defaultScale;
     this.translate = this.defaultTranslation;
+    this.simulation = d3.forceSimulation();
 
     this.svg.style('width', width + 'px').style('height', height + 'px');
     const graphDefs = this.svg.append('defs').attr('id', 'graph-defs');
@@ -68,9 +69,7 @@ export class GraphVizualization {
   }
 
   private displayNodes() {
-    this.nodesGroup = this.graphGroup
-    .append('g')
-    .attr('class', 'nodes');
+    this.nodesGroup = this.graphGroup.append('g').attr('class', 'nodes');
     this.node = this.nodesGroup
       .selectAll('circle')
       .data(this.dataLoader.getFilteredNodes(), (d: any) => d.id)
@@ -78,7 +77,7 @@ export class GraphVizualization {
       .append('circle')
       .attr('r', (d: any) => this.nodeScale(d.weight))
       .attr('stroke', '#251607 ')
-      .attr('stroke-width', function (d: any) {
+      .attr('stroke-width', (d: any) => {
         if (d.type === 'organization') return 3.0;
         if (d.type === 'hub') return 3.0;
         return 0.5;
@@ -87,9 +86,7 @@ export class GraphVizualization {
   }
 
   private displayLinks() {
-    this.linksGroup = this.graphGroup
-      .append('g')
-      .attr('class', 'links')
+    this.linksGroup = this.graphGroup.append('g').attr('class', 'links');
     this.link = this.linksGroup
       .selectAll('path')
       .data(this.dataLoader.getFilteredEdges(), (d: any) => d.id)
@@ -100,9 +97,8 @@ export class GraphVizualization {
       //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
       .attr('stroke-width', (d: any) => this.linkWidthScale(d.weight))
       .attr('marker-mid', (d: any) => {
-
-         // Define a marker to indicate what kind of line it is.
-         // Currently defined: arrow for subordinate / supervisory relationship.
+        // Define a marker to indicate what kind of line it is.
+        // Currently defined: arrow for subordinate / supervisory relationship.
         switch (d.type) {
           case 'lead':
             return `url(#${this.defMarkerArrow})`;
@@ -131,10 +127,8 @@ export class GraphVizualization {
   }
 
   simulate() {
-    /**
-     * Gravity determines how strongly the nodes push / pull eachother.
-     * In effect, the lower the number goes, the more spread out the graph will be.
-     */
+    // Gravity determines how strongly the nodes push / pull eachother.
+    // In effect, the lower the number goes, the more spread out the graph will be.
     const gravity = -100;
 
     const forceManyBody = d3.forceManyBody().strength(gravity);
@@ -145,10 +139,18 @@ export class GraphVizualization {
       .distance(150)
       .strength(0.7);
 
+    const hubEdges = this.dataLoader.getHubEdges();
+
+    const forceLinkHubs = d3
+      .forceLink(hubEdges)
+      .id((d: any) => d.id)
+      .distance(300)
+      .strength(0.7);
+
     const forceCollision = d3
       .forceCollide()
-      .radius(function (d: any) {
-        if (d.type === "hub") {
+      .radius((d: any) => {
+        if (d.type === 'hub') {
           return d.radius * 5;
         }
         return d.radius;
@@ -159,6 +161,7 @@ export class GraphVizualization {
     this.simulation = d3
       .forceSimulation(filteredNodes)
       .force('link', forceLink)
+      .force('linkHubs', forceLinkHubs)
       .force('charge', forceManyBody)
       .force('collision', forceCollision)
       .force('center', d3.forceCenter(this.width / 2, this.height / 2));
@@ -176,11 +179,11 @@ export class GraphVizualization {
     ];
   }
 
-  handleZoom = (e: any) => {
+  private handleZoom = (e: any) => {
     this.graphGroup.attr('transform', e.transform);
   };
 
-  registerZoom() {
+  private registerZoom() {
     let zoom = d3.zoom().on('zoom', this.handleZoom);
 
     this.graphGroup.call(zoom);
@@ -200,7 +203,7 @@ export class GraphVizualization {
     this.registerHovercard(this.node, this.simulation);
   }
 
-  drag() {
+  private drag() {
     const dragstarted = (d: any) => {
       if (!d.active) {
         this.simulation.alphaTarget(0.3).restart();
@@ -231,12 +234,12 @@ export class GraphVizualization {
       .on('end', dragended);
   }
 
-  animateNode() {
+  private animateNode() {
     this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
     if (this.dragEnabled) this.node.call(this.drag());
   }
 
-  animateLinks() {
+  private animateLinks() {
     this.link.attr('d', (d: any) => {
       const mid: [number, number] = [
         (d.source.x + d.target.x) / 2,
@@ -272,12 +275,11 @@ export class GraphVizualization {
     });
   }
 
-  registerHovercard(node: any, simulation: any) {
+  private registerHovercard(node: any, simulation: any) {
     node.on('mouseover', (event: any, d: any) => {
-      console.log(`Node mouse over`);
 
       const radius = event.target.r.baseVal.value;
-      const offset = radius + 3;
+      const offset = radius + 4;
       this.hovercard.moveTo(d.x + offset, d.y - offset, d);
 
       simulation.alphaTarget(0).restart();
@@ -290,4 +292,40 @@ export class GraphVizualization {
       this.hovercard.remove();
     });
   }
+
+  scaleToFit() {
+    const nodesGroup = d3.select('g.graph-nodes').selectChildren();
+    const xAttr = nodesGroup.attr('cx');
+    const maxX = d3.max(xAttr);
+    const maxY = d3.max(this.node.y);
+    console.log(`max X value = ${maxX}; max Y value = ${maxY}`);
+  }
+
+  // private calculateFixedHubLocations() {
+  //   const hubNodes = this.dataLoader.getHubNodes();
+  //   const yOffset = 100;
+  //   const xOffset = 100;
+  //   let yValue = 0;
+  //   let xValue = xOffset;
+  //   const yIncrement = (this.height - yOffset * 2) / hubNodes.length;
+  //   const xIncrement = (this.width - xOffset * 2) / 3;
+  //   for (const hub of hubNodes) {
+  //     yValue = yValue + yIncrement;
+  //     this.hubLocations.set(hub.id, [xValue, yValue]);
+  //     xValue = xValue + xIncrement;
+  //     if (xValue > this.width) xValue = xOffset;
+  //   }
+  // }
+
+  // private getHubXValue(d: any) {
+  //   const location = this.hubLocations.get(d.id);
+  //   const xAnchor = location ? location[0] : this.width / 2;
+  //   return xAnchor;
+  // }
+
+  // private getHubYValue(d: any) {
+  //   const location = this.hubLocations.get(d.id);
+  //   const yAnchor = location ? location[1] : this.width / 2;
+  //   return yAnchor;
+  // }
 }

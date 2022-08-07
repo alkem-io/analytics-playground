@@ -127,13 +127,14 @@ export class GraphDataProvider {
       return this.getRawData().nodes.contributors;
     }
     // Get the relevant contributors
+    const contributorEdges = this.filteredEdges.filter(e => e.type === 'member' || e.type === 'lead');
 
     const contributorResultsMap: Map<string, INode> = new Map();
-    for (const edge of this.filteredEdges) {
+    for (const edge of contributorEdges) {
       const contributorID = edge.sourceID;
       const contributorNode = this.contributorNodesMap.get(contributorID);
       if (!contributorNode) {
-        console.log(`Identified edge with unknown contributor:${contributorID}`);
+        console.log(`Identified edge with unknown contributor:${contributorID} - type: ${edge.type}`);
         continue;
       }
       contributorResultsMap.set(contributorID, contributorNode);

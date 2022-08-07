@@ -2,6 +2,8 @@ import * as d3 from 'd3';
 import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
 import { Selection } from 'd3';
+import { INode } from './model/node.interface';
+import { addArrowHeadDef } from './util/VisualDefinitions';
 
 export class GraphVizualization {
   dataLoader: GraphDataProvider;
@@ -17,6 +19,7 @@ export class GraphVizualization {
   translate: any;
 
   dragEnabled = false;
+  defMarkerArrow = 'markerArrow';
 
   link: any;
   linkWidthScale: any;
@@ -43,6 +46,8 @@ export class GraphVizualization {
     this.translate = this.defaultTranslation;
 
     this.svg.style('width', width + 'px').style('height', height + 'px');
+    const graphDefs = this.svg.append('defs').attr('id', 'graph-defs');
+    addArrowHeadDef(this.defMarkerArrow, graphDefs);
 
     this.graphGroup = this.svg.append('g').attr('id', 'graph');
 
@@ -65,7 +70,7 @@ export class GraphVizualization {
       .append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
-      .data(this.dataLoader.getFilteredNodes())
+      .data(this.dataLoader.getFilteredNodes(), (d: any) => d.id)
       .enter()
       .append('circle')
       .attr('r', (d: any) => this.nodeScale(d.weight))
@@ -81,8 +86,8 @@ export class GraphVizualization {
     this.link = this.graphGroup
       .append('g')
       .attr('class', 'links')
-      .selectAll('path.link')
-      .data(this.dataLoader.getFilteredEdges())
+      .selectAll('path')
+      .data(this.dataLoader.getFilteredEdges(), (d: any) => d.id)
       .enter()
       .append('path')
       .attr('stroke', '#999')
@@ -96,7 +101,7 @@ export class GraphVizualization {
          */
         switch (d.type) {
           case 'lead':
-            return 'url(#markerArrow)';
+            return `url(#${this.defMarkerArrow})`;
 
           default:
             return 'none';
@@ -217,13 +222,6 @@ export class GraphVizualization {
       .on('start', dragstarted)
       .on('drag', dragged)
       .on('end', dragended);
-  }
-
-  addDefs() {
-    // todo: replace inline html arrow head definition with code here
-    // <marker id="markerArrow" markerWidth="7" markerHeight="7" refX="2" refY="2" orient="auto" markerUnits="strokeWidth">
-    //           <path d="M0,0 L0,4 L4,2 z" fill="rgba(72, 72, 72, 0.35)" />
-    //       </marker>
   }
 
   animateNode() {

@@ -1,7 +1,4 @@
 import * as d3 from 'd3';
-import { IData } from '../graph/model/data.interface';
-import { IEdge } from '../graph/model/edge.interface';
-import { INode } from '../graph/model/node.interface';
 
 import { createMachine } from 'xstate';
 import { toDirectedGraph } from '@xstate/graph';

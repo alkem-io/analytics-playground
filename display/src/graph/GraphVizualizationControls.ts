@@ -17,7 +17,7 @@ export class GraphVizualizationControls {
     // Add in a Hub selection for each Hub in the data set
     this.container
       .selectAll('option.hub')
-      .data(this.dataLoader.getHubNodes())
+      .data(this.dataLoader.getRawHubNodes())
       .join('option')
       .attr('id', (d: any) => d.id)
       .attr('class', 'hub')
@@ -26,7 +26,7 @@ export class GraphVizualizationControls {
     }
 
     logInfo() {
-      console.log('Graph controls added');
+      //console.log('Graph controls added');
     }
 
 

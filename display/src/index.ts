@@ -14,18 +14,17 @@ const hubSelector = d3.select('#HubSelector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
-const graphDataProvider = new GraphDataProvider();
+const hubID = "c4111e11-edad-48f6-916f-20e11f468848";
+const graphDataProvider = new GraphDataProvider(true, false, hubID);
 await graphDataProvider.loadData(graphDataFileLocation);
 
 const graphControls = new GraphVizualizationControls(hubSelector, graphDataProvider);
 graphControls.logInfo();
-const forceGraph = new GraphVizualization(graphSvg, graphDataProvider, 900, 600);
-forceGraph.updateGraph();
+const forceGraph = new GraphVizualization(graphSvg, graphDataProvider, 800, 600);
 
 hubSelector.on('change', function () {
   const selectedHubOption = d3.select(this);
   const selectedHubID = selectedHubOption.property('value');
-  console.log(`Hub selected: ${selectedHubID}`);
   graphDataProvider.filterToHub(selectedHubID);
   forceGraph.updateGraph();
 });
@@ -35,3 +34,5 @@ await lifecycleData.loadData('data/lifecycle/innovation-flow.json');
 lifecycleData.updateState("awaitingApproval");
 const lifecycleViz = new LifecycleVisualization(lifecycleSvg, lifecycleData, 800, 600);
 lifecycleViz.displayLifecycle();
+
+//forceGraph.scaleToFit();

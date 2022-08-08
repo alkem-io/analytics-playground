@@ -44,6 +44,15 @@
 <p></p>
 <div class="lifecycle">
   <h2>Lifecycle Visualization</h2>
+  <div class="lifecycle-controls">
+    <label>Select Lifecycle:
+      <select id="lifecycle-selector" width="80">
+        <option id="Innovation Flow" value="data/lifecycle/innovation-flow.json" >Innovation Flow</option>
+        <option id="User Application" value="data/lifecycle/user-application.json" selected="true">User Application</option>
+      </select>
+    </label>
+    <br/>
+  </div>
   <div class="lifecycle-container">
     <svg id="lifecycle-svg"></svg>
   </div>

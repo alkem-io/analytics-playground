@@ -78,8 +78,8 @@ export class GraphVizualization {
   }
 
   displayGraph() {
-    this.displayNodes();
     this.displayLinks();
+    this.displayNodes();
   }
 
   private displayNodes() {
@@ -301,7 +301,6 @@ export class GraphVizualization {
     const listener = d3.drag();
     listener.on('drag', (event: any) => {
       this.translate = [ this.translate[0] + event.dx* this.scale, this.translate[1] + event.dy* this.scale];
-      console.log(`translate: ${this.translate}, scale ${this.scale}`);
       this.transformDisplay(0);
     });
     this.graphGroup.call(listener);

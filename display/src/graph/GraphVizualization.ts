@@ -4,13 +4,12 @@ import { Hovercard } from './components/Hovercard';
 import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
 import { NodeDragHandler } from './handlers/NodeDragHandler';
+import { TransformationHandler } from './handlers/TransformationHandler';
 
 export class GraphVizualization {
 
   defMarkerArrow = 'markerArrow';
   maxNodeRadius = 20;
-  defaultScale = 1;
-  defaultTranslation = [0, 0];
 
   dataLoader: GraphDataProvider;
   svg: Selection<any, any, any, any>;
@@ -22,9 +21,6 @@ export class GraphVizualization {
   width: number;
   height: number;
 
-  scale: any;
-  translate: any;
-
   dragEnabled = true;
 
   link: any;
@@ -33,6 +29,7 @@ export class GraphVizualization {
   simulation: Simulation<any, any>;
   lineGenerator = d3.line().curve(d3.curveCardinal);
   hovercard: Hovercard;
+  transformationHandler: TransformationHandler;
 
   constructor(
     svg: any,
@@ -46,8 +43,6 @@ export class GraphVizualization {
     this.width = width;
     this.height = height;
 
-    this.scale = this.defaultScale;
-    this.translate = this.defaultTranslation;
     this.simulation = d3.forceSimulation();
 
     this.svg.style('width', width + 'px').style('height', height + 'px');
@@ -55,6 +50,7 @@ export class GraphVizualization {
     addArrowHeadDef(this.defMarkerArrow, graphDefs);
 
     this.graphGroup = this.svg.append('g').attr('id', 'graph');
+    this.transformationHandler = new TransformationHandler(this.width, this.height, this.graphGroup);
 
     this.hovercard = new Hovercard(svg, 0, 0);
 
@@ -71,7 +67,7 @@ export class GraphVizualization {
     this.displayGraph();
     //this.registerZoom();
     //if (this.dragEnabled) this.registerDrag();
-    this.registerPanningDragListener();
+    this.transformationHandler.registerPanningDragListener(this.svg);
 
     this.simulate();
     this.registerHovercard(this.node, this.simulation);
@@ -126,6 +122,11 @@ export class GraphVizualization {
         }
       })
       .attr('fill', 'none');
+  }
+
+  scaleToFit() {
+    this.transformationHandler.scaleToFit(this.maxNodeRadius, this.node.data());
+    this.transformationHandler.transformDisplay(750);
   }
 
   updateScales() {
@@ -190,12 +191,7 @@ export class GraphVizualization {
     });
   }
 
-  transformCoordinates(x: number, y: number) {
-    return [
-      this.scale * x + this.translate[0],
-      this.scale * y + this.translate[1],
-    ];
-  }
+
 
   private animateNode() {
     this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
@@ -288,7 +284,7 @@ export class GraphVizualization {
 
       const radius = event.target.r.baseVal.value;
       const offset = radius + 4;
-      const [newX, newY] = this.transformCoordinates(d.x + offset, d.y - offset);
+      const [newX, newY] = this.transformationHandler.transformCoordinates(d.x + offset, d.y - offset);
       this.hovercard.moveTo(newX, newY, d);
 
       simulation.alphaTarget(0).restart();
@@ -300,36 +296,6 @@ export class GraphVizualization {
        */
       this.hovercard.remove();
     });
-  }
-
-  private registerPanningDragListener() {
-    const listener = d3.drag();
-    listener.on('drag', (event: any) => {
-      this.translate = [ this.translate[0] + event.dx* this.scale, this.translate[1] + event.dy* this.scale];
-      this.transformDisplay(0);
-    });
-    this.svg.call(listener);
-  }
-
-  scaleToFit() {
-    const childNodes = this.node.data();
-    const buffer = this.maxNodeRadius;
-    const maxX = d3.max(childNodes, (d: any) => d.x + buffer - 0) || 0;
-    const minX = d3.min(childNodes, (d: any) => d.x - buffer) || 0;
-    const rangeX = (maxX - minX);
-
-    const maxY = d3.max(childNodes, (d: any) => d.y + buffer - 0) || 0;
-    const minY = d3.min(childNodes, (d: any) => d.y - buffer - 0) || 0;
-    const rangeY = maxY - minY;
-
-    this.scale = 1/Math.max(rangeX/this.width, rangeY/this.height);
-    this.translate = [-minX * this.scale, -minY * this.scale];
-
-    this.transformDisplay(750);
-  }
-
-  private transformDisplay(duration: number) {
-    this.graphGroup.transition().duration(duration).attr('transform', `translate(${this.translate})scale(${this.scale})`);
   }
 
   // private calculateFixedHubLocations() {

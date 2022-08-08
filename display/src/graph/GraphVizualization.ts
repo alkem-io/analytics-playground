@@ -3,6 +3,7 @@ import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
 import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
+import { NodeDragHandler } from './handlers/NodeDragHandler';
 
 export class GraphVizualization {
 
@@ -74,6 +75,8 @@ export class GraphVizualization {
 
     this.simulate();
     this.registerHovercard(this.node, this.simulation);
+    const nodeDragHandler = new NodeDragHandler(this.simulation, this.width, this.height);
+    nodeDragHandler.register(this.node);
   }
 
   displayGraph() {
@@ -95,7 +98,9 @@ export class GraphVizualization {
         if (d.type === 'hub') return 3.0;
         return 0.5;
       })
-      .style('fill', (d: any) => this.nodeColorScale(d.group));
+      .style('fill', (d: any) => this.nodeColorScale(d.group))
+      .classed("node", true)
+      .classed("fixed", (d: any) => d.fx !== undefined);
   }
 
   private displayLinks() {
@@ -241,6 +246,7 @@ export class GraphVizualization {
     let zoom = d3.zoom().on('zoom', this.handleZoom);
     this.graphGroup.call(zoom);
   }
+
 
   private drag() {
     const dragstarted = (d: any) => {

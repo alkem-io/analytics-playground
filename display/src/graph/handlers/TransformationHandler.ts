@@ -42,6 +42,7 @@ export class TransformationHandler {
     targetElement.call(listener);
   }
 
+  // dataNodes typically obtained by doing a d3.selectAll().data();
   scaleToFit(maxNodeRadius: number, dataNodes: any) {
     const buffer = maxNodeRadius;
     const maxX = d3.max(dataNodes, (d: any) => d.x + buffer - 0) || 0;

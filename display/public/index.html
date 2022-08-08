@@ -23,23 +23,30 @@
   <h1>
       Alkemio Analytics Demo
   </h1>
-  <h2>
-      Force Directed graph: All Hubs, Contributors
-  </h2>
-  <div class="SelectionControls">
-    <select id="HubSelector" width="80">
-      <option id="all" value="">All</option>
-    </select>
- </div>
- <div class="graph-container">
-  <svg id="graph-svg"></svg>
+  <div class="graph">
+    <h2>Force Directed graph</h2>
+    <div class="graph-controls">
+      <label>Select a single Hub:
+        <select id="graph-hub-selector" width="80">
+          <option id="all" value="" selected="true">All</option>
+        </select>
+      </label>
+      <br/>
+      Display contributors with no role:<input type="checkbox" id="graph-checkbox-show-contributors-no-role" name="show-contributors-no-role">
+      <br/>
+      <button type="button" id="graph-scale-to-fit">Fit to screen</button>
+      <br/>
+    </div>
+    <div class="graph-container">
+      <svg id="graph-svg"></svg>
+    </div>
 </div>
 <p></p>
-<br/>
-<p>Lifecycle</p>
-
-<div class="lifecycle-container">
-  <svg id="lifecycle-svg"></svg>
+<div class="lifecycle">
+  <h2>Lifecycle Visualization</h2>
+  <div class="lifecycle-container">
+    <svg id="lifecycle-svg"></svg>
+  </div>
 </div>
 
 <script type="module" src="./bundle.js"></script>

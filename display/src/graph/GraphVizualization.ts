@@ -3,6 +3,7 @@ import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
 import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
+import { toEventObject } from '@xstate/graph/lib/graph';
 
 export class GraphVizualization {
   dataLoader: GraphDataProvider;
@@ -53,12 +54,23 @@ export class GraphVizualization {
 
     this.graphGroup = this.svg.append('g').attr('id', 'graph');
 
+    this.hovercard = new Hovercard(svg, 0, 0);
+
+    this.refreshDisplayedGraph();
+  }
+
+  refreshDisplayedGraph() {
+    this.simulation.stop();
+    if (this.linksGroup) this.linksGroup.remove();
+    if (this.nodesGroup) this.nodesGroup.remove();
+
+    // Scales may change
     this.updateScales();
     this.displayGraph();
-    this.registerZoom();
-    if (this.dragEnabled) this.registerDrag();
+    //this.registerZoom();
+    //if (this.dragEnabled) this.registerDrag();
+    this.registerPanningDragListener();
 
-    this.hovercard = new Hovercard(svg, 0, 0);
     this.simulate();
     this.registerHovercard(this.node, this.simulation);
   }
@@ -179,22 +191,6 @@ export class GraphVizualization {
     ];
   }
 
-  updateGraph() {
-    this.simulation.stop();
-    this.linksGroup.remove();
-    this.nodesGroup.remove();
-
-    // Scales may change
-    this.updateScales();
-    this.displayGraph();
-    this.registerZoom();
-    if (this.dragEnabled) this.registerDrag();
-
-    this.simulate();
-    this.registerHovercard(this.node, this.simulation);
-  }
-
-
   private animateNode() {
     this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
   }
@@ -285,7 +281,8 @@ export class GraphVizualization {
 
       const radius = event.target.r.baseVal.value;
       const offset = radius + 4;
-      this.hovercard.moveTo(d.x + offset, d.y - offset, d);
+      const [newX, newY] = this.transformCoordinates(d.x + offset, d.y - offset);
+      this.hovercard.moveTo(newX, newY, d);
 
       simulation.alphaTarget(0).restart();
     });
@@ -298,12 +295,34 @@ export class GraphVizualization {
     });
   }
 
+  private registerPanningDragListener() {
+    const listener = d3.drag();
+    listener.on('drag', (event: any) => {
+      this.translate = [ this.translate[0] + event.dx* this.scale, this.translate[1] + event.dy* this.scale];
+      console.log(`translate: ${this.translate}, scale ${this.scale}`);
+      this.transformDisplay(0);
+    });
+    this.graphGroup.call(listener);
+  }
+
   scaleToFit() {
-    const nodesGroup = d3.select('g.graph-nodes').selectChildren();
-    const xAttr = nodesGroup.attr('cx');
-    const maxX = d3.max(xAttr);
-    const maxY = d3.max(this.node.y);
-    console.log(`max X value = ${maxX}; max Y value = ${maxY}`);
+    const childNodes = this.node.data();
+    const maxX = d3.max(childNodes, (d: any) => d.x) || "0";
+    const minX = d3.min(childNodes, (d: any) => d.x) || "0";
+    const rangeX = parseInt(maxX) - parseInt(minX);
+
+    const maxY = d3.max(childNodes, (d: any) => d.y) || "0";
+    const minY = d3.min(childNodes, (d: any) => d.y) || "0";
+    const rangeY = parseInt(maxY) - parseInt(minY);
+
+    this.scale = 1/Math.max(rangeX/this.width, rangeY/this.height);
+    this.translate = [-minX * this.scale, -minY * this.scale];
+    //this.translate = [0, 0];
+    this.transformDisplay(750);
+  }
+
+  private transformDisplay(duration: number) {
+    this.graphGroup.transition().duration(duration).attr('transform', `translate(${this.translate})scale(${this.scale})`);
   }
 
   // private calculateFixedHubLocations() {

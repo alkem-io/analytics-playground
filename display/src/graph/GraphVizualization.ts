@@ -3,7 +3,6 @@ import { GraphDataProvider } from './GraphDataProvider';
 import { Hovercard } from './components/Hovercard';
 import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
-import { toEventObject } from '@xstate/graph/lib/graph';
 
 export class GraphVizualization {
 
@@ -274,7 +273,7 @@ export class GraphVizualization {
       .on('end', dragended);
   }
 
-  private registerDrag() {
+  private registerNodeDrag() {
     this.node.call(this.drag());
   }
 
@@ -303,7 +302,7 @@ export class GraphVizualization {
       this.translate = [ this.translate[0] + event.dx* this.scale, this.translate[1] + event.dy* this.scale];
       this.transformDisplay(0);
     });
-    this.graphGroup.call(listener);
+    this.svg.call(listener);
   }
 
   scaleToFit() {

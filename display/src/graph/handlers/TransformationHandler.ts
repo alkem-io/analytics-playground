@@ -63,4 +63,15 @@ export class TransformationHandler {
       .duration(duration)
       .attr('transform', `translate(${this.translate})scale(${this.scale})`);
   }
+
+  private handleZoom = (e: any) => {
+    this.group.attr('transform', e.transform);
+    console.log(`zoom called: ${e}`);
+  };
+
+  private registerZoom() {
+    let zoom = d3.zoom().on('zoom', this.handleZoom);
+    this.group.call(zoom);
+  }
+
 }

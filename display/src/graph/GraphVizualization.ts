@@ -64,20 +64,16 @@ export class GraphVizualization {
 
     // Scales may change
     this.updateScales();
-    this.displayGraph();
-    //this.registerZoom();
-    //if (this.dragEnabled) this.registerDrag();
+
+    this.displayLinks();
+    this.displayNodes();
     this.transformationHandler.registerPanningDragListener(this.svg);
 
     this.simulate();
-    this.registerHovercard(this.node, this.simulation);
+    this.hovercard.registerHovercard(this.node, this.simulation, this.transformationHandler);
+
     const nodeDragHandler = new NodeDragHandler(this.simulation, this.width, this.height);
     nodeDragHandler.register(this.node);
-  }
-
-  displayGraph() {
-    this.displayLinks();
-    this.displayNodes();
   }
 
   private displayNodes() {
@@ -129,7 +125,7 @@ export class GraphVizualization {
     this.transformationHandler.transformDisplay(750);
   }
 
-  updateScales() {
+  private updateScales() {
     // Get max values
     const maxNodeWeight =
       d3.max(this.dataLoader.getFilteredNodes().map(node => node.weight)) || 10;
@@ -191,8 +187,6 @@ export class GraphVizualization {
     });
   }
 
-
-
   private animateNode() {
     this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
   }
@@ -230,71 +224,6 @@ export class GraphVizualization {
       ];
 
       return this.lineGenerator(linePoints);
-    });
-  }
-
-  private handleZoom = (e: any) => {
-    this.graphGroup.attr('transform', e.transform);
-    console.log(`zoom called: ${e}`);
-  };
-
-  private registerZoom() {
-    let zoom = d3.zoom().on('zoom', this.handleZoom);
-    this.graphGroup.call(zoom);
-  }
-
-
-  private drag() {
-    const dragstarted = (d: any) => {
-      if (!d.active) {
-        this.simulation.alphaTarget(0.3).restart();
-      }
-
-      d.subject.fx = d.x;
-      d.subject.fy = d.y;
-    };
-
-    const dragged = (d: any) => {
-      d.subject.fx = d.x;
-      d.subject.fy = d.y;
-    };
-
-    const dragended = (d: any) => {
-      if (!d.active) {
-        this.simulation.alphaTarget(0);
-      }
-
-      d.subject.fx = null;
-      d.subject.fy = null;
-    };
-
-    return d3
-      .drag()
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended);
-  }
-
-  private registerNodeDrag() {
-    this.node.call(this.drag());
-  }
-
-  private registerHovercard(node: any, simulation: any) {
-    node.on('mouseover', (event: any, d: any) => {
-
-      const radius = event.target.r.baseVal.value;
-      const offset = radius + 4;
-      const [newX, newY] = this.transformationHandler.transformCoordinates(d.x + offset, d.y - offset);
-      this.hovercard.moveTo(newX, newY, d);
-
-      simulation.alphaTarget(0).restart();
-    });
-
-    node.on('mouseout', () => {
-      /**
-       * When the mouse is moved off a node, hide the card.
-       */
-      this.hovercard.remove();
     });
   }
 

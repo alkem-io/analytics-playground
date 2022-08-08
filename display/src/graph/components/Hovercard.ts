@@ -1,3 +1,5 @@
+import { TransformationHandler } from "../handlers/TransformationHandler";
+
 /**
  * Defines independent hovercard component for force directed graph.
  * Whenever Node is hovered over, as defined in different file, hovercard is moved to that location and updated with relevant text.
@@ -74,6 +76,23 @@
   //     this.cardGroup.attr('transform', `translate(${xPos}, ${yPos})`);
   //   }
   // }
+
+  registerHovercard(node: any, simulation: any, transformationHandler: TransformationHandler) {
+    node.on('mouseover', (event: any, d: any) => {
+
+      const radius = event.target.r.baseVal.value;
+      const offset = radius + 4;
+      const [newX, newY] = transformationHandler.transformCoordinates(d.x + offset, d.y - offset);
+      this.moveTo(newX, newY, d);
+
+      simulation.alphaTarget(0).restart();
+    });
+
+    node.on('mouseout', () => {
+      // When the mouse is moved off a node, hide the card.
+      this.remove();
+    });
+  }
 
   remove() {
     this.cardGroup.style('opacity', 0);

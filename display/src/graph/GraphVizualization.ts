@@ -6,6 +6,12 @@ import { addArrowHeadDef } from './util/VisualDefinitions';
 import { toEventObject } from '@xstate/graph/lib/graph';
 
 export class GraphVizualization {
+
+  defMarkerArrow = 'markerArrow';
+  maxNodeRadius = 20;
+  defaultScale = 1;
+  defaultTranslation = [0, 0];
+
   dataLoader: GraphDataProvider;
   svg: Selection<any, any, any, any>;
   graphGroup: Selection<any, any, any, any>;
@@ -20,7 +26,6 @@ export class GraphVizualization {
   translate: any;
 
   dragEnabled = true;
-  defMarkerArrow = 'markerArrow';
 
   link: any;
   linksGroup: any;
@@ -28,9 +33,6 @@ export class GraphVizualization {
   simulation: Simulation<any, any>;
   lineGenerator = d3.line().curve(d3.curveCardinal);
   hovercard: Hovercard;
-
-  defaultScale = 1;
-  defaultTranslation = [0, 0];
 
   constructor(
     svg: any,
@@ -131,7 +133,7 @@ export class GraphVizualization {
 
     // Create the scales
     this.nodeColorScale = d3.scaleOrdinal(d3.schemeCategory10);
-    this.nodeScale = d3.scaleLinear().domain([0, maxNodeWeight]).range([8, 20]);
+    this.nodeScale = d3.scaleLinear().domain([0, maxNodeWeight]).range([8, this.maxNodeRadius]);
     this.linkWidthScale = d3
       .scaleLinear()
       .domain([0, maxLinkWeight])
@@ -307,17 +309,18 @@ export class GraphVizualization {
 
   scaleToFit() {
     const childNodes = this.node.data();
-    const maxX = d3.max(childNodes, (d: any) => d.x) || "0";
-    const minX = d3.min(childNodes, (d: any) => d.x) || "0";
-    const rangeX = parseInt(maxX) - parseInt(minX);
+    const buffer = this.maxNodeRadius;
+    const maxX = d3.max(childNodes, (d: any) => d.x + buffer - 0) || 0;
+    const minX = d3.min(childNodes, (d: any) => d.x - buffer) || 0;
+    const rangeX = (maxX - minX);
 
-    const maxY = d3.max(childNodes, (d: any) => d.y) || "0";
-    const minY = d3.min(childNodes, (d: any) => d.y) || "0";
-    const rangeY = parseInt(maxY) - parseInt(minY);
+    const maxY = d3.max(childNodes, (d: any) => d.y + buffer - 0) || 0;
+    const minY = d3.min(childNodes, (d: any) => d.y - buffer - 0) || 0;
+    const rangeY = maxY - minY;
 
     this.scale = 1/Math.max(rangeX/this.width, rangeY/this.height);
     this.translate = [-minX * this.scale, -minY * this.scale];
-    //this.translate = [0, 0];
+
     this.transformDisplay(750);
   }
 

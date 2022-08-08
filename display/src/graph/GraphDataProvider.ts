@@ -13,7 +13,7 @@ export class GraphDataProvider {
   filteredNodes: INode[] = [];
 
   private showContributorsFlag = true;
-  private showContributorsWithoutRolesFlag = true;
+  private showContributorsWithoutRolesFlag = false;
   private showSingleHubID = '';
 
   constructor(showContributors: boolean, showContributorsWithoutRole: boolean, showSingleHubID = '' ) {

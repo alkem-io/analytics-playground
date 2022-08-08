@@ -8,9 +8,6 @@ import { LifecycleVisualization } from './lifecycle/LifecycleVisualization';
 // Make the DOM locations available
 const graphSvg = d3.select('#graph-svg');
 const graphHubSelectionControl = d3.select('#graph-hub-selector');
-const graphShowContributorsNoRole = d3.select(
-  '#graph-checkbox-show-contributors-no-role'
-);
 const graphShowContributors = d3.select('#graph-checkbox-show-contributors');
 const graphScaleToFit = d3.select('#graph-scale-to-fit');
 
@@ -38,19 +35,16 @@ graphHubSelectionControl.on('change', function () {
   forceGraph.refreshDisplayedGraph();
 });
 
-graphShowContributorsNoRole.on('click', (e: any) => {
+graphShowContributors.attr("checked", "checked");
+graphShowContributors.on('click', (e: any) => {
   const checked = e.target.checked;
-  console.log(`show contributors no role: ${checked}`);
-  graphDataProvider.showContributorsNoRole(checked);
+  graphDataProvider.showContributors(checked);
   forceGraph.refreshDisplayedGraph();
 });
 
 graphScaleToFit.on('click', (e: any) => {
-  console.log(`scale to fit clicked`);
   forceGraph.scaleToFit();
 });
-
-
 
 const lifecycleData = new LifecycleDataProvider();
 await lifecycleData.loadData('data/lifecycle/innovation-flow.json');
@@ -62,5 +56,3 @@ const lifecycleViz = new LifecycleVisualization(
   600
 );
 lifecycleViz.displayLifecycle();
-
-//forceGraph.scaleToFit();

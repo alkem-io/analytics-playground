@@ -12,6 +12,7 @@ const graphShowContributors = d3.select('#graph-checkbox-show-contributors');
 const graphScaleToFit = d3.select('#graph-scale-to-fit');
 
 const lifecycleSvg = d3.select('#lifecycle-svg');
+const lifecycleSelectionControl = d3.select('#lifecycle-selector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json'; //
@@ -46,9 +47,11 @@ graphScaleToFit.on('click', (e: any) => {
   forceGraph.scaleToFit();
 });
 
+/// Lifecycle ///////////////////////
 const lifecycleData = new LifecycleDataProvider();
-await lifecycleData.loadData('data/lifecycle/innovation-flow.json');
-lifecycleData.updateState('awaitingApproval');
+const selectedLifecycle = lifecycleSelectionControl.property('value');
+await lifecycleData.loadData(selectedLifecycle);
+//lifecycleData.updateState('awaitingApproval');
 const lifecycleViz = new LifecycleVisualization(
   lifecycleSvg,
   lifecycleData,
@@ -56,3 +59,8 @@ const lifecycleViz = new LifecycleVisualization(
   600
 );
 lifecycleViz.displayLifecycle();
+
+lifecycleSelectionControl.on('change', function () {
+  const selectedLifecycle = d3.select(this).property('value');
+  console.log(`switching to lifecycle: ${selectedLifecycle}`);
+});

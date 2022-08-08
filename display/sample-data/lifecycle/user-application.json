@@ -1,0 +1,31 @@
+{
+  "id": "user-application",
+  "context": {
+    "parentID": ""
+  },
+  "initial": "new",
+  "states": {
+    "new": {
+      "on": {
+        "APPROVE": {
+          "target": "approved",
+          "cond": "communityUpdateAuthorized"
+        },
+        "REJECT": "rejected"
+      }
+    },
+    "approved": {
+      "type": "final",
+      "entry": ["communityAddMember"]
+    },
+    "rejected": {
+      "on": {
+        "REOPEN": "new",
+        "ARCHIVE": "archived"
+      }
+    },
+    "archived": {
+      "type": "final"
+    }
+  }
+}

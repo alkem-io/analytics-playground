@@ -23,6 +23,7 @@
       .attr('id', 'hovercard')
       .attr('class', 'hovercard')
       .attr('pointer-events', 'none')
+      .attr('z-index', "99")
       .style('opacity', 0);
 
     this.cardBackground = this.cardGroup
@@ -54,13 +55,8 @@
 
     this.cardBackground.attr('width', cardWidth + 16);
 
-    // and display
-    const displayX =
-
     this.cardGroup.attr('transform', `translate(${x}, ${y})`);
-    // this.cardGroup
-    //   .style('left', x + this.svgX + 'px')
-    //   .style('top', x + this.svgX + 'px');
+
     this.cardGroup.transition().duration(200).style('opacity', 1);
   }
 

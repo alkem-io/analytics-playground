@@ -12,15 +12,15 @@ export class GraphDataProvider {
   filteredEdges: IEdge[] = [];
   filteredNodes: INode[] = [];
 
-  private showContributors = true;
-  private showContributorsWithoutRoles = false;
+  private showContributorsFlag = true;
+  private showContributorsWithoutRolesFlag = false;
   private showSingleHubID = '';
 
   constructor(showContributors: boolean, showContributorsWithoutRole: boolean, showSingleHubID = '' ) {
     this.contributorNodesMap = new Map();
     this.showSingleHubID = showSingleHubID;
-    this.showContributors = showContributors;
-    this.showContributorsWithoutRoles = showContributorsWithoutRole;
+    this.showContributorsFlag = showContributors;
+    this.showContributorsWithoutRolesFlag = showContributorsWithoutRole;
   }
 
   async loadData(jsonDataFileLocation: string) {
@@ -59,7 +59,7 @@ export class GraphDataProvider {
   private updateFilteredData() {
     // Filter the edges
     this.filteredEdges = this.getEdgesFilteredByGroup();
-    if (!this.showContributors) {
+    if (!this.showContributorsFlag) {
       this.filteredEdges = this.filteredEdges.filter(edge => edge.type !== "member" && edge.type !== "lead")
     }
 
@@ -76,7 +76,7 @@ export class GraphDataProvider {
     const edgesJson = JSON.stringify(this.filteredEdges);
     this.filteredEdges = JSON.parse(edgesJson);
 
-    console.log(`Single Hub[${this.showSingleHub()}], contributors (${this.showContributors}), contributors without roles (${this.showContributorsWithoutRoles}): Data consists of ${changeNodesFiltered.length} change nodes, ${contributors.length} contributors, ${this.filteredEdges.length} edges`)
+    console.log(`Single Hub[${this.showSingleHub()}], contributors (${this.showContributorsFlag}), contributors without roles (${this.showContributorsWithoutRolesFlag}): Data consists of ${changeNodesFiltered.length} change nodes, ${contributors.length} contributors, ${this.filteredEdges.length} edges`)
   }
 
   getFilteredEdges(): IEdge[] {
@@ -95,15 +95,27 @@ export class GraphDataProvider {
     );
   }
 
-  filterToHub(hubID: string) {
+  showSpecificHub(hubID: string) {
     this.showSingleHubID = hubID;
+    this.updateFilteredData();
+  }
+
+  showContributorsNoRole(contributorsNoRole: boolean) {
+    this.showContributorsWithoutRolesFlag = contributorsNoRole;
+    this.updateFilteredData();
+  }
+
+  showContributors(showContributors: boolean) {
+    this.showContributorsFlag = showContributors;
     this.updateFilteredData();
   }
 
   getRawHubNodes() {
     if (!this.data) throw new Error('Not loaded');
-
     return this.data.nodes.hubs;
+
+    // const hubsJson = JSON.stringify(this.data.nodes.hubs);
+    // return this.filteredNodes = JSON.parse(hubsJson);
   }
 
   getHubNodes() {
@@ -120,20 +132,21 @@ export class GraphDataProvider {
   }
 
   private getContributorNodesFilteredByRole(): INode[] {
-    if (!this.showContributors) {
+    if (!this.showContributorsFlag) {
       return [];
     }
-    if (this.showContributorsWithoutRoles) {
+    if (this.showContributorsWithoutRolesFlag) {
       return this.getRawData().nodes.contributors;
     }
     // Get the relevant contributors
+    const contributorEdges = this.filteredEdges.filter(e => e.type === 'member' || e.type === 'lead');
 
     const contributorResultsMap: Map<string, INode> = new Map();
-    for (const edge of this.filteredEdges) {
+    for (const edge of contributorEdges) {
       const contributorID = edge.sourceID;
       const contributorNode = this.contributorNodesMap.get(contributorID);
       if (!contributorNode) {
-        console.log(`Identified edge with unknown contributor:${contributorID}`);
+        console.log(`Identified edge with unknown contributor:${contributorID} - type: ${edge.type}`);
         continue;
       }
       contributorResultsMap.set(contributorID, contributorNode);

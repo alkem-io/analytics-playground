@@ -56,9 +56,9 @@ graphDisplayMap.on('click', (e: any) => {
   const checked = e.target.checked;
   console.log(`Display map: ${checked}`);
   if (checked) {
-    forceGraph.displayMap();
+    forceGraph.showMap();
   } else {
-    forceGraph.removeMap();
+    forceGraph.hideMap();
   }
 });
 

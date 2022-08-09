@@ -77,6 +77,7 @@ export class GraphVizualization {
     // Scales may change
     this.updateScales();
 
+    this.displayMap();
     this.displayLinks();
     this.displayNodes();
     this.transformationHandler.registerPanningDragListener(this.svg);
@@ -137,8 +138,9 @@ export class GraphVizualization {
       .attr('fill', 'none');
   }
 
-  displayMap() {
-    this.mapGroup = this.graphGroup.append('g').attr('class', 'map');
+  private displayMap() {
+    this.mapGroup = this.graphGroup.append('g').attr('class', 'map')
+    .style('opacity', 0);;
     this.map = this.mapGroup
       .selectAll('path')
       .data(this.mapDataProvider.getCountries().features)
@@ -148,8 +150,12 @@ export class GraphVizualization {
       .attr('stroke', 'white');
   }
 
-  removeMap() {
-    this.mapGroup.remove();
+  showMap() {
+    this.mapGroup.transition().duration(200).style('opacity', 1);
+  }
+
+  hideMap() {
+    this.mapGroup.transition().duration(200).style('opacity', 0);
   }
 
   fixContributorsLocationToMap() {

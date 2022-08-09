@@ -3,8 +3,8 @@ import { Node } from "./node";
 export class NodeChallenge extends Node {
   leadOrgsCount: number;
 
-  constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number, leadOrgsCount: number) {
-    super(id, nameID, displayName, type, group, weight);
+  constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number, leadOrgsCount: number, url: string, avatar: string, country: string, city: string ) {
+    super(id, nameID, displayName, type, group, weight, url, avatar, country, city);
     this.leadOrgsCount = leadOrgsCount;
   }
 }

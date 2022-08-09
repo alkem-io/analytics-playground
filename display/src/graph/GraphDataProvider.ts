@@ -16,11 +16,11 @@ export class GraphDataProvider {
   private showContributorsWithoutRolesFlag = false;
   private showSingleHubID = '';
 
-  constructor(showContributors: boolean, showContributorsWithoutRole: boolean, showSingleHubID = '' ) {
+  constructor(showContributors: boolean, showSingleHubID = '' ) {
     this.contributorNodesMap = new Map();
     this.showSingleHubID = showSingleHubID;
     this.showContributorsFlag = showContributors;
-    this.showContributorsWithoutRolesFlag = showContributorsWithoutRole;
+    this.showContributorsWithoutRolesFlag = false;
   }
 
   async loadData(jsonDataFileLocation: string) {

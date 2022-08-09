@@ -5,4 +5,8 @@ export interface INode {
   type: string;
   group: string;
   weight: number;
+  country: string;
+  city: string;
+  url: string;
+  avatar: string;
 }

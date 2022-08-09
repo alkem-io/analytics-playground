@@ -1,17 +1,20 @@
 import * as d3 from 'd3';
-import { Simulation } from 'd3';
+import { GeoConicProjection, Simulation } from 'd3';
 
 export class TransformationHandler {
   defaultScale = 1;
-  defaultTranslation = [0, 0];
+  defaultTranslation: [number, number] = [0, 0];
 
   width: number;
   height: number;
 
   group: any;
 
-  scale: any;
-  translate: any;
+  scale: number;
+  translate: [number, number];
+
+  projection: GeoConicProjection;
+  geoGenerator: any;
 
   constructor(width: number, height: number, group: any) {
     this.width = width;
@@ -21,6 +24,12 @@ export class TransformationHandler {
 
     this.scale = this.defaultScale;
     this.translate = this.defaultTranslation;
+    this.projection = d3.geoAlbers().rotate([-30, 0, 0]);
+    this.geoGenerator = d3.geoPath().projection(this.projection);
+  }
+
+  projectionExtent(geoJson: any) {
+    this.projection.fitExtent([ [0, 0], [ this.width, this.height]], geoJson);
   }
 
   transformCoordinates(x: number, y: number) {

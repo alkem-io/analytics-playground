@@ -7,7 +7,7 @@ const main = async () => {
   const logger = createLogger();
 
   logger.info('Tranforming acquired data into a graph for display with D3');
-  const alkemioAdapter = new AlkemioGraphTransformer();
+  const alkemioAdapter = new AlkemioGraphTransformer('https://alkem.io');
   alkemioAdapter.transformData();
 };
 

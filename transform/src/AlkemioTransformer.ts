@@ -18,9 +18,11 @@ const TRANSFORMED_DATA_FILE = '../display/public/data/transformed-graph-data.jso
 
 export class AlkemioGraphTransformer {
   logger;
+  urlBase: string;
 
-  constructor() {
+  constructor(urlBase: string) {
     this.logger = createLogger();
+    this.urlBase = urlBase
   }
 
   transformData() {
@@ -41,7 +43,11 @@ export class AlkemioGraphTransformer {
         `${contributor.displayName}`,
         NodeType.USER,
         NodeGroup.CONTRIBUTORS,
-        NodeWeight.USER
+        NodeWeight.USER,
+        `${this.urlBase}/users/${contributor.nameID}`,
+        contributor.profile.avatar.uri,
+        contributor.profile.location.country,
+        contributor.profile.location.city,
       );
       contributorNodes.push(contributorNode);
     }
@@ -55,7 +61,11 @@ export class AlkemioGraphTransformer {
         `${contributor.displayName}`,
         NodeType.ORGANIZATION,
         NodeGroup.CONTRIBUTORS,
-        NodeWeight.ORGANIZATION
+        NodeWeight.ORGANIZATION,
+        `${this.urlBase}/organizations/${contributor.nameID}`,
+        contributor.profile.avatar.uri,
+        contributor.profile.location.country,
+        contributor.profile.location.city,
       );
       contributorNodes.push(contributorNode);
     }
@@ -69,7 +79,11 @@ export class AlkemioGraphTransformer {
         NodeType.HUB,
         hub.id,
         NodeWeight.HUB,
-        1
+        1,
+        `${this.urlBase}/${hub.nameID}`,
+        'avatar',
+        'country',
+        'city'
       );
 
       hubNodes.push(hubNode);
@@ -113,7 +127,11 @@ export class AlkemioGraphTransformer {
           NodeType.CHALLENGE,
           hub.id,
           NodeWeight.CHALLENGE,
-          challenge.community.leadOrganizations.length
+          challenge.community.leadOrganizations.length,
+          `${this.urlBase}/${hub.nameID}/challenges/${challenge.nameID}`,
+          'avatar',
+          'country',
+          'city'
         );
 
         challengeNodes.push(challengeNode);
@@ -169,7 +187,11 @@ export class AlkemioGraphTransformer {
             NodeType.OPPORTUNITY,
             hub.id,
             NodeWeight.OPPORTUNITY,
-            opportunity.community.leadOrganizations.length
+            opportunity.community.leadOrganizations.length,
+            `${this.urlBase}/${hub.nameID}/challenges/${challenge.nameID}/opportunities/${opportunity.nameID}`,
+            'avatar',
+            'country',
+            'city'
           );
 
           opportunityNodes.push(opportunityNode);

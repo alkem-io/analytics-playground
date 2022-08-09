@@ -170,7 +170,7 @@ export class GraphVizualization {
         }
         return d.radius;
       })
-      .strength(10);
+      .strength(10).iterations(2);
 
     const filteredNodes: any = this.dataLoader.getFilteredNodes();
     this.simulation = d3
@@ -185,6 +185,7 @@ export class GraphVizualization {
       this.animateNode();
       this.animateLinks();
     });
+    //this.simulation.tick(10);
   }
 
   private animateNode() {

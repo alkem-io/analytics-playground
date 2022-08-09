@@ -8,6 +8,9 @@ export class LifecycleVisualization {
   node: any;
   width: number;
   height: number;
+  nodesGroup: any;
+  linksGroup: any;
+  textGroup: any;
 
   link: any;
   linkWidthScale: any;
@@ -29,11 +32,47 @@ export class LifecycleVisualization {
     this.width = width;
     this.height = height;
     this.options = options || new LifecycleVisualizationOptions();
+
+    this.svg.select('*').remove();
+    this.svg.attr('viewBox', [0, 0, this.width, this.height]);
+
+    const defs = this.svg.append('svg:defs');
+    defs
+      .append('svg:marker')
+      .attr('id', 'end-arrow')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 10)
+      .attr('markerWidth', 10.5)
+      .attr('markerHeight', 10.5)
+      .attr('orient', 'auto')
+      .append('svg:path')
+      .attr('d', 'M0,-5L10,0L0,5');
+
+    const filter = defs
+      .append('filter')
+      .attr('id', 'drop-shadow')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', '200%')
+      .attr('height', '200%');
+
+    filter
+      .append('feDropShadow')
+      .attr('dx', 2)
+      .attr('dy', 2)
+      .attr('stdDeviation', 1)
+      .attr('flood-color', this.options.strokeDefaultColor)
+      .attr('flood-opacity', 1);
+  }
+
+  removeDisplayedLifecycle() {
+    if (this.simulation) this.simulation.stop();
+    if (this.linksGroup) this.linksGroup.remove();
+    if (this.nodesGroup) this.nodesGroup.remove();
+    if (this.textGroup) this.textGroup.remove();
   }
 
   displayLifecycle() {
-
-
     const boxWidth = 120;
     const boxHeight = 30;
     const cornerRound = 10;
@@ -44,7 +83,9 @@ export class LifecycleVisualization {
     const nodes = this.lifecycleData.graph.children.map((node: any) => {
       // 2 is current state
       const group =
-        this.lifecycleData.state && node.id.endsWith(this.lifecycleData.state) ? 2 : 1;
+        this.lifecycleData.state && node.id.endsWith(this.lifecycleData.state)
+          ? 2
+          : 1;
       if (node.id.endsWith(initialState)) {
         return {
           id: node.id,
@@ -82,57 +123,29 @@ export class LifecycleVisualization {
       .force('collide', d3.forceCollide().radius(80).iterations(2))
       .force('center', d3.forceCenter(this.width / 2, this.height / 2));
 
-    this.svg.select('*').remove();
-
-    const defs = this.svg.append('svg:defs');
-    defs
-      .append('svg:marker')
-      .attr('id', 'end-arrow')
-      .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 10)
-      .attr('markerWidth', 10.5)
-      .attr('markerHeight', 10.5)
-      .attr('orient', 'auto')
-      .append('svg:path')
-      .attr('d', 'M0,-5L10,0L0,5');
-
-    const filter = defs
-      .append('filter')
-      .attr('id', 'drop-shadow')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', '200%')
-      .attr('height', '200%');
-
-    filter
-      .append('feDropShadow')
-      .attr('dx', 2)
-      .attr('dy', 2)
-      .attr('stdDeviation', 1)
-      .attr('flood-color', this.options.strokeDefaultColor)
-      .attr('flood-opacity', 1);
-
-    this.svg.attr('viewBox', [0, 0, this.width, this.height]);
-    this.link = this.svg
+    this.linksGroup = this.svg
       .append('g')
+      .attr('class', 'links')
       .attr('stroke', this.options.strokeDefaultColor)
-      .attr('stroke-opacity', 0.6)
+      .attr('stroke-opacity', 0.6);
+    this.link = this.linksGroup
       .selectAll('line')
       .data(links)
       .join('line')
       .attr('stroke-width', (_: any) => 1)
       .style('marker-end', 'url(#end-arrow)');
 
-    this.node = this.svg
-      .append('g')
-      .attr('class', 'nodes')
+    this.nodesGroup = this.svg.append('g').attr('class', 'nodes');
+    this.node = this.nodesGroup
       .attr('stroke-width', 1.5)
       .selectAll('rect')
       .data(nodes)
       .enter()
       .append('rect')
-      .attr('stroke', (d: any)  =>
-        d.group === 1 ? this.options.strokeDefaultColor : this.options.strokePrimaryColor
+      .attr('stroke', (d: any) =>
+        d.group === 1
+          ? this.options.strokeDefaultColor
+          : this.options.strokePrimaryColor
       )
       .attr('width', boxWidth)
       .attr('height', boxHeight)
@@ -140,10 +153,12 @@ export class LifecycleVisualization {
       .attr('ry', cornerRound)
       .attr('fill', this.options.fillColor)
       .style('filter', 'url(#drop-shadow)');
-    this.text = this.svg
+
+    this.textGroup = this.svg
       .append('g')
       .attr('class', 'text')
-      .attr('stroke-width', 1.5)
+      .attr('stroke-width', 1.5);
+    this.text = this.textGroup
       .selectAll('text')
       .data(nodes)
       .enter()
@@ -152,20 +167,23 @@ export class LifecycleVisualization {
       .attr('y', boxHeight)
       .attr('dx', boxWidth / 2)
       .attr('dy', boxHeight / 2)
-      .attr('fill', (d: any)  =>
-        d.group === 1 ? this.options.strokeDefaultColor : this.options.strokePrimaryColor
+      .attr('fill', (d: any) =>
+        d.group === 1
+          ? this.options.strokeDefaultColor
+          : this.options.strokePrimaryColor
       )
       .attr('font-weight', 400)
       .attr('font', this.options.font)
       .attr('font-size', this.options.fontSize)
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'central')
-      .text((d: any)  => d.id.split('.').pop());
-    this.node.append('title').text((d: any)  => d.id);
+      .text((d: any) => d.id.split('.').pop());
+
+    this.node.append('title').text((d: any) => d.id);
 
     this.simulation.on('tick', () => {
       this.link
-        .attr('x1', (d: any)  => {
+        .attr('x1', (d: any) => {
           let change = 0;
           if (Math.abs(d.target.x - d.source.x) > boxWidth) {
             // Boxes are far apart, draw from corner
@@ -174,7 +192,7 @@ export class LifecycleVisualization {
           }
           return d.source.x + change;
         })
-        .attr('y1', (d: any)  => {
+        .attr('y1', (d: any) => {
           let change = 0;
           if (Math.abs(d.target.y - d.source.y) > boxHeight) {
             // Boxes are far apart, draw from corner
@@ -183,7 +201,7 @@ export class LifecycleVisualization {
           }
           return d.source.y + change;
         })
-        .attr('x2', (d: any)  => {
+        .attr('x2', (d: any) => {
           let change = 0;
           if (Math.abs(d.target.x - d.source.x) > boxWidth) {
             // Boxes are far apart, draw from corner
@@ -192,7 +210,7 @@ export class LifecycleVisualization {
           }
           return d.target.x + change;
         })
-        .attr('y2', (d: any)  => {
+        .attr('y2', (d: any) => {
           let change = 0;
           if (Math.abs(d.target.y - d.source.y) > boxHeight) {
             // Boxes are far apart, draw from corner
@@ -203,11 +221,11 @@ export class LifecycleVisualization {
         });
 
       this.node
-        .attr('x', (d: any)  => d.x - boxWidth / 2)
-        .attr('y', (d: any)  => d.y - boxHeight / 2);
+        .attr('x', (d: any) => d.x - boxWidth / 2)
+        .attr('y', (d: any) => d.y - boxHeight / 2);
       this.text
-        .attr('x', (d: any)  => d.x - boxWidth / 2)
-        .attr('y', (d: any)  => d.y - boxHeight / 2);
+        .attr('x', (d: any) => d.x - boxWidth / 2)
+        .attr('y', (d: any) => d.y - boxHeight / 2);
     });
     this.simulation.tick(1000);
     //simulation.stop();

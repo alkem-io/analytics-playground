@@ -36,7 +36,7 @@ graphHubSelectionControl.on('change', function () {
   forceGraph.refreshDisplayedGraph();
 });
 
-graphShowContributors.attr("checked", "checked");
+graphShowContributors.attr('checked', 'checked');
 graphShowContributors.on('click', (e: any) => {
   const checked = e.target.checked;
   graphDataProvider.showContributors(checked);
@@ -48,19 +48,23 @@ graphScaleToFit.on('click', (e: any) => {
 });
 
 /// Lifecycle ///////////////////////
-const lifecycleData = new LifecycleDataProvider();
-const selectedLifecycle = lifecycleSelectionControl.property('value');
-await lifecycleData.loadData(selectedLifecycle);
-//lifecycleData.updateState('awaitingApproval');
-const lifecycleViz = new LifecycleVisualization(
-  lifecycleSvg,
-  lifecycleData,
-  800,
-  600
-);
-lifecycleViz.displayLifecycle();
+let lifecycleVizualization: LifecycleVisualization;
+async function displayLifecycleWithData() {
+  if (lifecycleVizualization) lifecycleVizualization.removeDisplayedLifecycle();
+  const lifecycleData = new LifecycleDataProvider();
+  const selectedLifecycle = lifecycleSelectionControl.property('value');
+  await lifecycleData.loadData(selectedLifecycle);
+  //lifecycleData.updateState('awaitingApproval');
+  lifecycleVizualization = new LifecycleVisualization(
+    lifecycleSvg,
+    lifecycleData,
+    800,
+    600
+  );
+  lifecycleVizualization.displayLifecycle();
+}
+displayLifecycleWithData();
 
 lifecycleSelectionControl.on('change', function () {
-  const selectedLifecycle = d3.select(this).property('value');
-  console.log(`switching to lifecycle: ${selectedLifecycle}`);
+  displayLifecycleWithData();
 });

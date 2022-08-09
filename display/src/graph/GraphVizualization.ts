@@ -72,7 +72,7 @@ export class GraphVizualization {
     this.simulate();
     this.hovercard.registerHovercard(this.node, this.simulation, this.transformationHandler);
 
-    const nodeDragHandler = new NodeDragHandler(this.simulation, this.width, this.height);
+    const nodeDragHandler = new NodeDragHandler(this.simulation);
     nodeDragHandler.register(this.node);
   }
 

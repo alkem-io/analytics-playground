@@ -9,4 +9,6 @@ export interface INode {
   city: string;
   url: string;
   avatar: string;
+  lon: number;
+  lat: number;
 }

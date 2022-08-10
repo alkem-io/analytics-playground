@@ -12,7 +12,10 @@ export class Node {
   country: string;
   city: string;
 
-  constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number, url: string, avatar: string, country: string, city: string) {
+  lon: number;
+  lat: number;
+
+  constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number, url: string, avatar: string, country: string, city: string, lon: number, lat: number) {
     this.id = id;
     this.nameID = nameID;
     this.displayName = displayName;
@@ -23,5 +26,7 @@ export class Node {
     this.avatar = avatar;
     this.country = country;
     this.city = city;
+    this.lon = lon;
+    this.lat = lat;
   }
 }

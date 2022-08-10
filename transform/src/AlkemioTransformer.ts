@@ -13,19 +13,22 @@ import { NodeGroup } from './common/node.group';
 import { NodeWeight } from './common/node.weight';
 import { EdgeWeight } from './common/edge.weight';
 import { EdgeType } from './common/edge.type';
+import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 
 const TRANSFORMED_DATA_FILE = '../display/public/data/transformed-graph-data.json';
 
 export class AlkemioGraphTransformer {
   logger;
   urlBase: string;
+  geocodeHandler: GeoapifyGeocodeHandler;
 
-  constructor(urlBase: string) {
+  constructor(urlBase: string, geocodeHandler: GeoapifyGeocodeHandler) {
     this.logger = createLogger();
     this.urlBase = urlBase
+    this.geocodeHandler = geocodeHandler;
   }
 
-  transformData() {
+  async transformData() {
     // create the graph
     const hubNodes: NodeChallenge[] = [];
     const challengeNodes: NodeChallenge[] = [];
@@ -37,6 +40,8 @@ export class AlkemioGraphTransformer {
     const users = usersData.data.users;
     for (let i = 0; i < users.length; i++) {
       const contributor = users[i];
+      const location = contributor.profile.location;
+      const locationExact = await this.geocodeHandler.lookup(location.city, location.country, contributor.nameID);
       const contributorNode = new NodeContributor(
         contributor.id,
         `${contributor.nameID}`,
@@ -46,8 +51,10 @@ export class AlkemioGraphTransformer {
         NodeWeight.USER,
         `${this.urlBase}/users/${contributor.nameID}`,
         contributor.profile.avatar.uri,
-        contributor.profile.location.country,
-        contributor.profile.location.city,
+        location.country,
+        location.city,
+        locationExact[0],
+        locationExact[1]
       );
       contributorNodes.push(contributorNode);
     }
@@ -55,6 +62,8 @@ export class AlkemioGraphTransformer {
     const organizations = organizationsData.data.organizations;
     for (let i = 0; i < organizations.length; i++) {
       const contributor = organizations[i];
+      const location = contributor.profile.location;
+      const locationExact = await this.geocodeHandler.lookup(location.city, location.country, contributor.nameID);
       const contributorNode = new NodeContributor(
         contributor.id,
         `${contributor.nameID}`,
@@ -64,8 +73,10 @@ export class AlkemioGraphTransformer {
         NodeWeight.ORGANIZATION,
         `${this.urlBase}/organizations/${contributor.nameID}`,
         contributor.profile.avatar.uri,
-        contributor.profile.location.country,
-        contributor.profile.location.city,
+        location.country,
+        location.city,
+        locationExact[0],
+        locationExact[1]
       );
       contributorNodes.push(contributorNode);
     }

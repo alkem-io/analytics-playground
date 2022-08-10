@@ -9,9 +9,15 @@ export class GeoapifyGeocodeHandler {
     this.apiKey = apiKey;
   }
 
-  async lookup(country: string, city: string, identifier: string): Promise<[number, number]> {
+  async lookup(
+    country: string,
+    city: string,
+    identifier: string
+  ): Promise<[number, number]> {
     if (!country.trim() && !city.trim()) {
-      console.log(`[${identifier}] Ignoring lookup with values '${city}', ${country}`);
+      console.log(
+        `[${identifier}] Ignoring lookup with values '${city}', ${country}`
+      );
       return [0, 0];
     }
     const url = `${this.urlBase}`;
@@ -48,8 +54,16 @@ export class GeoapifyGeocodeHandler {
 
       // 👇️ "response status is: 200"
       //console.log('response status is: ', status);
-
-      const properties = data.features[0].properties;
+      const firstFeature = data.features[0];
+      if (!firstFeature) {
+        console.log(
+          `[${identifier}] ERROR - Search term '${searchText}' resulted in no results: ${JSON.stringify(
+            data
+          )}`
+        );
+        return [0,0];
+      }
+      const properties = firstFeature.properties;
       const result: [number, number] = [properties.lon, properties.lat];
       console.log(
         `[${identifier}] Search term '${searchText}' resulted in location: ${result}`
@@ -64,7 +78,11 @@ export class GeoapifyGeocodeHandler {
         );
         return [0, 0];
       } else {
-        console.log(`[${identifier}] unexpected error: `, error, JSON.stringify(error));
+        console.log(
+          `[${identifier}] unexpected error on searching for '${searchText}': `,
+          error,
+          JSON.stringify(error)
+        );
         return [0, 0];
       }
     }

@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
 import { Simulation } from 'd3';
-import { TransformationHandler } from './TransformationHandler';
 
 export class NodeDragHandler {
   dragHandler: any;

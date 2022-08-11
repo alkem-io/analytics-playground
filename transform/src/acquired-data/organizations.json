@@ -1934,6 +1934,20 @@
         }
       },
       {
+        "id": "a1d89012-a8e9-4840-8839-9dc25766ea1b",
+        "nameID": "envision",
+        "displayName": "Envision",
+        "profile": {
+          "avatar": {
+            "uri": "https://alkem.io/ipfs/QmeDQWUgTccb4Wm5bVU1yrespuBLHirFvJVV4g1s7ZVZtR"
+          },
+          "location": {
+            "country": "NL",
+            "city": "The Hague"
+          }
+        }
+      },
+      {
         "id": "a292e443-9bf5-4bb7-9d3a-e6f0f5f0acb6",
         "nameID": "reseno",
         "displayName": "Reseno",
@@ -2013,6 +2027,20 @@
           },
           "location": {
             "country": "",
+            "city": ""
+          }
+        }
+      },
+      {
+        "id": "ac3265e6-85e8-4cc6-9d27-ee1b91e40e37",
+        "nameID": "tki-urban-energy",
+        "displayName": "TKI Urban Energy",
+        "profile": {
+          "avatar": {
+            "uri": "https://alkem.io/ipfs/Qmeaoodp1px6nQmDcapkReMqk4qGLoHi6LJu3AnwoAEjMG"
+          },
+          "location": {
+            "country": "NL",
             "city": ""
           }
         }
@@ -2718,6 +2746,20 @@
         }
       },
       {
+        "id": "e5235c70-d799-4bc9-8e94-9f5efecd2e0b",
+        "nameID": "mmdt",
+        "displayName": "Mensen Maken de Transitie",
+        "profile": {
+          "avatar": {
+            "uri": "https://alkem.io/ipfs/QmPaYFSS9RjmH6N5TnXZH2UTM7unKXGHKRqYhTSRFxL7m5"
+          },
+          "location": {
+            "country": "NL",
+            "city": ""
+          }
+        }
+      },
+      {
         "id": "e58fa229-7f6b-4bd3-ab95-0e85178ecaf0",
         "nameID": "energq",
         "displayName": "EnerGQ",
@@ -3063,6 +3105,20 @@
           },
           "location": {
             "country": "",
+            "city": ""
+          }
+        }
+      },
+      {
+        "id": "facc487e-9e16-4d8e-b2f3-3294449a950e",
+        "nameID": "gideon",
+        "displayName": "Gideon",
+        "profile": {
+          "avatar": {
+            "uri": "https://alkem.io/ipfs/QmezpsG2fBmsHkMpUTvyCAH6ePa6Txvc9Bih3oBRUJe6na"
+          },
+          "location": {
+            "country": "NL",
             "city": ""
           }
         }

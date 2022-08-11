@@ -26,7 +26,8 @@ export class NodeDragHandler {
   }
 
   private dragstartNode() {
-    d3.select(this).classed('fixed', true);
+    const selectedNode = d3.select(this);
+    selectedNode.classed('fixed', true);
   }
 
   private draggedNode(event: any, d: any) {

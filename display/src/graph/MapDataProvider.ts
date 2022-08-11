@@ -1,30 +1,51 @@
 import * as d3 from 'd3';
 
 export class MapDataProvider {
-  private countriesGeoJsonFile = '';
-  private countriesGeoJson: any;
-  private cities: any;
+  private selectedMap: string;
+  private loadedMaps: Map<string, any>;
+  private mapDisplayed: boolean;
 
-  constructor(countriesGeoJsonFile: string) {
-    this.countriesGeoJsonFile = countriesGeoJsonFile;
+  constructor() {
+    this.loadedMaps = new Map();
+    this.selectedMap = '';
+    this.mapDisplayed = false;
   }
 
-  async loadData() {
-    this.countriesGeoJson = await d3.json(this.countriesGeoJsonFile);
-    if (!this.countriesGeoJson) {
+  async loadMap(geoJsonFile: string) {
+    const loadedMap = await d3.json(geoJsonFile);
+    if (!loadedMap) {
       throw new Error('Unable to load data');
     }
-    console.log(`countries geojson loaded from ${this.countriesGeoJsonFile}`);
-
+    this.loadedMaps.set(geoJsonFile, loadedMap);
+    this.selectedMap = geoJsonFile;
+    console.log(`geojson loaded from ${geoJsonFile}`);
   }
 
-  getCountries() {
-    return this.countriesGeoJson;
+  setMapsDisplay(value: boolean) {
+    this.mapDisplayed = value;
   }
 
-  getCityLocation(country: string, city: string): [number, number] {
-    console.log(`Obtaining ${country} - ${city}`);
-    return [0,0];
+  isMapDisplayEnabled() {
+    return this.mapDisplayed;
+  }
+
+  setSelectedMap(geoJsonFile: string) {
+    const loadedMap = this.loadedMaps.get(geoJsonFile);
+    if (!loadedMap) {
+      throw new Error(`Unable to find specified map data: ${geoJsonFile}`);
+    }
+    this.selectedMap = geoJsonFile;
+  }
+
+  getSelectedMap() {
+    if (this.selectedMap === "") {
+      throw new Error(`No map selected: ${this.selectedMap}`);
+    }
+    const loadedMap = this.loadedMaps.get(this.selectedMap);
+    if (!loadedMap) {
+      throw new Error(`Unable to find specified map data: ${this.selectedMap}`);
+    }
+    return loadedMap;
   }
 
 }

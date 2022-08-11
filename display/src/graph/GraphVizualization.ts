@@ -6,6 +6,7 @@ import { addArrowHeadDef } from './util/VisualDefinitions';
 import { NodeDragHandler } from './handlers/NodeDragHandler';
 import { TransformationHandler } from './handlers/TransformationHandler';
 import { MapDataProvider } from './MapDataProvider';
+import { MapLocationHandler } from './handlers/MapLocationHandler';
 
 export class GraphVizualization {
   defMarkerArrowName = 'markerArrow';
@@ -35,6 +36,7 @@ export class GraphVizualization {
   lineGenerator = d3.line().curve(d3.curveCardinal);
   hovercard: Hovercard;
   transformationHandler: TransformationHandler;
+  mapLocationHandler: MapLocationHandler;
 
   constructor(
     svg: any,
@@ -62,9 +64,10 @@ export class GraphVizualization {
       this.height,
       this.graphGroup
     );
-    this.transformationHandler.projectionExtent(this.mapDataProvider.getCountries());
+    this.mapLocationHandler = new MapLocationHandler(this.simulation, this.transformationHandler);
 
     this.hovercard = new Hovercard(svg, 0, 0);
+
 
     this.refreshDisplayedGraph();
   }
@@ -73,6 +76,11 @@ export class GraphVizualization {
     this.simulation.stop();
     if (this.linksGroup) this.linksGroup.remove();
     if (this.nodesGroup) this.nodesGroup.remove();
+    if (this.mapGroup) this.mapGroup.remove();
+
+    this.transformationHandler.projectionExtent(
+      this.mapDataProvider.getSelectedMap()
+    );
 
     // Scales may change
     this.updateScales();
@@ -91,6 +99,8 @@ export class GraphVizualization {
 
     const nodeDragHandler = new NodeDragHandler(this.simulation);
     nodeDragHandler.register(this.node);
+    this.mapLocationHandler = new MapLocationHandler(this.simulation, this.transformationHandler);
+    if (this.mapDataProvider.isMapDisplayEnabled()) this.showMap();
   }
 
   private displayNodes() {
@@ -139,11 +149,14 @@ export class GraphVizualization {
   }
 
   private displayMap() {
-    this.mapGroup = this.graphGroup.append('g').attr('class', 'map')
-    .style('opacity', 0);;
+    this.mapGroup = this.graphGroup
+      .append('g')
+      .attr('class', 'map')
+      .style('opacity', 0);
+    const mapFeatures = this.mapDataProvider.getSelectedMap().features;
     this.map = this.mapGroup
       .selectAll('path')
-      .data(this.mapDataProvider.getCountries().features)
+      .data(mapFeatures, (d: any) => d.properties.name_en)
       .join('path')
       .attr('d', this.transformationHandler.geoGenerator)
       .attr('fill', 'lightgray')
@@ -152,19 +165,30 @@ export class GraphVizualization {
 
   showMap() {
     this.mapGroup.transition().duration(200).style('opacity', 1);
+    this.mapDataProvider.setMapsDisplay(true);
   }
 
   hideMap() {
     this.mapGroup.transition().duration(200).style('opacity', 0);
   }
 
-  fixContributorsLocationToMap() {
-    const data = this.node.data();
+  zoomFit() {
+    this.transformationHandler.zoomFit(this.maxNodeRadius, this.node.data());
+    this.transformationHandler.transformDisplay(750);
   }
 
-  scaleToFit() {
-    this.transformationHandler.scaleToFit(this.maxNodeRadius, this.node.data());
+  zoomPlus() {
+    this.transformationHandler.zoomPlus();
     this.transformationHandler.transformDisplay(750);
+  }
+
+  zoomMin() {
+    this.transformationHandler.zoomMin();
+    this.transformationHandler.transformDisplay(750);
+  }
+
+  fixContributorsLocationToMap() {
+    this.mapLocationHandler.fixNodeLocationToMap(this.node);
   }
 
   private updateScales() {

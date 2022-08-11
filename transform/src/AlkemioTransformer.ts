@@ -13,17 +13,23 @@ import { NodeGroup } from './common/node.group';
 import { NodeWeight } from './common/node.weight';
 import { EdgeWeight } from './common/edge.weight';
 import { EdgeType } from './common/edge.type';
+import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 
-const TRANSFORMED_DATA_FILE = '../display/public/data/transformed-graph-data.json';
+const TRANSFORMED_DATA_FILE =
+  '../display/public/data/transformed-graph-data.json';
 
 export class AlkemioGraphTransformer {
   logger;
+  urlBase: string;
+  geocodeHandler: GeoapifyGeocodeHandler;
 
-  constructor() {
+  constructor(urlBase: string, geocodeHandler: GeoapifyGeocodeHandler) {
     this.logger = createLogger();
+    this.urlBase = urlBase;
+    this.geocodeHandler = geocodeHandler;
   }
 
-  transformData() {
+  async transformData() {
     // create the graph
     const hubNodes: NodeChallenge[] = [];
     const challengeNodes: NodeChallenge[] = [];
@@ -35,13 +41,25 @@ export class AlkemioGraphTransformer {
     const users = usersData.data.users;
     for (let i = 0; i < users.length; i++) {
       const contributor = users[i];
+      const location = contributor.profile.location;
+      const locationExact = await this.geocodeHandler.lookup(
+        location.city,
+        location.country,
+        contributor.nameID
+      );
       const contributorNode = new NodeContributor(
         contributor.id,
         `${contributor.nameID}`,
         `${contributor.displayName}`,
         NodeType.USER,
         NodeGroup.CONTRIBUTORS,
-        NodeWeight.USER
+        NodeWeight.USER,
+        `${this.urlBase}/users/${contributor.nameID}`,
+        contributor.profile.avatar.uri,
+        location.country,
+        location.city,
+        locationExact[0],
+        locationExact[1]
       );
       contributorNodes.push(contributorNode);
     }
@@ -49,19 +67,37 @@ export class AlkemioGraphTransformer {
     const organizations = organizationsData.data.organizations;
     for (let i = 0; i < organizations.length; i++) {
       const contributor = organizations[i];
+      const location = contributor.profile.location;
+      const locationExact = await this.geocodeHandler.lookup(
+        location.city,
+        location.country,
+        contributor.nameID
+      );
       const contributorNode = new NodeContributor(
         contributor.id,
         `${contributor.nameID}`,
         `${contributor.displayName}`,
         NodeType.ORGANIZATION,
         NodeGroup.CONTRIBUTORS,
-        NodeWeight.ORGANIZATION
+        NodeWeight.ORGANIZATION,
+        `${this.urlBase}/organizations/${contributor.nameID}`,
+        contributor.profile.avatar.uri,
+        location.country,
+        location.city,
+        locationExact[0],
+        locationExact[1]
       );
       contributorNodes.push(contributorNode);
     }
 
     // Process Hubs
     for (const hub of hubsData.data.hubs) {
+      const location = hub.context.location;
+      const locationExact = await this.geocodeHandler.lookup(
+        location.city,
+        location.country,
+        hub.nameID
+      );
       const hubNode = new NodeChallenge(
         hub.id,
         hub.nameID,
@@ -69,7 +105,13 @@ export class AlkemioGraphTransformer {
         NodeType.HUB,
         hub.id,
         NodeWeight.HUB,
-        1
+        1,
+        `${this.urlBase}/${hub.nameID}`,
+        'avatar',
+        location.country,
+        location.city,
+        locationExact[0],
+        locationExact[1]
       );
 
       hubNodes.push(hubNode);
@@ -106,6 +148,12 @@ export class AlkemioGraphTransformer {
     // Process Challenges
     for (const hub of challengesData.data.hubs) {
       for (const challenge of hub.challenges) {
+        const location = challenge.context.location;
+        const locationExact = await this.geocodeHandler.lookup(
+          location.city,
+          location.country,
+          challenge.nameID
+        );
         const challengeNode = new NodeChallenge(
           challenge.id,
           challenge.nameID,
@@ -113,7 +161,13 @@ export class AlkemioGraphTransformer {
           NodeType.CHALLENGE,
           hub.id,
           NodeWeight.CHALLENGE,
-          challenge.community.leadOrganizations.length
+          challenge.community.leadOrganizations.length,
+          `${this.urlBase}/${hub.nameID}/challenges/${challenge.nameID}`,
+          'avatar',
+          location.country,
+          location.city,
+          locationExact[0],
+          locationExact[1]
         );
 
         challengeNodes.push(challengeNode);
@@ -162,6 +216,12 @@ export class AlkemioGraphTransformer {
     for (const hub of opportunitiesData.data.hubs) {
       for (const challenge of hub.challenges) {
         for (const opportunity of challenge.opportunities) {
+          const location = opportunity.context.location;
+          const locationExact = await this.geocodeHandler.lookup(
+            location.city,
+            location.country,
+            opportunity.nameID
+          );
           const opportunityNode = new NodeChallenge(
             opportunity.id,
             opportunity.nameID,
@@ -169,7 +229,13 @@ export class AlkemioGraphTransformer {
             NodeType.OPPORTUNITY,
             hub.id,
             NodeWeight.OPPORTUNITY,
-            opportunity.community.leadOrganizations.length
+            opportunity.community.leadOrganizations.length,
+            `${this.urlBase}/${hub.nameID}/challenges/${challenge.nameID}/opportunities/${opportunity.nameID}`,
+            'avatar',
+            location.country,
+            location.city,
+            locationExact[0],
+            locationExact[1]
           );
 
           opportunityNodes.push(opportunityNode);
@@ -221,7 +287,7 @@ export class AlkemioGraphTransformer {
         contributors: contributorNodes,
         hubs: hubNodes,
         challenges: challengeNodes,
-        opportunities: opportunityNodes
+        opportunities: opportunityNodes,
       },
     };
 

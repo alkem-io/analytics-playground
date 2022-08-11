@@ -5,17 +5,24 @@ import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
 import { NodeDragHandler } from './handlers/NodeDragHandler';
 import { TransformationHandler } from './handlers/TransformationHandler';
+import { MapDataProvider } from './MapDataProvider';
+import { MapLocationHandler } from './handlers/MapLocationHandler';
 
 export class GraphVizualization {
-
-  defMarkerArrow = 'markerArrow';
+  defMarkerArrowName = 'markerArrow';
   maxNodeRadius = 20;
 
-  dataLoader: GraphDataProvider;
+  graphDataProvider: GraphDataProvider;
+  mapDataProvider: MapDataProvider;
   svg: Selection<any, any, any, any>;
   graphGroup: Selection<any, any, any, any>;
-  node: any; // Selection<any, any, any, any>;
   nodesGroup: any;
+  linksGroup: any;
+  mapGroup: any;
+
+  map: any;
+
+  node: any; // Selection<any, any, any, any>;
   nodeScale: any; // d3.ScaleLinear<any, any>;
   nodeColorScale: any;
   width: number;
@@ -24,21 +31,23 @@ export class GraphVizualization {
   dragEnabled = true;
 
   link: any;
-  linksGroup: any;
   linkWidthScale: any;
   simulation: Simulation<any, any>;
   lineGenerator = d3.line().curve(d3.curveCardinal);
   hovercard: Hovercard;
   transformationHandler: TransformationHandler;
+  mapLocationHandler: MapLocationHandler;
 
   constructor(
     svg: any,
-    dataLoader: GraphDataProvider,
+    graphDataProvider: GraphDataProvider,
+    mapDataProvider: MapDataProvider,
     width: number,
     height: number
   ) {
-    this.dataLoader = dataLoader;
     this.svg = svg;
+    this.graphDataProvider = graphDataProvider;
+    this.mapDataProvider = mapDataProvider;
 
     this.width = width;
     this.height = height;
@@ -47,12 +56,18 @@ export class GraphVizualization {
 
     this.svg.style('width', width + 'px').style('height', height + 'px');
     const graphDefs = this.svg.append('defs').attr('id', 'graph-defs');
-    addArrowHeadDef(this.defMarkerArrow, graphDefs);
+    addArrowHeadDef(this.defMarkerArrowName, graphDefs);
 
     this.graphGroup = this.svg.append('g').attr('id', 'graph');
-    this.transformationHandler = new TransformationHandler(this.width, this.height, this.graphGroup);
+    this.transformationHandler = new TransformationHandler(
+      this.width,
+      this.height,
+      this.graphGroup
+    );
+    this.mapLocationHandler = new MapLocationHandler(this.simulation, this.transformationHandler);
 
     this.hovercard = new Hovercard(svg, 0, 0);
+
 
     this.refreshDisplayedGraph();
   }
@@ -61,28 +76,41 @@ export class GraphVizualization {
     this.simulation.stop();
     if (this.linksGroup) this.linksGroup.remove();
     if (this.nodesGroup) this.nodesGroup.remove();
+    if (this.mapGroup) this.mapGroup.remove();
+
+    this.transformationHandler.projectionExtent(
+      this.mapDataProvider.getSelectedMap()
+    );
 
     // Scales may change
     this.updateScales();
 
+    this.displayMap();
     this.displayLinks();
     this.displayNodes();
     this.transformationHandler.registerPanningDragListener(this.svg);
 
     this.simulate();
-    this.hovercard.registerHovercard(this.node, this.simulation, this.transformationHandler);
+    this.hovercard.registerHovercard(
+      this.node,
+      this.simulation,
+      this.transformationHandler
+    );
 
-    const nodeDragHandler = new NodeDragHandler(this.simulation, this.width, this.height);
+    const nodeDragHandler = new NodeDragHandler(this.simulation);
     nodeDragHandler.register(this.node);
+    this.mapLocationHandler = new MapLocationHandler(this.simulation, this.transformationHandler);
+    if (this.mapDataProvider.isMapDisplayEnabled()) this.showMap();
   }
 
   private displayNodes() {
     this.nodesGroup = this.graphGroup.append('g').attr('class', 'nodes');
     this.node = this.nodesGroup
       .selectAll('circle')
-      .data(this.dataLoader.getFilteredNodes(), (d: any) => d.id)
+      .data(this.graphDataProvider.getFilteredNodes(), (d: any) => d.id)
       .enter()
       .append('circle')
+      .attr('id', (d: any) => d.id)
       .attr('r', (d: any) => this.nodeScale(d.weight))
       .attr('stroke', '#251607 ')
       .attr('stroke-width', (d: any) => {
@@ -91,15 +119,15 @@ export class GraphVizualization {
         return 0.5;
       })
       .style('fill', (d: any) => this.nodeColorScale(d.group))
-      .classed("node", true)
-      .classed("fixed", (d: any) => d.fx !== undefined);
+      .classed('node', true)
+      .classed('fixed', (d: any) => d.fx !== undefined);
   }
 
   private displayLinks() {
     this.linksGroup = this.graphGroup.append('g').attr('class', 'links');
     this.link = this.linksGroup
       .selectAll('path')
-      .data(this.dataLoader.getFilteredEdges(), (d: any) => d.id)
+      .data(this.graphDataProvider.getFilteredEdges(), (d: any) => d.id)
       .enter()
       .append('path')
       .attr('stroke', '#999')
@@ -111,7 +139,7 @@ export class GraphVizualization {
         // Currently defined: arrow for subordinate / supervisory relationship.
         switch (d.type) {
           case 'lead':
-            return `url(#${this.defMarkerArrow})`;
+            return `url(#${this.defMarkerArrowName})`;
 
           default:
             return 'none';
@@ -120,21 +148,66 @@ export class GraphVizualization {
       .attr('fill', 'none');
   }
 
-  scaleToFit() {
-    this.transformationHandler.scaleToFit(this.maxNodeRadius, this.node.data());
+  private displayMap() {
+    this.mapGroup = this.graphGroup
+      .append('g')
+      .attr('class', 'map')
+      .style('opacity', 0);
+    const mapFeatures = this.mapDataProvider.getSelectedMap().features;
+    this.map = this.mapGroup
+      .selectAll('path')
+      .data(mapFeatures, (d: any) => d.properties.name_en)
+      .join('path')
+      .attr('d', this.transformationHandler.geoGenerator)
+      .attr('fill', 'lightgray')
+      .attr('stroke', 'white');
+  }
+
+  showMap() {
+    this.mapGroup.transition().duration(200).style('opacity', 1);
+    this.mapDataProvider.setMapsDisplay(true);
+  }
+
+  hideMap() {
+    this.mapGroup.transition().duration(200).style('opacity', 0);
+  }
+
+  zoomFit() {
+    this.transformationHandler.zoomFit(this.maxNodeRadius, this.node.data());
     this.transformationHandler.transformDisplay(750);
+  }
+
+  zoomPlus() {
+    this.transformationHandler.zoomPlus();
+    this.transformationHandler.transformDisplay(750);
+  }
+
+  zoomMin() {
+    this.transformationHandler.zoomMin();
+    this.transformationHandler.transformDisplay(750);
+  }
+
+  fixContributorsLocationToMap() {
+    this.mapLocationHandler.fixNodeLocationToMap(this.node);
   }
 
   private updateScales() {
     // Get max values
     const maxNodeWeight =
-      d3.max(this.dataLoader.getFilteredNodes().map(node => node.weight)) || 10;
+      d3.max(
+        this.graphDataProvider.getFilteredNodes().map(node => node.weight)
+      ) || 10;
     const maxLinkWeight =
-      d3.max(this.dataLoader.getFilteredEdges().map(link => link.weight)) || 10;
+      d3.max(
+        this.graphDataProvider.getFilteredEdges().map(link => link.weight)
+      ) || 10;
 
     // Create the scales
     this.nodeColorScale = d3.scaleOrdinal(d3.schemeCategory10);
-    this.nodeScale = d3.scaleLinear().domain([0, maxNodeWeight]).range([8, this.maxNodeRadius]);
+    this.nodeScale = d3
+      .scaleLinear()
+      .domain([0, maxNodeWeight])
+      .range([8, this.maxNodeRadius]);
     this.linkWidthScale = d3
       .scaleLinear()
       .domain([0, maxLinkWeight])
@@ -149,12 +222,12 @@ export class GraphVizualization {
     const forceManyBody = d3.forceManyBody().strength(gravity);
 
     const forceLink = d3
-      .forceLink(this.dataLoader.getFilteredEdges())
+      .forceLink(this.graphDataProvider.getFilteredEdges())
       .id((d: any) => d.id)
       .distance(150)
       .strength(0.7);
 
-    const hubEdges = this.dataLoader.getHubEdges();
+    const hubEdges = this.graphDataProvider.getHubEdges();
 
     const forceLinkHubs = d3
       .forceLink(hubEdges)
@@ -170,9 +243,10 @@ export class GraphVizualization {
         }
         return d.radius;
       })
-      .strength(10);
+      .strength(10)
+      .iterations(2);
 
-    const filteredNodes: any = this.dataLoader.getFilteredNodes();
+    const filteredNodes: any = this.graphDataProvider.getFilteredNodes();
     this.simulation = d3
       .forceSimulation(filteredNodes)
       .force('link', forceLink)
@@ -185,6 +259,7 @@ export class GraphVizualization {
       this.animateNode();
       this.animateLinks();
     });
+    //this.simulation.tick(10);
   }
 
   private animateNode() {

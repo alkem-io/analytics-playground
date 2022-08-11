@@ -2,17 +2,11 @@ import * as d3 from 'd3';
 import { Simulation } from 'd3';
 
 export class NodeDragHandler {
-  svg: any;
   dragHandler: any;
-  width: number;
-  height: number;
-
   simulation: Simulation<any, any>;
 
-  constructor(simulation: Simulation<any, any>, width: number, height: number) {
+  constructor(simulation: Simulation<any, any>) {
     this.simulation = simulation;
-    this.width = width;
-    this.height = height;
 
     this.dragHandler = d3
       .drag()
@@ -32,16 +26,13 @@ export class NodeDragHandler {
   }
 
   private dragstartNode() {
-    d3.select(this).classed('fixed', true);
+    const selectedNode = d3.select(this);
+    selectedNode.classed('fixed', true);
   }
 
   private draggedNode(event: any, d: any) {
-    const clamp = function(x: number, lo: number, hi: number) {
-        return x < lo ? lo : x > hi ? hi : x;
-      }
-
-    d.fx = clamp(event.x, 0, this.width);
-    d.fy = clamp(event.y, 0, this.height);
+    d.fx = event.x;
+    d.fy = event.y;
     this.simulation.alpha(1).restart();
   }
 }

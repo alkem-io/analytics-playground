@@ -1,32 +1,5 @@
 <head>
-  <style>
-      svg {
-          width: 800px;
-          height: 600px;
-          border: 1px solid #ccc;
-      }
-
-      text {
-          user-select: none;
-          pointer-events: none;
-      }
-
-      image {
-          pointer-events: none;
-          image-rendering: crisp-edges;
-          display: none;
-      }
-
-      .node {
-        stroke: #000;
-        stroke-width: 1.5px;
-      }
-
-      .node.fixed {
-        stroke: #FFFF00;
-        stroke-width: 3px;
-      }
-  </style>
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 <body>
 <div class="container mt-5">
@@ -36,6 +9,9 @@
   <div class="graph">
     <h2>Force Directed graph</h2>
     <div class="graph-controls">
+      <br/>
+      <b>Data Controls</b>
+      <br>
       <label>Select a single Hub:
         <select id="graph-hub-selector" width="80">
           <option id="all" value="" selected="true">All</option>
@@ -44,7 +20,25 @@
       <br/>
       Display contributors: <input type="checkbox" id="graph-checkbox-show-contributors" name="show-contributors">
       <br/>
-      <button type="button" id="graph-scale-to-fit">Fit to screen</button>
+      <b>Zooming</b>
+      <br/>
+        <button type="button" id="graph-zoom-fit">Fit to screen</button>
+        <button type="button" id="graph-zoom-plus">Zoom ++</button>
+        <button type="button" id="graph-zoom-min">Zoom --</button>
+      <br/>
+      <b>Map Controls</b>
+      <br/>
+      Display map: <input type="checkbox" id="graph-display-map" name="display-map">
+      <br/>
+      <label>Select Map:
+        <select id="graph-map-selector" width="80">
+          <option id="europe" value="maps/europe_geo.json" selected="true">Europe</option>
+          <option id="netherlands" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
+          <option id="ireland" value="maps/ireland-with-counties_geo.json" >Ireland</option>
+        </select>
+      </label>
+      <br/>
+      <button type="button" id="graph-contributors-to-location">Move contributors to location</button>
       <br/>
     </div>
     <div class="graph-container">
@@ -59,6 +53,7 @@
       <select id="lifecycle-selector" width="80">
         <option id="Innovation Flow" value="data/lifecycle/innovation-flow.json" >Innovation Flow</option>
         <option id="User Application" value="data/lifecycle/user-application.json" selected="true">User Application</option>
+        <option id="Organization Verification" value="data/lifecycle/organization-verification.json" >Organization Verification</option>
       </select>
     </label>
     <br/>

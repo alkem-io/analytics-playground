@@ -2,7 +2,8 @@
 # Display specific
 /display/node_modules
 /display/bak
-/display/public/data/*.json
+/display/public/data/transformed-graph-data.json
+/display/public/data/*.bak
 /display/dist
 
 # Generate specific

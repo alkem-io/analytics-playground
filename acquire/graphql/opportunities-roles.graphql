@@ -10,6 +10,13 @@ query opportunityRoles {
         id
         nameID
         displayName
+        context {
+          tagline
+          location {
+            country
+            city
+          }
+        }
         community {
           memberUsers {
             id

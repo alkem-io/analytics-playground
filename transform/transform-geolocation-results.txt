@@ -1,0 +1,859 @@
+
+[INFO] 13:41:43 ts-node-dev ver. 1.1.8 (using ts-node ver. 9.1.1, typescript ver. 4.2.4)
+info: Tranforming acquired data into a graph for display with D3
+[terrianne-novak-2469] Search term 'CZ, Prague' resulted in location: -56.686166,-27.583706
+[elisabeth-devries-8740] Search term 'NL, Lunteren' resulted in location: 5.6190737,52.0864617
+[christiaan-wolters-7666] Ignoring lookup with values '',
+[martijn-odijk-7434] Ignoring lookup with values '',
+[marianne-schimmel-6970] Ignoring lookup with values '',
+[ben-schuttenbeld-7651] Ignoring lookup with values '',
+[yvonne-hidding-727] Ignoring lookup with values '',
+[apodemus-erectus-7387] Ignoring lookup with values '',
+[wikke-alphenaar-1136] Search term 'Netherlands' resulted in location: 5.6343227,52.2434979
+[kimberly-agter-9740] Ignoring lookup with values '',
+[arthur-maring-4466] Search term 'Gouda' resulted in location: 4.711122134697802,52.018119350000006
+[kevin-vanguilik-5122] Ignoring lookup with values '',
+[brian-mc-4064] Search term 'AU, Melbourne' resulted in location: 144.9631608,-37.8142176
+[laurens-vanderburg-9152] Search term 'NL, 's-Hertogenbosch' resulted in location: 5.303116,51.6889387
+[tygrys17-rapiej-1454] Search term 'IE, Dublin' resulted in location: -6.2602732,53.3497645
+[niels-vandenkieboo-1442] Search term 'NL, Waalwijk' resulted in location: 5.017307939950269,51.687337150000005
+[gerlof-dehaan-8368] Ignoring lookup with values '',
+[valentin-yanakiev-4309] Search term 'Sofia' resulted in location: 23.3221789,42.6978634
+[solaiman-boubkari-1240] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[mieke-pol-7061] Search term 'NL, Eindhoven' resulted in location: 5.478633,51.4392648
+[daniel-kati-3398] Search term 'HU, Budapest' resulted in location: 19.058584,47.521221
+[jose-mak-9222] Ignoring lookup with values '',
+[mattijs-haarsma-1953] Ignoring lookup with values '',
+[jan-stedehouder-950] Ignoring lookup with values '',
+[peter-lehr-7744] Ignoring lookup with values '',
+[sandra-rabinska-1080] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[martin-debijl-3446] Ignoring lookup with values '',
+[a-boon-4180] Ignoring lookup with values '',
+[bas-oudeluttighuis-8372] Search term 'NL, Rotterdam' resulted in location: 4.47775,51.9244424
+[mathijs-schipper-1372] Ignoring lookup with values '',
+[alex-peters-4263] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[merijn-zondag-2343] Search term 'NL, Rotterdam' resulted in location: 4.47775,51.9244424
+[babette-vermulst-5700] Ignoring lookup with values '',
+[ian-frew-1551] Ignoring lookup with values '',
+[steven-menke-2361] Ignoring lookup with values '',
+[elizabeth-peck-803] Ignoring lookup with values '',
+[frank-vandereijden-5781] Ignoring lookup with values '',
+[kalina-hristova-6667] Ignoring lookup with values '',
+[michiel-kuik-7614] Ignoring lookup with values '',
+[murali-manoharan-6285] Ignoring lookup with values '',
+[patrick-casey-6526] Search term 'IE, Galway' resulted in location: 14.242486,53.099068
+[rogier-barendregt-17] Ignoring lookup with values '',
+[rob-vanloon-6487] Ignoring lookup with values '',
+[hein-corstens-5343] Ignoring lookup with values '',
+[yvo-hunink-6114] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[tim-speelman-3609] Ignoring lookup with values '',
+[tatjana-lisjak-2872] Search term 'NL, Delft' resulted in location: 6.5353399,52.9973486
+[myrthe-zondag-2013] Ignoring lookup with values '',
+[giulietta-marani-2641] Search term 'Amsterdam' resulted in location: 4.8936041,52.3727598
+[nico-delange-6566] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[diantha-cannegieter-3136] Ignoring lookup with values '',
+[jeroen-vonk-1008] Ignoring lookup with values '',
+[isabeau-vanderkraan-8012] Ignoring lookup with values '',
+[aleksandar-stojanovi-5369] Search term 'US, New York' resulted in location: -75.8449946,43.1561681
+[anna-helmus-3426] Ignoring lookup with values '',
+[hoyte-rutteman-5064] Search term 'NL, Rotterdam' resulted in location: 4.47775,51.9244424
+[kaylee-scholtes-7760] Search term 'NL, The Hague' resulted in location: 4.3113461,52.0799838
+[frank-wardenier-7625] Ignoring lookup with values '',
+[amir-banifatemi-9872] Ignoring lookup with values '',
+[stephanie-duque-7359] Search term 'NL, Hilversum' resulted in location: 5.1719396,52.2241375
+[mark-verschuur-902] Ignoring lookup with values '',
+[eric-vanesch-3352] Search term 'NL, Herpen' resulted in location: 5.6422866,51.7728234
+[paul-suijkerbuijk-6111] Ignoring lookup with values '',
+[irene-vanhooff-7398] Ignoring lookup with values '',
+[rene-honig-900] Search term 'FR, Paris' resulted in location: 2.3200410217200766,48.8588897
+[pieterin-hout-5658] Ignoring lookup with values '',
+[mart-smulders-292] Ignoring lookup with values '',
+[martijn-jansen-4227] Ignoring lookup with values '',
+[norbert-minten-4109] Ignoring lookup with values '',
+[niek-hendriks-1567] Ignoring lookup with values '',
+[manja-mauser-9998] Ignoring lookup with values '',
+[wessel-kouw-4992] Ignoring lookup with values '',
+[harry-roumen-515] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[wouter-fellendans-147] Ignoring lookup with values '',
+[denise-larsson-487] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[ruud-vanwijngaarden-9311] Ignoring lookup with values '',
+[arjan-spruijt-520] Ignoring lookup with values '',
+[holger-peters-6372] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[neileric-giles-3388] Ignoring lookup with values '',
+[maurice-vanerven-8920] Ignoring lookup with values '',
+[lord-xtacy-5009] Ignoring lookup with values '',
+[stefan-los-4173] Ignoring lookup with values '',
+[jeroen-baten-8766] Ignoring lookup with values '',
+[pieter-deruijter-9123] Ignoring lookup with values '',
+[saskia-bos-3148] Ignoring lookup with values '',
+[martin-boormans-145] Ignoring lookup with values '',
+[rutger-vanzuidam-1577] Ignoring lookup with values '',
+[sandra-vandeven-1904] Ignoring lookup with values '',
+[joke-hoogendonk-3395] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[livia-barilla-38] Ignoring lookup with values '',
+[gert-jan-schutte-9587] Ignoring lookup with values '',
+[marije-kootstra-2818] Ignoring lookup with values '',
+[corine-knulst-3494] Ignoring lookup with values '',
+[harald-huter-5535] Ignoring lookup with values '',
+[arno-denridder-9975] Ignoring lookup with values '',
+[sergej-vantoosten-3463] Search term 'NL, The Hague' resulted in location: 4.3113461,52.0799838
+[anna-kuznetsova-3289] Ignoring lookup with values '',
+[jeroen-steenbakkers-2084] Ignoring lookup with values '',
+[marloes-graaumans-3585] Ignoring lookup with values '',
+[evgeni-dimitrov] Search term 'BG, Sofia' resulted in location: 23.3221789,42.6978634
+[stefan-eikelenboom-6195] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[anneke-spijker-7508] Ignoring lookup with values '',
+[techsmyth] Search term 'Netherlands, Leidschendam' resulted in location: 4.3946774,52.0861654
+[birgit-ros-9284] Search term 'NL, Rotterdam' resulted in location: 4.47775,51.9244424
+[bart-rossieau-474] Ignoring lookup with values '',
+[notifications-admin-299] Ignoring lookup with values '',
+[myrjam-severs-9515] Ignoring lookup with values '',
+[pavel-semenov-9369] Search term 'SK, Bratislava' resulted in location: 17.1093063,48.1516988
+[tijn-kuyper-4853] Ignoring lookup with values '',
+[marc-vanandel-8024] Search term 'NL, Elburg' resulted in location: 5.3644804,51.5759127
+[willem-vandenbooga-9129] Search term 'NL, Assen' resulted in location: 6.560498,52.9952273
+[frank-lieuwen-9740] Ignoring lookup with values '',
+[edo-plantinga-6012] Ignoring lookup with values '',
+[rob-klok-9781] Ignoring lookup with values '',
+[sander-bayens-5244] Search term 'NL, Tilburg' resulted in location: 5.0886014,51.5562404
+[manon-digitalks-6347] Ignoring lookup with values '',
+[casper-oudejans-3884] Ignoring lookup with values '',
+[mirella-kamp-9083] Ignoring lookup with values '',
+[tessa-soeters-1938] Ignoring lookup with values '',
+[frans-dewaal-4398] Ignoring lookup with values '',
+[frank-vanzutphen-3792] Ignoring lookup with values '',
+[zakir-hussain-1005] Search term 'GB, London' resulted in location: -0.1276474,51.5073219
+[andre-vandermeer-1428] Ignoring lookup with values '',
+[marcel-dekrom-9623] Ignoring lookup with values '',
+[sophie-vink-6374] Ignoring lookup with values '',
+[wouter-welling] Search term 'Netherlands, The Hague' resulted in location: 4.3113461,52.0799838
+[sam-forrest-1433] Ignoring lookup with values '',
+[dorette-koster-1053] Ignoring lookup with values '',
+[arjen-vanderwoude-8060] Ignoring lookup with values '',
+[jf-ruiter-4112] Ignoring lookup with values '',
+[harrie-vanderwerf-1225] Ignoring lookup with values '',
+[jack-lancet-2531] Ignoring lookup with values '',
+[arjan-vanetten-9319] Ignoring lookup with values '',
+[noor-figdor-7994] Ignoring lookup with values '',
+[nitesh-bharosa-5829] Search term 'NL, Delft' resulted in location: 6.5353399,52.9973486
+[bart-dendulk-103] Ignoring lookup with values '',
+[sharvin-ramdat-7026] Ignoring lookup with values '',
+[haitske-vandelinde-2016] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[marco-vansteekelenb-1688] Ignoring lookup with values '',
+[tegegne-tefera-4674] Ignoring lookup with values '',
+[andrew-pazniak-6850] Ignoring lookup with values '',
+[bartosz-gutkowski-275] Ignoring lookup with values '',
+[natalie-morenorobles-6042] Ignoring lookup with values '',
+[connie-gouwentak-7404] Ignoring lookup with values '',
+[ruben-arendshorst-4846] Ignoring lookup with values '',
+[mario-egas-458] Ignoring lookup with values '',
+[evilcom-ssdah1ass-8463] Ignoring lookup with values '',
+[emmy-koning-1983] Search term 'NL, Monster' resulted in location: 4.1715344,52.0223028
+[angel-stoyanov-5495] Search term 'BG, Sofia' resulted in location: 23.3221789,42.6978634
+[lisanne-geschiere-916] Ignoring lookup with values '',
+[tomas-osiochain-8732] Ignoring lookup with values '',
+[tom-scholte-7775] Ignoring lookup with values '',
+[ferry-bijl-4136] Ignoring lookup with values '',
+[astrid-vanraalte-5740] Ignoring lookup with values '',
+[chantal-vanderwijst-7968] Search term 'NL, Utrecht' resulted in location: 5.1215634,52.0907006
+[mark-haaksman-374] Ignoring lookup with values '',
+[joost-hekkelman-4822] Search term 'NL, Hengelo' resulted in location: 6.7924049,52.2658726
+[john-patterson-6066] Ignoring lookup with values '',
+[anne-fleur-geneste-5368] Ignoring lookup with values '',
+[frans-ette-5532] Ignoring lookup with values '',
+[guido-jilderda-8849] Ignoring lookup with values '',
+[evgeni-dimitrov-4992] Ignoring lookup with values '',
+[nikola-velichkov-9395] Search term 'BG, Sofia' resulted in location: 23.3221789,42.6978634
+[bob-hulst-4121] Ignoring lookup with values '',
+[micheline-tasseron-4457] Search term 'Harderwijk' resulted in location: 5.618933,52.3490693
+[lyudmyla-horbatyuk-203] Ignoring lookup with values '',
+[mark-frischmuth-4456] Ignoring lookup with values '',
+[kyra-chan-6922] Ignoring lookup with values '',
+[paula-gronloh-6592] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[hanneke-kooymans-2305] Ignoring lookup with values '',
+[sander-kluin-2815] Search term 'The Hague' resulted in location: 4.3113461,52.0799838
+[marjan-dejong-3269] Ignoring lookup with values '',
+[carla-lendfers-5757] Search term 'NL, Berkel-Enschot' resulted in location: 5.1422542,51.5854521
+[ton-dehooge-6649] Search term 'Almere' resulted in location: 5.2210432,52.3657098
+[neil-smyth-admin] Search term 'NL, Leidschendam' resulted in location: 4.3946774,52.0861654
+[niels-schoffelen-8614] Ignoring lookup with values '',
+[fadime-yuksel-3401] Ignoring lookup with values '',
+[evgeni--gmail-1454] Ignoring lookup with values '',
+[jelmer-oosthoek-2683] Ignoring lookup with values '',
+[leon-postma-9495] Search term 'NL, delft' resulted in location: 6.5353399,52.9973486
+[simone-rietmeijer-9244] Search term 'NL, Vinkeveen' resulted in location: 4.9321634,52.214764
+[michiel-konigslow-9920] Ignoring lookup with values '',
+[noud-hooyman-2305] Ignoring lookup with values '',
+[thomas-pelzer-9754] Search term 'NL, Zaltbommel' resulted in location: 5.1898223872885225,51.782164
+[lykle-devries-7592] Search term 'Netherlands, Groningen' resulted in location: 5.7065157,51.3803927
+[jogchem-dijkstra-9792] Ignoring lookup with values '',
+[carlos-cano-977] Search term 'ES, Madrid' resulted in location: -3.7035825,40.4167047
+[mascha-kranse-2052] Ignoring lookup with values '',
+[jelle-brandsma-5821] Ignoring lookup with values '',
+[friso-penninga-1352] Ignoring lookup with values '',
+[fintan-smyth-824] Ignoring lookup with values '',
+[erwinvander-desombreff-53] Search term 'NL, ZUIDHORN' resulted in location: 6.4048657,53.2480055
+[jan-bruijn-8643] Ignoring lookup with values '',
+[romy-vandepol-1869] Ignoring lookup with values '',
+[jitka-bandell-925] Ignoring lookup with values '',
+[kathleen-torrance-8116] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[emil-otte-1943] Ignoring lookup with values '',
+[nikki-denero-8800] Ignoring lookup with values '',
+[rosan-vanwilgenburg-7448] Ignoring lookup with values '',
+[amy-cuff-3681] Ignoring lookup with values '',
+[wietse-balster-4180] Ignoring lookup with values '',
+[tom-koppe-9564] Ignoring lookup with values '',
+[roland-geraerts-4650] Search term 'NL, Utrecht' resulted in location: 5.1215634,52.0907006
+[karin-dieperink-devries-2] Ignoring lookup with values '',
+[flori-spoelstra-1e4c238a-] Search term 'Schoonhoven' resulted in location: 4.8516431,51.9463984
+[evelien-jansen-7870] Ignoring lookup with values '',
+[theresa-foster-7] Ignoring lookup with values '',
+[marc-winsemius-5005] Ignoring lookup with values '',
+[thamar-weerts-1899] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[berry-vanderkloost-9641] Ignoring lookup with values '',
+[ian-wachters-6380] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[chris-bosch-4484] Ignoring lookup with values '',
+[henk-middendorp-283] Ignoring lookup with values '',
+[gerlof-dehaan-7607] Ignoring lookup with values '',
+[harm-vanstekelenbur-4121] Ignoring lookup with values '',
+[maarten-scheurkogel-6391] Ignoring lookup with values '',
+[harmjan-arendshorst-6172] Ignoring lookup with values '',
+[hans-verweij-3578] Ignoring lookup with values '',
+[klaasjan-schroten-2806] Ignoring lookup with values '',
+[aniek-langendijk-6354] Ignoring lookup with values '',
+[mariagrazia-meli-3391] Search term 'SK, Bratislava' resulted in location: 17.1093063,48.1516988
+[robert-vos-4100] Ignoring lookup with values '',
+[khaled-abbud-7948] Ignoring lookup with values '',
+[sander-vanderzwet-5671] Ignoring lookup with values '',
+[huda-kalsbeek-6270] Ignoring lookup with values '',
+[lydia-defelice-6852] Ignoring lookup with values '',
+[eric-oosterom-7257] Search term 'Ede' resulted in location: 5.745510631034939,52.07168255
+[bojun-fu-4929] Ignoring lookup with values '',
+[nico-druif-8687] Ignoring lookup with values '',
+[junsik-park-7009] Ignoring lookup with values '',
+[keoma-jacobs-moed-5989] Ignoring lookup with values '',
+[roy-boertien-8400] Ignoring lookup with values '',
+[sam-butler-2260] Ignoring lookup with values '',
+[paul-dral-5842] Search term 'NL, 's-Hertogenbosch' resulted in location: 5.303116,51.6889387
+[jolanda-vanrijssen-365] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[koos-steenbergen-8651] Ignoring lookup with values '',
+[pieter-hout-1686] Ignoring lookup with values '',
+[hoyte-rutteman-4516] Ignoring lookup with values '',
+[andrii-kuzmenko-3751] Ignoring lookup with values '',
+[twan-dekorte-7097] Ignoring lookup with values '',
+[aakansha-doshi-6410] Ignoring lookup with values '',
+[johan-groenen-8437] Search term 'NL, Randstad' resulted in location: 5.2225679,52.3761371
+[inge-blokzijl-6917] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[maarten-vanderveen-4830] Ignoring lookup with values '',
+[cris-fitz-1770] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[remco-vanoudenaarde-3194] Search term 'NL, Middenbeemster' resulted in location: 4.9146226,52.5489163
+[nikki-nikki-9808] Ignoring lookup with values '',
+[john-klosse-5692] Ignoring lookup with values '',
+[esther-looman-5839] Search term 'NL, Hoorn' resulted in location: 4.649169,52.1417519
+[sandra-jaipal-2763] Search term 'The Hague' resulted in location: 4.3113461,52.0799838
+[robert-doetsch-8970] Ignoring lookup with values '',
+[jimmy-jongalock-2562] Ignoring lookup with values '',
+[yvonne-brink-7604] Ignoring lookup with values '',
+[jan-y-4200] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[rein-schaafsma-9573] Ignoring lookup with values '',
+[n-z-2768] Ignoring lookup with values '',
+[shashank-shukla-2180] Ignoring lookup with values '',
+[joris-koolen-5485] Search term 'NL, Rotterdam' resulted in location: 4.47775,51.9244424
+[rick-klooster-3389] Ignoring lookup with values '',
+[paul-vanlaarhoven-7766] Ignoring lookup with values '',
+[christian-verhagen-5970] Ignoring lookup with values '',
+[hoyte-rutteman-321] Search term 'NL, Rotterdam' resulted in location: 4.47775,51.9244424
+[manon-degraaff-278] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[marten-tilstra-4933] Ignoring lookup with values '',
+[ron-bartels-4377] Ignoring lookup with values '',
+[sem-vantuijn-2481] Search term 'NL, Eindhoven' resulted in location: 5.478633,51.4392648
+[walat-bashar-520] Ignoring lookup with values '',
+[odilia-vandervalk-444] Ignoring lookup with values '',
+[nienke-klumper-2579] Search term 'NL, Halle' resulted in location: 4.4181713,50.9139925
+[michel-vanschaik-7504] Ignoring lookup with values '',
+[igor-bereznanin-8214] Ignoring lookup with values '',
+[christiaan-vandenberg-468] Search term 'NL, Haarlem' resulted in location: 4.6388048,52.3885317
+[jose-mak-2985] Search term 'NL, Nijmegen' resulted in location: 5.8637771,51.8474946
+[joris-oomens-2432] Ignoring lookup with values '',
+[eduard-renger-3010] Search term 'NL, Veenendaal' resulted in location: 5.551800233162295,52.02320415
+[jusefina-mueller-9851] Search term 'AT, Vienna' resulted in location: 16.3725042,48.2083537
+[lisa-vanbarneveld-6411] Ignoring lookup with values '',
+[ruud-eveleens-3479] Ignoring lookup with values '',
+[linda-bartman-1027] Ignoring lookup with values '',
+[ssdah1assah1-ss-11dd99] Ignoring lookup with values '',
+[jan-minnee-6947] Ignoring lookup with values '',
+[joachim-tempelaars-8799] Ignoring lookup with values '',
+[joris-joosten-964] Ignoring lookup with values '',
+[martin-jonker-3139] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[marcel-rietdijk-3671] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[claire-arens-2490] Ignoring lookup with values '',
+[anno-scholing-4541] Ignoring lookup with values '',
+[albert-vanholthoon-3006] Ignoring lookup with values '',
+[merijn-zondag-1705] Ignoring lookup with values '',
+[siem-eikelenboom-6719] Search term 'NL, Koudekerk aan den Rijn' resulted in location: 4.5908325,52.1319621
+[bas-weber-9080] Ignoring lookup with values '',
+[niels-vandegraaf-4786] Ignoring lookup with values '',
+[wouter-heijnen-3442] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[mirjam-suurmeijer-3250] Ignoring lookup with values '',
+[vincent-kraus-5505] Ignoring lookup with values '',
+[ruth-dearnley-2705] Search term 'GB, Wendover' resulted in location: -0.7443215,51.7676884
+[svetoslav-petkov-1125] Search term 'BG, Sofia' resulted in location: 23.3221789,42.6978634
+[dirk-vanbarneveld-4340] Ignoring lookup with values '',
+[marcel-duffhuis-7123] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[nick-toet-3965] Ignoring lookup with values '',
+[denise-larsson-9227] Ignoring lookup with values '',
+[krisztina-aved-2686] Ignoring lookup with values '',
+[remon-vandelaar-2615] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[erwin-vanveen-4882] Ignoring lookup with values '',
+[stefan-bakker-6127] Ignoring lookup with values '',
+[matthijs-goense-5606] Ignoring lookup with values '',
+[kristel-thieme-4791] Ignoring lookup with values '',
+[thomas-schubert-7035] Ignoring lookup with values '',
+[gergely-both-1715] Search term 'HU, Budapest' resulted in location: 19.058584,47.521221
+[robert-jan-vandiepe-5602] Ignoring lookup with values '',
+[rolf-vanharen-1867] Ignoring lookup with values '',
+[steven-gort-1356] Ignoring lookup with values '',
+[lars-vanvianen-7673] Ignoring lookup with values '',
+[andre-dekok-9794] Ignoring lookup with values '',
+[corne-helmons-362] Ignoring lookup with values '',
+[jet-klaver-4802] Ignoring lookup with values '',
+[harm-russcher-5630] Ignoring lookup with values '',
+[andrez-coco-9986] Search term 'NL, Amsterdam' resulted in location: 4.8936041,52.3727598
+[sandra-leijten-2355] Ignoring lookup with values '',
+[tom-higgens-6822] Ignoring lookup with values '',
+[rob-kerkdijk-49] Ignoring lookup with values '',
+[rosa-swarte-7744] Search term 'NL, Leidschendam' resulted in location: 4.3946774,52.0861654
+[anne-marie-tytgat-3932] Ignoring lookup with values '',
+[valentin-yanakiev-8217] Ignoring lookup with values '',
+[anna-istomina-5836] Ignoring lookup with values '',
+[timan-rebel-8452] Ignoring lookup with values '',
+[alanna-taylor-2631] Search term 'GB, London' resulted in location: -0.1276474,51.5073219
+[enpuls] Ignoring lookup with values '',
+[microsoft-azure] Ignoring lookup with values '',
+[novum] Ignoring lookup with values '',
+[politie] Ignoring lookup with values '',
+[codefornl] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[gemeente-den-bosch] Ignoring lookup with values '',
+[waternet] Ignoring lookup with values '',
+[siemens] Ignoring lookup with values '',
+[rvo] Ignoring lookup with values '',
+[citycentrum-zwolle] Ignoring lookup with values '',
+[amsterdamt3d] Ignoring lookup with values '',
+[waterschap-vallei] Ignoring lookup with values '',
+[breda-univsersity] Ignoring lookup with values '',
+[benchmark-electronics] Ignoring lookup with values '',
+[org-woningbouwatelier] Ignoring lookup with values '',
+[ministerie-van-landbouw] Ignoring lookup with values '',
+[luchthaven-schiphol] Ignoring lookup with values '',
+[tec] Ignoring lookup with values '',
+[anivizzion] Ignoring lookup with values '',
+[gemeente-breda] Ignoring lookup with values '',
+[inter-act] Ignoring lookup with values '',
+[belastingdienst] Ignoring lookup with values '',
+[huawei] Ignoring lookup with values '',
+[ictu] Ignoring lookup with values '',
+[provincie-drente] Ignoring lookup with values '',
+[twinsense360] Ignoring lookup with values '',
+[c-cube] Ignoring lookup with values '',
+[havenbedrijf-rotterdam] Ignoring lookup with values '',
+[antea-group] Ignoring lookup with values '',
+[cesium] Ignoring lookup with values '',
+[green-land] Ignoring lookup with values '',
+[min-i-en-w] Ignoring lookup with values '',
+[pzh] Ignoring lookup with values '',
+[eyefly] Ignoring lookup with values '',
+[nldig] Ignoring lookup with values '',
+[kadaster] Ignoring lookup with values '',
+[50-tinten-groen] Ignoring lookup with values '',
+[analyze] Ignoring lookup with values '',
+[rijksvastgoedbedrijf] Ignoring lookup with values '',
+[inertia-technology] Ignoring lookup with values '',
+[dura-vermeer] Ignoring lookup with values '',
+[gemeente-helmond] Ignoring lookup with values '',
+[gemeente-rotterdam] Ignoring lookup with values '',
+[mob-inno-delft] Ignoring lookup with values '',
+[twente-university] Ignoring lookup with values '',
+[amsterdam] Ignoring lookup with values '',
+[tygron-platform] Ignoring lookup with values '',
+[gemeente-almelo] Ignoring lookup with values '',
+[royal-haskoningdhv] Ignoring lookup with values '',
+[denk-aan-morgen] Ignoring lookup with values '',
+[climate-campus] Ignoring lookup with values '',
+[infranea] Ignoring lookup with values '',
+[universiteit-twente] Ignoring lookup with values '',
+[power-bi] Ignoring lookup with values '',
+[provincie-noord-holland] Ignoring lookup with values '',
+[gemeente-groningen] Ignoring lookup with values '',
+[fm-electronic] Ignoring lookup with values '',
+[rws-zee-delta] Ignoring lookup with values '',
+[provincie-flevoland] Ignoring lookup with values '',
+[nwo] Ignoring lookup with values '',
+[collaborall] Ignoring lookup with values '',
+[brainport-eindhoven] Ignoring lookup with values '',
+[deltares] Ignoring lookup with values '',
+[overmorgen] Ignoring lookup with values '',
+[the-imagineers] Ignoring lookup with values '',
+[provincie-groningen] Ignoring lookup with values '',
+[novi] Ignoring lookup with values '',
+[tu-eindhoven] Ignoring lookup with values '',
+[data-science-lab] Ignoring lookup with values '',
+[rws] Ignoring lookup with values '',
+[water-veluwe] Ignoring lookup with values '',
+[hogeschool-saxion] Ignoring lookup with values '',
+[vng] Ignoring lookup with values '',
+[witteveenbos] Ignoring lookup with values '',
+[het-stedelijk-museum] Ignoring lookup with values '',
+[gemeente-ede] Ignoring lookup with values '',
+[dchi] Ignoring lookup with values '',
+[geonovum] Ignoring lookup with values '',
+[akkerweb] Ignoring lookup with values '',
+[rijks-innovatie-community] Search term 'NL, NOORDWIJK' resulted in location: 6.7573693,52.7012051
+[kade-inspectie] Ignoring lookup with values '',
+[groenbedrijf-deventer] Ignoring lookup with values '',
+[provincie-utrecht] Ignoring lookup with values '',
+[iv-infra] Ignoring lookup with values '',
+[gemeente-den-haag] Ignoring lookup with values '',
+[denhaag] Ignoring lookup with values '',
+[nda] Ignoring lookup with values '',
+[commondatafactory] Ignoring lookup with values '',
+[climate-adaptation] Ignoring lookup with values '',
+[bam] Ignoring lookup with values '',
+[universiteit-utrecht] Ignoring lookup with values '',
+[drents-ov-delta] Ignoring lookup with values '',
+[agrifirm] Ignoring lookup with values '',
+[strukton] Ignoring lookup with values '',
+[van-heteren] Ignoring lookup with values '',
+[gemeente-amersfoort] Ignoring lookup with values '',
+[gemeente-zwolle] Ignoring lookup with values '',
+[de-johan-cruiff-arena] Ignoring lookup with values '',
+[gemeente-capelle] Ignoring lookup with values '',
+[kbenp] Ignoring lookup with values '',
+[hz-university] Ignoring lookup with values '',
+[next-gen-infra] Ignoring lookup with values '',
+[provincie-fryslan] Ignoring lookup with values '',
+[tauw] Ignoring lookup with values '',
+[jcr-european-commision] Ignoring lookup with values '',
+[rotterdamt3d] Ignoring lookup with values '',
+[gemeente-papendrecht] Ignoring lookup with values '',
+[aeroscan] Ignoring lookup with values '',
+[knmi] Ignoring lookup with values '',
+[wur] Ignoring lookup with values '',
+[veiligheidsregio-zeeland] Ignoring lookup with values '',
+[concilium-zwolle] Ignoring lookup with values '',
+[de-groene-boog] Ignoring lookup with values '',
+[philips] Ignoring lookup with values '',
+[waterschapshuis] Ignoring lookup with values '',
+[provincie-noord-brabant] Ignoring lookup with values '',
+[centre-expertise] Ignoring lookup with values '',
+[gemeente-utrecht] Ignoring lookup with values '',
+[bdr-thermea-group] Ignoring lookup with values '',
+[windesheim] Ignoring lookup with values '',
+[johan-cruijff-arena] Ignoring lookup with values '',
+[radboud-universiteit] Ignoring lookup with values '',
+[tno] Ignoring lookup with values '',
+[stabialert] Ignoring lookup with values '',
+[ipo] Ignoring lookup with values '',
+[goede-stede-en-trebe] Ignoring lookup with values '',
+[t-systems] Ignoring lookup with values '',
+[logius] Ignoring lookup with values '',
+[ministerie-ezk] Ignoring lookup with values '',
+[van-hattum] Ignoring lookup with values '',
+[alkemio] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[nelen-en-schuurmans] Ignoring lookup with values '',
+[gdh-hho] Ignoring lookup with values '',
+[vodafone] Ignoring lookup with values '',
+[layhgo] Ignoring lookup with values '',
+[water-limburg] Ignoring lookup with values '',
+[gemeente-almere] Ignoring lookup with values '',
+[amsterdam-vervoer-regio] Ignoring lookup with values '',
+[reseno] Ignoring lookup with values '',
+[gemeente-goeree] Ignoring lookup with values '',
+[min-bzk] Ignoring lookup with values '',
+[nl-spoorwegen] Ignoring lookup with values '',
+[croonwolter-dros] Ignoring lookup with values '',
+[roc-twente] Ignoring lookup with values '',
+[minbzk-dg-bestuur] Ignoring lookup with values '',
+[tennet] Ignoring lookup with values '',
+[yesdelft] Ignoring lookup with values '',
+[breman-installatiegroep] Ignoring lookup with values '',
+[jads] Ignoring lookup with values '',
+[axians] Ignoring lookup with values '',
+[dbc] Ignoring lookup with values '',
+[argaleo] Ignoring lookup with values '',
+[phinion] Ignoring lookup with values '',
+[gemeente-hilversum] Ignoring lookup with values '',
+[programma-bro] Ignoring lookup with values '',
+[dh-lls] Ignoring lookup with values '',
+[dunea] Ignoring lookup with values '',
+[min-jenv] Ignoring lookup with values '',
+[prorail] Ignoring lookup with values '',
+[future-city-foundation] Ignoring lookup with values '',
+[stopthetraffik] Search term 'GB, London' resulted in location: -0.1276474,51.5073219
+[shell] Ignoring lookup with values '',
+[wetterskip-fryslan] Ignoring lookup with values '',
+[knvb] Ignoring lookup with values '',
+[digicampus] Ignoring lookup with values '',
+[woonfabriek-zwolle] Ignoring lookup with values '',
+[esri] Ignoring lookup with values '',
+[logistics-brabant] Ignoring lookup with values '',
+[saxion] Ignoring lookup with values '',
+[rvig] Ignoring lookup with values '',
+[arcadis] Ignoring lookup with values '',
+[gemeente-schouwen] Ignoring lookup with values '',
+[istimewa] Ignoring lookup with values '',
+[cyclomedia] Ignoring lookup with values '',
+[zwollefonds] Ignoring lookup with values '',
+[futureinsight-bv] Ignoring lookup with values '',
+[vialis] Ignoring lookup with values '',
+[unity] Ignoring lookup with values '',
+[world-class-maintenance] Ignoring lookup with values '',
+[wonen-en-ruimte] Ignoring lookup with values '',
+[gemeente-alkmaar] Ignoring lookup with values '',
+[gemeente-eindhoven] Ignoring lookup with values '',
+[hoogh-stichtse] Ignoring lookup with values '',
+[geomaat] Ignoring lookup with values '',
+[cgi] Ignoring lookup with values '',
+[datastad-den-bosch] Ignoring lookup with values '',
+[pelle-loonbedrijf] Ignoring lookup with values '',
+[ibm] Ignoring lookup with values '',
+[de-stripmaker] Ignoring lookup with values '',
+[port-amsterdam] Ignoring lookup with values '',
+[de-4daagse] Ignoring lookup with values '',
+[geodan] Ignoring lookup with values '',
+[nioo] Ignoring lookup with values '',
+[hogeschool-amsterdam] Ignoring lookup with values '',
+[energq] Ignoring lookup with values '',
+[provincie-zeeland] Ignoring lookup with values '',
+[ke-works] Ignoring lookup with values '',
+[cbs] Ignoring lookup with values '',
+[wdc] ERROR - Search term 'IE' resulted in no results: {"type":"FeatureCollection","features":[]}
+[startup-in-residence] Ignoring lookup with values '',
+[gdh-dso-mob] Ignoring lookup with values '',
+[dutch-drone-delta] Ignoring lookup with values '',
+[hogeschool-utrecht] Ignoring lookup with values '',
+[dronexpert] Ignoring lookup with values '',
+[kws-infra] Ignoring lookup with values '',
+[soltegro] Ignoring lookup with values '',
+[provincie-overijssel] Ignoring lookup with values '',
+[uwv] Ignoring lookup with values '',
+[tud] Ignoring lookup with values '',
+[gemeente-vlaardingen] Ignoring lookup with values '',
+[cisco] Ignoring lookup with values '',
+[het-waterschapshuis] Ignoring lookup with values '',
+[dwa] Ignoring lookup with values '',
+[hogeschool-windesheim] Ignoring lookup with values '',
+[tilburg-university] Ignoring lookup with values '',
+[rivm] Ignoring lookup with values '',
+[waterschap-vechtstromen] Ignoring lookup with values '',
+[waterschap-vallei-veluwe] Ignoring lookup with values '',
+[kpn] Ignoring lookup with values '',
+[vrije-universiteit] Ignoring lookup with values '',
+[prog-basis-ondergrond] Ignoring lookup with values '',
+[gemeente-nijmegen] Ignoring lookup with values '',
+[waterschap-drents] Ignoring lookup with values '',
+[vvs] Ignoring lookup with values '',
+[digileefomgeving] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[digicampus] Search term 'NL, The Hague' resulted in location: 4.3113461,52.0799838
+[open-innovation] Ignoring lookup with values '',
+[challengecentric] Ignoring lookup with values '',
+[codefornl] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[t3d] Ignoring lookup with values '',
+[amsterdam] Ignoring lookup with values '',
+[the-hague] Ignoring lookup with values '',
+[financiele-diensten] Ignoring lookup with values '',
+[uwv] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[gideons-tribe] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[aic] ERROR - Search term 'IE' resulted in no results: {"type":"FeatureCollection","features":[]}
+[stopthetraffik-ukraine] Ignoring lookup with values '',
+[min-bzk] Ignoring lookup with values '',
+[visimp] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[overeenkomsten-innovatie] Search term 'NL, The Hague' resulted in location: 4.3113461,52.0799838
+[webbercommunity] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[smartmobility] Ignoring lookup with values '',
+[digiwallets] Ignoring lookup with values '',
+[energietransitie] Ignoring lookup with values '',
+[infrastructuur] Ignoring lookup with values '',
+[klimaatadaptatie] Ignoring lookup with values '',
+[landbouwinnovatie] Ignoring lookup with values '',
+[mobiliteit] Ignoring lookup with values '',
+[crowdmanagement] Ignoring lookup with values '',
+[woningbouw] Ignoring lookup with values '',
+[t3d] Ignoring lookup with values '',
+[digitalediensten] Ignoring lookup with values '',
+[wallets] Ignoring lookup with values '',
+[digtwins] Ignoring lookup with values '',
+[virtassist] Ignoring lookup with values '',
+[ppt] Ignoring lookup with values '',
+[proactievedienstverlening] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[canvas-templates] Ignoring lookup with values '',
+[challenge-centric-ux] Ignoring lookup with values '',
+[delivered-value] Ignoring lookup with values '',
+[validation] Ignoring lookup with values '',
+[resp-app] Search term 'BG, Sofia' resulted in location: 23.3221789,42.6978634
+[systems-modeling] Search term 'NL, The Hague' resulted in location: 4.3113461,52.0799838
+[user-centric] Ignoring lookup with values '',
+[contribute] Ignoring lookup with values '',
+[global-menu] Ignoring lookup with values '',
+[structure] Ignoring lookup with values '',
+[my-homepage] Ignoring lookup with values '',
+[tech-savvy-bestuurders] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[producten-en-diensten] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[public-spaces] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[succesvolle-projecten] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[publieke-toegankelijkheid] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[strong-community] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[3dgebruik] Ignoring lookup with values '',
+[3dinwinnen] Ignoring lookup with values '',
+[3dregistratie] Ignoring lookup with values '',
+[3dsamenhang] Ignoring lookup with values '',
+[artworks-transport] Ignoring lookup with values '',
+[communicatie] Ignoring lookup with values '',
+[connectiviteit] Ignoring lookup with values '',
+[ssi-thehague] Ignoring lookup with values '',
+[energie] Ignoring lookup with values '',
+[milieu] Ignoring lookup with values '',
+[mobiliteit] Ignoring lookup with values '',
+[sociale-cohesie] Ignoring lookup with values '',
+[toezicht] Ignoring lookup with values '',
+[verlichting] Ignoring lookup with values '',
+[bld-burgers-gegevens] Ignoring lookup with values '',
+[bld-credentials-herroepen] Ignoring lookup with values '',
+[bld-dienstverlening] Ignoring lookup with values '',
+[bld-risicos-mitigeren] Ignoring lookup with values '',
+[bld-ict-systemen] Ignoring lookup with values '',
+[bld-iedereen-mee] Ignoring lookup with values '',
+[bld-trust-anchors] Ignoring lookup with values '',
+[bld-issued-creds] Ignoring lookup with values '',
+[accelerator] Ignoring lookup with values '',
+[testesttesttesttset] Ignoring lookup with values '',
+[test123] Ignoring lookup with values '',
+[energietransitie] Ignoring lookup with values '',
+[materialentransitie] Ignoring lookup with values '',
+[sociale-transitie] Ignoring lookup with values '',
+[adaptation] Ignoring lookup with values '',
+[gpp] Ignoring lookup with values '',
+[campaignmoderation] Ignoring lookup with values '',
+[translations] Ignoring lookup with values '',
+[bronidentiteit] Ignoring lookup with values '',
+[capelle-aardgasvrij] Search term 'Netherlands, Capelle aan den IJssel' resulted in location: 4.589460935511152,51.935853800000004
+[datalab-den-haag] Search term 'Netherlands, Den Haag' resulted in location: -69.526834,-35.33888
+[dego] Search term 'Netherlands, Nederland' resulted in location: 5.6343227,52.2434979
+[inrichting-grond] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[sustainable-powerlab] Search term 'Netherlands, Delft' resulted in location: 4.365563,51.998013
+[transitie-twente] Search term 'Netherlands, Hengelo' resulted in location: 121.034186,14.477985
+[kansen-in-de-ondergrond] Search term 'Netherlands, Noordzee' resulted in location: 4.9020514,52.0773727
+[plankaart-openbaar-laden] Search term 'Netherlands, Haarlem' resulted in location: 4.664715,52.385376
+[digital-twins-twomes] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[warmte-randstad] Search term 'Netherlands, Rotterdam' resulted in location: 4.47775,51.9244424
+[wijkpaspoort] Search term 'Netherlands, Nederland' resulted in location: 5.6343227,52.2434979
+[zonnecollector] Search term 'Netherlands, Wageningen' resulted in location: 121.034186,14.477985
+[wegtunnels-amsterdam] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[camino-rail] Search term 'Netherlands, Nederland' resulted in location: 5.6343227,52.2434979
+[corridor-a7-a8] Search term 'Netherlands, Hoorn' resulted in location: 5.067726588147824,52.622545450000004
+[digital-twin-rijksmuseum] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[digitwin-noordzee] Search term 'Netherlands, Noordzee' resulted in location: 4.9020514,52.0773727
+[kogerpolder] Search term 'Netherlands, Alkmaar' resulted in location: 121.034186,14.477985
+[koningstunnel-den-haag] Search term 'Netherlands, Den Haag' resulted in location: -69.526834,-35.33888
+[n33-groningen] Search term 'Netherlands, Appingedam' resulted in location: 6.8577654,53.3203563
+[n33-midden] Search term 'Netherlands, Appingedam' resulted in location: 6.8577654,53.3203563
+[brug-utrecht] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[pampus-ijmeerbrug] Search term 'Netherlands, IJmeer' resulted in location: 5.4163515,52.1899268
+[proeftuin-twente47] Search term 'Netherlands, Twente' resulted in location: 5.1375719,52.0640062
+[prorail-5d-digital-twin] Search term 'Netherlands' resulted in location: 5.6343227,52.2434979
+[prorail-levende-atlas] Search term 'Netherlands' resulted in location: 5.6343227,52.2434979
+[ring-utrecht-a27-a12] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[ruimtegebruik-noordzee] Search term 'Netherlands, Noordzee' resulted in location: 4.9020514,52.0773727
+[scheeresluis] Search term 'Netherlands, Scheeresluis' resulted in location: 121.034186,14.477985
+[sluis-eefde] Search term 'Netherlands, Zutphen' resulted in location: 121.034186,14.477985
+[stuw-de-haandrik] Search term 'Netherlands, Stuw de Haandrik' resulted in location: -75.622913,39.528422
+[twin-16] Search term 'Netherlands, Rotterdam' resulted in location: 4.47775,51.9244424
+[utrecht-centraal-station] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[waterwolftunnel] Search term 'Netherlands, Waterwolftunnel' resulted in location: 4.7831923,52.2748162
+[westfrisiaweg] Search term 'Netherlands, Enkhuizen' resulted in location: 5.2901222,52.7036282
+[zeelandbrug] Search term 'Netherlands, Zeeland' resulted in location: 3.7028061,51.4162975
+[riool-almelo] Search term 'Netherlands, Almelo' resulted in location: 6.66725277634109,52.3567956
+[zuidasdok] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[zuiveringsinfra] Search term 'Netherlands, Limburg' resulted in location: 5.9046302,51.2015196
+[atlas-leefbare-stad] Search term 'Netherlands, Breda' resulted in location: 121.034186,14.477985
+[drent-over-delta] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[geoportaal-papendrecht] Search term 'Netherlands, Papendrecht' resulted in location: 4.704688255674374,51.834666999999996
+[getijden-brouwersdam] Search term 'Netherlands, Brouwersdam' resulted in location: 4.6363971,52.3125312
+[groene-batenplanner] Search term 'Netherlands, Amersfoort' resulted in location: 5.3965879493517015,52.163773899999995
+[hitte-station-zwolle] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[station-amersfoort] Search term 'Netherlands, Amersfoort' resulted in location: 5.3965879493517015,52.163773899999995
+[klimaatopgave-ede] Search term 'Netherlands, Ede' resulted in location: 121.034186,14.477985
+[kop-van-schouwen] Search term 'Netherlands, Schouwen' resulted in location: 5.7269099,52.7187167
+[senshagen] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[smart-zwolle-hub] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[dasboard-milieukwaliteit] Search term 'Netherlands, Eindhoven' resulted in location: 5.478633,51.4392648
+[sterke-lekdijk] Search term 'Netherlands, Lekdijk' resulted in location: 4.5844117,51.9097549
+[veiligheidsregio-zeeland] Search term 'Netherlands, Zeeland' resulted in location: 3.7028061,51.4162975
+[bodemdaling-flevoland] Search term 'Netherlands, Flevoland' resulted in location: 5.4235397,52.4484375
+[de-virtual-river-game] Search term 'Netherlands, Waal' resulted in location: 121.034186,14.477985
+[digital-future-farming] Search term 'Netherlands, Wageningen' resulted in location: 121.034186,14.477985
+[bodemligging-rijntakken] Search term 'Netherlands, Nijmegen' resulted in location: 5.838960628748229,51.842574850000005
+[friese-veenweide] Search term 'Netherlands, Friesland' resulted in location: 5.692145,53.154635
+[gemeente-woerden] Search term 'Netherlands, Woerden' resulted in location: 4.876687198673499,52.08701595
+[het-groene-hart] Search term 'Netherlands, Het Groene Hart' resulted in location: 5.8947955,51.8891355
+[high-tech-grasmat] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[kanaaldijk-noord] Search term 'Netherlands, Eindhoven' resulted in location: 5.478633,51.4392648
+[lunterse-beek] Search term 'Netherlands, Lunterse Beek' resulted in location: 5.842219,51.852169
+[novi-zwolle] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[schouwen-deventer] Search term 'Netherlands, Deventer' resulted in location: 6.1584725,52.2532272
+[virtual-tomato-crops] Search term 'Netherlands, Wageningen' resulted in location: 121.034186,14.477985
+[waterbeheer] Search term 'Netherlands, Nederland' resulted in location: 5.6343227,52.2434979
+[adam-smart-city] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[atlas-fietsbaar-utrecht] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[atlas-brabant] Search term 'Netherlands, Noord-Brabant' resulted in location: 5.4441391,51.6017723
+[atlas-bereikbare-stad] Search term 'Netherlands, Noord-Brabant' resulted in location: 5.4441391,51.6017723
+[de-slimme-vecht] Search term 'Netherlands, Vechtdal' resulted in location: 5.6235316,52.0512732
+[floriade-almere] Search term 'Netherlands, Almere' resulted in location: 5.22031,52.349871
+[havenmeester-mis] Search term 'Netherlands, Rotterdam' resulted in location: 4.47775,51.9244424
+[outdoor-mobility] Search term 'Netherlands, Delft' resulted in location: 4.365563,51.998013
+[digital-twin-covid-19] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[druktebeeld-amsterdam] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[druktemeter-groningen] Search term 'Netherlands, Groningen' resulted in location: 5.7065157,51.3803927
+[druktemeter-hilversum] Search term 'Netherlands, Hilversum' resulted in location: 5.1719396,52.2241375
+[fieldlab-vierdaagse] Search term 'Netherlands, Nijmegen' resulted in location: 5.838960628748229,51.842574850000005
+[hanzehub] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[living-lab-scheveningen] Search term 'Netherlands, Scheveningen' resulted in location: 121.034186,14.477985
+[livinglab-stratumseind] Search term 'Netherlands, Eindhoven' resulted in location: 5.478633,51.4392648
+[schiphol-digital-twin] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[smart-city-hilversum] Search term 'Netherlands, Hilversum' resulted in location: 5.1719396,52.2241375
+[stadsdashboard-vervoer] Search term 'Netherlands, Rotterdam' resulted in location: 4.47775,51.9244424
+[datastad-den-bosch] Search term 'Netherlands, s-Hertogenbosch' resulted in location: 121.034186,14.477985
+[3d-amsterdam] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[3d-den-haag] Search term 'Netherlands, Den Haag' resulted in location: -69.526834,-35.33888
+[3d-groningen] Search term 'Netherlands, Groningen' resulted in location: 5.7065157,51.3803927
+[3d-rotterdam] Search term 'Netherlands, Rotterdam' resulted in location: 4.47775,51.9244424
+[3d-utrecht] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[3d-zwolle] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[brainport-knooppunt-xl] Search term 'Netherlands, Eindhoven' resulted in location: 5.478633,51.4392648
+[brainport-smart-district] Search term 'Netherlands, Helmond' resulted in location: 5.6671089885064525,51.47356795
+[city-information-model] Search term 'Netherlands, Utrecht' resulted in location: 121.034186,14.477985
+[gezond-stedelijk-leven] Search term 'Netherlands, Amersfoort' resulted in location: 5.3965879493517015,52.163773899999995
+[schiphol-bimt] Search term 'Netherlands, Amsterdam' resulted in location: 4.8936041,52.3727598
+[smart-city-alkmaar] Search term 'Netherlands, Alkmaar' resulted in location: 121.034186,14.477985
+[suikerunitterrein] Search term 'Netherlands, Groningen' resulted in location: 5.7065157,51.3803927
+[ten-post] Search term 'Netherlands, Ten Post' resulted in location: -69.526834,-35.33888
+[vlaardingen-digitwin] Search term 'Netherlands, Vlaardingen' resulted in location: 4.3399618,51.9075958
+[wikihouse] Search term 'Netherlands, Almere' resulted in location: 5.22031,52.349871
+[wooninzicht] Search term 'Netherlands, Zwolle' resulted in location: 6.066466,52.514514
+[onderzoek] Ignoring lookup with values '',
+[beheer-open-source] Ignoring lookup with values '',
+[toeslag] Ignoring lookup with values '',
+[compliance-by-design] Ignoring lookup with values '',
+[damodam] Ignoring lookup with values '',
+[geboorte] Ignoring lookup with values '',
+[huishoudboekje] Ignoring lookup with values '',
+[huwelijksplanner] Ignoring lookup with values '',
+[inkomenstoets] Ignoring lookup with values '',
+[inkomenstoetsw] Ignoring lookup with values '',
+[ketentestdorp] Ignoring lookup with values '',
+[nl-design-system] Ignoring lookup with values '',
+[regie] Ignoring lookup with values '',
+[rodeknop] Ignoring lookup with values '',
+[anaarb] Ignoring lookup with values '',
+[inkomstenloket] Ignoring lookup with values '',
+[waardepapieren] Ignoring lookup with values '',
+[heitje] Ignoring lookup with values '',
+[woningpas] Ignoring lookup with values '',
+[careerwallets] Ignoring lookup with values '',
+[coronacheck] Ignoring lookup with values '',
+[mandates] Ignoring lookup with values '',
+[digime] Ignoring lookup with values '',
+[bronidentiteit] Ignoring lookup with values '',
+[irma] Ignoring lookup with values '',
+[leopard] Ignoring lookup with values '',
+[mijnapp] Ignoring lookup with values '',
+[mijngegevens] Ignoring lookup with values '',
+[ondernemingspaspoort] Ignoring lookup with values '',
+[datakeeper] Ignoring lookup with values '',
+[schluss] Ignoring lookup with values '',
+[overlijdenschluss] Ignoring lookup with values '',
+[tip] Ignoring lookup with values '',
+[unlock] Ignoring lookup with values '',
+[vid] Ignoring lookup with values '',
+[workpi] Ignoring lookup with values '',
+[3d1dag] Ignoring lookup with values '',
+[scheveningen] Ignoring lookup with values '',
+[elektriciteit] Ignoring lookup with values '',
+[3dkennis] Ignoring lookup with values '',
+[groenebaten] Ignoring lookup with values '',
+[3dgroningen] Ignoring lookup with values '',
+[klimaat] Ignoring lookup with values '',
+[amersfoort] Ignoring lookup with values '',
+[nationaletwin] Ignoring lookup with values '',
+[oppervlaktewater] Ignoring lookup with values '',
+[spiegelstad] Ignoring lookup with values '',
+[udi] Ignoring lookup with values '',
+[tenpost] Ignoring lookup with values '',
+[warmte] Ignoring lookup with values '',
+[chatbotrobin] Ignoring lookup with values '',
+[sam] Ignoring lookup with values '',
+[digibalie] Ignoring lookup with values '',
+[idcontact] Ignoring lookup with values '',
+[klantreizen] Ignoring lookup with values '',
+[kiss-] Ignoring lookup with values '',
+[klantbeeld] Ignoring lookup with values '',
+[vinden] Ignoring lookup with values '',
+[overheid-in-broekzak] Ignoring lookup with values '',
+[chatbotcbs] Ignoring lookup with values '',
+[requestapp] Ignoring lookup with values '',
+[rita] Ignoring lookup with values '',
+[wout] Ignoring lookup with values '',
+[gem] Ignoring lookup with values '',
+[voiceid] Ignoring lookup with values '',
+[caredata] Ignoring lookup with values '',
+[aio] Ignoring lookup with values '',
+[gatekeeperforopenbanking] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[interactieoverheid18jarig] Search term 'NL, Den Haag' resulted in location: 5.92767,51.52638
+[userfriendlyonboarding] Ignoring lookup with values '',
+[ecosystem-mapping] Ignoring lookup with values '',
+[tokenization] Ignoring lookup with values '',
+[contribute] Ignoring lookup with values '',
+[createchallenge] Ignoring lookup with values '',
+[signup] Ignoring lookup with values '',
+[myhomepage] Ignoring lookup with values '',
+[teamwork] Ignoring lookup with values '',
+[understanding] Ignoring lookup with values '',
+[contribute-empathize] Ignoring lookup with values '',
+[contribute-define] Ignoring lookup with values '',
+[contribute-ideate] Ignoring lookup with values '',
+[contribute-prototype] Ignoring lookup with values '',
+[contribute-test] Ignoring lookup with values '',
+[clarity-show-cases] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[melden-toegankelijkheid] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[t3dketenproces] Ignoring lookup with values '',
+[t3dproefopstelling] ERROR - Search term 'NL' resulted in no results: {"type":"FeatureCollection","features":[]}
+[t3dtoolkit] Ignoring lookup with values '',
+[informeren-omgevings] Ignoring lookup with values '',
+[informeren-veiligheid] Ignoring lookup with values '',
+[glasvezel-strand] Ignoring lookup with values '',
+[wijkbudget] Ignoring lookup with values '',
+[energie-armoede] Ignoring lookup with values '',
+[energie-cooperatie] Ignoring lookup with values '',
+[microgrid-nh] Ignoring lookup with values '',
+[microgrid-zp] Ignoring lookup with values '',
+[sap] Ignoring lookup with values '',
+[verbeteren-walstroom] Ignoring lookup with values '',
+[zonnedak] Ignoring lookup with values '',
+[invloed-kleur-licht] Ignoring lookup with values '',
+[meten-stikstof] Ignoring lookup with values '',
+[meten-waterkwaliteit] Ignoring lookup with values '',
+[natuurtellingen] Ignoring lookup with values '',
+[inzicht-fietsdata] Ignoring lookup with values '',
+[reserveren-parkeerplaats] Ignoring lookup with values '',
+[databewustwording] Ignoring lookup with values '',
+[op-verzoek-verlichten] Ignoring lookup with values '',
+[agressie-monitor] Ignoring lookup with values '',
+[crowdmanagement-nb] Ignoring lookup with values '',
+[meten-geluid] Ignoring lookup with values '',
+[overlast-lachgas] Ignoring lookup with values '',
+[poller-toezicht] Ignoring lookup with values '',
+[realtime-beeldherkenning] Ignoring lookup with values '',
+[terugvinden-vermiste-kinderen] Ignoring lookup with values '',
+[verlichting-strand] Ignoring lookup with values '',
+[xxl] Ignoring lookup with values '',
+[test321] Ignoring lookup with values '',
+[houtcampagne] Ignoring lookup with values '',

@@ -1,0 +1,31 @@
+svg {
+  width: 800px;
+  height: 600px;
+  border: 1px solid #ccc;
+}
+
+text {
+  user-select: none;
+  pointer-events: none;
+}
+
+image {
+  pointer-events: none;
+  image-rendering: crisp-edges;
+  display: none;
+}
+
+.node {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node.fixed {
+  stroke: #ffff00;
+  stroke-width: 3px;
+}
+
+.node.fixed-location {
+  stroke: #8bddc4;
+  stroke-width: 3px;
+}

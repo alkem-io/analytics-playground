@@ -1,17 +1,21 @@
 import * as d3 from 'd3';
-import { Simulation } from 'd3';
+import { GeoConicProjection, Simulation } from 'd3';
 
 export class TransformationHandler {
   defaultScale = 1;
-  defaultTranslation = [0, 0];
+  defaultTranslation: [number, number] = [0, 0];
+  scaleFactor = 0.2;
 
   width: number;
   height: number;
 
   group: any;
 
-  scale: any;
-  translate: any;
+  scale: number;
+  translate: [number, number];
+
+  projection: GeoConicProjection;
+  geoGenerator: any;
 
   constructor(width: number, height: number, group: any) {
     this.width = width;
@@ -21,6 +25,12 @@ export class TransformationHandler {
 
     this.scale = this.defaultScale;
     this.translate = this.defaultTranslation;
+    this.projection = d3.geoAlbers().rotate([-30, 0, 0]);
+    this.geoGenerator = d3.geoPath().projection(this.projection);
+  }
+
+  projectionExtent(geoJson: any) {
+    this.projection.fitExtent([ [0, 0], [ this.width, this.height]], geoJson);
   }
 
   transformCoordinates(x: number, y: number) {
@@ -43,7 +53,7 @@ export class TransformationHandler {
   }
 
   // dataNodes typically obtained by doing a d3.selectAll().data();
-  scaleToFit(maxNodeRadius: number, dataNodes: any) {
+  zoomFit(maxNodeRadius: number, dataNodes: any) {
     const buffer = maxNodeRadius;
     const maxX = d3.max(dataNodes, (d: any) => d.x + buffer - 0) || 0;
     const minX = d3.min(dataNodes, (d: any) => d.x - buffer) || 0;
@@ -55,6 +65,14 @@ export class TransformationHandler {
 
     this.scale = 1 / Math.max(rangeX / this.width, rangeY / this.height);
     this.translate = [-minX * this.scale, -minY * this.scale];
+  }
+
+  zoomPlus() {
+    this.scale = this.scale * (1 + this.scaleFactor);
+  }
+
+  zoomMin() {
+    this.scale = this.scale * (1 - this.scaleFactor);
   }
 
   transformDisplay(duration: number) {
@@ -70,7 +88,8 @@ export class TransformationHandler {
   };
 
   private registerZoom() {
-    let zoom = d3.zoom().on('zoom', this.handleZoom);
+    const zoom = d3.zoom();
+    zoom.on('zoom', this.handleZoom);
     this.group.call(zoom);
   }
 

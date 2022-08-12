@@ -7,10 +7,11 @@ import { NodeDragHandler } from './handlers/NodeDragHandler';
 import { TransformationHandler } from './handlers/TransformationHandler';
 import { MapDataProvider } from './MapDataProvider';
 import { MapLocationHandler } from './handlers/MapLocationHandler';
+import { HovercardHtml } from './components/HovercardHtml';
 
 export class GraphVizualization {
   defMarkerArrowName = 'markerArrow';
-  maxNodeRadius = 20;
+  maxNodeRadius = 30;
 
   graphDataProvider: GraphDataProvider;
   mapDataProvider: MapDataProvider;
@@ -34,7 +35,7 @@ export class GraphVizualization {
   linkWidthScale: any;
   simulation: Simulation<any, any>;
   lineGenerator = d3.line().curve(d3.curveCardinal);
-  hovercard: Hovercard;
+  hovercard: HovercardHtml;
   transformationHandler: TransformationHandler;
   mapLocationHandler: MapLocationHandler;
 
@@ -46,6 +47,7 @@ export class GraphVizualization {
     height: number
   ) {
     this.svg = svg;
+
     this.graphDataProvider = graphDataProvider;
     this.mapDataProvider = mapDataProvider;
 
@@ -64,10 +66,12 @@ export class GraphVizualization {
       this.height,
       this.graphGroup
     );
-    this.mapLocationHandler = new MapLocationHandler(this.simulation, this.transformationHandler);
+    this.mapLocationHandler = new MapLocationHandler(
+      this.simulation,
+      this.transformationHandler
+    );
 
-    this.hovercard = new Hovercard(svg, 0, 0);
-
+    this.hovercard = new HovercardHtml(svg, 0, 0);
 
     this.refreshDisplayedGraph();
   }
@@ -99,7 +103,10 @@ export class GraphVizualization {
 
     const nodeDragHandler = new NodeDragHandler(this.simulation);
     nodeDragHandler.register(this.node);
-    this.mapLocationHandler = new MapLocationHandler(this.simulation, this.transformationHandler);
+    this.mapLocationHandler = new MapLocationHandler(
+      this.simulation,
+      this.transformationHandler
+    );
     if (this.mapDataProvider.isMapDisplayEnabled()) this.showMap();
   }
 
@@ -158,6 +165,7 @@ export class GraphVizualization {
       .selectAll('path')
       .data(mapFeatures, (d: any) => d.properties.name_en)
       .join('path')
+      .attr('id', (d: any) => d.properties.name_en)
       .attr('d', this.transformationHandler.geoGenerator)
       .attr('fill', 'lightgray')
       .attr('stroke', 'white');
@@ -187,8 +195,8 @@ export class GraphVizualization {
     this.transformationHandler.transformDisplay(750);
   }
 
-  fixContributorsLocationToMap() {
-    this.mapLocationHandler.fixNodeLocationToMap(this.node);
+  fixLocationToMap(nodeType: string) {
+    this.mapLocationHandler.fixNodeLocationToMap(this.node, nodeType);
   }
 
   private updateScales() {
@@ -225,7 +233,13 @@ export class GraphVizualization {
       .forceLink(this.graphDataProvider.getFilteredEdges())
       .id((d: any) => d.id)
       .distance(150)
-      .strength(0.7);
+      .strength((edge: any) => {
+        // Want hub-challenge-opp links to dominate
+        if (edge.type === 'child') {
+          return 0.7;
+        }
+        return 0.2;
+      });
 
     const hubEdges = this.graphDataProvider.getHubEdges();
 

@@ -4,7 +4,7 @@ import { GeoConicProjection, Simulation } from 'd3';
 export class TransformationHandler {
   defaultScale = 1;
   defaultTranslation: [number, number] = [0, 0];
-  scaleFactor = 0.2;
+  scaleFactor = 0.1;
 
   width: number;
   height: number;

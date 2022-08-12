@@ -17,6 +17,7 @@ const graphZoomMin = d3.select('#graph-zoom-min');
 // Graph map related controls
 const graphDisplayMap = d3.select('#graph-display-map');
 const graphFixContributorsToLocation = d3.select('#graph-contributors-to-location');
+const graphFixHubsToLocation = d3.select('#graph-hubs-to-location');
 const graphMapSelector = d3.select('#graph-map-selector');
 
 const lifecycleSvg = d3.select('#lifecycle-svg');
@@ -24,7 +25,7 @@ const lifecycleSelectionControl = d3.select('#lifecycle-selector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
-const hubID = ''; //"c4111e11-edad-48f6-916f-20e11f468848";
+const hubID = "c4111e11-edad-48f6-916f-20e11f468848";
 graphShowContributors.attr('checked', 'checked');
 const graphDataProvider = new GraphDataProvider(true, hubID);
 await graphDataProvider.loadData(graphDataFileLocation);
@@ -90,8 +91,13 @@ graphZoomMin.on('click', (e: any) => {
   forceGraph.zoomMin();
 });
 graphFixContributorsToLocation.on('click', (e: any) => {
-  console.log(`Fixing contributors to location...`);
-  forceGraph.fixContributorsLocationToMap();
+  forceGraph.fixLocationToMap('user');
+  forceGraph.fixLocationToMap('organization');
+});
+graphFixHubsToLocation.on('click', (e: any) => {
+  forceGraph.fixLocationToMap('hub');
+  forceGraph.fixLocationToMap('challenge');
+  forceGraph.fixLocationToMap('opportunity');
 });
 
 

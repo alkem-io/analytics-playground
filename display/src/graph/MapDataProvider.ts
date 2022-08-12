@@ -18,7 +18,7 @@ export class MapDataProvider {
     }
     this.loadedMaps.set(geoJsonFile, loadedMap);
     this.selectedMap = geoJsonFile;
-    console.log(`geojson loaded from ${geoJsonFile}`);
+    //console.log(`geojson loaded from ${geoJsonFile}`);
   }
 
   setMapsDisplay(value: boolean) {

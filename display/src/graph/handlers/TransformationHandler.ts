@@ -6,6 +6,7 @@ export class TransformationHandler {
   defaultTranslation: [number, number] = [0, 0];
   scaleFactor = 0.1;
 
+
   width: number;
   height: number;
 

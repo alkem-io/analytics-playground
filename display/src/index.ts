@@ -18,6 +18,7 @@ const graphZoomMin = d3.select('#graph-zoom-min');
 const graphDisplayMap = d3.select('#graph-display-map');
 const graphFixContributorsToLocation = d3.select('#graph-contributors-to-location');
 const graphFixHubsToLocation = d3.select('#graph-hubs-to-location');
+
 const graphMapSelector = d3.select('#graph-map-selector');
 
 const lifecycleSvg = d3.select('#lifecycle-svg');
@@ -25,7 +26,7 @@ const lifecycleSelectionControl = d3.select('#lifecycle-selector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
-const hubID = "c4111e11-edad-48f6-916f-20e11f468848";
+const hubID = ''; //"c4111e11-edad-48f6-916f-20e11f468848";
 graphShowContributors.attr('checked', 'checked');
 const graphDataProvider = new GraphDataProvider(true, hubID);
 await graphDataProvider.loadData(graphDataFileLocation);
@@ -82,6 +83,7 @@ graphDisplayMap.on('click', (e: any) => {
 graphZoomFit.on('click', (e: any) => {
   forceGraph.zoomFit();
 });
+
 
 graphZoomPlus.on('click', (e: any) => {
   forceGraph.zoomPlus();

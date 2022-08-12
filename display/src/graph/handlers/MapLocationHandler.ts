@@ -6,6 +6,7 @@ export class MapLocationHandler {
   simulation: Simulation<any, any>;
   transformationHandler: TransformationHandler;
 
+
   constructor(
     simulation: Simulation<any, any>,
     transformationHandler: TransformationHandler
@@ -13,6 +14,7 @@ export class MapLocationHandler {
     this.simulation = simulation;
     this.transformationHandler = transformationHandler;
   }
+
 
   fixNodeLocationToMap(nodes: any, nodeType: string) {
     const nodesData = nodes.data();
@@ -44,4 +46,5 @@ export class MapLocationHandler {
     if (lon === 0 || lat === 0) return false;
     return true;
   }
+
 }

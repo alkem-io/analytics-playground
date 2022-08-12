@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
 import { GraphDataProvider } from './GraphDataProvider';
-import { Hovercard } from './components/Hovercard';
 import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
 import { NodeDragHandler } from './handlers/NodeDragHandler';
@@ -12,6 +11,7 @@ import { HovercardHtml } from './components/HovercardHtml';
 export class GraphVizualization {
   defMarkerArrowName = 'markerArrow';
   maxNodeRadius = 30;
+
 
   graphDataProvider: GraphDataProvider;
   mapDataProvider: MapDataProvider;
@@ -47,6 +47,8 @@ export class GraphVizualization {
     height: number
   ) {
     this.svg = svg;
+    this.graphDataProvider = graphDataProvider;
+    this.mapDataProvider = mapDataProvider;
 
     this.graphDataProvider = graphDataProvider;
     this.mapDataProvider = mapDataProvider;
@@ -72,6 +74,8 @@ export class GraphVizualization {
     );
 
     this.hovercard = new HovercardHtml(svg, 0, 0);
+
+
 
     this.refreshDisplayedGraph();
   }
@@ -107,6 +111,7 @@ export class GraphVizualization {
       this.simulation,
       this.transformationHandler
     );
+
     if (this.mapDataProvider.isMapDisplayEnabled()) this.showMap();
   }
 
@@ -197,6 +202,7 @@ export class GraphVizualization {
 
   fixLocationToMap(nodeType: string) {
     this.mapLocationHandler.fixNodeLocationToMap(this.node, nodeType);
+    this.transformationHandler.transformDisplay(750);
   }
 
   private updateScales() {

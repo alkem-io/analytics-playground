@@ -1,0 +1,29 @@
+{
+  "name": "@alkemio/analytics-playground-display-acquire",
+  "version": "0.1.0",
+  "description": "Alkemio Analtics display tool, enabling users to explore analytics + visualizations of data",
+  "author": "Alkemio Foundation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alkem-io/alkemio-playground.git"
+  },
+  "type": "module",
+  "license": "EUPL-1.2",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tbd",
+    "start": "tbd",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "graphql": "^14.7.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.11.6",
+    "dotenv": "^8.2.0",
+    "graphql-codegen-typescript-common": "0.18.2",
+    "@graphql-codegen/typescript": "2.7.3",
+    "@graphql-codegen/typescript-resolvers": "2.7.3"
+  }
+}

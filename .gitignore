@@ -1,20 +1,3 @@
-
-# Display specific
-/display/node_modules
-/display/bak
-/display/public/data/transformed-graph-data.json
-/display/public/data/*.bak
-/display/dist
-
-# Generate specific
-/transform/node_modules
-/transform/dist
-/transform/src/data/*.bak
-/transform/*.log
-# Ensure do not accidentially upload real users data
-/transform/src/acquired-data/users-full.json
-/transform/src/acquired-data/users.json
-
 # Common
 /docs/diagrams/.$*
 

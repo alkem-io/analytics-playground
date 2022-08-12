@@ -1,0 +1,11 @@
+
+# Display specific
+/node_modules
+/bak
+/public/data/transformed-graph-data.json
+/public/data/*.bak
+/dist
+
+*.log
+.env
+.~*

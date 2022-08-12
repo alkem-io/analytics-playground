@@ -21,12 +21,15 @@ export class NodeDragHandler {
   private click(event: any, d: any) {
     delete d.fx;
     delete d.fy;
+    delete d.fixedLocation;
     d3.select(event.currentTarget).classed('fixed', false);
+    d3.select(event.currentTarget).classed('fixed-location', false);
     this.simulation.alpha(1).restart();
   }
 
   private dragstartNode() {
     const selectedNode = d3.select(this);
+    selectedNode.classed('fixed-location', false);
     selectedNode.classed('fixed', true);
   }
 

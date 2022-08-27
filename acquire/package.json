@@ -10,7 +10,7 @@
   "license": "EUPL-1.2",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tbd",
+    "build": "tsc --project tsconfig.prod.json",
     "start": "tbd",
     "codegen": "graphql-codegen --config codegen.yml",
     "validate-connection": "ts-node-dev src/validate-connection.ts",

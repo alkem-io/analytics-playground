@@ -1,21 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLClient } from 'graphql-request';
-import { AnalyticsClientConfig } from './types/config';
-import { ErrorHandler, handleErrors } from './util/handleErrors';
+import { AnalyticsClientConfig } from './config/analytics-client-config';
 import { Sdk, getSdk } from './generated/graphql';
 import { Logger } from 'winston';
-import { AlkemioClient } from '@alkemio/client-lib';
 import fs from 'fs';
+import { AlkemioClient } from '@alkemio/client-lib';
 
 export class AlkemioAnalyticsClient {
   public config!: AnalyticsClientConfig;
   public sdkClient!: Sdk;
-  private errorHandler: ErrorHandler;
   private logger: Logger;
 
   constructor(config: AnalyticsClientConfig, logger: Logger) {
     this.config = config;
-    this.errorHandler = handleErrors();
     this.logger = logger;
     this.logger.info(
       `Alkemio server: ${config.apiEndpointPrivateGraphql}`

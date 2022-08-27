@@ -3,6 +3,7 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
+
   "configurations": [
     {
       "name": "GenerateGraph",
@@ -16,6 +17,20 @@
         "<node_internals>/**"
       ],
       "type": "pwa-node"
+    },
+    {
+      "name": "AcquireHubs",
+      "request": "launch",
+      "runtimeArgs": [
+        "run",
+        "acquire-hubs"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node",
+      "cwd": "${workspaceFolder}//acquire"
     },
     {
       "name": "GenerateVisualisation",

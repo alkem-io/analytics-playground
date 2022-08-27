@@ -3,6 +3,7 @@ import { AnalyticsClientConfig } from "../types/config";
 
 export const createConfigUsingEnvVars = (): AnalyticsClientConfig => {
   dotenv.config();
+  const acquiredDataFolder = '../transform/src/acquired-data';
 
   const server =
     process.env.API_ENDPOINT_PRIVATE_GRAPHQL ||
@@ -16,5 +17,12 @@ export const createConfigUsingEnvVars = (): AnalyticsClientConfig => {
         password: process.env.AUTH_ADMIN_PASSWORD ?? "test",
       },
     },
+    files: {
+      users: `${acquiredDataFolder}/users.json`,
+      organizations: `${acquiredDataFolder}/organizations.json`,
+      hubs: `${acquiredDataFolder}/hubs-roles.json`,
+      challenges: `${acquiredDataFolder}/challenges-roles.json`,
+      opportunities: `${acquiredDataFolder}/opportunities-roles.json`
+    }
   };
 };

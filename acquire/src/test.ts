@@ -1,16 +1,22 @@
-import * as dotenv from 'dotenv';
 import { createLogger } from './util/create-logger';
+import { createClientUsingEnvVars } from './util/create-client-using-envvars';
+import { AlkemioAnalyticsClient } from './AlkemioAnalyticsClient';
+import dotenv from 'dotenv';
 
 const main = async () => {
-  dotenv.config();
+  dotenv.config()
   const logger = createLogger();
 
-  logger.info('Tranforming acquired data into a graph for display with D3');
+  const alkemioClient = await createClientUsingEnvVars();
+  logger.info(
+    `Alkemio server: ${alkemioClient.config.apiEndpointPrivateGraphql}`
+  );
+  await alkemioClient.validateConnection();
+  const apiToken = alkemioClient.apiToken;
 
-  const apiKey = '4cfbe072a6904698aa21382c71a3a44c'
-  const geocodeHandler = new GeoapifyGeocodeHandler(apiKey);
-  const alkemioAdapter = new AlkemioGraphTransformer('https://alkem.io', geocodeHandler);
-  alkemioAdapter.transformData();
+  const alkemioAnalyticsClient = new AlkemioAnalyticsClient(alkemioClient.config, alkemioClient.apiToken, logger);
+  await alkemioAnalyticsClient.initialise();
+
 };
 
 main().catch(error => {

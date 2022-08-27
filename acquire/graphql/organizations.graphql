@@ -1,4 +1,4 @@
-query {
+query organizations {
   organizations {
     id
     nameID

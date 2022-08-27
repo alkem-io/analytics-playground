@@ -1,22 +1,24 @@
 overwrite: true
 schema: "https://alkem.io/graphql"
 documents: graphql/**/*.graphql
+hooks:
+  afterAllFileWrite:
+    - eslint --fix
+    - prettier --write
 generates:
   src/generated/graphql.ts:
-    preset: import-types
-    presetConfig:
-      typesPath: ./types/alkemio-schema
-      importTypesNamespace: SchemaTypes
     plugins:
       - typescript
       - typescript-resolvers
+      - typescript-operations
+      - typescript-graphql-request
     config:
       maybeValue: T | undefined
       rawRequest: true
       preResolveTypes: true
       skipTypename: true
       scalars:
-        Upload: File
+        Upload: import('graphql-upload').FileUpload
         NameID: string
         UUID: string
         UUID_NAMEID: string

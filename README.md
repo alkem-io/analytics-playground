@@ -19,7 +19,10 @@ The layout of this simple demonstration takes inspiration from https://github.co
 ## Usage
 There are three steps to running this demonstration:
 * **Acquire**: Interact with the Alkemio graphql api to capture the raw data.
-  * Run each of the queries under `acquire/graphql` and save the results from each as the data for the exported file with the same name under `transform/src/acquired-data`
+  * The queries that are used to acquire the data from Alkemio server are located under: `acquire/graphql`
+  * Create a copy of the `.env.default` file, and save it as `.env`. Edit it to specify the credentials to use to connect.
+  * Run the following scripts: `npm run acquire-hubs` and `npm run acquire-contributors`.
+  * These scripts will save their output into the following folder: `transform/src/acquired-data`
 * **Transform**: Transform the raw data, combining if needed other data, to create the graph data suitable for usage in D3 display
   * Move to the `transform` folder: `cd transform`
   * Run the script to convert the data using `npm run transform-data`

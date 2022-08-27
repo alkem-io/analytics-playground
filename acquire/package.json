@@ -13,7 +13,9 @@
     "build": "tbd",
     "start": "tbd",
     "codegen": "graphql-codegen --config codegen.yml",
-    "test": "ts-node-dev src/test.ts"
+    "validate-connection": "ts-node-dev src/validate-connection.ts",
+    "acquire-hubs": "ts-node-dev src/acquire-hubs-challenges-opportunities.ts",
+    "acquire-contributors": "ts-node-dev src/acquire-contributors.ts"
   },
   "dependencies": {
     "@alkemio/client-lib": "^0.15.3",

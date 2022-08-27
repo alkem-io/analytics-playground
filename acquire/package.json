@@ -7,24 +7,29 @@
     "type": "git",
     "url": "https://github.com/alkem-io/alkemio-playground.git"
   },
-  "type": "module",
   "license": "EUPL-1.2",
   "scripts": {
     "clean": "rimraf dist",
     "build": "tbd",
     "start": "tbd",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "test": "ts-node-dev src/test.ts"
   },
   "dependencies": {
-    "graphql": "^14.7.0",
-    "typescript": "^4.7.4"
+    "@alkemio/client-lib": "^0.15.3",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.3",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "@types/graphql-upload": "^8.0.11",
+    "graphql": "^16.6.0",
+    "graphql-upload": "^16.0.1",
+    "typescript": "^4.7.4",
+    "winston": "^3.8.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "2.11.6",
-    "dotenv": "^8.2.0",
-    "graphql-codegen-typescript-common": "0.18.2",
-    "@graphql-codegen/import-types-preset": "^1.18.1",
+    "@graphql-codegen/cli": "2.11.8",
     "@graphql-codegen/typescript": "2.7.3",
-    "@graphql-codegen/typescript-resolvers": "2.7.3"
+    "@graphql-codegen/typescript-resolvers": "2.7.3",
+    "dotenv": "^16.0.1",
+    "ts-node-dev": "^2.0.0"
   }
 }

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { AnalyticsClientConfig } from "../types/config";
+import { AnalyticsClientConfig } from "../config/analytics-client-config";
 
 export const createConfigUsingEnvVars = (): AnalyticsClientConfig => {
   dotenv.config();

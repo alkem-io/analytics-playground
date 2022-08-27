@@ -5402,6 +5402,11 @@ export type HubRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HubRolesQuery = { hubs: Array<{ id: string, nameID: string, displayName: string, context?: { tagline?: string | undefined, location?: { country: string, city: string } | undefined } | undefined, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined, host?: { id: string } | undefined }> };
 
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { me: { id: string, nameID: string, displayName: string, email: string, profile?: { avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } | undefined } };
+
 export type OpportunityRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5483,6 +5488,25 @@ export const HubRolesDocument = gql`
     host {
       id
     }
+  }
+}
+    `;
+export const MeDocument = gql`
+    query me {
+  me {
+    id
+    nameID
+    displayName
+    profile {
+      avatar {
+        uri
+      }
+      location {
+        country
+        city
+      }
+    }
+    email
   }
 }
     `;
@@ -5568,6 +5592,7 @@ export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, str
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
 const ChallengeRolesDocumentString = print(ChallengeRolesDocument);
 const HubRolesDocumentString = print(HubRolesDocument);
+const MeDocumentString = print(MeDocument);
 const OpportunityRolesDocumentString = print(OpportunityRolesDocument);
 const OrganizationsDocumentString = print(OrganizationsDocument);
 const UsersDocumentString = print(UsersDocument);
@@ -5578,6 +5603,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     hubRoles(variables?: HubRolesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: HubRolesQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<HubRolesQuery>(HubRolesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'hubRoles', 'query');
+    },
+    me(variables?: MeQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: MeQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<MeQuery>(MeDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me', 'query');
     },
     opportunityRoles(variables?: OpportunityRolesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: OpportunityRolesQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<OpportunityRolesQuery>(OpportunityRolesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'opportunityRoles', 'query');

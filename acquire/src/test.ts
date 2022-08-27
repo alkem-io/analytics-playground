@@ -1,21 +1,23 @@
 import { createLogger } from './util/create-logger';
-import { createClientUsingEnvVars } from './util/create-client-using-envvars';
 import { AlkemioAnalyticsClient } from './AlkemioAnalyticsClient';
 import dotenv from 'dotenv';
+import { createConfigUsingEnvVars } from './util/create-config-using-envvars';
 
 const main = async () => {
   dotenv.config()
   const logger = createLogger();
 
-  const alkemioClient = await createClientUsingEnvVars();
+  const config = createConfigUsingEnvVars();
   logger.info(
-    `Alkemio server: ${alkemioClient.config.apiEndpointPrivateGraphql}`
+    `Alkemio server: ${config.apiEndpointPrivateGraphql}`
   );
-  await alkemioClient.validateConnection();
-  const apiToken = alkemioClient.apiToken;
+  logger.info(
+    `Auth info: ${JSON.stringify(config.authInfo)}`
+  );
 
-  const alkemioAnalyticsClient = new AlkemioAnalyticsClient(alkemioClient.config, alkemioClient.apiToken, logger);
+  const alkemioAnalyticsClient = new AlkemioAnalyticsClient(config, logger);
   await alkemioAnalyticsClient.initialise();
+  await alkemioAnalyticsClient.logUser();
 
 };
 

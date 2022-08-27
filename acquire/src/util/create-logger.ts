@@ -20,15 +20,3 @@ export const createLogger = () => {
     ],
   });
 };
-
-export const createProfiler = () => {
-  return winston.createLogger({
-    transports: [
-      new winston.transports.Console({ level: 'info', format: logFormat }),
-      new winston.transports.File({
-        filename: 'profile-info.log',
-        level: 'silly',
-      }),
-    ],
-  });
-};

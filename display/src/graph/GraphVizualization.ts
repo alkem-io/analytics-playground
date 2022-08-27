@@ -229,9 +229,9 @@ export class GraphVizualization {
   }
 
   simulate() {
-    // Gravity determines how strongly the nodes push / pull eachother.
+    // Gravity determines how strongly the nodes push / pull each other.
     // In effect, the lower the number goes, the more spread out the graph will be.
-    const gravity = -100;
+    const gravity = -40;
 
     const forceManyBody = d3.forceManyBody().strength(gravity);
 
@@ -252,19 +252,19 @@ export class GraphVizualization {
     const forceLinkHubs = d3
       .forceLink(hubEdges)
       .id((d: any) => d.id)
-      .distance(500)
-      .strength(0.7);
+      .distance(1500)
+      .strength(1);
 
     const forceCollision = d3
       .forceCollide()
       .radius((d: any) => {
         if (d.type === 'hub') {
-          return d.radius * 5;
+          return d.r * 5;
         }
-        return d.radius;
+        return d.r;
       })
-      .strength(10)
-      .iterations(2);
+      .strength(100)
+      .iterations(1);
 
     const filteredNodes: any = this.graphDataProvider.getFilteredNodes();
     this.simulation = d3

@@ -1,0 +1,15 @@
+
+
+
+# Generate specific
+/node_modules
+/dist
+/src/data/*.bak
+/*.log
+# Ensure do not accidentially upload real users data
+/src/acquired-data/users-full.json
+/src/acquired-data/users.json
+
+*.log
+.env
+.~*

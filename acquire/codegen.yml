@@ -1,0 +1,27 @@
+overwrite: true
+schema: "https://alkem.io/graphql"
+documents: graphql/**/*.graphql
+generates:
+  src/generated/graphql.ts:
+    preset: import-types
+    presetConfig:
+      typesPath: ./types/alkemio-schema
+      importTypesNamespace: SchemaTypes
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      maybeValue: T | undefined
+      rawRequest: true
+      preResolveTypes: true
+      skipTypename: true
+      scalars:
+        Upload: File
+        NameID: string
+        UUID: string
+        UUID_NAMEID: string
+        UUID_NAMEID_EMAIL: string
+        DID: string
+        DateTime: Date
+        JSON: string
+

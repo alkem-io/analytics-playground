@@ -11,7 +11,7 @@ export const createLogger = () => {
       new winston.transports.Console({ level: 'info', format: logFormat }),
       new winston.transports.File({
         filename: 'alkemio-analytics-info.log',
-        level: 'info',
+        level: 'verbose',
       }),
       new winston.transports.File({
         filename: 'alkemio-analytics-warnings.log',
@@ -27,7 +27,7 @@ export const createProfiler = () => {
       new winston.transports.Console({ level: 'info', format: logFormat }),
       new winston.transports.File({
         filename: 'profile-info.log',
-        level: 'silly',
+        level: 'verbose',
       }),
     ],
   });

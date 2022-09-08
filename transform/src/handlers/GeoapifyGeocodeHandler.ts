@@ -1,12 +1,15 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { GeoapifyResponse } from './GeoapifyResponse';
+import { Logger } from 'winston';
 
 export class GeoapifyGeocodeHandler {
   urlBase = 'https://api.geoapify.com/v1/geocode/search';
   apiKey: string;
+  logger: Logger;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, logger: Logger) {
     this.apiKey = apiKey;
+    this.logger = logger;
   }
 
   async lookup(
@@ -15,7 +18,7 @@ export class GeoapifyGeocodeHandler {
     identifier: string
   ): Promise<[number, number]> {
     if (!country.trim() && !city.trim()) {
-      console.log(
+      this.logger.info?.(
         `[${identifier}] Ignoring lookup with values '${city}', ${country}`
       );
       return [0, 0];
@@ -56,7 +59,7 @@ export class GeoapifyGeocodeHandler {
       //console.log('response status is: ', status);
       const firstFeature = data.features[0];
       if (!firstFeature) {
-        console.log(
+        this.logger.error(
           `[${identifier}] ERROR - Search term '${searchText}' resulted in no results: ${JSON.stringify(
             data
           )}`
@@ -65,20 +68,20 @@ export class GeoapifyGeocodeHandler {
       }
       const properties = firstFeature.properties;
       const result: [number, number] = [properties.lon, properties.lat];
-      console.log(
+      this.logger.info?.(
         `[${identifier}] Search term '${searchText}' resulted in location: ${result}`
       );
       return result;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log(
+        this.logger.error(
           `[${identifier}] error message on search text '${searchText}' based on city(${city}), country(${country}): `,
           error.message,
           JSON.stringify(error)
         );
         return [0, 0];
       } else {
-        console.log(
+        this.logger.error(
           `[${identifier}] unexpected error on searching for '${searchText}': `,
           error,
           JSON.stringify(error)

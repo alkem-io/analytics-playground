@@ -10,8 +10,8 @@ const main = async () => {
   logger.info('Tranforming acquired data into a graph for display with D3');
 
   const apiKey = '4cfbe072a6904698aa21382c71a3a44c'
-  const geocodeHandler = new GeoapifyGeocodeHandler(apiKey);
-  const alkemioAdapter = new AlkemioGraphTransformer('https://alkem.io', geocodeHandler);
+  const geocodeHandler = new GeoapifyGeocodeHandler(apiKey, logger);
+  const alkemioAdapter = new AlkemioGraphTransformer('https://alkem.io', logger, geocodeHandler);
   alkemioAdapter.transformData();
 };
 

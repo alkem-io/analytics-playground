@@ -1,4 +1,3 @@
-import { createLogger } from './util';
 import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
@@ -14,17 +13,18 @@ import { NodeWeight } from './common/node.weight';
 import { EdgeWeight } from './common/edge.weight';
 import { EdgeType } from './common/edge.type';
 import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
+import { Logger } from 'winston';
 
 const TRANSFORMED_DATA_FILE =
   '../display/public/data/transformed-graph-data.json';
 
 export class AlkemioGraphTransformer {
-  logger;
+  logger: Logger;
   urlBase: string;
   geocodeHandler: GeoapifyGeocodeHandler;
 
-  constructor(urlBase: string, geocodeHandler: GeoapifyGeocodeHandler) {
-    this.logger = createLogger();
+  constructor(urlBase: string, logger: Logger, geocodeHandler: GeoapifyGeocodeHandler) {
+    this.logger = logger;
     this.urlBase = urlBase;
     this.geocodeHandler = geocodeHandler;
   }

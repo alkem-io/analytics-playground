@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
-import { GeoConicProjection, Simulation } from 'd3';
+import { GeoConicProjection, Simulation, Selection, ZoomBehavior } from 'd3';
 
 export class TransformationHandler {
   defaultScale = 1;
   defaultTranslation: [number, number] = [0, 0];
   scaleFactor = 0.1;
 
-
+  svg: Selection<any, any, any, any>;
   width: number;
   height: number;
 
@@ -18,7 +18,10 @@ export class TransformationHandler {
   projection: GeoConicProjection;
   geoGenerator: any;
 
-  constructor(width: number, height: number, group: any) {
+  zoomHandler: ZoomBehavior<any, any>;
+
+  constructor(svg: any, width: number, height: number, group: any) {
+    this.svg = svg;
     this.width = width;
     this.height = height;
 
@@ -28,6 +31,17 @@ export class TransformationHandler {
     this.translate = this.defaultTranslation;
     this.projection = d3.geoAlbers().rotate([-30, 0, 0]);
     this.geoGenerator = d3.geoPath().projection(this.projection);
+
+    this.zoomHandler = d3.zoom()
+      .extent([[0, 0], [this.width, this.height]])
+      .scaleExtent([1, 10])
+      .on("zoom", ({ transform }) => {
+        this.scale = transform.k;
+        this.translate = [transform.x, transform.y];
+        this.transformDisplay(0);
+      });
+    this.svg.call(this.zoomHandler);
+
   }
 
   projectionExtent(geoJson: any) {
@@ -41,21 +55,9 @@ export class TransformationHandler {
     ];
   }
 
-  registerPanningDragListener(targetElement: any) {
-    const listener = d3.drag();
-    listener.on('drag', (event: any) => {
-      this.translate = [
-        this.translate[0] + event.dx * this.scale,
-        this.translate[1] + event.dy * this.scale,
-      ];
-      this.transformDisplay(0);
-    });
-    targetElement.call(listener);
-  }
 
   // dataNodes typically obtained by doing a d3.selectAll().data();
-  zoomFit(maxNodeRadius: number, dataNodes: any) {
-    const buffer = maxNodeRadius;
+  zoomFit(dataNodes: any, buffer: number = 0) {
     const maxX = d3.max(dataNodes, (d: any) => d.x + buffer - 0) || 0;
     const minX = d3.min(dataNodes, (d: any) => d.x - buffer) || 0;
     const rangeX = maxX - minX;
@@ -64,16 +66,26 @@ export class TransformationHandler {
     const minY = d3.min(dataNodes, (d: any) => d.y - buffer - 0) || 0;
     const rangeY = maxY - minY;
 
-    this.scale = 1 / Math.max(rangeX / this.width, rangeY / this.height);
-    this.translate = [-minX * this.scale, -minY * this.scale];
+    const scale = 1 / Math.max(rangeX / this.width, rangeY / this.height);
+    const translate = [-minX * scale, -minY * scale];
+    var transform = d3.zoomIdentity
+      .translate(translate[0], translate[1])
+      .scale(scale);
+    this.svg.call(this.zoomHandler.transform, transform);
   }
 
   zoomPlus() {
-    this.scale = this.scale * (1 + this.scaleFactor);
+    var transform = d3.zoomIdentity
+      .translate(this.translate[0] - (this.width / 2) * this.scaleFactor, this.translate[1] - (this.height / 2) * this.scaleFactor)
+      .scale(this.scale * (1 + this.scaleFactor));
+    this.svg.call(this.zoomHandler.transform, transform);
   }
 
   zoomMin() {
-    this.scale = this.scale * (1 - this.scaleFactor);
+    var transform = d3.zoomIdentity
+      .translate(this.translate[0] + (this.width / 2) * this.scaleFactor, this.translate[1] + (this.height / 2) * this.scaleFactor)
+      .scale(this.scale * (1 - this.scaleFactor));
+    this.svg.call(this.zoomHandler.transform, transform);
   }
 
   transformDisplay(duration: number) {
@@ -82,16 +94,4 @@ export class TransformationHandler {
       .duration(duration)
       .attr('transform', `translate(${this.translate})scale(${this.scale})`);
   }
-
-  private handleZoom = (e: any) => {
-    this.group.attr('transform', e.transform);
-    console.log(`zoom called: ${e}`);
-  };
-
-  private registerZoom() {
-    const zoom = d3.zoom();
-    zoom.on('zoom', this.handleZoom);
-    this.group.call(zoom);
-  }
-
 }

@@ -64,6 +64,7 @@ export class GraphVizualization {
 
     this.graphGroup = this.svg.append('g').attr('id', 'graph');
     this.transformationHandler = new TransformationHandler(
+      this.svg,
       this.width,
       this.height,
       this.graphGroup
@@ -96,7 +97,6 @@ export class GraphVizualization {
     this.displayMap();
     this.displayLinks();
     this.displayNodes();
-    this.transformationHandler.registerPanningDragListener(this.svg);
 
     this.simulate();
     this.hovercard.registerHovercard(
@@ -186,7 +186,7 @@ export class GraphVizualization {
   }
 
   zoomFit() {
-    this.transformationHandler.zoomFit(this.maxNodeRadius, this.node.data());
+    this.transformationHandler.zoomFit(this.node.data(), this.maxNodeRadius);
     this.transformationHandler.transformDisplay(750);
   }
 

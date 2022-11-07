@@ -1,13 +1,14 @@
 {
-  "name": "@alkemio/analytics-playground-display",
+  "name": "@alkemio/visualizations",
   "version": "0.1.0",
-  "description": "Alkemio Analtics display tool, enabling users to explore analytics + visualizations of data",
+  "description": "Alkemio Visualizations, enabling users to explore analytics + visualizations of data",
   "author": "Alkemio Foundation",
   "repository": {
     "type": "git",
     "url": "https://github.com/alkem-io/alkemio-playground.git"
   },
   "type": "module",
+  "private": false,
   "license": "EUPL-1.2",
   "scripts": {
     "clean": "rimraf dist",

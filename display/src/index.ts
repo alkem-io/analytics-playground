@@ -26,7 +26,7 @@ const lifecycleSelectionControl = d3.select('#lifecycle-selector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
-const hubID = ''; //"c4111e11-edad-48f6-916f-20e11f468848";
+const hubID = '14706c25-dc6e-447a-a623-2d19b391985a'; //"c4111e11-edad-48f6-916f-20e11f468848";
 graphShowContributors.attr('checked', 'checked');
 const graphDataProvider = new GraphDataProvider(true, hubID);
 await graphDataProvider.loadData(graphDataFileLocation);
@@ -105,7 +105,7 @@ graphFixHubsToLocation.on('click', (e: any) => {
 
 
 /// Lifecycle ///////////////////////
-let lifecycleVizualization: LifecycleVisualization;
+/*let lifecycleVizualization: LifecycleVisualization;
 async function displayLifecycleWithData() {
   if (lifecycleVizualization) lifecycleVizualization.removeDisplayedLifecycle();
   const lifecycleData = new LifecycleDataProvider();
@@ -125,3 +125,4 @@ displayLifecycleWithData();
 lifecycleSelectionControl.on('change', function () {
   displayLifecycleWithData();
 });
+*/

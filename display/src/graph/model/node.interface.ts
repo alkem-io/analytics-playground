@@ -11,4 +11,10 @@ export interface INode {
   avatar: string;
   lon: number;
   lat: number;
+
+  x?: number;
+  y?: number;
+  vx?: number;
+  vy?: number;
+
 }

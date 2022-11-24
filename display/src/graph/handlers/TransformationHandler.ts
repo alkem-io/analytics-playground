@@ -18,7 +18,7 @@ export class TransformationHandler {
   projection: GeoConicProjection;
   geoGenerator: any;
 
-  zoomHandler: ZoomBehavior<any, any>;
+  zoomBehavior: ZoomBehavior<any, any>;
 
   constructor(svg: any, width: number, height: number, group: any) {
     this.svg = svg;
@@ -32,15 +32,15 @@ export class TransformationHandler {
     this.projection = d3.geoAlbers().rotate([-30, 0, 0]);
     this.geoGenerator = d3.geoPath().projection(this.projection);
 
-    this.zoomHandler = d3.zoom()
+    this.zoomBehavior = d3.zoom()
       .extent([[0, 0], [this.width, this.height]])
-      .scaleExtent([1, 10])
+      .scaleExtent([0.1, 30])
       .on("zoom", ({ transform }) => {
         this.scale = transform.k;
         this.translate = [transform.x, transform.y];
         this.transformDisplay(0);
       });
-    this.svg.call(this.zoomHandler);
+    this.svg.call(this.zoomBehavior);
 
   }
 
@@ -71,21 +71,21 @@ export class TransformationHandler {
     var transform = d3.zoomIdentity
       .translate(translate[0], translate[1])
       .scale(scale);
-    this.svg.call(this.zoomHandler.transform, transform);
+    this.svg.call(this.zoomBehavior.transform, transform);
   }
 
   zoomPlus() {
     var transform = d3.zoomIdentity
       .translate(this.translate[0] - (this.width / 2) * this.scaleFactor, this.translate[1] - (this.height / 2) * this.scaleFactor)
       .scale(this.scale * (1 + this.scaleFactor));
-    this.svg.call(this.zoomHandler.transform, transform);
+    this.svg.call(this.zoomBehavior.transform, transform);
   }
 
   zoomMin() {
     var transform = d3.zoomIdentity
       .translate(this.translate[0] + (this.width / 2) * this.scaleFactor, this.translate[1] + (this.height / 2) * this.scaleFactor)
       .scale(this.scale * (1 - this.scaleFactor));
-    this.svg.call(this.zoomHandler.transform, transform);
+    this.svg.call(this.zoomBehavior.transform, transform);
   }
 
   transformDisplay(duration: number) {

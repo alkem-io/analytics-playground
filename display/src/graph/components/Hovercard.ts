@@ -5,7 +5,8 @@ import { TransformationHandler } from "../handlers/TransformationHandler";
  * Whenever Node is hovered over, as defined in different file, hovercard is moved to that location and updated with relevant text.
  * Note: need to have two levels of translation: one for zooming and one for the card position when displaying
  * relative to the node being explored
- */ export class Hovercard {
+ */
+export class Hovercard {
   svg: any;
   svgX: number;
   svgY: number;

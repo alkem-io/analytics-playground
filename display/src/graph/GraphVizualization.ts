@@ -7,6 +7,9 @@ import { TransformationHandler } from './handlers/TransformationHandler';
 import { MapDataProvider } from './MapDataProvider';
 import { MapLocationHandler } from './handlers/MapLocationHandler';
 import { HovercardHtml } from './components/HovercardHtml';
+import { NodeStyle } from './styles/NodeStyle';
+import { INode } from './model/node.interface';
+import { IEdge } from './model/edge.interface';
 
 export class GraphVizualization {
   defMarkerArrowName = 'markerArrow';
@@ -15,23 +18,22 @@ export class GraphVizualization {
 
   graphDataProvider: GraphDataProvider;
   mapDataProvider: MapDataProvider;
-  svg: Selection<any, any, any, any>;
-  graphGroup: Selection<any, any, any, any>;
-  nodesGroup: any;
+  svg: Selection<any, INode, any, any>;
+  graphGroup: Selection<any, INode, any, any>;
+  nodesGroup: Selection<any, INode, any, any> | undefined;
   linksGroup: any;
   mapGroup: any;
 
   map: any;
 
-  node: any; // Selection<any, any, any, any>;
+  node: Selection<any, INode, any, any> | undefined;
   nodeScale: any; // d3.ScaleLinear<any, any>;
-  nodeColorScale: any;
   width: number;
   height: number;
 
   dragEnabled = true;
 
-  link: any;
+  link: Selection<any, IEdge, any, any> | undefined;
   linkWidthScale: any;
   simulation: Simulation<any, any>;
   lineGenerator = d3.line().curve(d3.curveCardinal);
@@ -116,37 +118,94 @@ export class GraphVizualization {
   }
 
   private displayNodes() {
+
+
     this.nodesGroup = this.graphGroup.append('g').attr('class', 'nodes');
+    console.log(this.nodesGroup);
     this.node = this.nodesGroup
-      .selectAll('circle')
+      .selectAll('g')
       .data(this.graphDataProvider.getFilteredNodes(), (d: any) => d.id)
       .enter()
-      .append('circle')
-      .attr('id', (d: any) => d.id)
-      .attr('r', (d: any) => this.nodeScale(d.weight))
+      .append('g')
+      .attr('id', (d: INode) => { console.log(d); return d.id; })
+      .attr("transform", "translate(0,0)");
+
+
+    this.node.append("rect")
+      .attr('x', (d: INode) => -this.nodeScale(d.weight) / 2)
+      .attr('y', (d: INode) => -this.nodeScale(d.weight) / 2)
+      .attr('width', (d: INode) => this.nodeScale(d.weight))
+      .attr('height', (d: INode) => this.nodeScale(d.weight))
       .attr('stroke', '#251607 ')
-      .attr('stroke-width', (d: any) => {
+      .attr('stroke-width', (d: INode) => {
         if (d.type === 'organization') return 3.0;
         if (d.type === 'hub') return 3.0;
         return 0.5;
       })
-      .style('fill', (d: any) => this.nodeColorScale(d.group))
-      .classed('node', true)
-      .classed('fixed', (d: any) => d.fx !== undefined);
+      console.log(this.node)
+
+    NodeStyle.ApplyStyles(this.node);
+
+     this.node.append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("dy", ".35em")
+      /*.attr("stroke", (d: INode) => {
+        switch(d.type) {
+          case "hub": return styles.hub.color;
+          case "challenge": return styles.challenge.color;
+          case "opportunity": return styles.opportunity.color;
+          case "user": return styles.user.color;
+        }
+        return this.nodeColorScale(d.group)
+      })*/
+      .text(function(d: INode) { return d.displayName; });
+
+   /* this.node.append("foreignobject")
+      .attr('x', (d: Node) => -this.nodeScale(d.weight) / 2)
+      .attr('y', (d: Node) => -this.nodeScale(d.weight) / 2)
+      //.append((d: Node) => '<div style="width:10px; height: 10px; border:1px solid red;">' + d.displayName + '</div>')
+      .attr('innerHTML', (d: Node) => '<div style="width:10px; height: 10px; border:1px solid red;">' + d.displayName + '</div>')
+*/
+
+   // this.node.each(this.adjustRectangles);
+
   }
+
+  /*
+  {
+    "id": "d3d7fd0c-db9c-4e1c-8199-ee3d6c9f9a70",
+    "nameID": "qa-user-4985",
+    "displayName": "qa user",
+    "type": "user",
+    "group": "contributors",
+    "weight": 3,
+    "url": "https://alkem.io/user/qa-user-4985",
+    "avatar": "https://eu.ui-avatars.com/api/?name=qa+user&background=9701c2&color=ffffff",
+    "country": "AX",
+    "city": "Sofia",
+    "lon": -97.20304,
+    "lat": 35.229916,
+    "index": 9,
+    "x": 403.9405539260489,
+    "y": 501.8151954299078,
+    "vy": -0.00034215009998551606,
+    "vx": 0.00022628151726882366
+}*/
+
 
   private displayLinks() {
     this.linksGroup = this.graphGroup.append('g').attr('class', 'links');
     this.link = this.linksGroup
       .selectAll('path')
-      .data(this.graphDataProvider.getFilteredEdges(), (d: any) => d.id)
+      .data(this.graphDataProvider.getFilteredEdges(), (d: IEdge) => `edge-${d.index}`)
       .enter()
       .append('path')
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
       //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
-      .attr('stroke-width', (d: any) => this.linkWidthScale(d.weight))
-      .attr('marker-mid', (d: any) => {
+      .attr('stroke-width', (d: IEdge) => this.linkWidthScale(d.weight))
+      .attr('marker-mid', (d: IEdge) => {
         // Define a marker to indicate what kind of line it is.
         // Currently defined: arrow for subordinate / supervisory relationship.
         switch (d.type) {
@@ -186,6 +245,7 @@ export class GraphVizualization {
   }
 
   zoomFit() {
+    if (!this.node) return;
     this.transformationHandler.zoomFit(this.node.data(), this.maxNodeRadius);
     this.transformationHandler.transformDisplay(750);
   }
@@ -217,7 +277,6 @@ export class GraphVizualization {
       ) || 10;
 
     // Create the scales
-    this.nodeColorScale = d3.scaleOrdinal(d3.schemeCategory10);
     this.nodeScale = d3
       .scaleLinear()
       .domain([0, maxNodeWeight])
@@ -283,10 +342,13 @@ export class GraphVizualization {
   }
 
   private animateNode() {
-    this.node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
+    if (!this.node) return;
+    const center = parseInt(this.node.attr('width')) / 2;
+    this.node.attr('transform', (d: INode) => `translate(${d.x}, ${d.y})`);
   }
 
   private animateLinks() {
+    if (!this.link) return;
     this.link.attr('d', (d: any) => {
       const mid: [number, number] = [
         (d.source.x + d.target.x) / 2,
@@ -338,13 +400,13 @@ export class GraphVizualization {
   //   }
   // }
 
-  // private getHubXValue(d: any) {
+  // private getHubXValue(d: Node) {
   //   const location = this.hubLocations.get(d.id);
   //   const xAnchor = location ? location[0] : this.width / 2;
   //   return xAnchor;
   // }
 
-  // private getHubYValue(d: any) {
+  // private getHubYValue(d: Node) {
   //   const location = this.hubLocations.get(d.id);
   //   const yAnchor = location ? location[1] : this.width / 2;
   //   return yAnchor;

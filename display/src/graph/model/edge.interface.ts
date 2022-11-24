@@ -1,4 +1,5 @@
 export interface IEdge {
+  index?: number;
   sourceID: string;
   targetID: string;
   source: string;

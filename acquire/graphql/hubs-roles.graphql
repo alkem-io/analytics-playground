@@ -1,5 +1,5 @@
 query hubRoles {
-  hubs {
+  hubs(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID
     displayName

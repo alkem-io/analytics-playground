@@ -2,9 +2,9 @@ query organizations {
   organizations {
     id
     nameID
-    displayName
     profile {
-      avatar {
+      displayName
+      avatar: visual(type: AVATAR) {
         uri
       }
       location {

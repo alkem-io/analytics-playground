@@ -1,9 +1,9 @@
 query hubRoles {
-  hubs(filter: { visibilities: [ACTIVE, DEMO] }) {
+  spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID
-    displayName
-    context {
+    profile {
+      displayName
       tagline
       location {
         country
@@ -14,13 +14,13 @@ query hubRoles {
       memberUsers {
         id
       }
-      memberOrganizations {
+      memberOrganizations: organizationsInRole(role: MEMBER) {
         id
       }
-      leadOrganizations {
+      leadOrganizations: organizationsInRole(role: LEAD) {
         id
       }
-      leadUsers {
+      leadUsers: usersInRole(role: LEAD) {
         id
       }
     }

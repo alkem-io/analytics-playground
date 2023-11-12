@@ -1,13 +1,15 @@
 query challengeRoles {
-  hubs(filter: { visibilities: [ACTIVE, DEMO] }) {
+  spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID
-    displayName
+    profile {
+      displayName
+    }
     challenges {
       id
       nameID
-      displayName
-      context {
+      profile {
+        displayName
         tagline
         location {
           country
@@ -18,13 +20,13 @@ query challengeRoles {
         memberUsers {
           id
         }
-        memberOrganizations {
+        memberOrganizations: organizationsInRole(role: MEMBER) {
           id
         }
-        leadOrganizations {
+        leadOrganizations: organizationsInRole(role: LEAD) {
           id
         }
-        leadUsers {
+        leadUsers: usersInRole(role: LEAD) {
           id
         }
       }

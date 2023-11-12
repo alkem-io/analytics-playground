@@ -2,9 +2,9 @@ query users {
   users {
     id
     nameID
-    displayName
     profile {
-      avatar {
+      displayName
+      avatar: visual(type: AVATAR) {
         uri
       }
       location {

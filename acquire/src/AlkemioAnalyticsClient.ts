@@ -42,24 +42,24 @@ export class AlkemioAnalyticsClient {
 
   async logUser() {
     const userResponse = await this.sdkClient.me();
-    this.logger.info(`Authenticated user: '${userResponse.data.me.displayName}'`);
+    this.logger.info(`Authenticated user: '${userResponse.data.me.user?.profile.displayName}'`);
   }
 
-  async acquireHubs() {
-    const hubsResponse = await this.sdkClient.hubRoles();
-    this.logger.info(`Acquired data on Hubs: '${hubsResponse.data.hubs.length}'`);
-    fs.writeFileSync(this.config.files.hubs, JSON.stringify(hubsResponse));
+  async acquireSpaces() {
+    const spacesResponse = await this.sdkClient.spacesRoles();
+    this.logger.info(`Acquired data on Spaces: '${spacesResponse.data.spaces.length}'`);
+    fs.writeFileSync(this.config.files.spaces, JSON.stringify(spacesResponse));
   }
 
   async acquireChallenges() {
     const challengesResponse = await this.sdkClient.challengeRoles();
-    this.logger.info(`Acquired data on Challenges, # Hubs: '${challengesResponse.data.hubs.length}'`);
+    this.logger.info(`Acquired data on Challenges, # Spaces: '${challengesResponse.data.spaces.length}'`);
     fs.writeFileSync(this.config.files.challenges, JSON.stringify(challengesResponse));
   }
 
   async acquireOpportunities() {
     const opportunitiesResponse = await this.sdkClient.opportunityRoles();
-    this.logger.info(`Acquired data on Opportunities, # Hubs: '${opportunitiesResponse.data.hubs.length}'`);
+    this.logger.info(`Acquired data on Opportunities, # Spaces: '${opportunitiesResponse.data.spaces.length}'`);
     fs.writeFileSync(this.config.files.opportunities, JSON.stringify(opportunitiesResponse));
   }
 

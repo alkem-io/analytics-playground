@@ -19,11 +19,11 @@
       "type": "pwa-node"
     },
     {
-      "name": "AcquireHubs",
+      "name": "AcquireSpaces",
       "request": "launch",
       "runtimeArgs": [
         "run",
-        "acquire-hubs"
+        "acquire-spaces"
       ],
       "runtimeExecutable": "npm",
       "skipFiles": [

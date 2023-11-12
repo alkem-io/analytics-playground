@@ -9,7 +9,7 @@ const main = async () => {
   const alkemioAnalyticsClient = new AlkemioAnalyticsClient(config, logger);
   await alkemioAnalyticsClient.initialise();
   await alkemioAnalyticsClient.logUser();
-  await alkemioAnalyticsClient.acquireHubs();
+  await alkemioAnalyticsClient.acquireSpaces();
   await alkemioAnalyticsClient.acquireChallenges();
   await alkemioAnalyticsClient.acquireOpportunities();
 

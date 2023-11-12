@@ -4,7 +4,7 @@ export interface AnalyticsClientConfig extends AlkemioClientConfig  {
   files: {
     users: string,
     organizations: string,
-    hubs: string,
+    spaces: string,
     challenges: string,
     opportunities: string
   }

@@ -7,13 +7,13 @@ export class GraphVizualizationControls {
     this.dataLoader = dataLoader;
   }
 
-  addHubSelectorOptions(container: any) {
+  addSpaceSelectorOptions(container: any) {
     container
-      .selectAll('option.hub-option')
-      .data(this.dataLoader.getRawHubNodes())
+      .selectAll('option.space-option')
+      .data(this.dataLoader.getRawSpaceNodes())
       .join('option')
       .attr('id', (d: any) => d.id)
-      .attr('class', 'hub-option' )
+      .attr('class', 'space-option' )
       .attr('value', (d: any) => d.id)
       .text((d: any) => d.displayName);
   }

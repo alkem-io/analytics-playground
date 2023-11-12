@@ -6,9 +6,9 @@ import { INode } from './model/node.interface';
 
 export class GraphDataProvider {
   data: IData | undefined = undefined;
-  // All the hubs, challenges, opportunities
-  hubNodes: INode[] = [];
-  hubNodesMap: Map<string, INode>;
+  // All the spaces, challenges, opportunities
+  spaceNodes: INode[] = [];
+  spaceNodesMap: Map<string, INode>;
   // All the contributors: users, organizations
   contributorNodes: INode[] = [];
   contributorNodesMap: Map<string, INode>;
@@ -18,12 +18,12 @@ export class GraphDataProvider {
 
   private showContributorsFlag = true;
   private showContributorsWithoutRolesFlag = false;
-  private showSingleHubID = '';
+  private showSingleSpaceID = '';
 
-  constructor(showContributors: boolean, showSingleHubID = '') {
+  constructor(showContributors: boolean, showSingleSpaceID = '') {
     this.contributorNodesMap = new Map();
-    this.hubNodesMap = new Map();
-    this.showSingleHubID = showSingleHubID;
+    this.spaceNodesMap = new Map();
+    this.showSingleSpaceID = showSingleSpaceID;
     this.showContributorsFlag = showContributors;
     this.showContributorsWithoutRolesFlag = false;
   }
@@ -35,11 +35,11 @@ export class GraphDataProvider {
     }
     const nodesGroup = this.data.nodes;
 
-    this.hubNodes = nodesGroup.hubs
+    this.spaceNodes = nodesGroup.spaces
       .concat(nodesGroup.challenges)
       .concat(nodesGroup.opportunities);
-    for (const hubNode of this.hubNodes) {
-      this.hubNodesMap.set(hubNode.id, hubNode);
+    for (const spaceNode of this.spaceNodes) {
+      this.spaceNodesMap.set(spaceNode.id, spaceNode);
     }
 
     this.contributorNodes = nodesGroup.contributors;
@@ -74,8 +74,8 @@ export class GraphDataProvider {
   private validateNodeExists(nodeID: string): boolean {
     const contributorNode = this.contributorNodesMap.get(nodeID);
     if (!contributorNode) {
-      const hubNode = this.hubNodesMap.get(nodeID);
-      if (!hubNode) {
+      const spaceNode = this.spaceNodesMap.get(nodeID);
+      if (!spaceNode) {
         console.log(`Unable to find node with ID: ${nodeID}`);
         return false;
       }
@@ -83,16 +83,16 @@ export class GraphDataProvider {
     return true;
   }
 
-  private showSingleHub(): boolean {
-    if (this.showSingleHubID && this.showSingleHubID.length > 0) return true;
+  private showSingleSpace(): boolean {
+    if (this.showSingleSpaceID && this.showSingleSpaceID.length > 0) return true;
     return false;
   }
 
   private getEdgesFilteredByGroup() {
-    if (!this.showSingleHub()) return this.getRawData().edges;
+    if (!this.showSingleSpace()) return this.getRawData().edges;
 
     return this.getRawData().edges.filter(
-      edge => edge.group === this.showSingleHubID
+      edge => edge.group === this.showSingleSpaceID
     );
   }
 
@@ -119,7 +119,7 @@ export class GraphDataProvider {
     this.filteredEdges = JSON.parse(edgesJson);
 
     console.log(
-      `Single Hub[${this.showSingleHub()}], contributors (${
+      `Single Space[${this.showSingleSpace()}], contributors (${
         this.showContributorsFlag
       }), contributors without roles (${
         this.showContributorsWithoutRolesFlag
@@ -138,13 +138,13 @@ export class GraphDataProvider {
   }
 
   private getChangeNodesFilteredByGroup() {
-    if (!this.showSingleHub()) return this.hubNodes;
+    if (!this.showSingleSpace()) return this.spaceNodes;
 
-    return this.hubNodes.filter(node => node.group === this.showSingleHubID);
+    return this.spaceNodes.filter(node => node.group === this.showSingleSpaceID);
   }
 
-  showSpecificHub(hubID: string) {
-    this.showSingleHubID = hubID;
+  showSpecificSpace(spaceID: string) {
+    this.showSingleSpaceID = spaceID;
     this.updateFilteredData();
   }
 
@@ -158,25 +158,25 @@ export class GraphDataProvider {
     this.updateFilteredData();
   }
 
-  getRawHubNodes() {
+  getRawSpaceNodes() {
     if (!this.data) throw new Error('Not loaded');
-    return this.data.nodes.hubs;
+    return this.data.nodes.spaces;
 
-    // const hubsJson = JSON.stringify(this.data.nodes.hubs);
-    // return this.filteredNodes = JSON.parse(hubsJson);
+    // const spacesJson = JSON.stringify(this.data.nodes.spaces);
+    // return this.filteredNodes = JSON.parse(spacesJson);
   }
 
-  getHubNodes() {
+  getSpaceNodes() {
     if (!this.data) throw new Error('Not loaded');
-    // Only return a single hub if only one selected
-    if (this.showSingleHub()) {
-      const hub = this.data.nodes.hubs.find(
-        hub => (hub.id = this.showSingleHubID)
+    // Only return a single space if only one selected
+    if (this.showSingleSpace()) {
+      const space = this.data.nodes.spaces.find(
+        space => (space.id = this.showSingleSpaceID)
       );
-      if (hub) return [hub];
+      if (space) return [space];
       return [];
     }
-    return this.data.nodes.hubs;
+    return this.data.nodes.spaces;
   }
 
   private getContributorNodesFilteredByRole(): INode[] {
@@ -212,25 +212,25 @@ export class GraphDataProvider {
     return this.data;
   }
 
-  getHubEdges(): IEdge[] {
+  getSpaceEdges(): IEdge[] {
     const result: IEdge[] = [];
-    if (this.showSingleHub()) {
-      // Only one Hub so no Hub-Hub edges to add
+    if (this.showSingleSpace()) {
+      // Only one Space so no Space-Space edges to add
       return result;
     }
-    const hubNodes = this.getRawData().nodes.hubs;
+    const spaceNodes = this.getRawData().nodes.spaces;
 
-    for (let i = 1; i < hubNodes.length; i++) {
-      for (let j = 1; j < hubNodes.length; j++) {
+    for (let i = 1; i < spaceNodes.length; i++) {
+      for (let j = 1; j < spaceNodes.length; j++) {
         if (j > i) {
           const edge = {
-            sourceID: hubNodes[i].id,
-            targetID: hubNodes[j].id,
-            source: hubNodes[i].id,
-            target: hubNodes[j].id,
+            sourceID: spaceNodes[i].id,
+            targetID: spaceNodes[j].id,
+            source: spaceNodes[i].id,
+            target: spaceNodes[j].id,
             weight: 10,
-            type: 'hub-hub',
-            group: 'hubs',
+            type: 'space-space',
+            group: 'spaces',
           };
 
           result.push(edge);

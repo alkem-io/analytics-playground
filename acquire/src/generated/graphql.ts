@@ -8587,10 +8587,10 @@ export type OrganizationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OrganizationsQuery = { organizations: Array<{ id: string, nameID: string, profile: { displayName: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } }> };
 
-export type HubRolesQueryVariables = Exact<{ [key: string]: never; }>;
+export type SpacesRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HubRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined, host?: { id: string } | undefined }> };
+export type SpacesRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined, host?: { id: string } | undefined }> };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -8715,8 +8715,8 @@ export const OrganizationsDocument = gql`
   }
 }
     `;
-export const HubRolesDocument = gql`
-    query hubRoles {
+export const SpacesRolesDocument = gql`
+    query spacesRoles {
   spaces(filter: {visibilities: [ACTIVE, DEMO]}) {
     id
     nameID
@@ -8775,7 +8775,7 @@ const ChallengeRolesDocumentString = print(ChallengeRolesDocument);
 const MeDocumentString = print(MeDocument);
 const OpportunityRolesDocumentString = print(OpportunityRolesDocument);
 const OrganizationsDocumentString = print(OrganizationsDocument);
-const HubRolesDocumentString = print(HubRolesDocument);
+const SpacesRolesDocumentString = print(SpacesRolesDocument);
 const UsersDocumentString = print(UsersDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
@@ -8791,8 +8791,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     organizations(variables?: OrganizationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: OrganizationsQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<OrganizationsQuery>(OrganizationsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'organizations', 'query');
     },
-    hubRoles(variables?: HubRolesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: HubRolesQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<HubRolesQuery>(HubRolesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'hubRoles', 'query');
+    spacesRoles(variables?: SpacesRolesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: SpacesRolesQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<SpacesRolesQuery>(SpacesRolesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'spacesRoles', 'query');
     },
     users(variables?: UsersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: UsersQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<UsersQuery>(UsersDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'users', 'query');

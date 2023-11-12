@@ -4,7 +4,7 @@ import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
 import organizationsData from './acquired-data/organizations.json';
 import usersData from './acquired-data/users.json';
-import hubsData from './acquired-data/hubs-roles.json';
+import spacesData from './acquired-data/spaces-roles.json';
 import challengesData from './acquired-data/challenges-roles.json';
 import opportunitiesData from './acquired-data/opportunities-roles.json';
 import { NodeType } from './common/node.type';
@@ -31,7 +31,7 @@ export class AlkemioGraphTransformer {
 
   async transformData() {
     // create the graph
-    const hubNodes: NodeChallenge[] = [];
+    const spaceNodes: NodeChallenge[] = [];
     const challengeNodes: NodeChallenge[] = [];
     const opportunityNodes: NodeChallenge[] = [];
     const contributorNodes: NodeContributor[] = [];
@@ -90,23 +90,23 @@ export class AlkemioGraphTransformer {
       contributorNodes.push(contributorNode);
     }
 
-    // Process Hubs
-    for (const hub of hubsData.data.hubs) {
-      const location = hub.context.location;
+    // Process Spaces
+    for (const space of spacesData.data.spaces) {
+      const location = space.context.location;
       const locationExact = await this.geocodeHandler.lookup(
         location.city,
         location.country,
-        hub.nameID
+        space.nameID
       );
-      const hubNode = new NodeChallenge(
-        hub.id,
-        hub.nameID,
-        hub.displayName,
-        NodeType.HUB,
-        hub.id,
+      const spaceNode = new NodeChallenge(
+        space.id,
+        space.nameID,
+        space.displayName,
+        NodeType.SPACE,
+        space.id,
         NodeWeight.HUB,
         1,
-        `${this.urlBase}/${hub.nameID}`,
+        `${this.urlBase}/${space.nameID}`,
         '',
         location.country,
         location.city,
@@ -114,40 +114,40 @@ export class AlkemioGraphTransformer {
         locationExact[1]
       );
 
-      hubNodes.push(hubNode);
+      spaceNodes.push(spaceNode);
       this.addCommunityRoleEdges(
-        hub,
-        hub.community.memberUsers,
+        space,
+        space.community.memberUsers,
         edges,
         EdgeType.MEMBER,
-        hub.id
+        space.id
       );
       this.addCommunityRoleEdges(
-        hub,
-        hub.community.memberOrganizations,
+        space,
+        space.community.memberOrganizations,
         edges,
         EdgeType.MEMBER,
-        hub.id
+        space.id
       );
       this.addCommunityRoleEdges(
-        hub,
-        hub.community.leadOrganizations,
+        space,
+        space.community.leadOrganizations,
         edges,
         EdgeType.LEAD,
-        hub.id
+        space.id
       );
       this.addCommunityRoleEdges(
-        hub,
-        hub.community.leadUsers,
+        space,
+        space.community.leadUsers,
         edges,
         EdgeType.LEAD,
-        hub.id
+        space.id
       );
     }
 
     // Process Challenges
-    for (const hub of challengesData.data.hubs) {
-      for (const challenge of hub.challenges) {
+    for (const space of challengesData.data.spaces) {
+      for (const challenge of space.challenges) {
         const location = challenge.context.location;
         const locationExact = await this.geocodeHandler.lookup(
           location.city,
@@ -159,10 +159,10 @@ export class AlkemioGraphTransformer {
           challenge.nameID,
           challenge.displayName,
           NodeType.CHALLENGE,
-          hub.id,
+          space.id,
           NodeWeight.CHALLENGE,
           challenge.community.leadOrganizations.length,
-          `${this.urlBase}/${hub.nameID}/challenges/${challenge.nameID}`,
+          `${this.urlBase}/${space.nameID}/challenges/${challenge.nameID}`,
           '',
           location.country,
           location.city,
@@ -174,10 +174,10 @@ export class AlkemioGraphTransformer {
 
         const edge = new Edge(
           challenge.id,
-          hub.id,
+          space.id,
           EdgeWeight.CHILD,
           EdgeType.CHILD,
-          hub.id
+          space.id
         );
         edges.push(edge);
 
@@ -186,35 +186,35 @@ export class AlkemioGraphTransformer {
           challenge.community.memberUsers,
           edges,
           EdgeType.MEMBER,
-          hub.id
+          space.id
         );
         this.addCommunityRoleEdges(
           challenge,
           challenge.community.memberOrganizations,
           edges,
           EdgeType.MEMBER,
-          hub.id
+          space.id
         );
         this.addCommunityRoleEdges(
           challenge,
           challenge.community.leadOrganizations,
           edges,
           EdgeType.LEAD,
-          hub.id
+          space.id
         );
         this.addCommunityRoleEdges(
           challenge,
           challenge.community.leadUsers,
           edges,
           EdgeType.LEAD,
-          hub.id
+          space.id
         );
       }
     }
 
     // Process Opportunities
-    for (const hub of opportunitiesData.data.hubs) {
-      for (const challenge of hub.challenges) {
+    for (const space of opportunitiesData.data.spaces) {
+      for (const challenge of space.challenges) {
         for (const opportunity of challenge.opportunities) {
           const location = opportunity.context.location;
           const locationExact = await this.geocodeHandler.lookup(
@@ -227,10 +227,10 @@ export class AlkemioGraphTransformer {
             opportunity.nameID,
             opportunity.displayName,
             NodeType.OPPORTUNITY,
-            hub.id,
+            space.id,
             NodeWeight.OPPORTUNITY,
             opportunity.community.leadOrganizations.length,
-            `${this.urlBase}/${hub.nameID}/challenges/${challenge.nameID}/opportunities/${opportunity.nameID}`,
+            `${this.urlBase}/${space.nameID}/challenges/${challenge.nameID}/opportunities/${opportunity.nameID}`,
             '',
             location.country,
             location.city,
@@ -245,7 +245,7 @@ export class AlkemioGraphTransformer {
             challenge.id,
             EdgeWeight.CHILD,
             EdgeType.CHILD,
-            hub.id
+            space.id
           );
           edges.push(edge);
 
@@ -254,28 +254,28 @@ export class AlkemioGraphTransformer {
             opportunity.community.memberUsers,
             edges,
             EdgeType.MEMBER,
-            hub.id
+            space.id
           );
           this.addCommunityRoleEdges(
             opportunity,
             opportunity.community.memberOrganizations,
             edges,
             EdgeType.MEMBER,
-            hub.id
+            space.id
           );
           this.addCommunityRoleEdges(
             opportunity,
             opportunity.community.leadOrganizations,
             edges,
             EdgeType.LEAD,
-            hub.id
+            space.id
           );
           this.addCommunityRoleEdges(
             opportunity,
             opportunity.community.leadUsers,
             edges,
             EdgeType.LEAD,
-            hub.id
+            space.id
           );
         }
       }
@@ -285,7 +285,7 @@ export class AlkemioGraphTransformer {
       edges: edges,
       nodes: {
         contributors: contributorNodes,
-        hubs: hubNodes,
+        spaces: spaceNodes,
         challenges: challengeNodes,
         opportunities: opportunityNodes,
       },

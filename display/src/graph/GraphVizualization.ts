@@ -127,7 +127,7 @@ export class GraphVizualization {
       .attr('stroke', '#251607 ')
       .attr('stroke-width', (d: any) => {
         if (d.type === 'organization') return 3.0;
-        if (d.type === 'hub') return 3.0;
+        if (d.type === 'space') return 3.0;
         return 0.5;
       })
       .style('fill', (d: any) => this.nodeColorScale(d.group))
@@ -240,17 +240,17 @@ export class GraphVizualization {
       .id((d: any) => d.id)
       .distance(150)
       .strength((edge: any) => {
-        // Want hub-challenge-opp links to dominate
+        // Want space-challenge-opp links to dominate
         if (edge.type === 'child') {
           return 0.7;
         }
         return 0.2;
       });
 
-    const hubEdges = this.graphDataProvider.getHubEdges();
+    const spaceEdges = this.graphDataProvider.getSpaceEdges();
 
-    const forceLinkHubs = d3
-      .forceLink(hubEdges)
+    const forceLinkSpaces = d3
+      .forceLink(spaceEdges)
       .id((d: any) => d.id)
       .distance(1500)
       .strength(1);
@@ -258,7 +258,7 @@ export class GraphVizualization {
     const forceCollision = d3
       .forceCollide()
       .radius((d: any) => {
-        if (d.type === 'hub') {
+        if (d.type === 'space') {
           return d.r * 5;
         }
         return d.r;
@@ -270,7 +270,7 @@ export class GraphVizualization {
     this.simulation = d3
       .forceSimulation(filteredNodes)
       .force('link', forceLink)
-      .force('linkHubs', forceLinkHubs)
+      .force('linkSpaces', forceLinkSpaces)
       .force('charge', forceManyBody)
       .force('collision', forceCollision)
       .force('center', d3.forceCenter(this.width / 2, this.height / 2));
@@ -322,30 +322,30 @@ export class GraphVizualization {
     });
   }
 
-  // private calculateFixedHubLocations() {
-  //   const hubNodes = this.dataLoader.getHubNodes();
+  // private calculateFixedSpaceLocations() {
+  //   const spaceNodes = this.dataLoader.getSpaceNodes();
   //   const yOffset = 100;
   //   const xOffset = 100;
   //   let yValue = 0;
   //   let xValue = xOffset;
-  //   const yIncrement = (this.height - yOffset * 2) / hubNodes.length;
+  //   const yIncrement = (this.height - yOffset * 2) / spaceNodes.length;
   //   const xIncrement = (this.width - xOffset * 2) / 3;
-  //   for (const hub of hubNodes) {
+  //   for (const space of spaceNodes) {
   //     yValue = yValue + yIncrement;
-  //     this.hubLocations.set(hub.id, [xValue, yValue]);
+  //     this.spaceLocations.set(space.id, [xValue, yValue]);
   //     xValue = xValue + xIncrement;
   //     if (xValue > this.width) xValue = xOffset;
   //   }
   // }
 
-  // private getHubXValue(d: any) {
-  //   const location = this.hubLocations.get(d.id);
+  // private getSpaceXValue(d: any) {
+  //   const location = this.spaceLocations.get(d.id);
   //   const xAnchor = location ? location[0] : this.width / 2;
   //   return xAnchor;
   // }
 
-  // private getHubYValue(d: any) {
-  //   const location = this.hubLocations.get(d.id);
+  // private getSpaceYValue(d: any) {
+  //   const location = this.spaceLocations.get(d.id);
   //   const yAnchor = location ? location[1] : this.width / 2;
   //   return yAnchor;
   // }

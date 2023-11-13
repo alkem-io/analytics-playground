@@ -18,6 +18,7 @@ query opportunityRoles {
             country
             city
           }
+          url
         }
         community {
           memberUsers {

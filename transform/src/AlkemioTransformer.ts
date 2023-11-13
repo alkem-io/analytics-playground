@@ -20,12 +20,10 @@ const TRANSFORMED_DATA_FILE =
 
 export class AlkemioGraphTransformer {
   logger: Logger;
-  urlBase: string;
   geocodeHandler: GeoapifyGeocodeHandler;
 
-  constructor(urlBase: string, logger: Logger, geocodeHandler: GeoapifyGeocodeHandler) {
+  constructor(logger: Logger, geocodeHandler: GeoapifyGeocodeHandler) {
     this.logger = logger;
-    this.urlBase = urlBase;
     this.geocodeHandler = geocodeHandler;
   }
 
@@ -50,11 +48,11 @@ export class AlkemioGraphTransformer {
       const contributorNode = new NodeContributor(
         contributor.id,
         `${contributor.nameID}`,
-        `${contributor.displayName}`,
+        `${contributor.profile.displayName}`,
         NodeType.USER,
         NodeGroup.CONTRIBUTORS,
         NodeWeight.USER,
-        `${this.urlBase}/user/${contributor.nameID}`,
+        contributor.profile.url,
         contributor.profile.avatar.uri,
         location.country,
         location.city,
@@ -76,11 +74,11 @@ export class AlkemioGraphTransformer {
       const contributorNode = new NodeContributor(
         contributor.id,
         `${contributor.nameID}`,
-        `${contributor.displayName}`,
+        `${contributor.profile.displayName}`,
         NodeType.ORGANIZATION,
         NodeGroup.CONTRIBUTORS,
         NodeWeight.ORGANIZATION,
-        `${this.urlBase}/organization/${contributor.nameID}`,
+        contributor.profile.url,
         contributor.profile.avatar.uri,
         location.country,
         location.city,
@@ -92,7 +90,7 @@ export class AlkemioGraphTransformer {
 
     // Process Spaces
     for (const space of spacesData.data.spaces) {
-      const location = space.context.location;
+      const location = space.profile.location;
       const locationExact = await this.geocodeHandler.lookup(
         location.city,
         location.country,
@@ -101,12 +99,12 @@ export class AlkemioGraphTransformer {
       const spaceNode = new NodeChallenge(
         space.id,
         space.nameID,
-        space.displayName,
+        space.profile.displayName,
         NodeType.SPACE,
         space.id,
         NodeWeight.HUB,
         1,
-        `${this.urlBase}/${space.nameID}`,
+        space.profile.url,
         '',
         location.country,
         location.city,
@@ -148,7 +146,7 @@ export class AlkemioGraphTransformer {
     // Process Challenges
     for (const space of challengesData.data.spaces) {
       for (const challenge of space.challenges) {
-        const location = challenge.context.location;
+        const location = challenge.profile.location;
         const locationExact = await this.geocodeHandler.lookup(
           location.city,
           location.country,
@@ -157,12 +155,12 @@ export class AlkemioGraphTransformer {
         const challengeNode = new NodeChallenge(
           challenge.id,
           challenge.nameID,
-          challenge.displayName,
+          challenge.profile.displayName,
           NodeType.CHALLENGE,
           space.id,
           NodeWeight.CHALLENGE,
           challenge.community.leadOrganizations.length,
-          `${this.urlBase}/${space.nameID}/challenges/${challenge.nameID}`,
+          challenge.profile.url,
           '',
           location.country,
           location.city,
@@ -216,7 +214,7 @@ export class AlkemioGraphTransformer {
     for (const space of opportunitiesData.data.spaces) {
       for (const challenge of space.challenges) {
         for (const opportunity of challenge.opportunities) {
-          const location = opportunity.context.location;
+          const location = opportunity.profile.location;
           const locationExact = await this.geocodeHandler.lookup(
             location.city,
             location.country,
@@ -225,12 +223,12 @@ export class AlkemioGraphTransformer {
           const opportunityNode = new NodeChallenge(
             opportunity.id,
             opportunity.nameID,
-            opportunity.displayName,
+            opportunity.profile.displayName,
             NodeType.OPPORTUNITY,
             space.id,
             NodeWeight.OPPORTUNITY,
             opportunity.community.leadOrganizations.length,
-            `${this.urlBase}/${space.nameID}/challenges/${challenge.nameID}/opportunities/${opportunity.nameID}`,
+            opportunity.profile.url,
             '',
             location.country,
             location.city,

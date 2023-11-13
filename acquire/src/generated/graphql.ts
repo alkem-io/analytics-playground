@@ -8570,32 +8570,32 @@ export type Resolvers<ContextType = any> = {
 export type ChallengeRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChallengeRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string }, challenges?: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined }> | undefined }> };
+export type ChallengeRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string }, challenges?: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, url: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined }> | undefined }> };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { me: { user?: { id: string, nameID: string, email: string, profile: { displayName: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } } | undefined } };
+export type MeQuery = { me: { user?: { id: string, nameID: string, email: string, profile: { displayName: string, url: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } } | undefined } };
 
 export type OpportunityRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OpportunityRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string }, challenges?: Array<{ id: string, nameID: string, opportunities?: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined }> | undefined }> | undefined }> };
+export type OpportunityRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string }, challenges?: Array<{ id: string, nameID: string, opportunities?: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, url: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined }> | undefined }> | undefined }> };
 
 export type OrganizationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OrganizationsQuery = { organizations: Array<{ id: string, nameID: string, profile: { displayName: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } }> };
+export type OrganizationsQuery = { organizations: Array<{ id: string, nameID: string, profile: { displayName: string, url: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } }> };
 
 export type SpacesRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SpacesRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined, host?: { id: string } | undefined }> };
+export type SpacesRolesQuery = { spaces: Array<{ id: string, nameID: string, profile: { displayName: string, tagline: string, url: string, location?: { country: string, city: string } | undefined }, community?: { memberUsers?: Array<{ id: string }> | undefined, memberOrganizations?: Array<{ id: string }> | undefined, leadOrganizations?: Array<{ id: string }> | undefined, leadUsers?: Array<{ id: string }> | undefined } | undefined, host?: { id: string } | undefined }> };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsersQuery = { users: Array<{ id: string, nameID: string, profile: { displayName: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } }> };
+export type UsersQuery = { users: Array<{ id: string, nameID: string, profile: { displayName: string, url: string, avatar?: { uri: string } | undefined, location?: { country: string, city: string } | undefined } }> };
 
 
 export const ChallengeRolesDocument = gql`
@@ -8616,6 +8616,7 @@ export const ChallengeRolesDocument = gql`
           country
           city
         }
+        url
       }
       community {
         memberUsers {
@@ -8650,6 +8651,7 @@ export const MeDocument = gql`
           country
           city
         }
+        url
       }
       email
     }
@@ -8677,6 +8679,7 @@ export const OpportunityRolesDocument = gql`
             country
             city
           }
+          url
         }
         community {
           memberUsers {
@@ -8711,6 +8714,7 @@ export const OrganizationsDocument = gql`
         country
         city
       }
+      url
     }
   }
 }
@@ -8727,6 +8731,7 @@ export const SpacesRolesDocument = gql`
         country
         city
       }
+      url
     }
     community {
       memberUsers {
@@ -8762,6 +8767,7 @@ export const UsersDocument = gql`
         country
         city
       }
+      url
     }
   }
 }

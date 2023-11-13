@@ -4,8 +4,8 @@
       {
         "id": "001df83f-682e-4726-8ae0-a857b19adf33",
         "nameID": "sample-data",
-        "displayName": "SampleData",
         "profile": {
+          "displayName": "SampleData",
           "avatar": {
             "uri": "https://eu.ui-avatars.com/api/?name=TerriAnne+Novak&background=6d0516&color=ffffff"
           },

@@ -9,6 +9,7 @@ query spacesRoles {
         country
         city
       }
+      url
     }
     community {
       memberUsers {

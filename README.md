@@ -21,7 +21,7 @@ There are three steps to running this demonstration:
 * **Acquire**: Interact with the Alkemio graphql api to capture the raw data.
   * The queries that are used to acquire the data from Alkemio server are located under: `acquire/graphql`
   * Create a copy of the `.env.default` file, and save it as `.env`. Edit it to specify the credentials to use to connect.
-  * Run the following scripts: `npm run acquire-hubs` and `npm run acquire-contributors`.
+  * Run the following scripts: `npm run acquire-spaces` and `npm run acquire-contributors`.
   * These scripts will save their output into the following folder: `transform/src/acquired-data`
 * **Transform**: Transform the raw data, combining if needed other data, to create the graph data suitable for usage in D3 display
   * Move to the `transform` folder: `cd transform`
@@ -31,7 +31,7 @@ There are three steps to running this demonstration:
   * Move to the `display` folder: `cd display`
   * Launch the web dev server using `npm start`, a browser will open to `(http://localhost:8080/)[http://localhost:8080]` + display the visualization
 
-The connectivity graph is meant to provide a way of navigating the connectivity within the Hubs and Challenges hosted on Alkemio.
+The connectivity graph is meant to provide a way of navigating the connectivity within the Spaces and Challenges hosted on Alkemio.
 
 ## Connectivity Graph
 A sample image generated using this approach is shown below:

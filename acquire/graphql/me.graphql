@@ -1,17 +1,20 @@
 query me {
   me {
-    id
-    nameID
-    displayName
-    profile {
-      avatar {
-        uri
+    user {
+      id
+      nameID
+      profile {
+        displayName
+        avatar: visual(type: AVATAR) {
+          uri
+        }
+        location {
+          country
+          city
+        }
+        url
       }
-      location {
-        country
-        city
-      }
+      email
     }
-    email
   }
 }

@@ -3,7 +3,7 @@
 export enum NodeType {
   ORGANIZATION = 'organization',
   USER = 'user',
-  HUB = 'hub',
+  SPACE = 'space',
   CHALLENGE = 'challenge',
   OPPORTUNITY = 'opportunity',
 }

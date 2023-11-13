@@ -5,7 +5,7 @@ import { toDirectedGraph } from '@xstate/graph';
 
 export class LifecycleDataProvider {
 
-  selectedHubID = '';
+  selectedSpaceID = '';
   machineDef: any = undefined;
   machine: any;
   graph: any;

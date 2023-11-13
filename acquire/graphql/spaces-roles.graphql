@@ -1,0 +1,32 @@
+query spacesRoles {
+  spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
+    id
+    nameID
+    profile {
+      displayName
+      tagline
+      location {
+        country
+        city
+      }
+      url
+    }
+    community {
+      memberUsers {
+        id
+      }
+      memberOrganizations: organizationsInRole(role: MEMBER) {
+        id
+      }
+      leadOrganizations: organizationsInRole(role: LEAD) {
+        id
+      }
+      leadUsers: usersInRole(role: LEAD) {
+        id
+      }
+    }
+    host {
+      id
+    }
+  }
+}

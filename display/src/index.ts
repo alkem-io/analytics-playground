@@ -8,7 +8,7 @@ import { LifecycleVisualization } from './lifecycle/LifecycleVisualization';
 
 // Make the DOM locations available
 const graphSvg = d3.select('#graph-svg');
-const graphHubSelectionControl = d3.select('#graph-hub-selector');
+const graphSpaceSelectionControl = d3.select('#graph-space-selector');
 const graphShowContributors = d3.select('#graph-checkbox-show-contributors');
 const graphZoomFit = d3.select('#graph-zoom-fit');
 const graphZoomPlus = d3.select('#graph-zoom-plus');
@@ -17,7 +17,7 @@ const graphZoomMin = d3.select('#graph-zoom-min');
 // Graph map related controls
 const graphDisplayMap = d3.select('#graph-display-map');
 const graphFixContributorsToLocation = d3.select('#graph-contributors-to-location');
-const graphFixHubsToLocation = d3.select('#graph-hubs-to-location');
+const graphFixSpacesToLocation = d3.select('#graph-spaces-to-location');
 
 const graphMapSelector = d3.select('#graph-map-selector');
 
@@ -26,9 +26,9 @@ const lifecycleSelectionControl = d3.select('#lifecycle-selector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
-const hubID = ''; //"c4111e11-edad-48f6-916f-20e11f468848";
+const spaceID = ''; //"c4111e11-edad-48f6-916f-20e11f468848";
 graphShowContributors.attr('checked', 'checked');
-const graphDataProvider = new GraphDataProvider(true, hubID);
+const graphDataProvider = new GraphDataProvider(true, spaceID);
 await graphDataProvider.loadData(graphDataFileLocation);
 
 
@@ -48,7 +48,7 @@ graphMapSelector.on('change', function () {
 });
 
 const graphControls = new GraphVizualizationControls(graphDataProvider);
-graphControls.addHubSelectorOptions(graphHubSelectionControl);
+graphControls.addSpaceSelectorOptions(graphSpaceSelectionControl);
 const forceGraph = new GraphVizualization(
   graphSvg,
   graphDataProvider,
@@ -57,10 +57,10 @@ const forceGraph = new GraphVizualization(
   600
 );
 
-graphHubSelectionControl.on('change', function () {
-  const selectedHubOption = d3.select(this);
-  const selectedHubID = selectedHubOption.property('value');
-  graphDataProvider.showSpecificHub(selectedHubID);
+graphSpaceSelectionControl.on('change', function () {
+  const selectedSpaceOption = d3.select(this);
+  const selectedSpaceID = selectedSpaceOption.property('value');
+  graphDataProvider.showSpecificSpace(selectedSpaceID);
   forceGraph.refreshDisplayedGraph();
 });
 
@@ -96,8 +96,8 @@ graphFixContributorsToLocation.on('click', (e: any) => {
   forceGraph.fixLocationToMap('user');
   forceGraph.fixLocationToMap('organization');
 });
-graphFixHubsToLocation.on('click', (e: any) => {
-  forceGraph.fixLocationToMap('hub');
+graphFixSpacesToLocation.on('click', (e: any) => {
+  forceGraph.fixLocationToMap('space');
   forceGraph.fixLocationToMap('challenge');
   forceGraph.fixLocationToMap('opportunity');
 });

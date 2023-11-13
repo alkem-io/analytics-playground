@@ -1,33 +1,36 @@
 query opportunityRoles {
-  hubs(filter: { visibilities: [ACTIVE, DEMO] }) {
+  spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID
-    displayName
+    profile {
+      displayName
+    }
     challenges {
       id
       nameID
       opportunities {
         id
         nameID
-        displayName
-        context {
+        profile {
+          displayName
           tagline
           location {
             country
             city
           }
+          url
         }
         community {
           memberUsers {
             id
           }
-          memberOrganizations {
+          memberOrganizations: organizationsInRole(role: MEMBER) {
             id
           }
-          leadOrganizations {
+          leadOrganizations: organizationsInRole(role: LEAD) {
             id
           }
-          leadUsers {
+          leadUsers: usersInRole(role: LEAD) {
             id
           }
         }

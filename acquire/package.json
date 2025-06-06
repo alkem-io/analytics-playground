@@ -32,11 +32,16 @@
     "@graphql-codegen/typescript-graphql-request": "^6.3.0",
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@types/graphql-upload": "^17.0.0",
+    "@types/node": "^20.13.1",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "dotenv": "^16.5.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
+  },
+   "engines": {
+    "node": ">=20.9.0",
+    "npm": ">=10"
   }
 }

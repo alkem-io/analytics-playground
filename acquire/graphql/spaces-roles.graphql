@@ -1,4 +1,4 @@
-query spacesRoles {
+query spaceRolesL0 {
   spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID

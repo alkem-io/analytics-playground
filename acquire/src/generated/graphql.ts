@@ -18381,11 +18381,11 @@ export type OrganizationsQuery = {
   }>;
 };
 
-export type SpacesRolesQueryVariables = SchemaTypes.Exact<{
+export type SpaceRolesL0QueryVariables = SchemaTypes.Exact<{
   [key: string]: never;
 }>;
 
-export type SpacesRolesQuery = {
+export type SpaceRolesL0Query = {
   spaces: Array<{
     id: string;
     nameID: string;
@@ -18413,11 +18413,11 @@ export type SpacesRolesQuery = {
   }>;
 };
 
-export type ChallengeRolesQueryVariables = SchemaTypes.Exact<{
+export type SpaceRolesL1QueryVariables = SchemaTypes.Exact<{
   [key: string]: never;
 }>;
 
-export type ChallengeRolesQuery = {
+export type SpaceRolesL1Query = {
   spaces: Array<{
     id: string;
     nameID: string;
@@ -18447,11 +18447,11 @@ export type ChallengeRolesQuery = {
   }>;
 };
 
-export type OpportunityRolesQueryVariables = SchemaTypes.Exact<{
+export type SpaceRolesL2QueryVariables = SchemaTypes.Exact<{
   [key: string]: never;
 }>;
 
-export type OpportunityRolesQuery = {
+export type SpaceRolesL2Query = {
   spaces: Array<{
     id: string;
     nameID: string;
@@ -18543,8 +18543,8 @@ export const OrganizationsDocument = gql`
     }
   }
 `;
-export const SpacesRolesDocument = gql`
-  query spacesRoles {
+export const SpaceRolesL0Document = gql`
+  query spaceRolesL0 {
     spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
       id
       nameID
@@ -18583,8 +18583,8 @@ export const SpacesRolesDocument = gql`
     }
   }
 `;
-export const ChallengeRolesDocument = gql`
-  query challengeRoles {
+export const SpaceRolesL1Document = gql`
+  query spaceRolesL1 {
     spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
       id
       nameID
@@ -18627,8 +18627,8 @@ export const ChallengeRolesDocument = gql`
     }
   }
 `;
-export const OpportunityRolesDocument = gql`
-  query opportunityRoles {
+export const SpaceRolesL2Document = gql`
+  query spaceRolesL2 {
     spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
       id
       nameID
@@ -18710,9 +18710,9 @@ const defaultWrapper: SdkFunctionWrapper = (
 ) => action();
 const MeDocumentString = print(MeDocument);
 const OrganizationsDocumentString = print(OrganizationsDocument);
-const SpacesRolesDocumentString = print(SpacesRolesDocument);
-const ChallengeRolesDocumentString = print(ChallengeRolesDocument);
-const OpportunityRolesDocumentString = print(OpportunityRolesDocument);
+const SpaceRolesL0DocumentString = print(SpaceRolesL0Document);
+const SpaceRolesL1DocumentString = print(SpaceRolesL1Document);
+const SpaceRolesL2DocumentString = print(SpaceRolesL2Document);
 const UsersDocumentString = print(UsersDocument);
 export function getSdk(
   client: GraphQLClient,
@@ -18762,11 +18762,11 @@ export function getSdk(
         variables,
       );
     },
-    spacesRoles(
-      variables?: SchemaTypes.SpacesRolesQueryVariables,
+    spaceRolesL0(
+      variables?: SchemaTypes.SpaceRolesL0QueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
     ): Promise<{
-      data: SchemaTypes.SpacesRolesQuery;
+      data: SchemaTypes.SpaceRolesL0Query;
       errors?: GraphQLError[];
       extensions?: any;
       headers: Headers;
@@ -18774,21 +18774,21 @@ export function getSdk(
     }> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.rawRequest<SchemaTypes.SpacesRolesQuery>(
-            SpacesRolesDocumentString,
+          client.rawRequest<SchemaTypes.SpaceRolesL0Query>(
+            SpaceRolesL0DocumentString,
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
-        "spacesRoles",
+        "spaceRolesL0",
         "query",
         variables,
       );
     },
-    challengeRoles(
-      variables?: SchemaTypes.ChallengeRolesQueryVariables,
+    spaceRolesL1(
+      variables?: SchemaTypes.SpaceRolesL1QueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
     ): Promise<{
-      data: SchemaTypes.ChallengeRolesQuery;
+      data: SchemaTypes.SpaceRolesL1Query;
       errors?: GraphQLError[];
       extensions?: any;
       headers: Headers;
@@ -18796,21 +18796,21 @@ export function getSdk(
     }> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.rawRequest<SchemaTypes.ChallengeRolesQuery>(
-            ChallengeRolesDocumentString,
+          client.rawRequest<SchemaTypes.SpaceRolesL1Query>(
+            SpaceRolesL1DocumentString,
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
-        "challengeRoles",
+        "spaceRolesL1",
         "query",
         variables,
       );
     },
-    opportunityRoles(
-      variables?: SchemaTypes.OpportunityRolesQueryVariables,
+    spaceRolesL2(
+      variables?: SchemaTypes.SpaceRolesL2QueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
     ): Promise<{
-      data: SchemaTypes.OpportunityRolesQuery;
+      data: SchemaTypes.SpaceRolesL2Query;
       errors?: GraphQLError[];
       extensions?: any;
       headers: Headers;
@@ -18818,12 +18818,12 @@ export function getSdk(
     }> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.rawRequest<SchemaTypes.OpportunityRolesQuery>(
-            OpportunityRolesDocumentString,
+          client.rawRequest<SchemaTypes.SpaceRolesL2Query>(
+            SpaceRolesL2DocumentString,
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
-        "opportunityRoles",
+        "spaceRolesL2",
         "query",
         variables,
       );

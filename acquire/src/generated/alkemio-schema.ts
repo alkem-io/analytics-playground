@@ -17704,9 +17704,9 @@ export type OrganizationsQuery = {
   }>;
 };
 
-export type SpacesRolesQueryVariables = Exact<{ [key: string]: never }>;
+export type SpaceRolesL0QueryVariables = Exact<{ [key: string]: never }>;
 
-export type SpacesRolesQuery = {
+export type SpaceRolesL0Query = {
   spaces: Array<{
     id: string;
     nameID: string;
@@ -17734,9 +17734,9 @@ export type SpacesRolesQuery = {
   }>;
 };
 
-export type ChallengeRolesQueryVariables = Exact<{ [key: string]: never }>;
+export type SpaceRolesL1QueryVariables = Exact<{ [key: string]: never }>;
 
-export type ChallengeRolesQuery = {
+export type SpaceRolesL1Query = {
   spaces: Array<{
     id: string;
     nameID: string;
@@ -17766,9 +17766,9 @@ export type ChallengeRolesQuery = {
   }>;
 };
 
-export type OpportunityRolesQueryVariables = Exact<{ [key: string]: never }>;
+export type SpaceRolesL2QueryVariables = Exact<{ [key: string]: never }>;
 
-export type OpportunityRolesQuery = {
+export type SpaceRolesL2Query = {
   spaces: Array<{
     id: string;
     nameID: string;

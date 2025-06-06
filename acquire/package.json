@@ -14,7 +14,7 @@
     "start": "tbd",
     "codegen": "graphql-codegen --config codegen.ts",
     "validate-connection": "tsx src/validate-connection.ts",
-    "acquire-spaces": "tsx src/acquire-spaces-challenges-opportunities.ts",
+    "acquire-spaces": "tsx src/acquire-spaces-level-0-1-2.ts",
     "acquire-contributors": "tsx src/acquire-contributors.ts"
   },
   "dependencies": {

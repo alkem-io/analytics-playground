@@ -1,4 +1,4 @@
-query opportunityRoles {
+query spaceRolesL2 {
   spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID

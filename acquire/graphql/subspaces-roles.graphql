@@ -1,4 +1,4 @@
-query challengeRoles {
+query spaceRolesL1 {
   spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID

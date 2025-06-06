@@ -20,9 +20,9 @@ export const createConfigUsingEnvVars = (): AnalyticsClientConfig => {
     files: {
       users: `${acquiredDataFolder}/users.json`,
       organizations: `${acquiredDataFolder}/organizations.json`,
-      spaces: `${acquiredDataFolder}/spaces-roles.json`,
+      spacesL0: `${acquiredDataFolder}/spaces-roles.json`,
       challenges: `${acquiredDataFolder}/challenges-roles.json`,
-      opportunities: `${acquiredDataFolder}/opportunities-roles.json`
+      spacesL2: `${acquiredDataFolder}/opportunities-roles.json`
     }
   };
 };

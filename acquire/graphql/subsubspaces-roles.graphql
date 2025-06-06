@@ -1,0 +1,46 @@
+query opportunityRoles {
+  spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
+    id
+    nameID
+    about {
+      profile {
+        displayName
+      }
+    }
+    subspaces {
+      id
+      nameID
+      subspaces {
+        id
+        nameID
+        about {
+          profile {
+            displayName
+            tagline
+            location {
+              country
+              city
+            }
+            url
+          }
+        }
+        community {
+          roleSet {
+            memberUsers: usersInRole(role: MEMBER) {
+              id
+            }
+            memberOrganizations: organizationsInRole(role: MEMBER) {
+              id
+            }
+            leadOrganizations: organizationsInRole(role: LEAD) {
+              id
+            }
+            leadUsers: usersInRole(role: LEAD) {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+}

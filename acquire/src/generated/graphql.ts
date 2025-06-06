@@ -116,10 +116,7 @@ export type AccountSubscription = {
   name: LicensingCredentialBasedCredentialType;
 };
 
-export enum AccountType {
-  Organization = "ORGANIZATION",
-  User = "USER",
-}
+export type AccountType = "ORGANIZATION" | "USER";
 
 export type ActivityCreatedSubscriptionInput = {
   /** The collaboration on which to subscribe for new activity */
@@ -135,19 +132,18 @@ export type ActivityCreatedSubscriptionResult = {
   activity: ActivityLogEntry;
 };
 
-export enum ActivityEventType {
-  CalendarEventCreated = "CALENDAR_EVENT_CREATED",
-  CalloutLinkCreated = "CALLOUT_LINK_CREATED",
-  CalloutPostComment = "CALLOUT_POST_COMMENT",
-  CalloutPostCreated = "CALLOUT_POST_CREATED",
-  CalloutPublished = "CALLOUT_PUBLISHED",
-  CalloutWhiteboardContentModified = "CALLOUT_WHITEBOARD_CONTENT_MODIFIED",
-  CalloutWhiteboardCreated = "CALLOUT_WHITEBOARD_CREATED",
-  DiscussionComment = "DISCUSSION_COMMENT",
-  MemberJoined = "MEMBER_JOINED",
-  SubspaceCreated = "SUBSPACE_CREATED",
-  UpdateSent = "UPDATE_SENT",
-}
+export type ActivityEventType =
+  | "CALENDAR_EVENT_CREATED"
+  | "CALLOUT_LINK_CREATED"
+  | "CALLOUT_POST_COMMENT"
+  | "CALLOUT_POST_CREATED"
+  | "CALLOUT_PUBLISHED"
+  | "CALLOUT_WHITEBOARD_CONTENT_MODIFIED"
+  | "CALLOUT_WHITEBOARD_CREATED"
+  | "DISCUSSION_COMMENT"
+  | "MEMBER_JOINED"
+  | "SUBSPACE_CREATED"
+  | "UPDATE_SENT";
 
 export type ActivityFeed = {
   activityFeed: Array<ActivityLogEntry>;
@@ -183,11 +179,7 @@ export type ActivityFeedQueryArgs = {
   types?: InputMaybe<Array<ActivityEventType>>;
 };
 
-export enum ActivityFeedRoles {
-  Admin = "ADMIN",
-  Lead = "LEAD",
-  Member = "MEMBER",
-}
+export type ActivityFeedRoles = "ADMIN" | "LEAD" | "MEMBER";
 
 export type ActivityLogEntry = {
   /** Indicates if this Activity happened on a child Collaboration. Child results can be included via the "includeChild" parameter. */
@@ -516,13 +508,12 @@ export type AgentBeginVerifiedCredentialRequestOutput = {
   qrCodeImg: Scalars["String"]["output"];
 };
 
-export enum AgentType {
-  Account = "ACCOUNT",
-  Organization = "ORGANIZATION",
-  Space = "SPACE",
-  User = "USER",
-  VirtualContributor = "VIRTUAL_CONTRIBUTOR",
-}
+export type AgentType =
+  | "ACCOUNT"
+  | "ORGANIZATION"
+  | "SPACE"
+  | "USER"
+  | "VIRTUAL_CONTRIBUTOR";
 
 export type AiPersona = {
   /** The ID of the AiPersonaService. */
@@ -553,32 +544,27 @@ export type AiPersona = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum AiPersonaBodyOfKnowledgeType {
-  AlkemioKnowledgeBase = "ALKEMIO_KNOWLEDGE_BASE",
-  AlkemioSpace = "ALKEMIO_SPACE",
-  None = "NONE",
-  Other = "OTHER",
-  Website = "WEBSITE",
-}
+export type AiPersonaBodyOfKnowledgeType =
+  | "ALKEMIO_KNOWLEDGE_BASE"
+  | "ALKEMIO_SPACE"
+  | "NONE"
+  | "OTHER"
+  | "WEBSITE";
 
-export enum AiPersonaDataAccessMode {
-  None = "NONE",
-  SpaceProfile = "SPACE_PROFILE",
-  SpaceProfileAndContents = "SPACE_PROFILE_AND_CONTENTS",
-}
+export type AiPersonaDataAccessMode =
+  | "NONE"
+  | "SPACE_PROFILE"
+  | "SPACE_PROFILE_AND_CONTENTS";
 
-export enum AiPersonaEngine {
-  CommunityManager = "COMMUNITY_MANAGER",
-  Expert = "EXPERT",
-  GenericOpenai = "GENERIC_OPENAI",
-  Guidance = "GUIDANCE",
-  LibraFlow = "LIBRA_FLOW",
-  OpenaiAssistant = "OPENAI_ASSISTANT",
-}
+export type AiPersonaEngine =
+  | "COMMUNITY_MANAGER"
+  | "EXPERT"
+  | "GENERIC_OPENAI"
+  | "GUIDANCE"
+  | "LIBRA_FLOW"
+  | "OPENAI_ASSISTANT";
 
-export enum AiPersonaInteractionMode {
-  DiscussionTagging = "DISCUSSION_TAGGING",
-}
+export type AiPersonaInteractionMode = "DISCUSSION_TAGGING";
 
 export type AiPersonaModelCard = {
   /** The model card information about the AI Engine behind the AI Persona. */
@@ -589,22 +575,20 @@ export type AiPersonaModelCard = {
   spaceUsage?: Maybe<Array<ModelCardSpaceUsageResult>>;
 };
 
-export enum AiPersonaModelCardEntry {
-  SpaceCapabilities = "SPACE_CAPABILITIES",
-  SpaceDataAccess = "SPACE_DATA_ACCESS",
-  SpaceRoleRequired = "SPACE_ROLE_REQUIRED",
-}
+export type AiPersonaModelCardEntry =
+  | "SPACE_CAPABILITIES"
+  | "SPACE_DATA_ACCESS"
+  | "SPACE_ROLE_REQUIRED";
 
-export enum AiPersonaModelCardEntryFlagName {
-  SpaceCapabilityCommunityManagement = "SPACE_CAPABILITY_COMMUNITY_MANAGEMENT",
-  SpaceCapabilityCreateContent = "SPACE_CAPABILITY_CREATE_CONTENT",
-  SpaceCapabilityTagging = "SPACE_CAPABILITY_TAGGING",
-  SpaceDataAccessAbout = "SPACE_DATA_ACCESS_ABOUT",
-  SpaceDataAccessContent = "SPACE_DATA_ACCESS_CONTENT",
-  SpaceDataAccessSubspaces = "SPACE_DATA_ACCESS_SUBSPACES",
-  SpaceRoleAdmin = "SPACE_ROLE_ADMIN",
-  SpaceRoleMember = "SPACE_ROLE_MEMBER",
-}
+export type AiPersonaModelCardEntryFlagName =
+  | "SPACE_CAPABILITY_COMMUNITY_MANAGEMENT"
+  | "SPACE_CAPABILITY_CREATE_CONTENT"
+  | "SPACE_CAPABILITY_TAGGING"
+  | "SPACE_DATA_ACCESS_ABOUT"
+  | "SPACE_DATA_ACCESS_CONTENT"
+  | "SPACE_DATA_ACCESS_SUBSPACES"
+  | "SPACE_ROLE_ADMIN"
+  | "SPACE_ROLE_MEMBER";
 
 export type AiPersonaModelCardFlag = {
   /** Is this model card entry flag enabled? */
@@ -757,12 +741,7 @@ export type AuthenticationProviderConfig = {
 
 export type AuthenticationProviderConfigUnion = OryConfig;
 
-export enum AuthenticationType {
-  Email = "EMAIL",
-  Linkedin = "LINKEDIN",
-  Microsoft = "MICROSOFT",
-  Unknown = "UNKNOWN",
-}
+export type AuthenticationType = "EMAIL" | "LINKEDIN" | "MICROSOFT" | "UNKNOWN";
 
 export type Authorization = {
   /** The date at which the entity was created. */
@@ -785,30 +764,29 @@ export type Authorization = {
   >;
 };
 
-export enum AuthorizationCredential {
-  AccountAdmin = "ACCOUNT_ADMIN",
-  BetaTester = "BETA_TESTER",
-  GlobalAdmin = "GLOBAL_ADMIN",
-  GlobalAnonymous = "GLOBAL_ANONYMOUS",
-  GlobalCommunityRead = "GLOBAL_COMMUNITY_READ",
-  GlobalLicenseManager = "GLOBAL_LICENSE_MANAGER",
-  GlobalPlatformManager = "GLOBAL_PLATFORM_MANAGER",
-  GlobalRegistered = "GLOBAL_REGISTERED",
-  GlobalSpacesReader = "GLOBAL_SPACES_READER",
-  GlobalSupport = "GLOBAL_SUPPORT",
-  GlobalSupportManager = "GLOBAL_SUPPORT_MANAGER",
-  OrganizationAdmin = "ORGANIZATION_ADMIN",
-  OrganizationAssociate = "ORGANIZATION_ASSOCIATE",
-  OrganizationOwner = "ORGANIZATION_OWNER",
-  SpaceAdmin = "SPACE_ADMIN",
-  SpaceLead = "SPACE_LEAD",
-  SpaceMember = "SPACE_MEMBER",
-  SpaceMemberInvitee = "SPACE_MEMBER_INVITEE",
-  SpaceSubspaceAdmin = "SPACE_SUBSPACE_ADMIN",
-  UserGroupMember = "USER_GROUP_MEMBER",
-  UserSelfManagement = "USER_SELF_MANAGEMENT",
-  VcCampaign = "VC_CAMPAIGN",
-}
+export type AuthorizationCredential =
+  | "ACCOUNT_ADMIN"
+  | "BETA_TESTER"
+  | "GLOBAL_ADMIN"
+  | "GLOBAL_ANONYMOUS"
+  | "GLOBAL_COMMUNITY_READ"
+  | "GLOBAL_LICENSE_MANAGER"
+  | "GLOBAL_PLATFORM_MANAGER"
+  | "GLOBAL_REGISTERED"
+  | "GLOBAL_SPACES_READER"
+  | "GLOBAL_SUPPORT"
+  | "GLOBAL_SUPPORT_MANAGER"
+  | "ORGANIZATION_ADMIN"
+  | "ORGANIZATION_ASSOCIATE"
+  | "ORGANIZATION_OWNER"
+  | "SPACE_ADMIN"
+  | "SPACE_LEAD"
+  | "SPACE_MEMBER"
+  | "SPACE_MEMBER_INVITEE"
+  | "SPACE_SUBSPACE_ADMIN"
+  | "USER_GROUP_MEMBER"
+  | "USER_SELF_MANAGEMENT"
+  | "VC_CAMPAIGN";
 
 export type AuthorizationPolicyRuleCredential = {
   cascade: Scalars["Boolean"]["output"];
@@ -829,115 +807,113 @@ export type AuthorizationPolicyRuleVerifiedCredential = {
   grantedPrivileges: Array<AuthorizationPrivilege>;
 };
 
-export enum AuthorizationPolicyType {
-  Account = "ACCOUNT",
-  Agent = "AGENT",
-  AiPersona = "AI_PERSONA",
-  AiPersonaService = "AI_PERSONA_SERVICE",
-  AiServer = "AI_SERVER",
-  Application = "APPLICATION",
-  Calendar = "CALENDAR",
-  CalendarEvent = "CALENDAR_EVENT",
-  Callout = "CALLOUT",
-  CalloutsSet = "CALLOUTS_SET",
-  CalloutContribution = "CALLOUT_CONTRIBUTION",
-  CalloutFraming = "CALLOUT_FRAMING",
-  Classification = "CLASSIFICATION",
-  Collaboration = "COLLABORATION",
-  Communication = "COMMUNICATION",
-  Community = "COMMUNITY",
-  CommunityGuidelines = "COMMUNITY_GUIDELINES",
-  Discussion = "DISCUSSION",
-  Document = "DOCUMENT",
-  Forum = "FORUM",
-  InnovationFlow = "INNOVATION_FLOW",
-  InnovationHub = "INNOVATION_HUB",
-  InnovationPack = "INNOVATION_PACK",
-  Invitation = "INVITATION",
-  InMemory = "IN_MEMORY",
-  KnowledgeBase = "KNOWLEDGE_BASE",
-  Library = "LIBRARY",
-  License = "LICENSE",
-  LicensePolicy = "LICENSE_POLICY",
-  Licensing = "LICENSING",
-  Link = "LINK",
-  Organization = "ORGANIZATION",
-  OrganizationVerification = "ORGANIZATION_VERIFICATION",
-  Platform = "PLATFORM",
-  Post = "POST",
-  Preference = "PREFERENCE",
-  PreferenceSet = "PREFERENCE_SET",
-  Profile = "PROFILE",
-  Reference = "REFERENCE",
-  RoleSet = "ROLE_SET",
-  Room = "ROOM",
-  Space = "SPACE",
-  SpaceAbout = "SPACE_ABOUT",
-  StorageAggregator = "STORAGE_AGGREGATOR",
-  StorageBucket = "STORAGE_BUCKET",
-  Tagset = "TAGSET",
-  Template = "TEMPLATE",
-  TemplatesManager = "TEMPLATES_MANAGER",
-  TemplatesSet = "TEMPLATES_SET",
-  TemplateContentSpace = "TEMPLATE_CONTENT_SPACE",
-  TemplateDefault = "TEMPLATE_DEFAULT",
-  Timeline = "TIMELINE",
-  Unknown = "UNKNOWN",
-  User = "USER",
-  UserGroup = "USER_GROUP",
-  VirtualContributor = "VIRTUAL_CONTRIBUTOR",
-  Visual = "VISUAL",
-  Whiteboard = "WHITEBOARD",
-}
+export type AuthorizationPolicyType =
+  | "ACCOUNT"
+  | "AGENT"
+  | "AI_PERSONA"
+  | "AI_PERSONA_SERVICE"
+  | "AI_SERVER"
+  | "APPLICATION"
+  | "CALENDAR"
+  | "CALENDAR_EVENT"
+  | "CALLOUT"
+  | "CALLOUTS_SET"
+  | "CALLOUT_CONTRIBUTION"
+  | "CALLOUT_FRAMING"
+  | "CLASSIFICATION"
+  | "COLLABORATION"
+  | "COMMUNICATION"
+  | "COMMUNITY"
+  | "COMMUNITY_GUIDELINES"
+  | "DISCUSSION"
+  | "DOCUMENT"
+  | "FORUM"
+  | "INNOVATION_FLOW"
+  | "INNOVATION_HUB"
+  | "INNOVATION_PACK"
+  | "INVITATION"
+  | "IN_MEMORY"
+  | "KNOWLEDGE_BASE"
+  | "LIBRARY"
+  | "LICENSE"
+  | "LICENSE_POLICY"
+  | "LICENSING"
+  | "LINK"
+  | "ORGANIZATION"
+  | "ORGANIZATION_VERIFICATION"
+  | "PLATFORM"
+  | "POST"
+  | "PREFERENCE"
+  | "PREFERENCE_SET"
+  | "PROFILE"
+  | "REFERENCE"
+  | "ROLE_SET"
+  | "ROOM"
+  | "SPACE"
+  | "SPACE_ABOUT"
+  | "STORAGE_AGGREGATOR"
+  | "STORAGE_BUCKET"
+  | "TAGSET"
+  | "TEMPLATE"
+  | "TEMPLATES_MANAGER"
+  | "TEMPLATES_SET"
+  | "TEMPLATE_CONTENT_SPACE"
+  | "TEMPLATE_DEFAULT"
+  | "TIMELINE"
+  | "UNKNOWN"
+  | "USER"
+  | "USER_GROUP"
+  | "VIRTUAL_CONTRIBUTOR"
+  | "VISUAL"
+  | "WHITEBOARD";
 
-export enum AuthorizationPrivilege {
-  AccessInteractiveGuidance = "ACCESS_INTERACTIVE_GUIDANCE",
-  AccountLicenseManage = "ACCOUNT_LICENSE_MANAGE",
-  AuthorizationReset = "AUTHORIZATION_RESET",
-  CommunityAssignVcFromAccount = "COMMUNITY_ASSIGN_VC_FROM_ACCOUNT",
-  Contribute = "CONTRIBUTE",
-  Create = "CREATE",
-  CreateCallout = "CREATE_CALLOUT",
-  CreateDiscussion = "CREATE_DISCUSSION",
-  CreateInnovationHub = "CREATE_INNOVATION_HUB",
-  CreateInnovationPack = "CREATE_INNOVATION_PACK",
-  CreateMessage = "CREATE_MESSAGE",
-  CreateMessageReaction = "CREATE_MESSAGE_REACTION",
-  CreateMessageReply = "CREATE_MESSAGE_REPLY",
-  CreateOrganization = "CREATE_ORGANIZATION",
-  CreatePost = "CREATE_POST",
-  CreateSpace = "CREATE_SPACE",
-  CreateSubspace = "CREATE_SUBSPACE",
-  CreateVirtualContributor = "CREATE_VIRTUAL_CONTRIBUTOR",
-  CreateWhiteboard = "CREATE_WHITEBOARD",
-  Delete = "DELETE",
-  FileDelete = "FILE_DELETE",
-  FileUpload = "FILE_UPLOAD",
-  Grant = "GRANT",
-  GrantGlobalAdmins = "GRANT_GLOBAL_ADMINS",
-  LicenseReset = "LICENSE_RESET",
-  MoveContribution = "MOVE_CONTRIBUTION",
-  MovePost = "MOVE_POST",
-  PlatformAdmin = "PLATFORM_ADMIN",
-  PlatformSettingsAdmin = "PLATFORM_SETTINGS_ADMIN",
-  Read = "READ",
-  ReadAbout = "READ_ABOUT",
-  ReadLicense = "READ_LICENSE",
-  ReadUsers = "READ_USERS",
-  ReadUserPii = "READ_USER_PII",
-  ReadUserSettings = "READ_USER_SETTINGS",
-  RolesetEntryRoleApply = "ROLESET_ENTRY_ROLE_APPLY",
-  RolesetEntryRoleAssign = "ROLESET_ENTRY_ROLE_ASSIGN",
-  RolesetEntryRoleInvite = "ROLESET_ENTRY_ROLE_INVITE",
-  RolesetEntryRoleInviteAccept = "ROLESET_ENTRY_ROLE_INVITE_ACCEPT",
-  RolesetEntryRoleJoin = "ROLESET_ENTRY_ROLE_JOIN",
-  TransferResourceAccept = "TRANSFER_RESOURCE_ACCEPT",
-  TransferResourceOffer = "TRANSFER_RESOURCE_OFFER",
-  Update = "UPDATE",
-  UpdateCalloutPublisher = "UPDATE_CALLOUT_PUBLISHER",
-  UpdateContent = "UPDATE_CONTENT",
-  UpdateInnovationFlow = "UPDATE_INNOVATION_FLOW",
-}
+export type AuthorizationPrivilege =
+  | "ACCESS_INTERACTIVE_GUIDANCE"
+  | "ACCOUNT_LICENSE_MANAGE"
+  | "AUTHORIZATION_RESET"
+  | "COMMUNITY_ASSIGN_VC_FROM_ACCOUNT"
+  | "CONTRIBUTE"
+  | "CREATE"
+  | "CREATE_CALLOUT"
+  | "CREATE_DISCUSSION"
+  | "CREATE_INNOVATION_HUB"
+  | "CREATE_INNOVATION_PACK"
+  | "CREATE_MESSAGE"
+  | "CREATE_MESSAGE_REACTION"
+  | "CREATE_MESSAGE_REPLY"
+  | "CREATE_ORGANIZATION"
+  | "CREATE_POST"
+  | "CREATE_SPACE"
+  | "CREATE_SUBSPACE"
+  | "CREATE_VIRTUAL_CONTRIBUTOR"
+  | "CREATE_WHITEBOARD"
+  | "DELETE"
+  | "FILE_DELETE"
+  | "FILE_UPLOAD"
+  | "GRANT"
+  | "GRANT_GLOBAL_ADMINS"
+  | "LICENSE_RESET"
+  | "MOVE_CONTRIBUTION"
+  | "MOVE_POST"
+  | "PLATFORM_ADMIN"
+  | "PLATFORM_SETTINGS_ADMIN"
+  | "READ"
+  | "READ_ABOUT"
+  | "READ_LICENSE"
+  | "READ_USERS"
+  | "READ_USER_PII"
+  | "READ_USER_SETTINGS"
+  | "ROLESET_ENTRY_ROLE_APPLY"
+  | "ROLESET_ENTRY_ROLE_ASSIGN"
+  | "ROLESET_ENTRY_ROLE_INVITE"
+  | "ROLESET_ENTRY_ROLE_INVITE_ACCEPT"
+  | "ROLESET_ENTRY_ROLE_JOIN"
+  | "TRANSFER_RESOURCE_ACCEPT"
+  | "TRANSFER_RESOURCE_OFFER"
+  | "UPDATE"
+  | "UPDATE_CALLOUT_PUBLISHER"
+  | "UPDATE_CONTENT"
+  | "UPDATE_INNOVATION_FLOW";
 
 export type Calendar = {
   /** The authorization rules for the entity */
@@ -993,12 +969,7 @@ export type CalendarEvent = {
   wholeDay: Scalars["Boolean"]["output"];
 };
 
-export enum CalendarEventType {
-  Event = "EVENT",
-  Milestone = "MILESTONE",
-  Other = "OTHER",
-  Training = "TRAINING",
-}
+export type CalendarEventType = "EVENT" | "MILESTONE" | "OTHER" | "TRAINING";
 
 export type Callout = {
   /** The activity for this Callout. */
@@ -1096,11 +1067,7 @@ export type CalloutContributionPolicy = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum CalloutContributionType {
-  Link = "LINK",
-  Post = "POST",
-  Whiteboard = "WHITEBOARD",
-}
+export type CalloutContributionType = "LINK" | "POST" | "WHITEBOARD";
 
 export type CalloutFraming = {
   /** The authorization rules for the entity */
@@ -1128,24 +1095,16 @@ export type CalloutPostCreated = {
   sortOrder: Scalars["Float"]["output"];
 };
 
-export enum CalloutState {
-  Archived = "ARCHIVED",
-  Closed = "CLOSED",
-  Open = "OPEN",
-}
+export type CalloutState = "ARCHIVED" | "CLOSED" | "OPEN";
 
-export enum CalloutType {
-  LinkCollection = "LINK_COLLECTION",
-  Post = "POST",
-  PostCollection = "POST_COLLECTION",
-  Whiteboard = "WHITEBOARD",
-  WhiteboardCollection = "WHITEBOARD_COLLECTION",
-}
+export type CalloutType =
+  | "LINK_COLLECTION"
+  | "POST"
+  | "POST_COLLECTION"
+  | "WHITEBOARD"
+  | "WHITEBOARD_COLLECTION";
 
-export enum CalloutVisibility {
-  Draft = "DRAFT",
-  Published = "PUBLISHED",
-}
+export type CalloutVisibility = "DRAFT" | "PUBLISHED";
 
 export type CalloutsSet = {
   /** The authorization rules for the entity */
@@ -1173,10 +1132,7 @@ export type CalloutsSetCalloutsArgs = {
   types?: InputMaybe<Array<CalloutType>>;
 };
 
-export enum CalloutsSetType {
-  Collaboration = "COLLABORATION",
-  KnowledgeBase = "KNOWLEDGE_BASE",
-}
+export type CalloutsSetType = "COLLABORATION" | "KNOWLEDGE_BASE";
 
 export type ChatGuidanceAnswerRelevanceInput = {
   /** The answer id. */
@@ -1433,11 +1389,7 @@ export type CommunityInvitationResult = {
   spacePendingMembershipInfo: SpacePendingMembershipInfo;
 };
 
-export enum CommunityMembershipPolicy {
-  Applications = "APPLICATIONS",
-  Invitations = "INVITATIONS",
-  Open = "OPEN",
-}
+export type CommunityMembershipPolicy = "APPLICATIONS" | "INVITATIONS" | "OPEN";
 
 export type CommunityMembershipResult = {
   /** The child community memberships */
@@ -1448,12 +1400,11 @@ export type CommunityMembershipResult = {
   space: Space;
 };
 
-export enum CommunityMembershipStatus {
-  ApplicationPending = "APPLICATION_PENDING",
-  InvitationPending = "INVITATION_PENDING",
-  Member = "MEMBER",
-  NotMember = "NOT_MEMBER",
-}
+export type CommunityMembershipStatus =
+  | "APPLICATION_PENDING"
+  | "INVITATION_PENDING"
+  | "MEMBER"
+  | "NOT_MEMBER";
 
 export type Config = {
   /** Elastic APM (RUM & performance monitoring) related configuration. */
@@ -1478,11 +1429,7 @@ export type ConfigDefaultVisualTypeConstraintsArgs = {
   type: VisualType;
 };
 
-export enum ContentUpdatePolicy {
-  Admins = "ADMINS",
-  Contributors = "CONTRIBUTORS",
-  Owner = "OWNER",
-}
+export type ContentUpdatePolicy = "ADMINS" | "CONTRIBUTORS" | "OWNER";
 
 export type Contributor = {
   /** The Agent for the Contributor. */
@@ -2139,38 +2086,37 @@ export type CredentialMetadataOutput = {
   uniqueType: Scalars["String"]["output"];
 };
 
-export enum CredentialType {
-  AccountAdmin = "ACCOUNT_ADMIN",
-  AccountLicensePlus = "ACCOUNT_LICENSE_PLUS",
-  BetaTester = "BETA_TESTER",
-  GlobalAdmin = "GLOBAL_ADMIN",
-  GlobalAnonymous = "GLOBAL_ANONYMOUS",
-  GlobalCommunityRead = "GLOBAL_COMMUNITY_READ",
-  GlobalLicenseManager = "GLOBAL_LICENSE_MANAGER",
-  GlobalPlatformManager = "GLOBAL_PLATFORM_MANAGER",
-  GlobalRegistered = "GLOBAL_REGISTERED",
-  GlobalSpacesReader = "GLOBAL_SPACES_READER",
-  GlobalSupport = "GLOBAL_SUPPORT",
-  GlobalSupportManager = "GLOBAL_SUPPORT_MANAGER",
-  OrganizationAdmin = "ORGANIZATION_ADMIN",
-  OrganizationAssociate = "ORGANIZATION_ASSOCIATE",
-  OrganizationOwner = "ORGANIZATION_OWNER",
-  SpaceAdmin = "SPACE_ADMIN",
-  SpaceFeatureSaveAsTemplate = "SPACE_FEATURE_SAVE_AS_TEMPLATE",
-  SpaceFeatureVirtualContributors = "SPACE_FEATURE_VIRTUAL_CONTRIBUTORS",
-  SpaceFeatureWhiteboardMultiUser = "SPACE_FEATURE_WHITEBOARD_MULTI_USER",
-  SpaceLead = "SPACE_LEAD",
-  SpaceLicenseEnterprise = "SPACE_LICENSE_ENTERPRISE",
-  SpaceLicenseFree = "SPACE_LICENSE_FREE",
-  SpaceLicensePlus = "SPACE_LICENSE_PLUS",
-  SpaceLicensePremium = "SPACE_LICENSE_PREMIUM",
-  SpaceMember = "SPACE_MEMBER",
-  SpaceMemberInvitee = "SPACE_MEMBER_INVITEE",
-  SpaceSubspaceAdmin = "SPACE_SUBSPACE_ADMIN",
-  UserGroupMember = "USER_GROUP_MEMBER",
-  UserSelfManagement = "USER_SELF_MANAGEMENT",
-  VcCampaign = "VC_CAMPAIGN",
-}
+export type CredentialType =
+  | "ACCOUNT_ADMIN"
+  | "ACCOUNT_LICENSE_PLUS"
+  | "BETA_TESTER"
+  | "GLOBAL_ADMIN"
+  | "GLOBAL_ANONYMOUS"
+  | "GLOBAL_COMMUNITY_READ"
+  | "GLOBAL_LICENSE_MANAGER"
+  | "GLOBAL_PLATFORM_MANAGER"
+  | "GLOBAL_REGISTERED"
+  | "GLOBAL_SPACES_READER"
+  | "GLOBAL_SUPPORT"
+  | "GLOBAL_SUPPORT_MANAGER"
+  | "ORGANIZATION_ADMIN"
+  | "ORGANIZATION_ASSOCIATE"
+  | "ORGANIZATION_OWNER"
+  | "SPACE_ADMIN"
+  | "SPACE_FEATURE_SAVE_AS_TEMPLATE"
+  | "SPACE_FEATURE_VIRTUAL_CONTRIBUTORS"
+  | "SPACE_FEATURE_WHITEBOARD_MULTI_USER"
+  | "SPACE_LEAD"
+  | "SPACE_LICENSE_ENTERPRISE"
+  | "SPACE_LICENSE_FREE"
+  | "SPACE_LICENSE_PLUS"
+  | "SPACE_LICENSE_PREMIUM"
+  | "SPACE_MEMBER"
+  | "SPACE_MEMBER_INVITEE"
+  | "SPACE_SUBSPACE_ADMIN"
+  | "USER_GROUP_MEMBER"
+  | "USER_SELF_MANAGEMENT"
+  | "VC_CAMPAIGN";
 
 export type DeleteAiPersonaServiceInput = {
   ID: Scalars["UUID"]["input"];
@@ -2304,10 +2250,9 @@ export type DiscussionsInput = {
   orderBy?: InputMaybe<DiscussionsOrderBy>;
 };
 
-export enum DiscussionsOrderBy {
-  DiscussionsCreatedateAsc = "DISCUSSIONS_CREATEDATE_ASC",
-  DiscussionsCreatedateDesc = "DISCUSSIONS_CREATEDATE_DESC",
-}
+export type DiscussionsOrderBy =
+  | "DISCUSSIONS_CREATEDATE_ASC"
+  | "DISCUSSIONS_CREATEDATE_DESC";
 
 export type Document = {
   /** The authorization rules for the entity */
@@ -2425,20 +2370,15 @@ export type ForumCreateDiscussionInput = {
   tags?: InputMaybe<Array<Scalars["String"]["input"]>>;
 };
 
-export enum ForumDiscussionCategory {
-  ChallengeCentric = "CHALLENGE_CENTRIC",
-  CommunityBuilding = "COMMUNITY_BUILDING",
-  Help = "HELP",
-  Other = "OTHER",
-  PlatformFunctionalities = "PLATFORM_FUNCTIONALITIES",
-  Releases = "RELEASES",
-}
+export type ForumDiscussionCategory =
+  | "CHALLENGE_CENTRIC"
+  | "COMMUNITY_BUILDING"
+  | "HELP"
+  | "OTHER"
+  | "PLATFORM_FUNCTIONALITIES"
+  | "RELEASES";
 
-export enum ForumDiscussionPrivacy {
-  Authenticated = "AUTHENTICATED",
-  Author = "AUTHOR",
-  Public = "PUBLIC",
-}
+export type ForumDiscussionPrivacy = "AUTHENTICATED" | "AUTHOR" | "PUBLIC";
 
 export type Geo = {
   /** Endpoint where geo information is consumed from. */
@@ -2524,11 +2464,7 @@ export type InAppNotificationCalloutPublished = InAppNotification & {
 };
 
 /** Which category (role) is this notification targeted to. */
-export enum InAppNotificationCategory {
-  Admin = "ADMIN",
-  Member = "MEMBER",
-  Self = "SELF",
-}
+export type InAppNotificationCategory = "ADMIN" | "MEMBER" | "SELF";
 
 export type InAppNotificationCommunityNewMember = InAppNotification & {
   /** The Contributor that joined. */
@@ -2552,11 +2488,7 @@ export type InAppNotificationCommunityNewMember = InAppNotification & {
   type: NotificationEventType;
 };
 
-export enum InAppNotificationState {
-  Archived = "ARCHIVED",
-  Read = "READ",
-  Unread = "UNREAD",
-}
+export type InAppNotificationState = "ARCHIVED" | "READ" | "UNREAD";
 
 export type InAppNotificationUserMentioned = InAppNotification & {
   /** Which category (role) is this notification targeted to. */
@@ -2645,10 +2577,7 @@ export type InnovationHub = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum InnovationHubType {
-  List = "LIST",
-  Visibility = "VISIBILITY",
-}
+export type InnovationHubType = "LIST" | "VISIBILITY";
 
 export type InnovationPack = {
   /** The authorization rules for the entity */
@@ -2680,11 +2609,10 @@ export type InnovationPacksInput = {
   orderBy?: InputMaybe<InnovationPacksOrderBy>;
 };
 
-export enum InnovationPacksOrderBy {
-  NumberOfTemplatesAsc = "NUMBER_OF_TEMPLATES_ASC",
-  NumberOfTemplatesDesc = "NUMBER_OF_TEMPLATES_DESC",
-  Random = "RANDOM",
-}
+export type InnovationPacksOrderBy =
+  | "NUMBER_OF_TEMPLATES_ASC"
+  | "NUMBER_OF_TEMPLATES_DESC"
+  | "RANDOM";
 
 export type InputCreatorQueryResults = {
   /** Create an input based on the provided Callout */
@@ -2860,25 +2788,21 @@ export type LicenseEntitlement = {
   usage: Scalars["Float"]["output"];
 };
 
-export enum LicenseEntitlementDataType {
-  Flag = "FLAG",
-  Limit = "LIMIT",
-}
+export type LicenseEntitlementDataType = "FLAG" | "LIMIT";
 
-export enum LicenseEntitlementType {
-  AccountInnovationHub = "ACCOUNT_INNOVATION_HUB",
-  AccountInnovationPack = "ACCOUNT_INNOVATION_PACK",
-  AccountSpaceFree = "ACCOUNT_SPACE_FREE",
-  AccountSpacePlus = "ACCOUNT_SPACE_PLUS",
-  AccountSpacePremium = "ACCOUNT_SPACE_PREMIUM",
-  AccountVirtualContributor = "ACCOUNT_VIRTUAL_CONTRIBUTOR",
-  SpaceFlagSaveAsTemplate = "SPACE_FLAG_SAVE_AS_TEMPLATE",
-  SpaceFlagVirtualContributorAccess = "SPACE_FLAG_VIRTUAL_CONTRIBUTOR_ACCESS",
-  SpaceFlagWhiteboardMultiUser = "SPACE_FLAG_WHITEBOARD_MULTI_USER",
-  SpaceFree = "SPACE_FREE",
-  SpacePlus = "SPACE_PLUS",
-  SpacePremium = "SPACE_PREMIUM",
-}
+export type LicenseEntitlementType =
+  | "ACCOUNT_INNOVATION_HUB"
+  | "ACCOUNT_INNOVATION_PACK"
+  | "ACCOUNT_SPACE_FREE"
+  | "ACCOUNT_SPACE_PLUS"
+  | "ACCOUNT_SPACE_PREMIUM"
+  | "ACCOUNT_VIRTUAL_CONTRIBUTOR"
+  | "SPACE_FLAG_SAVE_AS_TEMPLATE"
+  | "SPACE_FLAG_VIRTUAL_CONTRIBUTOR_ACCESS"
+  | "SPACE_FLAG_WHITEBOARD_MULTI_USER"
+  | "SPACE_FREE"
+  | "SPACE_PLUS"
+  | "SPACE_PREMIUM";
 
 export type LicensePlan = {
   /** Assign this plan to all new Organization accounts */
@@ -2926,14 +2850,13 @@ export type LicensePolicy = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum LicenseType {
-  Account = "ACCOUNT",
-  Collaboration = "COLLABORATION",
-  Roleset = "ROLESET",
-  Space = "SPACE",
-  TemplateContentSpace = "TEMPLATE_CONTENT_SPACE",
-  Whiteboard = "WHITEBOARD",
-}
+export type LicenseType =
+  | "ACCOUNT"
+  | "COLLABORATION"
+  | "ROLESET"
+  | "SPACE"
+  | "TEMPLATE_CONTENT_SPACE"
+  | "WHITEBOARD";
 
 export type Licensing = {
   /** The authorization rules for the entity */
@@ -2950,23 +2873,21 @@ export type Licensing = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum LicensingCredentialBasedCredentialType {
-  AccountLicensePlus = "ACCOUNT_LICENSE_PLUS",
-  SpaceFeatureSaveAsTemplate = "SPACE_FEATURE_SAVE_AS_TEMPLATE",
-  SpaceFeatureVirtualContributors = "SPACE_FEATURE_VIRTUAL_CONTRIBUTORS",
-  SpaceFeatureWhiteboardMultiUser = "SPACE_FEATURE_WHITEBOARD_MULTI_USER",
-  SpaceLicenseEnterprise = "SPACE_LICENSE_ENTERPRISE",
-  SpaceLicenseFree = "SPACE_LICENSE_FREE",
-  SpaceLicensePlus = "SPACE_LICENSE_PLUS",
-  SpaceLicensePremium = "SPACE_LICENSE_PREMIUM",
-}
+export type LicensingCredentialBasedCredentialType =
+  | "ACCOUNT_LICENSE_PLUS"
+  | "SPACE_FEATURE_SAVE_AS_TEMPLATE"
+  | "SPACE_FEATURE_VIRTUAL_CONTRIBUTORS"
+  | "SPACE_FEATURE_WHITEBOARD_MULTI_USER"
+  | "SPACE_LICENSE_ENTERPRISE"
+  | "SPACE_LICENSE_FREE"
+  | "SPACE_LICENSE_PLUS"
+  | "SPACE_LICENSE_PREMIUM";
 
-export enum LicensingCredentialBasedPlanType {
-  AccountFeatureFlag = "ACCOUNT_FEATURE_FLAG",
-  AccountPlan = "ACCOUNT_PLAN",
-  SpaceFeatureFlag = "SPACE_FEATURE_FLAG",
-  SpacePlan = "SPACE_PLAN",
-}
+export type LicensingCredentialBasedPlanType =
+  | "ACCOUNT_FEATURE_FLAG"
+  | "ACCOUNT_PLAN"
+  | "SPACE_FEATURE_FLAG"
+  | "SPACE_PLAN";
 
 export type LicensingCredentialBasedPolicyCredentialRule = {
   credentialType: LicensingCredentialBasedCredentialType;
@@ -3530,32 +3451,31 @@ export type MigrateEmbeddings = {
   success: Scalars["Boolean"]["output"];
 };
 
-export enum MimeType {
-  Avif = "AVIF",
-  Bmp = "BMP",
-  Doc = "DOC",
-  Docx = "DOCX",
-  Gif = "GIF",
-  Jpeg = "JPEG",
-  Jpg = "JPG",
-  Odp = "ODP",
-  Ods = "ODS",
-  Odt = "ODT",
-  Pdf = "PDF",
-  Png = "PNG",
-  Potm = "POTM",
-  Potx = "POTX",
-  Ppsm = "PPSM",
-  Ppsx = "PPSX",
-  Ppt = "PPT",
-  Pptm = "PPTM",
-  Pptx = "PPTX",
-  Svg = "SVG",
-  Webp = "WEBP",
-  Xls = "XLS",
-  Xlsx = "XLSX",
-  Xpng = "XPNG",
-}
+export type MimeType =
+  | "AVIF"
+  | "BMP"
+  | "DOC"
+  | "DOCX"
+  | "GIF"
+  | "JPEG"
+  | "JPG"
+  | "ODP"
+  | "ODS"
+  | "ODT"
+  | "PDF"
+  | "PNG"
+  | "POTM"
+  | "POTX"
+  | "PPSM"
+  | "PPSX"
+  | "PPT"
+  | "PPTM"
+  | "PPTX"
+  | "SVG"
+  | "WEBP"
+  | "XLS"
+  | "XLSX"
+  | "XPNG";
 
 export type ModelCardAiEngineResult = {
   /** Access to detailed information on the underlying models specifications */
@@ -4561,11 +4481,7 @@ export type MutationUploadImageOnVisualArgs = {
   uploadData: VisualUploadImageInput;
 };
 
-export enum MutationType {
-  Create = "CREATE",
-  Delete = "DELETE",
-  Update = "UPDATE",
-}
+export type MutationType = "CREATE" | "DELETE" | "UPDATE";
 
 export type MySpaceResults = {
   latestActivity?: Maybe<ActivityLogEntry>;
@@ -4584,61 +4500,59 @@ export type Nvp = {
 };
 
 /** The type of the notification */
-export enum NotificationEventType {
-  CollaborationCalloutPublished = "COLLABORATION_CALLOUT_PUBLISHED",
-  CollaborationDiscussionComment = "COLLABORATION_DISCUSSION_COMMENT",
-  CollaborationPostComment = "COLLABORATION_POST_COMMENT",
-  CollaborationPostCreated = "COLLABORATION_POST_CREATED",
-  CollaborationWhiteboardCreated = "COLLABORATION_WHITEBOARD_CREATED",
-  CommentReply = "COMMENT_REPLY",
-  CommunicationCommentSent = "COMMUNICATION_COMMENT_SENT",
-  CommunicationCommunityMessage = "COMMUNICATION_COMMUNITY_MESSAGE",
-  CommunicationOrganizationMention = "COMMUNICATION_ORGANIZATION_MENTION",
-  CommunicationOrganizationMessage = "COMMUNICATION_ORGANIZATION_MESSAGE",
-  CommunicationUpdateSent = "COMMUNICATION_UPDATE_SENT",
-  CommunicationUserMention = "COMMUNICATION_USER_MENTION",
-  CommunicationUserMessage = "COMMUNICATION_USER_MESSAGE",
-  CommunityApplicationCreated = "COMMUNITY_APPLICATION_CREATED",
-  CommunityInvitationCreated = "COMMUNITY_INVITATION_CREATED",
-  CommunityInvitationCreatedVc = "COMMUNITY_INVITATION_CREATED_VC",
-  CommunityNewMember = "COMMUNITY_NEW_MEMBER",
-  CommunityPlatformInvitationCreated = "COMMUNITY_PLATFORM_INVITATION_CREATED",
-  PlatformForumDiscussionComment = "PLATFORM_FORUM_DISCUSSION_COMMENT",
-  PlatformForumDiscussionCreated = "PLATFORM_FORUM_DISCUSSION_CREATED",
-  PlatformGlobalRoleChange = "PLATFORM_GLOBAL_ROLE_CHANGE",
-  PlatformUserInvitedToRole = "PLATFORM_USER_INVITED_TO_ROLE",
-  PlatformUserRegistered = "PLATFORM_USER_REGISTERED",
-  PlatformUserRemoved = "PLATFORM_USER_REMOVED",
-  SpaceCreated = "SPACE_CREATED",
-}
+export type NotificationEventType =
+  | "COLLABORATION_CALLOUT_PUBLISHED"
+  | "COLLABORATION_DISCUSSION_COMMENT"
+  | "COLLABORATION_POST_COMMENT"
+  | "COLLABORATION_POST_CREATED"
+  | "COLLABORATION_WHITEBOARD_CREATED"
+  | "COMMENT_REPLY"
+  | "COMMUNICATION_COMMENT_SENT"
+  | "COMMUNICATION_COMMUNITY_MESSAGE"
+  | "COMMUNICATION_ORGANIZATION_MENTION"
+  | "COMMUNICATION_ORGANIZATION_MESSAGE"
+  | "COMMUNICATION_UPDATE_SENT"
+  | "COMMUNICATION_USER_MENTION"
+  | "COMMUNICATION_USER_MESSAGE"
+  | "COMMUNITY_APPLICATION_CREATED"
+  | "COMMUNITY_INVITATION_CREATED"
+  | "COMMUNITY_INVITATION_CREATED_VC"
+  | "COMMUNITY_NEW_MEMBER"
+  | "COMMUNITY_PLATFORM_INVITATION_CREATED"
+  | "PLATFORM_FORUM_DISCUSSION_COMMENT"
+  | "PLATFORM_FORUM_DISCUSSION_CREATED"
+  | "PLATFORM_GLOBAL_ROLE_CHANGE"
+  | "PLATFORM_USER_INVITED_TO_ROLE"
+  | "PLATFORM_USER_REGISTERED"
+  | "PLATFORM_USER_REMOVED"
+  | "SPACE_CREATED";
 
-export enum OpenAiModel {
-  Babbage_002 = "BABBAGE_002",
-  DallE_2 = "DALL_E_2",
-  DallE_3 = "DALL_E_3",
-  Davinci_002 = "DAVINCI_002",
-  Gpt_3_5Turbo = "GPT_3_5_TURBO",
-  Gpt_4 = "GPT_4",
-  Gpt_4O = "GPT_4O",
-  Gpt_4OAudioPreview = "GPT_4O_AUDIO_PREVIEW",
-  Gpt_4OMini = "GPT_4O_MINI",
-  Gpt_4OMiniAudioPreview = "GPT_4O_MINI_AUDIO_PREVIEW",
-  Gpt_4OMiniRealtimePreview = "GPT_4O_MINI_REALTIME_PREVIEW",
-  Gpt_4ORealtimePreview = "GPT_4O_REALTIME_PREVIEW",
-  Gpt_4_5Preview = "GPT_4_5_PREVIEW",
-  Gpt_4Turbo = "GPT_4_TURBO",
-  O1 = "O1",
-  O1Mini = "O1_MINI",
-  O3Mini = "O3_MINI",
-  OmniModerationLatest = "OMNI_MODERATION_LATEST",
-  TextEmbedding_3Large = "TEXT_EMBEDDING_3_LARGE",
-  TextEmbedding_3Small = "TEXT_EMBEDDING_3_SMALL",
-  TextEmbeddingAda_002 = "TEXT_EMBEDDING_ADA_002",
-  TextModerationLatest = "TEXT_MODERATION_LATEST",
-  Tts_1 = "TTS_1",
-  Tts_1Hd = "TTS_1_HD",
-  Whisper_1 = "WHISPER_1",
-}
+export type OpenAiModel =
+  | "BABBAGE_002"
+  | "DALL_E_2"
+  | "DALL_E_3"
+  | "DAVINCI_002"
+  | "GPT_3_5_TURBO"
+  | "GPT_4"
+  | "GPT_4O"
+  | "GPT_4O_AUDIO_PREVIEW"
+  | "GPT_4O_MINI"
+  | "GPT_4O_MINI_AUDIO_PREVIEW"
+  | "GPT_4O_MINI_REALTIME_PREVIEW"
+  | "GPT_4O_REALTIME_PREVIEW"
+  | "GPT_4_5_PREVIEW"
+  | "GPT_4_TURBO"
+  | "O1"
+  | "O1_MINI"
+  | "O3_MINI"
+  | "OMNI_MODERATION_LATEST"
+  | "TEXT_EMBEDDING_3_LARGE"
+  | "TEXT_EMBEDDING_3_SMALL"
+  | "TEXT_EMBEDDING_ADA_002"
+  | "TEXT_MODERATION_LATEST"
+  | "TTS_1"
+  | "TTS_1_HD"
+  | "WHISPER_1";
 
 export type Organization = Contributor &
   Groupable & {
@@ -4735,10 +4649,9 @@ export type OrganizationVerification = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum OrganizationVerificationEnum {
-  NotVerified = "NOT_VERIFIED",
-  VerifiedManualAttestation = "VERIFIED_MANUAL_ATTESTATION",
-}
+export type OrganizationVerificationEnum =
+  | "NOT_VERIFIED"
+  | "VERIFIED_MANUAL_ATTESTATION";
 
 export type OrganizationVerificationEventInput = {
   eventName: Scalars["String"]["input"];
@@ -4839,16 +4752,15 @@ export type PlatformFeatureFlag = {
   name: PlatformFeatureFlagName;
 };
 
-export enum PlatformFeatureFlagName {
-  Communications = "COMMUNICATIONS",
-  CommunicationsDiscussions = "COMMUNICATIONS_DISCUSSIONS",
-  GuidenceEngine = "GUIDENCE_ENGINE",
-  LandingPage = "LANDING_PAGE",
-  Notifications = "NOTIFICATIONS",
-  Ssi = "SSI",
-  Subscriptions = "SUBSCRIPTIONS",
-  Whiteboards = "WHITEBOARDS",
-}
+export type PlatformFeatureFlagName =
+  | "COMMUNICATIONS"
+  | "COMMUNICATIONS_DISCUSSIONS"
+  | "GUIDENCE_ENGINE"
+  | "LANDING_PAGE"
+  | "NOTIFICATIONS"
+  | "SSI"
+  | "SUBSCRIPTIONS"
+  | "WHITEBOARDS";
 
 export type PlatformIntegrationSettings = {
   /** The list of allowed URLs for iFrames within Markdown content. */
@@ -4992,42 +4904,36 @@ export type PreferenceDefinition = {
   valueType: PreferenceValueType;
 };
 
-export enum PreferenceType {
-  NotificationApplicationReceived = "NOTIFICATION_APPLICATION_RECEIVED",
-  NotificationApplicationSubmitted = "NOTIFICATION_APPLICATION_SUBMITTED",
-  NotificationCalloutPublished = "NOTIFICATION_CALLOUT_PUBLISHED",
-  NotificationCommentReply = "NOTIFICATION_COMMENT_REPLY",
-  NotificationCommunicationDiscussionCreated = "NOTIFICATION_COMMUNICATION_DISCUSSION_CREATED",
-  NotificationCommunicationDiscussionCreatedAdmin = "NOTIFICATION_COMMUNICATION_DISCUSSION_CREATED_ADMIN",
-  NotificationCommunicationMention = "NOTIFICATION_COMMUNICATION_MENTION",
-  NotificationCommunicationUpdates = "NOTIFICATION_COMMUNICATION_UPDATES",
-  NotificationCommunicationUpdateSentAdmin = "NOTIFICATION_COMMUNICATION_UPDATE_SENT_ADMIN",
-  NotificationCommunityCollaborationInterestAdmin = "NOTIFICATION_COMMUNITY_COLLABORATION_INTEREST_ADMIN",
-  NotificationCommunityCollaborationInterestUser = "NOTIFICATION_COMMUNITY_COLLABORATION_INTEREST_USER",
-  NotificationCommunityInvitationUser = "NOTIFICATION_COMMUNITY_INVITATION_USER",
-  NotificationCommunityNewMember = "NOTIFICATION_COMMUNITY_NEW_MEMBER",
-  NotificationCommunityNewMemberAdmin = "NOTIFICATION_COMMUNITY_NEW_MEMBER_ADMIN",
-  NotificationCommunityReviewSubmitted = "NOTIFICATION_COMMUNITY_REVIEW_SUBMITTED",
-  NotificationCommunityReviewSubmittedAdmin = "NOTIFICATION_COMMUNITY_REVIEW_SUBMITTED_ADMIN",
-  NotificationDiscussionCommentCreated = "NOTIFICATION_DISCUSSION_COMMENT_CREATED",
-  NotificationForumDiscussionComment = "NOTIFICATION_FORUM_DISCUSSION_COMMENT",
-  NotificationForumDiscussionCreated = "NOTIFICATION_FORUM_DISCUSSION_CREATED",
-  NotificationOrganizationMention = "NOTIFICATION_ORGANIZATION_MENTION",
-  NotificationOrganizationMessage = "NOTIFICATION_ORGANIZATION_MESSAGE",
-  NotificationPostCommentCreated = "NOTIFICATION_POST_COMMENT_CREATED",
-  NotificationPostCreated = "NOTIFICATION_POST_CREATED",
-  NotificationPostCreatedAdmin = "NOTIFICATION_POST_CREATED_ADMIN",
-  NotificationUserRemoved = "NOTIFICATION_USER_REMOVED",
-  NotificationUserSignUp = "NOTIFICATION_USER_SIGN_UP",
-  NotificationWhiteboardCreated = "NOTIFICATION_WHITEBOARD_CREATED",
-}
+export type PreferenceType =
+  | "NOTIFICATION_APPLICATION_RECEIVED"
+  | "NOTIFICATION_APPLICATION_SUBMITTED"
+  | "NOTIFICATION_CALLOUT_PUBLISHED"
+  | "NOTIFICATION_COMMENT_REPLY"
+  | "NOTIFICATION_COMMUNICATION_DISCUSSION_CREATED"
+  | "NOTIFICATION_COMMUNICATION_DISCUSSION_CREATED_ADMIN"
+  | "NOTIFICATION_COMMUNICATION_MENTION"
+  | "NOTIFICATION_COMMUNICATION_UPDATES"
+  | "NOTIFICATION_COMMUNICATION_UPDATE_SENT_ADMIN"
+  | "NOTIFICATION_COMMUNITY_COLLABORATION_INTEREST_ADMIN"
+  | "NOTIFICATION_COMMUNITY_COLLABORATION_INTEREST_USER"
+  | "NOTIFICATION_COMMUNITY_INVITATION_USER"
+  | "NOTIFICATION_COMMUNITY_NEW_MEMBER"
+  | "NOTIFICATION_COMMUNITY_NEW_MEMBER_ADMIN"
+  | "NOTIFICATION_COMMUNITY_REVIEW_SUBMITTED"
+  | "NOTIFICATION_COMMUNITY_REVIEW_SUBMITTED_ADMIN"
+  | "NOTIFICATION_DISCUSSION_COMMENT_CREATED"
+  | "NOTIFICATION_FORUM_DISCUSSION_COMMENT"
+  | "NOTIFICATION_FORUM_DISCUSSION_CREATED"
+  | "NOTIFICATION_ORGANIZATION_MENTION"
+  | "NOTIFICATION_ORGANIZATION_MESSAGE"
+  | "NOTIFICATION_POST_COMMENT_CREATED"
+  | "NOTIFICATION_POST_CREATED"
+  | "NOTIFICATION_POST_CREATED_ADMIN"
+  | "NOTIFICATION_USER_REMOVED"
+  | "NOTIFICATION_USER_SIGN_UP"
+  | "NOTIFICATION_WHITEBOARD_CREATED";
 
-export enum PreferenceValueType {
-  Boolean = "BOOLEAN",
-  Float = "FLOAT",
-  Int = "INT",
-  String = "STRING",
-}
+export type PreferenceValueType = "BOOLEAN" | "FLOAT" | "INT" | "STRING";
 
 export type Profile = {
   /** The authorization rules for the entity */
@@ -5079,26 +4985,25 @@ export type ProfileCredentialVerified = {
   vc: Scalars["String"]["output"];
 };
 
-export enum ProfileType {
-  CalendarEvent = "CALENDAR_EVENT",
-  CalloutFraming = "CALLOUT_FRAMING",
-  CommunityGuidelines = "COMMUNITY_GUIDELINES",
-  ContributionLink = "CONTRIBUTION_LINK",
-  Discussion = "DISCUSSION",
-  InnovationFlow = "INNOVATION_FLOW",
-  InnovationHub = "INNOVATION_HUB",
-  InnovationPack = "INNOVATION_PACK",
-  KnowledgeBase = "KNOWLEDGE_BASE",
-  Organization = "ORGANIZATION",
-  Post = "POST",
-  SpaceAbout = "SPACE_ABOUT",
-  Template = "TEMPLATE",
-  User = "USER",
-  UserGroup = "USER_GROUP",
-  VirtualContributor = "VIRTUAL_CONTRIBUTOR",
-  VirtualPersona = "VIRTUAL_PERSONA",
-  Whiteboard = "WHITEBOARD",
-}
+export type ProfileType =
+  | "CALENDAR_EVENT"
+  | "CALLOUT_FRAMING"
+  | "COMMUNITY_GUIDELINES"
+  | "CONTRIBUTION_LINK"
+  | "DISCUSSION"
+  | "INNOVATION_FLOW"
+  | "INNOVATION_HUB"
+  | "INNOVATION_PACK"
+  | "KNOWLEDGE_BASE"
+  | "ORGANIZATION"
+  | "POST"
+  | "SPACE_ABOUT"
+  | "TEMPLATE"
+  | "USER"
+  | "USER_GROUP"
+  | "VIRTUAL_CONTRIBUTOR"
+  | "VIRTUAL_PERSONA"
+  | "WHITEBOARD";
 
 export type Query = {
   /** The Accounts on this platform; If accessed through an Innovation Hub will return ONLY the Accounts defined in it. */
@@ -5502,22 +5407,21 @@ export type Role = {
   virtualContributorPolicy: ContributorRolePolicy;
 };
 
-export enum RoleName {
-  Admin = "ADMIN",
-  Associate = "ASSOCIATE",
-  GlobalAdmin = "GLOBAL_ADMIN",
-  GlobalCommunityReader = "GLOBAL_COMMUNITY_READER",
-  GlobalLicenseManager = "GLOBAL_LICENSE_MANAGER",
-  GlobalPlatformManager = "GLOBAL_PLATFORM_MANAGER",
-  GlobalSpacesReader = "GLOBAL_SPACES_READER",
-  GlobalSupport = "GLOBAL_SUPPORT",
-  GlobalSupportManager = "GLOBAL_SUPPORT_MANAGER",
-  Lead = "LEAD",
-  Member = "MEMBER",
-  Owner = "OWNER",
-  PlatformBetaTester = "PLATFORM_BETA_TESTER",
-  PlatformVcCampaign = "PLATFORM_VC_CAMPAIGN",
-}
+export type RoleName =
+  | "ADMIN"
+  | "ASSOCIATE"
+  | "GLOBAL_ADMIN"
+  | "GLOBAL_COMMUNITY_READER"
+  | "GLOBAL_LICENSE_MANAGER"
+  | "GLOBAL_PLATFORM_MANAGER"
+  | "GLOBAL_SPACES_READER"
+  | "GLOBAL_SUPPORT"
+  | "GLOBAL_SUPPORT_MANAGER"
+  | "LEAD"
+  | "MEMBER"
+  | "OWNER"
+  | "PLATFORM_BETA_TESTER"
+  | "PLATFORM_VC_CAMPAIGN";
 
 export type RoleSet = {
   /** The Form used for Applications to this roleSet. */
@@ -5632,11 +5536,7 @@ export type RoleSetVirtualContributorsInRolesArgs = {
   roles: Array<RoleName>;
 };
 
-export enum RoleSetContributorType {
-  Organization = "ORGANIZATION",
-  User = "USER",
-  Virtual = "VIRTUAL",
-}
+export type RoleSetContributorType = "ORGANIZATION" | "USER" | "VIRTUAL";
 
 export type RoleSetInvitationResult = {
   invitation?: Maybe<Invitation>;
@@ -5644,24 +5544,16 @@ export type RoleSetInvitationResult = {
   type: RoleSetInvitationResultType;
 };
 
-export enum RoleSetInvitationResultType {
-  AlreadyInvitedToPlatformAndRoleSet = "ALREADY_INVITED_TO_PLATFORM_AND_ROLE_SET",
-  AlreadyInvitedToRoleSet = "ALREADY_INVITED_TO_ROLE_SET",
-  InvitationToParentNotAuthorized = "INVITATION_TO_PARENT_NOT_AUTHORIZED",
-  InvitedToPlatformAndRoleSet = "INVITED_TO_PLATFORM_AND_ROLE_SET",
-  InvitedToRoleSet = "INVITED_TO_ROLE_SET",
-}
+export type RoleSetInvitationResultType =
+  | "ALREADY_INVITED_TO_PLATFORM_AND_ROLE_SET"
+  | "ALREADY_INVITED_TO_ROLE_SET"
+  | "INVITATION_TO_PARENT_NOT_AUTHORIZED"
+  | "INVITED_TO_PLATFORM_AND_ROLE_SET"
+  | "INVITED_TO_ROLE_SET";
 
-export enum RoleSetRoleImplicit {
-  AccountAdmin = "ACCOUNT_ADMIN",
-  SubspaceAdmin = "SUBSPACE_ADMIN",
-}
+export type RoleSetRoleImplicit = "ACCOUNT_ADMIN" | "SUBSPACE_ADMIN";
 
-export enum RoleSetType {
-  Organization = "ORGANIZATION",
-  Platform = "PLATFORM",
-  Space = "SPACE",
-}
+export type RoleSetType = "ORGANIZATION" | "PLATFORM" | "SPACE";
 
 export type RolesOrganizationInput = {
   /** Return membership in Spaces matching the provided filter. */
@@ -5827,12 +5719,11 @@ export type RoomSendMessageReplyInput = {
 };
 
 /** The category in which to search. A category may include a couple of entity types, e.g. "responses" include posts, whiteboard, etc. */
-export enum SearchCategory {
-  CollaborationTools = "COLLABORATION_TOOLS",
-  Contributors = "CONTRIBUTORS",
-  Responses = "RESPONSES",
-  Spaces = "SPACES",
-}
+export type SearchCategory =
+  | "COLLABORATION_TOOLS"
+  | "CONTRIBUTORS"
+  | "RESPONSES"
+  | "SPACES";
 
 export type SearchFilterInput = {
   /** Include this category in the search results. */
@@ -5928,15 +5819,14 @@ export type SearchResultSpace = SearchResult & {
 };
 
 /** The different types of available search results. */
-export enum SearchResultType {
-  Callout = "CALLOUT",
-  Organization = "ORGANIZATION",
-  Post = "POST",
-  Space = "SPACE",
-  Subspace = "SUBSPACE",
-  User = "USER",
-  Whiteboard = "WHITEBOARD",
-}
+export type SearchResultType =
+  | "CALLOUT"
+  | "ORGANIZATION"
+  | "POST"
+  | "SPACE"
+  | "SUBSPACE"
+  | "USER"
+  | "WHITEBOARD";
 
 export type SearchResultUser = SearchResult & {
   /** The identifier of the search result. Does not represent the entity in Alkemio. */
@@ -5951,11 +5841,7 @@ export type SearchResultUser = SearchResult & {
   user: User;
 };
 
-export enum SearchVisibility {
-  Account = "ACCOUNT",
-  Hidden = "HIDDEN",
-  Public = "PUBLIC",
-}
+export type SearchVisibility = "ACCOUNT" | "HIDDEN" | "PUBLIC";
 
 export type Sentry = {
   /** Flag indicating if the client should use Sentry for monitoring. */
@@ -6079,11 +5965,7 @@ export type SpaceFilterInput = {
   visibilities?: InputMaybe<Array<SpaceVisibility>>;
 };
 
-export enum SpaceLevel {
-  L0 = "L0",
-  L1 = "L1",
-  L2 = "L2",
-}
+export type SpaceLevel = "L0" | "L1" | "L2";
 
 export type SpacePendingMembershipInfo = {
   /** About the Space */
@@ -6096,10 +5978,7 @@ export type SpacePendingMembershipInfo = {
   level: SpaceLevel;
 };
 
-export enum SpacePrivacyMode {
-  Private = "PRIVATE",
-  Public = "PUBLIC",
-}
+export type SpacePrivacyMode = "PRIVATE" | "PUBLIC";
 
 export type SpaceSettings = {
   /** The collaboration settings for this Space. */
@@ -6144,11 +6023,7 @@ export type SpaceSubscription = {
   name: LicensingCredentialBasedCredentialType;
 };
 
-export enum SpaceVisibility {
-  Active = "ACTIVE",
-  Archived = "ARCHIVED",
-  Demo = "DEMO",
-}
+export type SpaceVisibility = "ACTIVE" | "ARCHIVED" | "DEMO";
 
 export type StorageAggregator = {
   /** The authorization rules for the entity */
@@ -6185,13 +6060,12 @@ export type StorageAggregatorParent = {
   url: Scalars["String"]["output"];
 };
 
-export enum StorageAggregatorType {
-  Account = "ACCOUNT",
-  Organization = "ORGANIZATION",
-  Platform = "PLATFORM",
-  Space = "SPACE",
-  User = "USER",
-}
+export type StorageAggregatorType =
+  | "ACCOUNT"
+  | "ORGANIZATION"
+  | "PLATFORM"
+  | "SPACE"
+  | "USER";
 
 export type StorageBucket = {
   /** Mime types allowed to be stored on this StorageBucket. */
@@ -6327,13 +6201,12 @@ export type TagsetArgs = {
   tags?: InputMaybe<Array<Scalars["String"]["input"]>>;
 };
 
-export enum TagsetReservedName {
-  Capabilities = "CAPABILITIES",
-  Default = "DEFAULT",
-  FlowState = "FLOW_STATE",
-  Keywords = "KEYWORDS",
-  Skills = "SKILLS",
-}
+export type TagsetReservedName =
+  | "CAPABILITIES"
+  | "DEFAULT"
+  | "FLOW_STATE"
+  | "KEYWORDS"
+  | "SKILLS";
 
 export type TagsetTemplate = {
   allowedValues: Array<Scalars["String"]["output"]>;
@@ -6349,11 +6222,7 @@ export type TagsetTemplate = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum TagsetType {
-  Freeform = "FREEFORM",
-  SelectMany = "SELECT_MANY",
-  SelectOne = "SELECT_ONE",
-}
+export type TagsetType = "FREEFORM" | "SELECT_MANY" | "SELECT_ONE";
 
 export type Task = {
   /** The timestamp when the task was created */
@@ -6381,11 +6250,7 @@ export type Task = {
 };
 
 /** The current status of the task */
-export enum TaskStatus {
-  Completed = "COMPLETED",
-  Errored = "ERRORED",
-  InProgress = "IN_PROGRESS",
-}
+export type TaskStatus = "COMPLETED" | "ERRORED" | "IN_PROGRESS";
 
 export type Template = {
   /** The authorization rules for the entity */
@@ -6450,13 +6315,12 @@ export type TemplateDefault = {
   updatedDate: Scalars["DateTime"]["output"];
 };
 
-export enum TemplateDefaultType {
-  PlatformSpace = "PLATFORM_SPACE",
-  PlatformSpaceTutorials = "PLATFORM_SPACE_TUTORIALS",
-  PlatformSubspace = "PLATFORM_SUBSPACE",
-  PlatformSubspaceKnowledge = "PLATFORM_SUBSPACE_KNOWLEDGE",
-  SpaceSubspace = "SPACE_SUBSPACE",
-}
+export type TemplateDefaultType =
+  | "PLATFORM_SPACE"
+  | "PLATFORM_SPACE_TUTORIALS"
+  | "PLATFORM_SUBSPACE"
+  | "PLATFORM_SUBSPACE_KNOWLEDGE"
+  | "SPACE_SUBSPACE";
 
 export type TemplateResult = {
   /** The InnovationPack where this Template is being returned from. */
@@ -6465,13 +6329,12 @@ export type TemplateResult = {
   template: Template;
 };
 
-export enum TemplateType {
-  Callout = "CALLOUT",
-  CommunityGuidelines = "COMMUNITY_GUIDELINES",
-  Post = "POST",
-  Space = "SPACE",
-  Whiteboard = "WHITEBOARD",
-}
+export type TemplateType =
+  | "CALLOUT"
+  | "COMMUNITY_GUIDELINES"
+  | "POST"
+  | "SPACE"
+  | "WHITEBOARD";
 
 export type TemplatesManager = {
   /** The authorization rules for the entity */
@@ -7192,29 +7055,28 @@ export type UrlResolverQueryResults = {
   virtualContributor?: Maybe<UrlResolverQueryResultVirtualContributor>;
 };
 
-export enum UrlType {
-  Admin = "ADMIN",
-  Callout = "CALLOUT",
-  CalloutsSet = "CALLOUTS_SET",
-  ContributionPost = "CONTRIBUTION_POST",
-  ContributionWhiteboard = "CONTRIBUTION_WHITEBOARD",
-  ContributorsExplorer = "CONTRIBUTORS_EXPLORER",
-  Discussion = "DISCUSSION",
-  Documentation = "DOCUMENTATION",
-  Flow = "FLOW",
-  Forum = "FORUM",
-  Home = "HOME",
-  InnovationHub = "INNOVATION_HUB",
-  InnovationLibrary = "INNOVATION_LIBRARY",
-  InnovationPacks = "INNOVATION_PACKS",
-  NotAuthorized = "NOT_AUTHORIZED",
-  Organization = "ORGANIZATION",
-  Space = "SPACE",
-  SpaceExplorer = "SPACE_EXPLORER",
-  Unknown = "UNKNOWN",
-  User = "USER",
-  VirtualContributor = "VIRTUAL_CONTRIBUTOR",
-}
+export type UrlType =
+  | "ADMIN"
+  | "CALLOUT"
+  | "CALLOUTS_SET"
+  | "CONTRIBUTION_POST"
+  | "CONTRIBUTION_WHITEBOARD"
+  | "CONTRIBUTORS_EXPLORER"
+  | "DISCUSSION"
+  | "DOCUMENTATION"
+  | "FLOW"
+  | "FORUM"
+  | "HOME"
+  | "INNOVATION_HUB"
+  | "INNOVATION_LIBRARY"
+  | "INNOVATION_PACKS"
+  | "NOT_AUTHORIZED"
+  | "ORGANIZATION"
+  | "SPACE"
+  | "SPACE_EXPLORER"
+  | "UNKNOWN"
+  | "USER"
+  | "VIRTUAL_CONTRIBUTOR";
 
 export type User = Contributor & {
   /** The account hosted by this User. */
@@ -7419,10 +7281,7 @@ export type VirtualContributorSettingsPrivacy = {
   knowledgeBaseContentVisible: Scalars["Boolean"]["output"];
 };
 
-export enum VirtualContributorStatus {
-  Initializing = "INITIALIZING",
-  Ready = "READY",
-}
+export type VirtualContributorStatus = "INITIALIZING" | "READY";
 
 /** The result from a Virtual Contributor update */
 export type VirtualContributorUpdatedSubscriptionResult = {
@@ -7475,12 +7334,7 @@ export type VisualConstraints = {
   minWidth: Scalars["Float"]["output"];
 };
 
-export enum VisualType {
-  Avatar = "AVATAR",
-  Banner = "BANNER",
-  BannerWide = "BANNER_WIDE",
-  Card = "CARD",
-}
+export type VisualType = "AVATAR" | "BANNER" | "BANNER_WIDE" | "CARD";
 
 export type VisualUploadImageInput = {
   alternativeText?: InputMaybe<Scalars["String"]["input"]>;

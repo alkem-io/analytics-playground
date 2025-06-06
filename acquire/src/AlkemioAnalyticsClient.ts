@@ -48,19 +48,19 @@ export class AlkemioAnalyticsClient {
   async acquireSpacesL0() {
     const spacesResponse = await this.sdkClient.spaceRolesL0();
     this.logger.info(`Acquired data on Spaces L0: '${spacesResponse.data.spaces.length}'`);
-    fs.writeFileSync(this.config.files.spaces, JSON.stringify(spacesResponse));
+    fs.writeFileSync(this.config.files.spacesL0, JSON.stringify(spacesResponse));
   }
 
   async acquireSpacesL1() {
     const spacesL1Response = await this.sdkClient.spaceRolesL1();
     this.logger.info(`Acquired data on Spaces L1, # Spaces: '${spacesL1Response.data.spaces.length}'`);
-    fs.writeFileSync(this.config.files.challenges, JSON.stringify(spacesL1Response));
+    fs.writeFileSync(this.config.files.spacesL1, JSON.stringify(spacesL1Response));
   }
 
   async acquireSpacesL2() {
     const spacesL2Response = await this.sdkClient.spaceRolesL2();
     this.logger.info(`Acquired data on Spaces L2, # Spaces: '${spacesL2Response.data.spaces.length}'`);
-    fs.writeFileSync(this.config.files.opportunities, JSON.stringify(spacesL2Response));
+    fs.writeFileSync(this.config.files.spacesL2, JSON.stringify(spacesL2Response));
   }
 
   async acquireUsers() {

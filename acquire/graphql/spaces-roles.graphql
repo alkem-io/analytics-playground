@@ -1,32 +1,38 @@
-query spacesRoles {
+query spaceRolesL0 {
   spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID
-    profile {
-      displayName
-      tagline
-      location {
-        country
-        city
+    about {
+      profile {
+        displayName
+        tagline
+        location {
+          country
+          city
+        }
+        url
       }
-      url
     }
     community {
-      memberUsers {
-        id
-      }
-      memberOrganizations: organizationsInRole(role: MEMBER) {
-        id
-      }
-      leadOrganizations: organizationsInRole(role: LEAD) {
-        id
-      }
-      leadUsers: usersInRole(role: LEAD) {
-        id
+      roleSet {
+        memberUsers: usersInRole(role: MEMBER) {
+          id
+        }
+        memberOrganizations: organizationsInRole(role: MEMBER) {
+          id
+        }
+        leadOrganizations: organizationsInRole(role: LEAD) {
+          id
+        }
+        leadUsers: usersInRole(role: LEAD) {
+          id
+        }
       }
     }
-    host {
-      id
+    account {
+      host {
+        id
+      }
     }
   }
 }

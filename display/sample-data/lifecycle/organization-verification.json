@@ -9,7 +9,7 @@
       "on": {
         "VERIFICATION_REQUEST": {
           "target": "verificationPending",
-          "cond": "organizationVerificationUpdateAuthorized"
+          "guard": "organizationVerificationUpdateAuthorized"
         }
       }
     },
@@ -17,7 +17,7 @@
       "on": {
         "MANUALLY_VERIFY": {
           "target": "manuallyVerified",
-          "cond": "organizationVerificationGrantAuthorized"
+          "guard": "organizationVerificationGrantAuthorized"
         },
         "REJECT": "rejected"
       }
@@ -27,7 +27,7 @@
       "on": {
         "RESET": {
           "target": "notVerified",
-          "cond": "organizationVerificationGrantAuthorized"
+          "guard": "organizationVerificationGrantAuthorized"
         }
       }
     },

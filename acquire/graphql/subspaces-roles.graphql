@@ -1,16 +1,16 @@
-query opportunityRoles {
+query spaceRolesL1 {
   spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
     id
     nameID
-    profile {
-      displayName
+    about {
+      profile {
+        displayName
+      }
     }
-    challenges {
+    subspaces {
       id
       nameID
-      opportunities {
-        id
-        nameID
+      about {
         profile {
           displayName
           tagline
@@ -20,8 +20,10 @@ query opportunityRoles {
           }
           url
         }
-        community {
-          memberUsers {
+      }
+      community {
+        roleSet {
+          memberUsers: usersInRole(role: MEMBER) {
             id
           }
           memberOrganizations: organizationsInRole(role: MEMBER) {
@@ -34,6 +36,11 @@ query opportunityRoles {
             id
           }
         }
+      }
+    }
+    account {
+      host {
+        id
       }
     }
   }

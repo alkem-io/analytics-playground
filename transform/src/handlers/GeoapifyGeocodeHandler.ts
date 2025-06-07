@@ -67,9 +67,11 @@ export class GeoapifyGeocodeHandler {
         return [0,0];
       }
       const properties = firstFeature.properties;
-      const result: [number, number] = [properties.lon, properties.lat];
+      const longitude = properties.lon;
+      const latitude = properties.lat;
+      const result: [number, number] = [longitude, latitude];
       this.logger.info?.(
-        `[${identifier}] Search term '${searchText}' resulted in location: ${result}`
+        `[${identifier}] Search term '${searchText}' resulted in location: longitude=${longitude}, latitude=${latitude}`
       );
       return result;
     } catch (error) {

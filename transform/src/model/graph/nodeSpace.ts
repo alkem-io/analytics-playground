@@ -1,6 +1,6 @@
 import { Node } from "./node";
 
-export class NodeChallenge extends Node {
+export class NodeSpace extends Node {
   leadOrgsCount: number;
 
   constructor(id: string, nameID: string, displayName: string, type: string, group: string, weight: number, leadOrgsCount: number, url: string, avatar: string, country: string, city: string, lon = 0, lat = 0) {

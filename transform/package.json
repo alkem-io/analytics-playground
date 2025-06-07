@@ -20,6 +20,7 @@
     "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
     "nodemon": "nodemon",
     "transform-data": "tsx src/transform-data.ts",
+    "transform-data-single-file": "tsx src/transform-data-single-file.ts",
     "test-geocode": "tsx src/test-geocode.ts",
     "start": "npm transform-data",
     "prepublishOnly": "npm run build"

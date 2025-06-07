@@ -2,9 +2,6 @@ import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
-import organizationsData from './acquired-data/organizations.json';
-import usersData from './acquired-data/users.json';
-import spacesL0Data from './acquired-data/spaces-l0-roles.json';
 import { NodeType } from './common/node.type';
 import { NodeGroup } from './common/node.group';
 import { NodeWeight } from './common/node.weight';
@@ -13,7 +10,6 @@ import { EdgeType } from './common/edge.type';
 import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 import { Logger } from 'winston';
 import { SpaceModel } from '../../acquire/src/model/spaceModel';
-import { mapSpaceDataToSpaceModel } from '../../acquire/src/util/mapSpacesDataToModel';
 
 const TRANSFORMED_DATA_FILE =
   '../display/public/data/transformed-graph-data.json';
@@ -291,13 +287,7 @@ export class AlkemioGraphTransformer {
     return data;
   }
 
-  // New: Loads from file and calls transformDataFromParams
-  async transformDataFromFiles() {
-    const users = usersData.data.users;
-    const organizations = organizationsData.data.organizations;
-    const spacesL0 = spacesL0Data.map(mapSpaceDataToSpaceModel);
-    return await this.transformData({ users, organizations, spacesL0 });
-  }
+
 
   addCommunityRoleEdges(
     parent: any,

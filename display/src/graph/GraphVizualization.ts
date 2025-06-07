@@ -203,6 +203,7 @@ export class GraphVizualization {
 
   fixLocationToMap(nodeType: string) {
     this.mapLocationHandler.fixNodeLocationToMap(this.node, nodeType);
+    this.mapLocationHandler.registerNodeExpansion(this.node);
     this.transformationHandler.transformDisplay(750);
   }
 

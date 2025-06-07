@@ -17,10 +17,13 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "paths": {
-      "@generated/*": ["src/generated/*"],
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@lib/*": ["../lib/src/*"]
     }
   },
   "exclude": ["./node_modules"],
-  "include": ["./src/**/*.ts"]
+  "include": [
+    "./src/**/*.ts",
+    "../lib/src/**/*.ts",
+  ]
 }

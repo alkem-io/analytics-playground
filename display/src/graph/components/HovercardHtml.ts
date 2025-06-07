@@ -1,5 +1,5 @@
 import { TransformationHandler } from '../handlers/TransformationHandler';
-import { GraphNodeModel } from '../../../../transform/src/model/graph/graphNode';
+import { GraphNodeModel } from '@lib/graph/graphNode';
 
 /**
  * Defines independent hovercard component for force directed graph.

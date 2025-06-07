@@ -1,18 +1,18 @@
 import fs from 'fs';
-import { GraphNodeSpaceModel } from './model/graph/graphNodeSpace';
-import { GraphNodeContributorModel } from './model/graph/graphNodeContributor';
-import { GraphEdgeModel } from './model/graph/graphEdge';
-import { NodeType } from './common/node.type';
-import { NodeGroup } from './common/node.group';
-import { NodeWeight } from './common/node.weight';
-import { EdgeWeight } from './common/edge.weight';
-import { EdgeType } from './common/edge.type';
+import { GraphNodeSpaceModel } from '@lib/graph/graphNodeSpace';
+import { GraphNodeContributorModel } from '@lib/graph/graphNodeContributor';
+import { GraphEdgeModel } from '@lib/graph/graphEdge';
+import { NodeType } from '@lib/common/node.type';
+import { NodeGroup } from '@lib/common/node.group';
+import { NodeWeight } from '@lib/common/node.weight';
+import { EdgeWeight } from '@lib/common/edge.weight';
+import { EdgeType } from '@lib/common/edge.type';
 import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 import { Logger } from 'winston';
 import { IDisplayData } from '../../display/src/graph/model/data.interface';
 import { ContributorModel, SpaceModel } from '../../acquire/src/model/spaceModel';
 import countries from 'i18n-iso-countries';
-import { GraphLocationModel } from './model/graph/graphLocationModel';
+import { GraphLocationModel } from '@lib/graph/graphLocationModel';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
@@ -147,7 +147,7 @@ export class AlkemioGraphTransformer {
         space,
         space.id,
         NodeType.SPACE_L0,
-        NodeWeight.HUB,
+        NodeWeight.SPACE_L0,
         space.about.profile.url,
         1
       );
@@ -162,7 +162,7 @@ export class AlkemioGraphTransformer {
           spaceL1,
           spaceL0.id,
           NodeType.SPACE_L1,
-          NodeWeight.CHALLENGE,
+          NodeWeight.SPACE_L1,
           spaceL1.about.profile.url,
           spaceL1.community.roleSet.leadOrganizations.length
         );
@@ -187,7 +187,7 @@ export class AlkemioGraphTransformer {
             spaceL2,
             spaceL1.id,
             NodeType.SPACE_L2,
-            NodeWeight.OPPORTUNITY,
+            NodeWeight.SPACE_L2,
             spaceL2.about.profile.url,
             spaceL2.community.roleSet.leadOrganizations.length
           );

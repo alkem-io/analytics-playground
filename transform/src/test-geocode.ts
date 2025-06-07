@@ -9,7 +9,7 @@ const main = async () => {
   logger.info('Testing out Geocode api');
   const apiKey = '4cfbe072a6904698aa21382c71a3a44c'
   const geocodeHandler = new GeoapifyGeocodeHandler(apiKey, logger);
-  const resuolt = await geocodeHandler.lookup('IE', '', 'test');
+  const result = await geocodeHandler.lookup('IE', '', 'test');
 };
 
 main().catch(error => {

@@ -1,5 +1,5 @@
 import { IDataNodes } from "./nodes.interface";
-import { GraphEdgeModel } from '../../../../transform/src/model/graph/graphEdge';
+import { GraphEdgeModel } from '@lib/graph/graphEdge';
 
 export interface IDisplayData {
   edges: GraphEdgeModel[];

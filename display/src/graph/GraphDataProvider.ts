@@ -1,9 +1,9 @@
 import { json } from 'd3-fetch';
 import { IDisplayData } from './model/data.interface';
-import { GraphNodeSpaceModel } from '../../../transform/src/model/graph/graphNodeSpace';
-import { GraphNodeContributorModel } from '../../../transform/src/model/graph/graphNodeContributor';
-import { GraphEdgeModel } from '../../../transform/src/model/graph/graphEdge';
-import { GraphNodeModel } from '../../../transform/src/model/graph/graphNode';
+import { GraphNodeSpaceModel } from '@lib/graph/graphNodeSpace';
+import { GraphNodeContributorModel } from '@lib/graph/graphNodeContributor';
+import { GraphEdgeModel } from '@lib/graph/graphEdge';
+import { GraphNodeModel } from '@lib/graph/graphNode';
 
 export class GraphDataProvider {
   data: IDisplayData | undefined = undefined;

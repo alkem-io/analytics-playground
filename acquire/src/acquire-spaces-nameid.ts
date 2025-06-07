@@ -5,13 +5,15 @@ import fs from "fs";
 import { OrganizationModel, UserModel } from "./model/fullDataModel";
 import { mapUserDataToUserModel, mapOrganizationDataToOrganizationModel } from "./util/mapUserAndOrgDataToModel";
 
-// TODO: Replace with your actual list of space nameIDs
-const SPACE_NAMEIDS = ["test2", "eco1"];
+// Accept space nameIDs from command line, fallback to default
+const SPACE_NAMEIDS = process.argv.length > 2
+  ? process.argv.slice(2)
+  : ["test2", "eco1"];
 
 class SpacesByNameIDAcquirer {
   constructor(private alkemioAnalyticsClient: AlkemioAnalyticsClient, private logger: any) {}
 
-  async acquire(spaceNameIDs: string[], outputFile: string = "full-data.json") {
+  async acquire(spaceNameIDs: string[], outputFile: string = "../transform/src/acquired-data/spaces-nameid.json") {
     // 1. Fetch spaces by nameID
     const spaces: any[] = [];
     for (const nameID of spaceNameIDs) {
@@ -68,7 +70,8 @@ const main = async () => {
   await alkemioAnalyticsClient.initialise();
   await alkemioAnalyticsClient.logUser();
   const acquirer = new SpacesByNameIDAcquirer(alkemioAnalyticsClient, logger);
-  await acquirer.acquire(SPACE_NAMEIDS);
+  // Output to transform/src/acquired-data/spaces-nameid.json
+  await acquirer.acquire(SPACE_NAMEIDS, "../transform/src/acquired-data/spaces-nameid.json");
 };
 
 main().catch((error) => {

@@ -1,5 +1,5 @@
-import { GraphNodeSpaceModel } from '../../../../transform/src/model/graph/graphNodeSpace';
-import { GraphNodeContributorModel } from '../../../../transform/src/model/graph/graphNodeContributor';
+import { GraphNodeSpaceModel } from '@lib/graph/graphNodeSpace';
+import { GraphNodeContributorModel } from '@lib/graph/graphNodeContributor';
 export interface IDataNodes {
   spacesL0: GraphNodeSpaceModel[];
   spacesL1: GraphNodeSpaceModel[];

@@ -1,18 +1,22 @@
 import fs from 'fs';
-import { GraphNodeSpaceModel } from './model/graph/graphNodeSpace';
-import { GraphNodeContributorModel } from './model/graph/graphNodeContributor';
-import { GraphEdgeModel } from './model/graph/graphEdge';
-import { NodeType } from './common/node.type';
-import { NodeGroup } from './common/node.group';
-import { NodeWeight } from './common/node.weight';
-import { EdgeWeight } from './common/edge.weight';
-import { EdgeType } from './common/edge.type';
+import { GraphNodeSpaceModel } from '@lib/graph/graphNodeSpace';
+import { GraphNodeContributorModel } from '@lib/graph/graphNodeContributor';
+import { GraphEdgeModel } from '@lib/graph/graphEdge';
+import { NodeType } from '@lib/common/node.type';
+import { NodeGroup } from '@lib/common/node.group';
+import { NodeWeight } from '@lib/common/node.weight';
+import { EdgeWeight } from '@lib/common/edge.weight';
+import { EdgeType } from '@lib/common/edge.type';
 import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 import { Logger } from 'winston';
 import { IDisplayData } from '../../display/src/graph/model/data.interface';
-import { ContributorModel, SpaceModel } from '../../acquire/src/model/spaceModel';
+import {
+  ContributorModel,
+  SpaceModel,
+} from '../../acquire/src/model/spaceModel';
 import countries from 'i18n-iso-countries';
-import { GraphLocationModel } from './model/graph/graphLocationModel';
+import { GraphLocationModel } from '@lib/graph/graphLocationModel';
+import { GraphProfileModel } from '../../lib/src/graph/graphProfileModel';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
@@ -37,7 +41,14 @@ export class AlkemioGraphTransformer {
   }
 
   // Helper to create a NodeSpace for any level
-  private async createSpaceNode(space: any, parentId: string, nodeType: NodeType, nodeWeight: number, url: string, leadOrgCount: number): Promise<GraphNodeSpaceModel> {
+  private async createSpaceNode(
+    space: any,
+    parentId: string,
+    nodeType: NodeType,
+    nodeWeight: number,
+    url: string,
+    leadOrgCount: number
+  ): Promise<GraphNodeSpaceModel> {
     const locationData = space.about.profile.location;
     const countryName = resolveCountryName(locationData.country || '');
     const locationExact = await this.geocodeHandler.lookup(
@@ -46,22 +57,25 @@ export class AlkemioGraphTransformer {
       space.nameID
     );
     const locationModel: GraphLocationModel = new GraphLocationModel(
-        locationData.country || '',
-        locationData.city || '',
-        locationExact[0],
-        locationExact[1]
-      );
+      locationData.country || '',
+      locationData.city || '',
+      locationExact[0],
+      locationExact[1]
+    );
+    const profileModel: GraphProfileModel = new GraphProfileModel(
+      space.about.profile.displayName,
+      space.about.profile.url || '',
+      locationModel
+    );
     return new GraphNodeSpaceModel(
       space.id,
       space.nameID,
-      space.about.profile.displayName,
       nodeType,
       parentId,
       nodeWeight,
       leadOrgCount,
       url,
-      '',
-      locationModel
+      profileModel
     );
   }
 
@@ -98,16 +112,19 @@ export class AlkemioGraphTransformer {
         locationExact[0],
         locationExact[1]
       );
+      const profileModel: GraphProfileModel = new GraphProfileModel(
+        contributor.profile.displayName,
+        contributor.profile.url || '',
+        locationModel
+      );
       const contributorNode = new GraphNodeContributorModel(
         contributor.id,
         `${contributor.nameID}`,
-        `${contributor.profile.displayName}`,
         NodeType.USER,
         NodeGroup.CONTRIBUTORS,
         NodeWeight.USER,
-        contributor.profile.url,
         contributor.profile.avatar?.uri,
-        locationModel
+        profileModel
       );
       contributorNodes.push(contributorNode);
     }
@@ -127,16 +144,19 @@ export class AlkemioGraphTransformer {
         locationExact[0],
         locationExact[1]
       );
+      const profileModel: GraphProfileModel = new GraphProfileModel(
+        contributor.profile.displayName,
+        contributor.profile.url || '',
+        locationModel
+      );
       const contributorNode = new GraphNodeContributorModel(
         contributor.id,
         `${contributor.nameID}`,
-        `${contributor.profile.displayName}`,
         NodeType.ORGANIZATION,
         NodeGroup.CONTRIBUTORS,
         NodeWeight.ORGANIZATION,
-        contributor.profile.url,
         contributor.profile.avatar?.uri,
-        locationModel
+        profileModel
       );
       contributorNodes.push(contributorNode);
     }
@@ -147,7 +167,7 @@ export class AlkemioGraphTransformer {
         space,
         space.id,
         NodeType.SPACE_L0,
-        NodeWeight.HUB,
+        NodeWeight.SPACE_L0,
         space.about.profile.url,
         1
       );
@@ -162,7 +182,7 @@ export class AlkemioGraphTransformer {
           spaceL1,
           spaceL0.id,
           NodeType.SPACE_L1,
-          NodeWeight.CHALLENGE,
+          NodeWeight.SPACE_L1,
           spaceL1.about.profile.url,
           spaceL1.community.roleSet.leadOrganizations.length
         );
@@ -187,7 +207,7 @@ export class AlkemioGraphTransformer {
             spaceL2,
             spaceL1.id,
             NodeType.SPACE_L2,
-            NodeWeight.OPPORTUNITY,
+            NodeWeight.SPACE_L2,
             spaceL2.about.profile.url,
             spaceL2.community.roleSet.leadOrganizations.length
           );
@@ -219,7 +239,11 @@ export class AlkemioGraphTransformer {
   }
 
   // Helper to add all community role edges for a space node
-  private addAllCommunityRoleEdges(space: SpaceModel, edges: GraphEdgeModel[], group: string) {
+  private addAllCommunityRoleEdges(
+    space: SpaceModel,
+    edges: GraphEdgeModel[],
+    group: string
+  ) {
     this.addCommunityRoleEdges(
       space,
       space.community.roleSet.memberUsers,
@@ -260,7 +284,13 @@ export class AlkemioGraphTransformer {
     for (const contributor of contributors) {
       let weight = EdgeWeight.MEMBER;
       if (type === EdgeType.LEAD) weight = EdgeWeight.LEAD;
-      const edge = new GraphEdgeModel(contributor.id, parent.id, weight, type, group);
+      const edge = new GraphEdgeModel(
+        contributor.id,
+        parent.id,
+        weight,
+        type,
+        group
+      );
       edges.push(edge);
     }
   }

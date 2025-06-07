@@ -1,36 +1,30 @@
-import { GraphLocationModel } from "./graphLocationModel";
+import { GraphProfileModel } from "./graphProfileModel";
 
 export class GraphNodeModel {
   nameID: string;
   id: string;
-  displayName: string;
   type: string;
   group: string;
   weight: number;
-
-  url: string;
   avatar: string;
-  location: GraphLocationModel;
+  profile: GraphProfileModel;
+
 
   constructor(
     id: string,
     nameID: string,
-    displayName: string,
     type: string,
     group: string,
     weight: number,
-    url: string,
     avatar: string,
-    location: GraphLocationModel
+    profile: GraphProfileModel
   ) {
     this.id = id;
     this.nameID = nameID;
-    this.displayName = displayName;
     this.type = type;
     this.group = group;
     this.weight = weight;
-    this.url = url;
     this.avatar = avatar;
-    this.location = location;
+    this.profile = profile;
   }
 }

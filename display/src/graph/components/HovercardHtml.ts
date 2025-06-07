@@ -1,5 +1,5 @@
 import { TransformationHandler } from '../handlers/TransformationHandler';
-import { GraphNodeModel } from '../../../../transform/src/model/graph/graphNode';
+import { GraphNodeModel } from '@lib/graph/graphNode';
 
 /**
  * Defines independent hovercard component for force directed graph.
@@ -63,7 +63,7 @@ export class HovercardHtml {
     <table style="width:100%">
       <tr>
         ${tdImage}
-        <td><b>${node.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.url}" target=”_blank”>Link</a></td>
+        <td><b>${node.profile?.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.profile?.url}" target=”_blank”>Link</a></td>
       </tr>
     </table>`;
   }

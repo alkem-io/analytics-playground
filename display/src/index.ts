@@ -5,7 +5,7 @@ import { GraphVizualizationControls } from './graph/GraphVizualizationControls';
 import { MapDataProvider } from './graph/MapDataProvider';
 import { LifecycleDataProvider } from './lifecycle/LifecycleDataProvider';
 import { LifecycleVisualization } from './lifecycle/LifecycleVisualization';
-import { NodeType } from '../../transform/src/common/node.type';
+import { NodeType } from '../../lib/src/common/node.type';
 
 // Make the DOM locations available
 const graphSvg = select('#graph-svg');

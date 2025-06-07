@@ -1,1 +1,0 @@
-{"status":200,"headers":{},"data":{"organizations":[{"id":"59a685b0-86ff-485c-a2a1-a540470190bc","nameID":"eco1host","profile":{"displayName":"Eco1 Host","avatar":{"uri":"http://localhost:3000/api/private/rest/storage/document/60f65e93-fae5-4f5c-a8ce-8308989fa77e"},"location":{"country":null,"city":null},"url":"http://localhost:3000/organization/eco1host"}}]}}

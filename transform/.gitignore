@@ -6,9 +6,8 @@
 /dist
 /src/data/*.bak
 /*.log
-# Ensure do not accidentially upload real users data
-/src/acquired-data/users-full.json
-/src/acquired-data/users.json
+# Ensure do not accidentially upload real  data
+/src/acquired-data/*.json
 
 *.log
 .env

@@ -17687,6 +17687,29 @@ export type MeQuery = {
   };
 };
 
+export type OrganizationByIdQueryVariables = Exact<{
+  id: Scalars["UUID"]["input"];
+}>;
+
+export type OrganizationByIdQuery = {
+  lookup: {
+    organization?:
+      | {
+          id: string;
+          nameID: string;
+          profile: {
+            displayName: string;
+            url: string;
+            avatar?: { uri: string } | undefined;
+            location?:
+              | { country?: string | undefined; city?: string | undefined }
+              | undefined;
+          };
+        }
+      | undefined;
+  };
+};
+
 export type OrganizationsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type OrganizationsQuery = {
@@ -17704,78 +17727,118 @@ export type OrganizationsQuery = {
   }>;
 };
 
+export type SpaceByNameQueryVariables = Exact<{
+  nameId: Scalars["NameID"]["input"];
+}>;
+
+export type SpaceByNameQuery = {
+  lookupByName: {
+    space?:
+      | {
+          id: string;
+          nameID: string;
+          subspaces: Array<{
+            id: string;
+            nameID: string;
+            subspaces: Array<{
+              id: string;
+              nameID: string;
+              about: {
+                profile: {
+                  displayName: string;
+                  tagline?: string | undefined;
+                  url: string;
+                  location?:
+                    | {
+                        country?: string | undefined;
+                        city?: string | undefined;
+                      }
+                    | undefined;
+                };
+              };
+              community: {
+                roleSet: {
+                  memberUsers: Array<{ id: string }>;
+                  memberOrganizations: Array<{ id: string }>;
+                  leadOrganizations: Array<{ id: string }>;
+                  leadUsers: Array<{ id: string }>;
+                };
+              };
+            }>;
+            about: {
+              profile: {
+                displayName: string;
+                tagline?: string | undefined;
+                url: string;
+                location?:
+                  | { country?: string | undefined; city?: string | undefined }
+                  | undefined;
+              };
+            };
+            community: {
+              roleSet: {
+                memberUsers: Array<{ id: string }>;
+                memberOrganizations: Array<{ id: string }>;
+                leadOrganizations: Array<{ id: string }>;
+                leadUsers: Array<{ id: string }>;
+              };
+            };
+          }>;
+          account: {
+            host?: { id: string } | { id: string } | { id: string } | undefined;
+          };
+          about: {
+            profile: {
+              displayName: string;
+              tagline?: string | undefined;
+              url: string;
+              location?:
+                | { country?: string | undefined; city?: string | undefined }
+                | undefined;
+            };
+          };
+          community: {
+            roleSet: {
+              memberUsers: Array<{ id: string }>;
+              memberOrganizations: Array<{ id: string }>;
+              leadOrganizations: Array<{ id: string }>;
+              leadUsers: Array<{ id: string }>;
+            };
+          };
+        }
+      | undefined;
+  };
+};
+
+export type SpaceByNameFragmentFragment = {
+  id: string;
+  nameID: string;
+  about: {
+    profile: {
+      displayName: string;
+      tagline?: string | undefined;
+      url: string;
+      location?:
+        | { country?: string | undefined; city?: string | undefined }
+        | undefined;
+    };
+  };
+  community: {
+    roleSet: {
+      memberUsers: Array<{ id: string }>;
+      memberOrganizations: Array<{ id: string }>;
+      leadOrganizations: Array<{ id: string }>;
+      leadUsers: Array<{ id: string }>;
+    };
+  };
+};
+
 export type SpaceRolesL0QueryVariables = Exact<{ [key: string]: never }>;
 
 export type SpaceRolesL0Query = {
   spaces: Array<{
     id: string;
     nameID: string;
-    about: {
-      profile: {
-        displayName: string;
-        tagline?: string | undefined;
-        url: string;
-        location?:
-          | { country?: string | undefined; city?: string | undefined }
-          | undefined;
-      };
-    };
-    community: {
-      roleSet: {
-        memberUsers: Array<{ id: string }>;
-        memberOrganizations: Array<{ id: string }>;
-        leadOrganizations: Array<{ id: string }>;
-        leadUsers: Array<{ id: string }>;
-      };
-    };
-    account: {
-      host?: { id: string } | { id: string } | { id: string } | undefined;
-    };
-  }>;
-};
-
-export type SpaceRolesL1QueryVariables = Exact<{ [key: string]: never }>;
-
-export type SpaceRolesL1Query = {
-  spaces: Array<{
-    id: string;
-    nameID: string;
-    about: { profile: { displayName: string } };
-    subspaces: Array<{
-      id: string;
-      nameID: string;
-      about: {
-        profile: {
-          displayName: string;
-          tagline?: string | undefined;
-          url: string;
-          location?:
-            | { country?: string | undefined; city?: string | undefined }
-            | undefined;
-        };
-      };
-      community: {
-        roleSet: {
-          memberUsers: Array<{ id: string }>;
-          memberOrganizations: Array<{ id: string }>;
-          leadOrganizations: Array<{ id: string }>;
-          leadUsers: Array<{ id: string }>;
-        };
-      };
-    }>;
-    account: {
-      host?: { id: string } | { id: string } | { id: string } | undefined;
-    };
-  }>;
-};
-
-export type SpaceRolesL2QueryVariables = Exact<{ [key: string]: never }>;
-
-export type SpaceRolesL2Query = {
-  spaces: Array<{
-    id: string;
-    nameID: string;
-    about: { profile: { displayName: string } };
     subspaces: Array<{
       id: string;
       nameID: string;
@@ -17801,16 +17864,94 @@ export type SpaceRolesL2Query = {
           };
         };
       }>;
+      about: {
+        profile: {
+          displayName: string;
+          tagline?: string | undefined;
+          url: string;
+          location?:
+            | { country?: string | undefined; city?: string | undefined }
+            | undefined;
+        };
+      };
+      community: {
+        roleSet: {
+          memberUsers: Array<{ id: string }>;
+          memberOrganizations: Array<{ id: string }>;
+          leadOrganizations: Array<{ id: string }>;
+          leadUsers: Array<{ id: string }>;
+        };
+      };
     }>;
     account: {
       host?: { id: string } | { id: string } | { id: string } | undefined;
     };
+    about: {
+      profile: {
+        displayName: string;
+        tagline?: string | undefined;
+        url: string;
+        location?:
+          | { country?: string | undefined; city?: string | undefined }
+          | undefined;
+      };
+    };
+    community: {
+      roleSet: {
+        memberUsers: Array<{ id: string }>;
+        memberOrganizations: Array<{ id: string }>;
+        leadOrganizations: Array<{ id: string }>;
+        leadUsers: Array<{ id: string }>;
+      };
+    };
   }>;
+};
+
+export type SpaceFragmentFragment = {
+  id: string;
+  nameID: string;
+  about: {
+    profile: {
+      displayName: string;
+      tagline?: string | undefined;
+      url: string;
+      location?:
+        | { country?: string | undefined; city?: string | undefined }
+        | undefined;
+    };
+  };
+  community: {
+    roleSet: {
+      memberUsers: Array<{ id: string }>;
+      memberOrganizations: Array<{ id: string }>;
+      leadOrganizations: Array<{ id: string }>;
+      leadUsers: Array<{ id: string }>;
+    };
+  };
 };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UsersQuery = {
+  users: Array<{
+    id: string;
+    nameID: string;
+    profile: {
+      displayName: string;
+      url: string;
+      avatar?: { uri: string } | undefined;
+      location?:
+        | { country?: string | undefined; city?: string | undefined }
+        | undefined;
+    };
+  }>;
+};
+
+export type UsersByIDsQueryVariables = Exact<{
+  ids: Array<Scalars["UUID"]["input"]> | Scalars["UUID"]["input"];
+}>;
+
+export type UsersByIDsQuery = {
   users: Array<{
     id: string;
     nameID: string;

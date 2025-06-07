@@ -1,0 +1,18 @@
+# Accepts an array of user IDs as input
+query usersByIDs($ids: [UUID!]!) {
+  users(IDs: $ids) {
+    id
+    nameID
+    profile {
+      displayName
+      avatar: visual(type: AVATAR) {
+        uri
+      }
+      location {
+        country
+        city
+      }
+      url
+    }
+  }
+}

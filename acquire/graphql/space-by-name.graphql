@@ -1,21 +1,23 @@
-query spaceRolesL0 {
-  spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
-    ...SpaceFragment
-    subspaces {
-      ...SpaceFragment
+query spaceByName($nameId: NameID!) {
+  lookupByName {
+    space(NAMEID: $nameId) {
+      ...SpaceByNameFragment
       subspaces {
-        ...SpaceFragment
+        ...SpaceByNameFragment
+        subspaces {
+          ...SpaceByNameFragment
+        }
       }
-    }
-    account {
-      host {
-        id
+      account {
+        host {
+          id
+        }
       }
     }
   }
 }
 
-fragment SpaceFragment on Space {
+fragment SpaceByNameFragment on Space {
   id
   nameID
   about {

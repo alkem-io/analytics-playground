@@ -63,7 +63,7 @@ export class HovercardHtml {
     <table style="width:100%">
       <tr>
         ${tdImage}
-        <td><b>${node.profile.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.profile.url}" target=”_blank”>Link</a></td>
+        <td><b>${node.profile?.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.profile?.url}" target=”_blank”>Link</a></td>
       </tr>
     </table>`;
   }

@@ -20,8 +20,8 @@ export class MapLocationHandler {
     const nodesData = nodes.data();
     for (const node of nodesData) {
       if (nodeType == node.type) {
-        const lon = node.profile.location?.lon || '';
-        const lat = node.profile.location?.lat || '';
+        const lon = node.profile?.location?.lon || '';
+        const lat = node.profile?.location?.lat || '';
         if (this.isValidLocation(lon, lat)) {
           const fixedLocation = this.transformationHandler.projection([
             lon,

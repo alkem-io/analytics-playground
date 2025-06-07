@@ -15,6 +15,6 @@ export class GraphVizualizationControls {
       .attr('id', (d: any) => d.id)
       .attr('class', 'space-option' )
       .attr('value', (d: any) => d.id)
-      .text((d: any) => d.profile.displayName);
+      .text((d: any) => d.profile?.displayName);
   }
 }

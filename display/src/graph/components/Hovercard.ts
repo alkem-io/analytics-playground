@@ -48,7 +48,7 @@ import { TransformationHandler } from "../handlers/TransformationHandler";
 
   moveTo(x: number, y: number, node: any) {
     // Update the hovercard data
-    this.cardTextName.text(node.profile.displayName);
+    this.cardTextName.text(node.profile?.displayName);
     this.cardTextPosition.text(node.nameID);
 
     const nameWidth = this.cardTextName.node().getBBox().width;

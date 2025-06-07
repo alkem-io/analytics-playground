@@ -1,7 +1,6 @@
 export class GraphLocationModel {
   country: string;
   city: string;
-
   lon: number;
   lat: number;
 

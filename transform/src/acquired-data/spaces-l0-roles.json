@@ -6,20 +6,184 @@
       "profile": {
         "displayName": "test2",
         "tagline": "",
-        "location": { "country": null, "city": null },
+        "location": {
+          "country": null,
+          "city": null
+        },
         "url": "http://localhost:3000/test2"
       }
     },
     "community": {
       "roleSet": {
-        "memberUsers": [{ "id": "626572d9-f1d3-4358-a545-e7003db180bb" }],
+        "memberUsers": [
+          {
+            "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+          }
+        ],
         "memberOrganizations": [],
         "leadOrganizations": [],
-        "leadUsers": [{ "id": "626572d9-f1d3-4358-a545-e7003db180bb" }]
+        "leadUsers": [
+          {
+            "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+          }
+        ]
       }
     },
-    "account": { "host": { "id": "626572d9-f1d3-4358-a545-e7003db180bb" } },
-    "subspaces": []
+    "account": {
+      "host": {
+        "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+      }
+    },
+    "subspaces": [
+      {
+        "id": "a6101805-98ce-4cfa-85fd-c05988dc7be5",
+        "nameID": "asdfsadf",
+        "about": {
+          "profile": {
+            "displayName": "asdfsadf",
+            "tagline": "",
+            "location": {
+              "country": null,
+              "city": null
+            },
+            "url": "http://localhost:3000/test2/challenges/asdfsadf"
+          }
+        },
+        "community": {
+          "roleSet": {
+            "memberUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ],
+            "memberOrganizations": [],
+            "leadOrganizations": [],
+            "leadUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ]
+          }
+        },
+        "account": {
+          "host": {
+            "id": ""
+          }
+        },
+        "subspaces": []
+      },
+      {
+        "id": "b1edfd03-0f76-4503-87b8-ba90de70c905",
+        "nameID": "ddddd",
+        "about": {
+          "profile": {
+            "displayName": "ddddd",
+            "tagline": "",
+            "location": {
+              "country": null,
+              "city": null
+            },
+            "url": "http://localhost:3000/test2/challenges/ddddd"
+          }
+        },
+        "community": {
+          "roleSet": {
+            "memberUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ],
+            "memberOrganizations": [],
+            "leadOrganizations": [],
+            "leadUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ]
+          }
+        },
+        "account": {
+          "host": {
+            "id": ""
+          }
+        },
+        "subspaces": []
+      },
+      {
+        "id": "6659f8ee-18bc-492b-b110-de59db5f31cc",
+        "nameID": "newspace4",
+        "about": {
+          "profile": {
+            "displayName": "newspace4",
+            "tagline": "",
+            "location": {
+              "country": null,
+              "city": null
+            },
+            "url": "http://localhost:3000/test2/challenges/newspace4"
+          }
+        },
+        "community": {
+          "roleSet": {
+            "memberUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ],
+            "memberOrganizations": [],
+            "leadOrganizations": [],
+            "leadUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ]
+          }
+        },
+        "account": {
+          "host": {
+            "id": ""
+          }
+        },
+        "subspaces": []
+      },
+      {
+        "id": "f33941d7-f9ef-49a7-a9bc-495beca672d1",
+        "nameID": "ss1vi",
+        "about": {
+          "profile": {
+            "displayName": "ss1",
+            "tagline": "",
+            "location": {
+              "country": null,
+              "city": null
+            },
+            "url": "http://localhost:3000/test2/challenges/ss1vi"
+          }
+        },
+        "community": {
+          "roleSet": {
+            "memberUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ],
+            "memberOrganizations": [],
+            "leadOrganizations": [],
+            "leadUsers": [
+              {
+                "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              }
+            ]
+          }
+        },
+        "account": {
+          "host": {
+            "id": ""
+          }
+        },
+        "subspaces": []
+      }
+    ]
   },
   {
     "id": "ead1e513-e086-4032-bd27-93bdd47c9126",
@@ -28,7 +192,10 @@
       "profile": {
         "displayName": "Default Space",
         "tagline": "An empty space to be populated",
-        "location": { "country": null, "city": null },
+        "location": {
+          "country": null,
+          "city": null
+        },
         "url": "http://localhost:3000/eco1"
       }
     },
@@ -36,13 +203,23 @@
       "roleSet": {
         "memberUsers": [],
         "memberOrganizations": [
-          { "id": "59a685b0-86ff-485c-a2a1-a540470190bc" }
+          {
+            "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
+          }
         ],
-        "leadOrganizations": [{ "id": "59a685b0-86ff-485c-a2a1-a540470190bc" }],
+        "leadOrganizations": [
+          {
+            "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
+          }
+        ],
         "leadUsers": []
       }
     },
-    "account": { "host": { "id": "59a685b0-86ff-485c-a2a1-a540470190bc" } },
+    "account": {
+      "host": {
+        "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
+      }
+    },
     "subspaces": []
   }
 ]

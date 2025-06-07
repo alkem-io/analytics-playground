@@ -1,6 +1,43 @@
 {
   "spaces": [
     {
+      "id": "ead1e513-e086-4032-bd27-93bdd47c9126",
+      "nameID": "eco1",
+      "about": {
+        "profile": {
+          "displayName": "Default Space",
+          "tagline": "An empty space to be populated",
+          "location": {
+            "country": null,
+            "city": null
+          },
+          "url": "http://localhost:3000/eco1"
+        }
+      },
+      "community": {
+        "roleSet": {
+          "memberUsers": [],
+          "memberOrganizations": [
+            {
+              "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
+            }
+          ],
+          "leadOrganizations": [
+            {
+              "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
+            }
+          ],
+          "leadUsers": []
+        }
+      },
+      "subspaces": [],
+      "account": {
+        "host": {
+          "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
+        }
+      }
+    },
+    {
       "id": "0e7bac6d-a34d-4ed8-9726-6b1949511503",
       "nameID": "test2",
       "about": {
@@ -163,43 +200,6 @@
       "account": {
         "host": {
           "id": "626572d9-f1d3-4358-a545-e7003db180bb"
-        }
-      }
-    },
-    {
-      "id": "ead1e513-e086-4032-bd27-93bdd47c9126",
-      "nameID": "eco1",
-      "about": {
-        "profile": {
-          "displayName": "Default Space",
-          "tagline": "An empty space to be populated",
-          "location": {
-            "country": null,
-            "city": null
-          },
-          "url": "http://localhost:3000/eco1"
-        }
-      },
-      "community": {
-        "roleSet": {
-          "memberUsers": [],
-          "memberOrganizations": [
-            {
-              "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
-            }
-          ],
-          "leadOrganizations": [
-            {
-              "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
-            }
-          ],
-          "leadUsers": []
-        }
-      },
-      "subspaces": [],
-      "account": {
-        "host": {
-          "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
         }
       }
     }

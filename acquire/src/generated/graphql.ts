@@ -18372,76 +18372,6 @@ export type SpaceRolesL0Query = {
   spaces: Array<{
     id: string;
     nameID: string;
-    about: {
-      profile: {
-        displayName: string;
-        tagline?: string | undefined;
-        url: string;
-        location?:
-          | { country?: string | undefined; city?: string | undefined }
-          | undefined;
-      };
-    };
-    community: {
-      roleSet: {
-        memberUsers: Array<{ id: string }>;
-        memberOrganizations: Array<{ id: string }>;
-        leadOrganizations: Array<{ id: string }>;
-        leadUsers: Array<{ id: string }>;
-      };
-    };
-    account: {
-      host?: { id: string } | { id: string } | { id: string } | undefined;
-    };
-  }>;
-};
-
-export type SpaceRolesL1QueryVariables = SchemaTypes.Exact<{
-  [key: string]: never;
-}>;
-
-export type SpaceRolesL1Query = {
-  spaces: Array<{
-    id: string;
-    nameID: string;
-    about: { profile: { displayName: string } };
-    subspaces: Array<{
-      id: string;
-      nameID: string;
-      about: {
-        profile: {
-          displayName: string;
-          tagline?: string | undefined;
-          url: string;
-          location?:
-            | { country?: string | undefined; city?: string | undefined }
-            | undefined;
-        };
-      };
-      community: {
-        roleSet: {
-          memberUsers: Array<{ id: string }>;
-          memberOrganizations: Array<{ id: string }>;
-          leadOrganizations: Array<{ id: string }>;
-          leadUsers: Array<{ id: string }>;
-        };
-      };
-    }>;
-    account: {
-      host?: { id: string } | { id: string } | { id: string } | undefined;
-    };
-  }>;
-};
-
-export type SpaceRolesL2QueryVariables = SchemaTypes.Exact<{
-  [key: string]: never;
-}>;
-
-export type SpaceRolesL2Query = {
-  spaces: Array<{
-    id: string;
-    nameID: string;
-    about: { profile: { displayName: string } };
     subspaces: Array<{
       id: string;
       nameID: string;
@@ -18467,11 +18397,70 @@ export type SpaceRolesL2Query = {
           };
         };
       }>;
+      about: {
+        profile: {
+          displayName: string;
+          tagline?: string | undefined;
+          url: string;
+          location?:
+            | { country?: string | undefined; city?: string | undefined }
+            | undefined;
+        };
+      };
+      community: {
+        roleSet: {
+          memberUsers: Array<{ id: string }>;
+          memberOrganizations: Array<{ id: string }>;
+          leadOrganizations: Array<{ id: string }>;
+          leadUsers: Array<{ id: string }>;
+        };
+      };
     }>;
     account: {
       host?: { id: string } | { id: string } | { id: string } | undefined;
     };
+    about: {
+      profile: {
+        displayName: string;
+        tagline?: string | undefined;
+        url: string;
+        location?:
+          | { country?: string | undefined; city?: string | undefined }
+          | undefined;
+      };
+    };
+    community: {
+      roleSet: {
+        memberUsers: Array<{ id: string }>;
+        memberOrganizations: Array<{ id: string }>;
+        leadOrganizations: Array<{ id: string }>;
+        leadUsers: Array<{ id: string }>;
+      };
+    };
   }>;
+};
+
+export type SpaceFragmentFragment = {
+  id: string;
+  nameID: string;
+  about: {
+    profile: {
+      displayName: string;
+      tagline?: string | undefined;
+      url: string;
+      location?:
+        | { country?: string | undefined; city?: string | undefined }
+        | undefined;
+    };
+  };
+  community: {
+    roleSet: {
+      memberUsers: Array<{ id: string }>;
+      memberOrganizations: Array<{ id: string }>;
+      leadOrganizations: Array<{ id: string }>;
+      leadUsers: Array<{ id: string }>;
+    };
+  };
 };
 
 export type UsersQueryVariables = SchemaTypes.Exact<{ [key: string]: never }>;
@@ -18514,6 +18503,39 @@ export type UsersByIDsQuery = {
 
 export const SpaceByNameFragmentFragmentDoc = gql`
   fragment SpaceByNameFragment on Space {
+    id
+    nameID
+    about {
+      profile {
+        displayName
+        tagline
+        location {
+          country
+          city
+        }
+        url
+      }
+    }
+    community {
+      roleSet {
+        memberUsers: usersInRole(role: MEMBER) {
+          id
+        }
+        memberOrganizations: organizationsInRole(role: MEMBER) {
+          id
+        }
+        leadOrganizations: organizationsInRole(role: LEAD) {
+          id
+        }
+        leadUsers: usersInRole(role: LEAD) {
+          id
+        }
+      }
+    }
+  }
+`;
+export const SpaceFragmentFragmentDoc = gql`
+  fragment SpaceFragment on Space {
     id
     nameID
     about {
@@ -18631,135 +18653,11 @@ export const SpaceByNameDocument = gql`
 export const SpaceRolesL0Document = gql`
   query spaceRolesL0 {
     spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
-      id
-      nameID
-      about {
-        profile {
-          displayName
-          tagline
-          location {
-            country
-            city
-          }
-          url
-        }
-      }
-      community {
-        roleSet {
-          memberUsers: usersInRole(role: MEMBER) {
-            id
-          }
-          memberOrganizations: organizationsInRole(role: MEMBER) {
-            id
-          }
-          leadOrganizations: organizationsInRole(role: LEAD) {
-            id
-          }
-          leadUsers: usersInRole(role: LEAD) {
-            id
-          }
-        }
-      }
-      account {
-        host {
-          id
-        }
-      }
-    }
-  }
-`;
-export const SpaceRolesL1Document = gql`
-  query spaceRolesL1 {
-    spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
-      id
-      nameID
-      about {
-        profile {
-          displayName
-        }
-      }
+      ...SpaceFragment
       subspaces {
-        id
-        nameID
-        about {
-          profile {
-            displayName
-            tagline
-            location {
-              country
-              city
-            }
-            url
-          }
-        }
-        community {
-          roleSet {
-            memberUsers: usersInRole(role: MEMBER) {
-              id
-            }
-            memberOrganizations: organizationsInRole(role: MEMBER) {
-              id
-            }
-            leadOrganizations: organizationsInRole(role: LEAD) {
-              id
-            }
-            leadUsers: usersInRole(role: LEAD) {
-              id
-            }
-          }
-        }
-      }
-      account {
-        host {
-          id
-        }
-      }
-    }
-  }
-`;
-export const SpaceRolesL2Document = gql`
-  query spaceRolesL2 {
-    spaces(filter: { visibilities: [ACTIVE, DEMO] }) {
-      id
-      nameID
-      about {
-        profile {
-          displayName
-        }
-      }
-      subspaces {
-        id
-        nameID
+        ...SpaceFragment
         subspaces {
-          id
-          nameID
-          about {
-            profile {
-              displayName
-              tagline
-              location {
-                country
-                city
-              }
-              url
-            }
-          }
-          community {
-            roleSet {
-              memberUsers: usersInRole(role: MEMBER) {
-                id
-              }
-              memberOrganizations: organizationsInRole(role: MEMBER) {
-                id
-              }
-              leadOrganizations: organizationsInRole(role: LEAD) {
-                id
-              }
-              leadUsers: usersInRole(role: LEAD) {
-                id
-              }
-            }
-          }
+          ...SpaceFragment
         }
       }
       account {
@@ -18769,6 +18667,7 @@ export const SpaceRolesL2Document = gql`
       }
     }
   }
+  ${SpaceFragmentFragmentDoc}
 `;
 export const UsersDocument = gql`
   query users {
@@ -18827,8 +18726,6 @@ const OrganizationByIdDocumentString = print(OrganizationByIdDocument);
 const OrganizationsDocumentString = print(OrganizationsDocument);
 const SpaceByNameDocumentString = print(SpaceByNameDocument);
 const SpaceRolesL0DocumentString = print(SpaceRolesL0Document);
-const SpaceRolesL1DocumentString = print(SpaceRolesL1Document);
-const SpaceRolesL2DocumentString = print(SpaceRolesL2Document);
 const UsersDocumentString = print(UsersDocument);
 const UsersByIDsDocumentString = print(UsersByIDsDocument);
 export function getSdk(
@@ -18941,50 +18838,6 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
         "spaceRolesL0",
-        "query",
-        variables,
-      );
-    },
-    spaceRolesL1(
-      variables?: SchemaTypes.SpaceRolesL1QueryVariables,
-      requestHeaders?: GraphQLClientRequestHeaders,
-    ): Promise<{
-      data: SchemaTypes.SpaceRolesL1Query;
-      errors?: GraphQLError[];
-      extensions?: any;
-      headers: Headers;
-      status: number;
-    }> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.rawRequest<SchemaTypes.SpaceRolesL1Query>(
-            SpaceRolesL1DocumentString,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders },
-          ),
-        "spaceRolesL1",
-        "query",
-        variables,
-      );
-    },
-    spaceRolesL2(
-      variables?: SchemaTypes.SpaceRolesL2QueryVariables,
-      requestHeaders?: GraphQLClientRequestHeaders,
-    ): Promise<{
-      data: SchemaTypes.SpaceRolesL2Query;
-      errors?: GraphQLError[];
-      extensions?: any;
-      headers: Headers;
-      status: number;
-    }> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.rawRequest<SchemaTypes.SpaceRolesL2Query>(
-            SpaceRolesL2DocumentString,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders },
-          ),
-        "spaceRolesL2",
         "query",
         variables,
       );

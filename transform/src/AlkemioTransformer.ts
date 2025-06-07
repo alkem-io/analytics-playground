@@ -2,11 +2,6 @@ import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
-import organizationsData from './acquired-data/organizations.json';
-import usersData from './acquired-data/users.json';
-import spacesL0Data from './acquired-data/spaces-l0-roles.json';
-import spacesL1Data from './acquired-data/spaces-l1-roles.json';
-import spacesL2Data from './acquired-data/spaces-l2-roles.json';
 import { NodeType } from './common/node.type';
 import { NodeGroup } from './common/node.group';
 import { NodeWeight } from './common/node.weight';
@@ -29,7 +24,16 @@ export class AlkemioGraphTransformer {
     this.geocodeHandler = geocodeHandler;
   }
 
-  async transformData() {
+  // New: Accepts data as parameters
+  async transformData({
+    users,
+    organizations,
+    spacesL0,
+  }: {
+    users: any[];
+    organizations: any[];
+    spacesL0: SpaceModel[];
+  }) {
     // create the graph
     const spaceL0Nodes: NodeChallenge[] = [];
     const spaceL1Nodes: NodeChallenge[] = [];
@@ -38,7 +42,6 @@ export class AlkemioGraphTransformer {
     const edges: Edge[] = [];
 
     // Nodes for users + orgs
-    const users = usersData.data.users;
     for (let i = 0; i < users.length; i++) {
       const contributor = users[i];
       const location = contributor.profile.location;
@@ -55,7 +58,7 @@ export class AlkemioGraphTransformer {
         NodeGroup.CONTRIBUTORS,
         NodeWeight.USER,
         contributor.profile.url,
-        contributor.profile.avatar.uri,
+        contributor.profile.avatar?.uri,
         location.country || '',
         location.city || '',
         locationExact[0],
@@ -64,7 +67,6 @@ export class AlkemioGraphTransformer {
       contributorNodes.push(contributorNode);
     }
 
-    const organizations = organizationsData.data.organizations;
     for (let i = 0; i < organizations.length; i++) {
       const contributor = organizations[i];
       const location = contributor.profile.location;
@@ -81,7 +83,7 @@ export class AlkemioGraphTransformer {
         NodeGroup.CONTRIBUTORS,
         NodeWeight.ORGANIZATION,
         contributor.profile.url,
-        contributor.profile.avatar.uri,
+        contributor.profile.avatar?.uri,
         location.country || '',
         location.city || '',
         locationExact[0],
@@ -89,11 +91,6 @@ export class AlkemioGraphTransformer {
       );
       contributorNodes.push(contributorNode);
     }
-
-    // Use SpaceModel[] for type safety
-    const spacesL0: SpaceModel[] = spacesL0Data.map(mapSpaceDataToSpaceModel);
-    const spacesL1: SpaceModel[] = spacesL1Data.map(mapSpaceDataToSpaceModel);
-    const spacesL2: SpaceModel[] = spacesL2Data.map(mapSpaceDataToSpaceModel);
 
     // Process Spaces
     for (const space of spacesL0) {
@@ -118,7 +115,6 @@ export class AlkemioGraphTransformer {
         locationExact[0],
         locationExact[1]
       );
-
       spaceL0Nodes.push(spaceNode);
       this.addCommunityRoleEdges(
         space,
@@ -151,7 +147,7 @@ export class AlkemioGraphTransformer {
     }
 
     // Process Challenges
-    for (const space of spacesL1) {
+    for (const space of spacesL0) {
       for (const spaceL1 of space.subspaces) {
         const location = spaceL1.about.profile.location;
         const locationExact = await this.geocodeHandler.lookup(
@@ -174,9 +170,7 @@ export class AlkemioGraphTransformer {
           locationExact[0],
           locationExact[1]
         );
-
         spaceL1Nodes.push(challengeNode);
-
         const edge = new Edge(
           spaceL1.id,
           space.id,
@@ -185,7 +179,6 @@ export class AlkemioGraphTransformer {
           space.id
         );
         edges.push(edge);
-
         this.addCommunityRoleEdges(
           spaceL1,
           spaceL1.community.roleSet.memberUsers,
@@ -218,7 +211,7 @@ export class AlkemioGraphTransformer {
     }
 
     // Process L2 spaces
-    for (const space of spacesL2) {
+    for (const space of spacesL0) {
       for (const spaceL1 of space.subspaces) {
         for (const spaceL2 of spaceL1.subspaces) {
           const location = spaceL2.about.profile.location;
@@ -242,9 +235,7 @@ export class AlkemioGraphTransformer {
             locationExact[0],
             locationExact[1]
           );
-
           spaceL2Nodes.push(opportunityNode);
-
           const edge = new Edge(
             spaceL2.id,
             spaceL1.id,
@@ -253,7 +244,6 @@ export class AlkemioGraphTransformer {
             space.id
           );
           edges.push(edge);
-
           this.addCommunityRoleEdges(
             spaceL2,
             spaceL2.community.roleSet.memberUsers,
@@ -295,9 +285,31 @@ export class AlkemioGraphTransformer {
         opportunities: spaceL2Nodes,
       },
     };
+    return data;
+  }
 
-    // save the results to files
-    fs.writeFileSync(TRANSFORMED_DATA_FILE, JSON.stringify(data));
+  // New: Loads from file and calls transformDataFromParams
+  async transformDataFromFiles({
+    usersFile,
+    organizationsFile,
+    spacesL0File,
+  }: {
+    usersFile: string;
+    organizationsFile: string;
+    spacesL0File: string;
+  }) {
+    const users = JSON.parse(fs.readFileSync(usersFile, 'utf-8'));
+    const organizations = JSON.parse(fs.readFileSync(organizationsFile, 'utf-8'));
+    const spacesL0 = JSON.parse(fs.readFileSync(spacesL0File, 'utf-8')).map(mapSpaceDataToSpaceModel);
+    return await this.transformData({ users, organizations, spacesL0 });
+  }
+
+  async loadData() {
+    return this.transformDataFromFiles({
+      usersFile: './acquired-data/users.json',
+      organizationsFile: './acquired-data/organizations.json',
+      spacesL0File: './acquired-data/spaces-l0-roles.json',
+    });
   }
 
   addCommunityRoleEdges(

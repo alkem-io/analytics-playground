@@ -12,7 +12,7 @@ const main = async () => {
   const apiKey = '4cfbe072a6904698aa21382c71a3a44c'
   const geocodeHandler = new GeoapifyGeocodeHandler(apiKey, logger);
   const alkemioAdapter = new AlkemioGraphTransformer(logger, geocodeHandler);
-  alkemioAdapter.transformData();
+  alkemioAdapter.loadData();
 };
 
 main().catch(error => {

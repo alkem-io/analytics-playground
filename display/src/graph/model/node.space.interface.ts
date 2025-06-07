@@ -1,5 +1,5 @@
 import { INode } from "./node.interface";
 
-export interface INodeChallenge extends INode {
+export interface INodeSpace extends INode {
   leadOrgsCount: number;
 }

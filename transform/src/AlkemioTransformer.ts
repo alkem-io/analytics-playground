@@ -9,6 +9,7 @@ import { EdgeWeight } from './common/edge.weight';
 import { EdgeType } from './common/edge.type';
 import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 import { Logger } from 'winston';
+import { IDisplayData } from '../../display/src/graph/model/data.interface';
 import { ContributorModel, SpaceModel } from '../../acquire/src/model/spaceModel';
 import countries from 'i18n-iso-countries';
 
@@ -194,13 +195,13 @@ export class AlkemioGraphTransformer {
       }
     }
 
-    const data = {
+    const data: IDisplayData = {
       edges: edges,
       nodes: {
         contributors: contributorNodes,
-        spaces: spaceL0Nodes,
-        challenges: spaceL1Nodes,
-        opportunities: spaceL2Nodes,
+        spacesL0: spaceL0Nodes,
+        spacesL1: spaceL1Nodes,
+        spacesL2: spaceL2Nodes,
       },
     };
     // save the results to files

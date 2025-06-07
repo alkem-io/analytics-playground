@@ -1,10 +1,10 @@
 import { json } from 'd3-fetch';
-import { IData } from './model/data.interface';
+import { IDisplayData } from './model/data.interface';
 import { IEdge } from './model/edge.interface';
 import { INode } from './model/node.interface';
 
 export class GraphDataProvider {
-  data: IData | undefined = undefined;
+  data: IDisplayData | undefined = undefined;
   // All the spaces, challenges, opportunities
   spaceNodes: INode[] = [];
   spaceNodesMap: Map<string, INode>;
@@ -34,9 +34,9 @@ export class GraphDataProvider {
     }
     const nodesGroup = this.data.nodes;
 
-    this.spaceNodes = nodesGroup.spaces
-      .concat(nodesGroup.challenges)
-      .concat(nodesGroup.opportunities);
+    this.spaceNodes = nodesGroup.spacesL0
+      .concat(nodesGroup.spacesL2)
+      .concat(nodesGroup.spacesL1);
     for (const spaceNode of this.spaceNodes) {
       this.spaceNodesMap.set(spaceNode.id, spaceNode);
     }
@@ -159,7 +159,7 @@ export class GraphDataProvider {
 
   getRawSpaceNodes() {
     if (!this.data) throw new Error('Not loaded');
-    return this.data.nodes.spaces;
+    return this.data.nodes.spacesL0;
 
     // const spacesJson = JSON.stringify(this.data.nodes.spaces);
     // return this.filteredNodes = JSON.parse(spacesJson);
@@ -169,13 +169,13 @@ export class GraphDataProvider {
     if (!this.data) throw new Error('Not loaded');
     // Only return a single space if only one selected
     if (this.showSingleSpace()) {
-      const space = this.data.nodes.spaces.find(
+      const space = this.data.nodes.spacesL0.find(
         space => (space.id = this.showSingleSpaceID)
       );
       if (space) return [space];
       return [];
     }
-    return this.data.nodes.spaces;
+    return this.data.nodes.spacesL0;
   }
 
   private getContributorNodesFilteredByRole(): INode[] {
@@ -206,7 +206,7 @@ export class GraphDataProvider {
     return result;
   }
 
-  getRawData(): IData {
+  getRawData(): IDisplayData {
     if (!this.data) throw new Error('Not loaded');
     return this.data;
   }
@@ -217,7 +217,7 @@ export class GraphDataProvider {
       // Only one Space so no Space-Space edges to add
       return result;
     }
-    const spaceNodes = this.getRawData().nodes.spaces;
+    const spaceNodes = this.getRawData().nodes.spacesL0;
 
     for (let i = 1; i < spaceNodes.length; i++) {
       for (let j = 1; j < spaceNodes.length; j++) {

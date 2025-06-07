@@ -7,12 +7,12 @@ const main = async () => {
   dotenv.config();
   const logger = createLogger();
 
-  logger.info('Tranforming acquired data into a graph for display with D3');
+  logger.info('Transforming acquired data into a graph for display with D3');
 
   const apiKey = '4cfbe072a6904698aa21382c71a3a44c'
   const geocodeHandler = new GeoapifyGeocodeHandler(apiKey, logger);
   const alkemioAdapter = new AlkemioGraphTransformer(logger, geocodeHandler);
-  alkemioAdapter.loadData();
+  alkemioAdapter.transformDataFromFiles();
 };
 
 main().catch(error => {

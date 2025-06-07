@@ -2,6 +2,9 @@ import fs from 'fs';
 import { NodeChallenge } from './model/graph/nodeChallenge';
 import { NodeContributor } from './model/graph/nodeContributor';
 import { Edge } from './model/graph/edge';
+import organizationsData from './acquired-data/organizations.json';
+import usersData from './acquired-data/users.json';
+import spacesL0Data from './acquired-data/spaces-l0-roles.json';
 import { NodeType } from './common/node.type';
 import { NodeGroup } from './common/node.group';
 import { NodeWeight } from './common/node.weight';
@@ -289,27 +292,11 @@ export class AlkemioGraphTransformer {
   }
 
   // New: Loads from file and calls transformDataFromParams
-  async transformDataFromFiles({
-    usersFile,
-    organizationsFile,
-    spacesL0File,
-  }: {
-    usersFile: string;
-    organizationsFile: string;
-    spacesL0File: string;
-  }) {
-    const users = JSON.parse(fs.readFileSync(usersFile, 'utf-8'));
-    const organizations = JSON.parse(fs.readFileSync(organizationsFile, 'utf-8'));
-    const spacesL0 = JSON.parse(fs.readFileSync(spacesL0File, 'utf-8')).map(mapSpaceDataToSpaceModel);
+  async transformDataFromFiles() {
+    const users = usersData.data.users;
+    const organizations = organizationsData.data.organizations;
+    const spacesL0 = spacesL0Data.map(mapSpaceDataToSpaceModel);
     return await this.transformData({ users, organizations, spacesL0 });
-  }
-
-  async loadData() {
-    return this.transformDataFromFiles({
-      usersFile: './acquired-data/users.json',
-      organizationsFile: './acquired-data/organizations.json',
-      spacesL0File: './acquired-data/spaces-l0-roles.json',
-    });
   }
 
   addCommunityRoleEdges(

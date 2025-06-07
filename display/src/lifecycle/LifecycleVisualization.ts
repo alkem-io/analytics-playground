@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { select, Selection } from 'd3-selection';
+import { forceSimulation, forceLink, forceManyBody, forceCollide, forceCenter } from 'd3-force';
 import { LifecycleVisualizationOptions } from './LifecycleVisualizationOptions';
 import { LifecycleDataProvider } from './LifecycleDataProvider';
 
@@ -113,15 +114,14 @@ export class LifecycleVisualization {
         target: edge.target.id,
       }))
     );
-    this.simulation = d3
-      .forceSimulation(nodes)
+    this.simulation = forceSimulation(nodes)
       .force(
         'link',
-        d3.forceLink(links).id((d: any) => d.id)
+        forceLink(links).id((d: any) => d.id)
       )
-      .force('charge', d3.forceManyBody().strength(-100))
-      .force('collide', d3.forceCollide().radius(80).iterations(2))
-      .force('center', d3.forceCenter(this.width / 2, this.height / 2));
+      .force('charge', forceManyBody().strength(-100))
+      .force('collide', forceCollide().radius(80).iterations(2))
+      .force('center', forceCenter(this.width / 2, this.height / 2));
 
     this.linksGroup = this.svg
       .append('g')

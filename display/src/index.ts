@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import { select, Selection } from 'd3-selection';
 import { GraphDataProvider } from './graph/GraphDataProvider';
 import { GraphVizualization } from './graph/GraphVizualization';
 import { GraphVizualizationControls } from './graph/GraphVizualizationControls';
@@ -7,22 +7,22 @@ import { LifecycleDataProvider } from './lifecycle/LifecycleDataProvider';
 import { LifecycleVisualization } from './lifecycle/LifecycleVisualization';
 
 // Make the DOM locations available
-const graphSvg = d3.select('#graph-svg');
-const graphSpaceSelectionControl = d3.select('#graph-space-selector');
-const graphShowContributors = d3.select('#graph-checkbox-show-contributors');
-const graphZoomFit = d3.select('#graph-zoom-fit');
-const graphZoomPlus = d3.select('#graph-zoom-plus');
-const graphZoomMin = d3.select('#graph-zoom-min');
+const graphSvg = select('#graph-svg');
+const graphSpaceSelectionControl = select('#graph-space-selector');
+const graphShowContributors = select('#graph-checkbox-show-contributors');
+const graphZoomFit = select('#graph-zoom-fit');
+const graphZoomPlus = select('#graph-zoom-plus');
+const graphZoomMin = select('#graph-zoom-min');
 
 // Graph map related controls
-const graphDisplayMap = d3.select('#graph-display-map');
-const graphFixContributorsToLocation = d3.select('#graph-contributors-to-location');
-const graphFixSpacesToLocation = d3.select('#graph-spaces-to-location');
+const graphDisplayMap = select('#graph-display-map');
+const graphFixContributorsToLocation = select('#graph-contributors-to-location');
+const graphFixSpacesToLocation = select('#graph-spaces-to-location');
 
-const graphMapSelector = d3.select('#graph-map-selector');
+const graphMapSelector = select('#graph-map-selector');
 
-const lifecycleSvg = d3.select('#lifecycle-svg');
-const lifecycleSelectionControl = d3.select('#lifecycle-selector');
+const lifecycleSvg = select('#lifecycle-svg');
+const lifecycleSelectionControl = select('#lifecycle-selector');
 
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
@@ -58,7 +58,7 @@ const forceGraph = new GraphVizualization(
 );
 
 graphSpaceSelectionControl.on('change', function () {
-  const selectedSpaceOption = d3.select(this);
+  const selectedSpaceOption = select(this);
   const selectedSpaceID = selectedSpaceOption.property('value');
   graphDataProvider.showSpecificSpace(selectedSpaceID);
   forceGraph.refreshDisplayedGraph();

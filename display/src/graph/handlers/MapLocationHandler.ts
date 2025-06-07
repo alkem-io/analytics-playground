@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
-import { Simulation } from 'd3';
+import { drag, DragBehavior } from 'd3-drag';
+import { Simulation } from 'd3-force';
 import { TransformationHandler } from './TransformationHandler';
 
 export class MapLocationHandler {

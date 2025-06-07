@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import { json } from 'd3-fetch';
 import { node } from 'webpack';
 import { IData } from './model/data.interface';
 import { IEdge } from './model/edge.interface';
@@ -29,7 +29,7 @@ export class GraphDataProvider {
   }
 
   async loadData(jsonDataFileLocation: string) {
-    this.data = await d3.json(jsonDataFileLocation);
+    this.data = await json(jsonDataFileLocation);
     if (!this.data) {
       throw new Error('Unable to load data');
     }

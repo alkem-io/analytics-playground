@@ -1,6 +1,10 @@
-import * as d3 from 'd3';
+import { select, Selection } from 'd3-selection';
+import { max } from 'd3-array';
+import { scaleOrdinal, scaleLinear } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
+import { forceSimulation, forceLink, forceManyBody, forceCollide, forceCenter } from 'd3-force';
+import { line, curveCardinal } from 'd3-shape';
 import { GraphDataProvider } from './GraphDataProvider';
-import { Selection, Simulation } from 'd3';
 import { addArrowHeadDef } from './util/VisualDefinitions';
 import { NodeDragHandler } from './handlers/NodeDragHandler';
 import { TransformationHandler } from './handlers/TransformationHandler';
@@ -33,8 +37,8 @@ export class GraphVizualization {
 
   link: any;
   linkWidthScale: any;
-  simulation: Simulation<any, any>;
-  lineGenerator = d3.line().curve(d3.curveCardinal);
+  simulation: any;
+  lineGenerator = line().curve(curveCardinal);
   hovercard: HovercardHtml;
   transformationHandler: TransformationHandler;
   mapLocationHandler: MapLocationHandler;
@@ -56,7 +60,7 @@ export class GraphVizualization {
     this.width = width;
     this.height = height;
 
-    this.simulation = d3.forceSimulation();
+    this.simulation = forceSimulation();
 
     this.svg.style('width', width + 'px').style('height', height + 'px');
     const graphDefs = this.svg.append('defs').attr('id', 'graph-defs');
@@ -208,22 +212,20 @@ export class GraphVizualization {
   private updateScales() {
     // Get max values
     const maxNodeWeight =
-      d3.max(
+      max(
         this.graphDataProvider.getFilteredNodes().map(node => node.weight)
       ) || 10;
     const maxLinkWeight =
-      d3.max(
+      max(
         this.graphDataProvider.getFilteredEdges().map(link => link.weight)
       ) || 10;
 
     // Create the scales
-    this.nodeColorScale = d3.scaleOrdinal(d3.schemeCategory10);
-    this.nodeScale = d3
-      .scaleLinear()
+    this.nodeColorScale = scaleOrdinal(schemeCategory10);
+    this.nodeScale = scaleLinear()
       .domain([0, maxNodeWeight])
       .range([8, this.maxNodeRadius]);
-    this.linkWidthScale = d3
-      .scaleLinear()
+    this.linkWidthScale = scaleLinear()
       .domain([0, maxLinkWeight])
       .range([0.5, 5]);
   }
@@ -233,10 +235,9 @@ export class GraphVizualization {
     // In effect, the lower the number goes, the more spread out the graph will be.
     const gravity = -40;
 
-    const forceManyBody = d3.forceManyBody().strength(gravity);
+    const forceManyBodyInstance = forceManyBody().strength(gravity);
 
-    const forceLink = d3
-      .forceLink(this.graphDataProvider.getFilteredEdges())
+    const forceLinkInstance = forceLink(this.graphDataProvider.getFilteredEdges())
       .id((d: any) => d.id)
       .distance(150)
       .strength((edge: any) => {
@@ -249,14 +250,12 @@ export class GraphVizualization {
 
     const spaceEdges = this.graphDataProvider.getSpaceEdges();
 
-    const forceLinkSpaces = d3
-      .forceLink(spaceEdges)
+    const forceLinkSpacesInstance = forceLink(spaceEdges)
       .id((d: any) => d.id)
       .distance(1500)
       .strength(1);
 
-    const forceCollision = d3
-      .forceCollide()
+    const forceCollisionInstance = forceCollide()
       .radius((d: any) => {
         if (d.type === 'space') {
           return d.r * 5;
@@ -267,13 +266,12 @@ export class GraphVizualization {
       .iterations(1);
 
     const filteredNodes: any = this.graphDataProvider.getFilteredNodes();
-    this.simulation = d3
-      .forceSimulation(filteredNodes)
-      .force('link', forceLink)
-      .force('linkSpaces', forceLinkSpaces)
-      .force('charge', forceManyBody)
-      .force('collision', forceCollision)
-      .force('center', d3.forceCenter(this.width / 2, this.height / 2));
+    this.simulation = forceSimulation(filteredNodes)
+      .force('link', forceLinkInstance)
+      .force('linkSpaces', forceLinkSpacesInstance)
+      .force('charge', forceManyBodyInstance)
+      .force('collision', forceCollisionInstance)
+      .force('center', forceCenter(this.width / 2, this.height / 2));
 
     this.simulation.on('tick', () => {
       this.animateNode();

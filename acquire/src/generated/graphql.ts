@@ -18298,6 +18298,9 @@ export type SpaceRolesL1Query = {
         };
       };
     }>;
+    account: {
+      host?: { id: string } | { id: string } | { id: string } | undefined;
+    };
   }>;
 };
 
@@ -18336,6 +18339,9 @@ export type SpaceRolesL2Query = {
         };
       }>;
     }>;
+    account: {
+      host?: { id: string } | { id: string } | { id: string } | undefined;
+    };
   }>;
 };
 
@@ -18478,6 +18484,11 @@ export const SpaceRolesL1Document = gql`
           }
         }
       }
+      account {
+        host {
+          id
+        }
+      }
     }
   }
 `;
@@ -18524,6 +18535,11 @@ export const SpaceRolesL2Document = gql`
               }
             }
           }
+        }
+      }
+      account {
+        host {
+          id
         }
       }
     }

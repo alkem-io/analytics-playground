@@ -42,5 +42,10 @@ query spaceRolesL2 {
         }
       }
     }
+    account {
+      host {
+        id
+      }
+    }
   }
 }

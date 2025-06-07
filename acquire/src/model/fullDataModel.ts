@@ -2,21 +2,10 @@
 // filepath: acquire/src/model/fullDataModel.ts
 
 import { SpaceModel } from './spaceModel';
-
-export interface UserModel {
+export interface ContributorModel {
   id: string;
   nameID: string;
-  profile: {
-    displayName: string;
-    avatar?: { uri: string };
-    location?: { country: string | null; city: string | null };
-    url?: string;
-  };
-}
-
-export interface OrganizationModel {
-  id: string;
-  nameID: string;
+  type: 'user' | 'organization';
   profile: {
     displayName: string;
     avatar?: { uri: string };
@@ -27,6 +16,6 @@ export interface OrganizationModel {
 
 export interface FullDataModel {
   spaces: SpaceModel[];
-  users: UserModel[];
-  organizations: OrganizationModel[];
+  users: ContributorModel[];
+  organizations: ContributorModel[];
 }

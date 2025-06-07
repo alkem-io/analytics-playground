@@ -9,7 +9,7 @@ import { EdgeWeight } from './common/edge.weight';
 import { EdgeType } from './common/edge.type';
 import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 import { Logger } from 'winston';
-import { SpaceModel } from '../../acquire/src/model/spaceModel';
+import { ContributorModel, SpaceModel } from '../../acquire/src/model/spaceModel';
 import countries from 'i18n-iso-countries';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
@@ -32,6 +32,32 @@ export class AlkemioGraphTransformer {
   constructor(logger: Logger, geocodeHandler: GeoapifyGeocodeHandler) {
     this.logger = logger;
     this.geocodeHandler = geocodeHandler;
+  }
+
+  // Helper to create a NodeSpace for any level
+  private async createSpaceNode(space: any, parentId: string, nodeType: NodeType, nodeWeight: number, url: string, leadOrgCount: number): Promise<NodeSpace> {
+    const location = space.about.profile.location;
+    const countryName = resolveCountryName(location.country || '');
+    const locationExact = await this.geocodeHandler.lookup(
+      countryName,
+      location.city || '',
+      space.nameID
+    );
+    return new NodeSpace(
+      space.id,
+      space.nameID,
+      space.about.profile.displayName,
+      nodeType,
+      parentId,
+      nodeWeight,
+      leadOrgCount,
+      url,
+      '',
+      countryName,
+      location.city || '',
+      locationExact[0],
+      locationExact[1]
+    );
   }
 
   // New: Accepts data as parameters
@@ -106,121 +132,39 @@ export class AlkemioGraphTransformer {
 
     // Process Spaces
     for (const space of spacesL0) {
-      const location = space.about.profile.location;
-      const countryName = resolveCountryName(location.country || '');
-      const locationExact = await this.geocodeHandler.lookup(
-        countryName,
-        location.city || '',
-        space.nameID
-      );
-      const spaceNode = new NodeSpace(
+      const spaceNode = await this.createSpaceNode(
+        space,
         space.id,
-        space.nameID,
-        space.about.profile.displayName,
         NodeType.SPACE_L0,
-        space.id,
         NodeWeight.HUB,
-        1,
         space.about.profile.url,
-        '',
-        location.country,
-        location.city,
-        locationExact[0],
-        locationExact[1]
+        1
       );
       spaceL0Nodes.push(spaceNode);
-      this.addCommunityRoleEdges(
-        space,
-        space.community.roleSet.memberUsers,
-        edges,
-        EdgeType.MEMBER,
-        space.id
-      );
-      this.addCommunityRoleEdges(
-        space,
-        space.community.roleSet.memberOrganizations,
-        edges,
-        EdgeType.MEMBER,
-        space.id
-      );
-      this.addCommunityRoleEdges(
-        space,
-        space.community.roleSet.leadOrganizations,
-        edges,
-        EdgeType.LEAD,
-        space.id
-      );
-      this.addCommunityRoleEdges(
-        space,
-        space.community.roleSet.leadUsers,
-        edges,
-        EdgeType.LEAD,
-        space.id
-      );
+      this.addAllCommunityRoleEdges(space, edges, space.id);
     }
 
     // Process Challenges
-    for (const space of spacesL0) {
-      for (const spaceL1 of space.subspaces) {
-        const location = spaceL1.about.profile.location;
-        const countryName = resolveCountryName(location.country || '');
-        const locationExact = await this.geocodeHandler.lookup(
-          countryName,
-          location.city || '',
-          spaceL1.nameID
-        );
-        const spaceL1Node = new NodeSpace(
-          spaceL1.id,
-          spaceL1.nameID,
-          spaceL1.about.profile.displayName,
+    for (const spaceL0 of spacesL0) {
+      for (const spaceL1 of spaceL0.subspaces) {
+        const spaceL1Node = await this.createSpaceNode(
+          spaceL1,
+          spaceL0.id,
           NodeType.SPACE_L1,
-          space.id,
           NodeWeight.CHALLENGE,
-          spaceL1.community.roleSet.leadOrganizations.length,
           spaceL1.about.profile.url,
-          '',
-          location.country,
-          location.city,
-          locationExact[0],
-          locationExact[1]
+          spaceL1.community.roleSet.leadOrganizations.length
         );
         spaceL1Nodes.push(spaceL1Node);
         const edge = new Edge(
           spaceL1.id,
-          space.id,
+          spaceL0.id,
           EdgeWeight.CHILD,
           EdgeType.CHILD,
-          space.id
+          spaceL0.id
         );
         edges.push(edge);
-        this.addCommunityRoleEdges(
-          spaceL1,
-          spaceL1.community.roleSet.memberUsers,
-          edges,
-          EdgeType.MEMBER,
-          space.id
-        );
-        this.addCommunityRoleEdges(
-          spaceL1,
-          spaceL1.community.roleSet.memberOrganizations,
-          edges,
-          EdgeType.MEMBER,
-          space.id
-        );
-        this.addCommunityRoleEdges(
-          spaceL1,
-          spaceL1.community.roleSet.leadOrganizations,
-          edges,
-          EdgeType.LEAD,
-          space.id
-        );
-        this.addCommunityRoleEdges(
-          spaceL1,
-          spaceL1.community.roleSet.leadUsers,
-          edges,
-          EdgeType.LEAD,
-          space.id
-        );
+        this.addAllCommunityRoleEdges(spaceL1, edges, spaceL0.id);
       }
     }
 
@@ -228,27 +172,13 @@ export class AlkemioGraphTransformer {
     for (const space of spacesL0) {
       for (const spaceL1 of space.subspaces) {
         for (const spaceL2 of spaceL1.subspaces) {
-          const location = spaceL2.about.profile.location;
-          const countryName = resolveCountryName(location.country || '');
-          const locationExact = await this.geocodeHandler.lookup(
-            countryName,
-            location.city || '',
-            spaceL2.nameID
-          );
-          const spaceL2Node = new NodeSpace(
-            spaceL2.id,
-            spaceL2.nameID,
-            spaceL2.about.profile.displayName,
-            NodeType.SPACE_L2,
+          const spaceL2Node = await this.createSpaceNode(
+            spaceL2,
             space.id,
+            NodeType.SPACE_L2,
             NodeWeight.OPPORTUNITY,
-            spaceL2.community.roleSet.leadOrganizations.length,
             spaceL2.about.profile.url,
-            '',
-            (location.country ?? '') as string,
-            (location.city ?? '') as string,
-            locationExact[0],
-            locationExact[1]
+            spaceL2.community.roleSet.leadOrganizations.length
           );
           spaceL2Nodes.push(spaceL2Node);
           const edge = new Edge(
@@ -259,34 +189,7 @@ export class AlkemioGraphTransformer {
             space.id
           );
           edges.push(edge);
-          this.addCommunityRoleEdges(
-            spaceL2,
-            spaceL2.community.roleSet.memberUsers,
-            edges,
-            EdgeType.MEMBER,
-            space.id
-          );
-          this.addCommunityRoleEdges(
-            spaceL2,
-            spaceL2.community.roleSet.memberOrganizations,
-            edges,
-            EdgeType.MEMBER,
-            space.id
-          );
-          this.addCommunityRoleEdges(
-            spaceL2,
-            spaceL2.community.roleSet.leadOrganizations,
-            edges,
-            EdgeType.LEAD,
-            space.id
-          );
-          this.addCommunityRoleEdges(
-            spaceL2,
-            spaceL2.community.roleSet.leadUsers,
-            edges,
-            EdgeType.LEAD,
-            space.id
-          );
+          this.addAllCommunityRoleEdges(spaceL2, edges, space.id);
         }
       }
     }
@@ -304,9 +207,41 @@ export class AlkemioGraphTransformer {
     fs.writeFileSync(TRANSFORMED_DATA_FILE, JSON.stringify(data));
   }
 
+  // Helper to add all community role edges for a space node
+  private addAllCommunityRoleEdges(space: SpaceModel, edges: Edge[], group: string) {
+    this.addCommunityRoleEdges(
+      space,
+      space.community.roleSet.memberUsers,
+      edges,
+      EdgeType.MEMBER,
+      group
+    );
+    this.addCommunityRoleEdges(
+      space,
+      space.community.roleSet.memberOrganizations,
+      edges,
+      EdgeType.MEMBER,
+      group
+    );
+    this.addCommunityRoleEdges(
+      space,
+      space.community.roleSet.leadOrganizations,
+      edges,
+      EdgeType.LEAD,
+      group
+    );
+    this.addCommunityRoleEdges(
+      space,
+      space.community.roleSet.leadUsers,
+      edges,
+      EdgeType.LEAD,
+      group
+    );
+  }
+
   addCommunityRoleEdges(
-    parent: any,
-    contributors: any[],
+    parent: SpaceModel,
+    contributors: ContributorModel[],
     edges: Edge[],
     type: EdgeType,
     group: string

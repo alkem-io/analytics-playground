@@ -2,8 +2,8 @@ import { createLogger } from "./util/create-logger";
 import { createConfigUsingEnvVars } from "./util/create-config-using-envvars";
 import { AlkemioAnalyticsClient } from "./AlkemioAnalyticsClient";
 import fs from "fs";
-import { OrganizationModel, UserModel } from "./model/fullDataModel";
-import { mapUserDataToUserModel, mapOrganizationDataToOrganizationModel } from "./util/mapUserAndOrgDataToModel";
+import { ContributorModel } from "./model/fullDataModel";
+import { mapContributorDataToContributorModel } from "./util/mapUserAndOrgDataToModel";
 
 // Accept space nameIDs from command line, fallback to default
 const SPACE_NAMEIDS = process.argv.length > 2
@@ -45,14 +45,14 @@ class SpacesByNameIDAcquirer {
     const usersResponseData = await this.alkemioAnalyticsClient.sdkClient.usersByIDs({
       ids: userIDs,
     });
-    const users: UserModel[] = (usersResponseData.data.users || []).map(mapUserDataToUserModel);
+    const users: ContributorModel[] = (usersResponseData.data.users || []).map(user => mapContributorDataToContributorModel(user, 'user'));
 
     // 4. Fetch organization details and map
-    const organizations: OrganizationModel[] = [];
+    const organizations: ContributorModel[] = [];
     for (const orgID of orgIDs) {
       const org = await this.alkemioAnalyticsClient.sdkClient.organizationByID({ id: orgID });
       if (org.data.lookup.organization) {
-        organizations.push(mapOrganizationDataToOrganizationModel(org.data.lookup.organization));
+        organizations.push(mapContributorDataToContributorModel(org.data.lookup.organization, 'organization'));
       }
     }
 

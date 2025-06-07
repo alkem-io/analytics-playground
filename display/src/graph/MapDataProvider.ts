@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import { json } from 'd3-fetch';
 
 export class MapDataProvider {
   private selectedMap: string;
@@ -12,7 +12,7 @@ export class MapDataProvider {
   }
 
   async loadMap(geoJsonFile: string) {
-    const loadedMap = await d3.json(geoJsonFile);
+    const loadedMap = await json(geoJsonFile);
     if (!loadedMap) {
       throw new Error('Unable to load data');
     }

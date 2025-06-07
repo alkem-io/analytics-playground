@@ -1,5 +1,5 @@
 import { TransformationHandler } from '../handlers/TransformationHandler';
-import { INode } from '../model/node.interface';
+import { GraphNodeModel } from '../../../../transform/src/model/graph/graphNode';
 
 /**
  * Defines independent hovercard component for force directed graph.
@@ -54,7 +54,7 @@ export class HovercardHtml {
     //.text(function (d) { return d.statement; });
   }
 
-  updateHtmlText(node: INode) {
+  updateHtmlText(node: GraphNodeModel) {
     let tdImage = ''
     if (node.avatar ) {
       tdImage = `<td><img src="${node.avatar}" width="50" height="50" vertical-align="top"></td>`;
@@ -70,7 +70,7 @@ export class HovercardHtml {
 
   moveTo(x: number, y: number, node: any) {
 
-    const nodeWithData: INode = node;
+    const nodeWithData: GraphNodeModel = node;
 
     // Todo: update the hovercard size depending on the text? Or scale it?
     // this.cardBackground.attr('width', this.width + 16);

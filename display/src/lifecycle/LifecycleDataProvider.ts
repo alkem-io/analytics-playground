@@ -1,3 +1,4 @@
+import { json } from 'd3-fetch';
 import * as d3 from 'd3';
 
 import { createMachine } from 'xstate';
@@ -14,7 +15,7 @@ export class LifecycleDataProvider {
   constructor() {}
 
   async loadData(jsonDataFileLocation: string) {
-     this.machineDef = await d3.json(jsonDataFileLocation);
+     this.machineDef = await json(jsonDataFileLocation);
 
 
      this.machine = createMachine(this.machineDef);

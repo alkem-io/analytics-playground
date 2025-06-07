@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { max as d3Max } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
 
 /**
  * Force directed graph component which displays the name associated with any Node at the place
@@ -14,19 +15,16 @@ export class Label {
   }
 
   register(nodes: any, nodeScale: any) {
-    const max = d3.max(nodes.map((node: any) => node.weight)) || 10;
+    const weights: number[] = nodes.map((node: any) => Number(node.weight));
+    const maxWeight = d3Max(weights) || 10;
+    const fontSizeScale = scaleLinear<number, number>().domain([0, maxWeight]).range([7, 12]);
 
-    const fontSizeScale = d3.scaleLinear().domain([0]).range([7, 12]);
-
-    const textContainer = this.svg
+    this.textContainer = this.svg
       .append('g')
       .attr('class', 'textContainer')
       .selectAll('g.label')
       .data(nodes)
-      .enter()
-      .append('g');
-
-    textContainer
+      .join('g')
       .append('text')
       .text((d: any) => d.name)
       .attr('font-size', (d: any) => fontSizeScale(d.weight))

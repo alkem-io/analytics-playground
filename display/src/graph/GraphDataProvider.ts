@@ -1,20 +1,21 @@
-import * as d3 from 'd3';
-import { node } from 'webpack';
-import { IData } from './model/data.interface';
-import { IEdge } from './model/edge.interface';
-import { INode } from './model/node.interface';
+import { json } from 'd3-fetch';
+import { IDisplayData } from './model/data.interface';
+import { GraphNodeSpaceModel } from '../../../transform/src/model/graph/graphNodeSpace';
+import { GraphNodeContributorModel } from '../../../transform/src/model/graph/graphNodeContributor';
+import { GraphEdgeModel } from '../../../transform/src/model/graph/graphEdge';
+import { GraphNodeModel } from '../../../transform/src/model/graph/graphNode';
 
 export class GraphDataProvider {
-  data: IData | undefined = undefined;
+  data: IDisplayData | undefined = undefined;
   // All the spaces, challenges, opportunities
-  spaceNodes: INode[] = [];
-  spaceNodesMap: Map<string, INode>;
+  spaceNodes: GraphNodeSpaceModel[] = [];
+  spaceNodesMap: Map<string, GraphNodeSpaceModel>;
   // All the contributors: users, organizations
-  contributorNodes: INode[] = [];
-  contributorNodesMap: Map<string, INode>;
+  contributorNodes: GraphNodeContributorModel[] = [];
+  contributorNodesMap: Map<string, GraphNodeContributorModel>;
 
-  filteredEdges: IEdge[] = [];
-  filteredNodes: INode[] = [];
+  filteredEdges: GraphEdgeModel[] = [];
+  filteredNodes: GraphNodeModel[] = [];
 
   private showContributorsFlag = true;
   private showContributorsWithoutRolesFlag = false;
@@ -29,15 +30,15 @@ export class GraphDataProvider {
   }
 
   async loadData(jsonDataFileLocation: string) {
-    this.data = await d3.json(jsonDataFileLocation);
+    this.data = await json(jsonDataFileLocation);
     if (!this.data) {
       throw new Error('Unable to load data');
     }
     const nodesGroup = this.data.nodes;
 
-    this.spaceNodes = nodesGroup.spaces
-      .concat(nodesGroup.challenges)
-      .concat(nodesGroup.opportunities);
+    this.spaceNodes = nodesGroup.spacesL0
+      .concat(nodesGroup.spacesL2)
+      .concat(nodesGroup.spacesL1);
     for (const spaceNode of this.spaceNodes) {
       this.spaceNodesMap.set(spaceNode.id, spaceNode);
     }
@@ -106,7 +107,7 @@ export class GraphDataProvider {
     }
 
     // Filter the nodes
-    const changeNodesFiltered = this.getChangeNodesFilteredByGroup();
+    const changeNodesFiltered: GraphNodeModel[] = this.getChangeNodesFilteredByGroup();
     // Get the relevant contributors
     const contributors = this.getContributorNodesFilteredByRole();
 
@@ -129,11 +130,11 @@ export class GraphDataProvider {
     );
   }
 
-  getFilteredEdges(): IEdge[] {
+  getFilteredEdges(): GraphEdgeModel[] {
     return this.filteredEdges;
   }
 
-  getFilteredNodes(): INode[] {
+  getFilteredNodes(): GraphNodeModel[] {
     return this.filteredNodes;
   }
 
@@ -160,7 +161,7 @@ export class GraphDataProvider {
 
   getRawSpaceNodes() {
     if (!this.data) throw new Error('Not loaded');
-    return this.data.nodes.spaces;
+    return this.data.nodes.spacesL0;
 
     // const spacesJson = JSON.stringify(this.data.nodes.spaces);
     // return this.filteredNodes = JSON.parse(spacesJson);
@@ -170,16 +171,16 @@ export class GraphDataProvider {
     if (!this.data) throw new Error('Not loaded');
     // Only return a single space if only one selected
     if (this.showSingleSpace()) {
-      const space = this.data.nodes.spaces.find(
+      const space = this.data.nodes.spacesL0.find(
         space => (space.id = this.showSingleSpaceID)
       );
       if (space) return [space];
       return [];
     }
-    return this.data.nodes.spaces;
+    return this.data.nodes.spacesL0;
   }
 
-  private getContributorNodesFilteredByRole(): INode[] {
+  private getContributorNodesFilteredByRole(): GraphNodeModel[] {
     if (!this.showContributorsFlag) {
       return [];
     }
@@ -191,7 +192,7 @@ export class GraphDataProvider {
       e => e.type === 'member' || e.type === 'lead'
     );
 
-    const contributorResultsMap: Map<string, INode> = new Map();
+    const contributorResultsMap: Map<string, GraphNodeModel> = new Map();
     for (const edge of contributorEdges) {
       const contributorID = edge.sourceID;
       const contributorNode = this.contributorNodesMap.get(contributorID);
@@ -203,22 +204,22 @@ export class GraphDataProvider {
       }
       contributorResultsMap.set(contributorID, contributorNode);
     }
-    const result: INode[] = Array.from(contributorResultsMap.values());
+    const result: GraphNodeModel[] = Array.from(contributorResultsMap.values());
     return result;
   }
 
-  getRawData(): IData {
+  getRawData(): IDisplayData {
     if (!this.data) throw new Error('Not loaded');
     return this.data;
   }
 
-  getSpaceEdges(): IEdge[] {
-    const result: IEdge[] = [];
+  getSpaceEdges(): GraphEdgeModel[] {
+    const result: GraphEdgeModel[] = [];
     if (this.showSingleSpace()) {
       // Only one Space so no Space-Space edges to add
       return result;
     }
-    const spaceNodes = this.getRawData().nodes.spaces;
+    const spaceNodes = this.getRawData().nodes.spacesL0;
 
     for (let i = 1; i < spaceNodes.length; i++) {
       for (let j = 1; j < spaceNodes.length; j++) {

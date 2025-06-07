@@ -26,13 +26,13 @@ export interface Community {
 }
 
 export interface RoleSet {
-  memberUsers: Contributor[];
-  memberOrganizations: Contributor[];
-  leadOrganizations: Contributor[];
-  leadUsers: Contributor[];
+  memberUsers: ContributorModel[];
+  memberOrganizations: ContributorModel[];
+  leadOrganizations: ContributorModel[];
+  leadUsers: ContributorModel[];
 }
 
-export interface Contributor {
+export interface ContributorModel {
   id: string;
 }
 

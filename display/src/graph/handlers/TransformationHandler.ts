@@ -1,5 +1,7 @@
-import * as d3 from 'd3';
-import { GeoConicProjection, Simulation } from 'd3';
+import { zoom, ZoomBehavior } from 'd3-zoom';
+import { drag, DragBehavior } from 'd3-drag';
+import { geoAlbers, geoPath, GeoConicProjection } from 'd3-geo';
+import { max, min } from 'd3-array';
 
 export class TransformationHandler {
   defaultScale = 1;
@@ -26,8 +28,8 @@ export class TransformationHandler {
 
     this.scale = this.defaultScale;
     this.translate = this.defaultTranslation;
-    this.projection = d3.geoAlbers().rotate([-30, 0, 0]);
-    this.geoGenerator = d3.geoPath().projection(this.projection);
+    this.projection = geoAlbers().rotate([-30, 0, 0]);
+    this.geoGenerator = geoPath().projection(this.projection);
   }
 
   projectionExtent(geoJson: any) {
@@ -42,7 +44,7 @@ export class TransformationHandler {
   }
 
   registerPanningDragListener(targetElement: any) {
-    const listener = d3.drag();
+    const listener = drag();
     listener.on('drag', (event: any) => {
       this.translate = [
         this.translate[0] + event.dx * this.scale,
@@ -56,12 +58,12 @@ export class TransformationHandler {
   // dataNodes typically obtained by doing a d3.selectAll().data();
   zoomFit(maxNodeRadius: number, dataNodes: any) {
     const buffer = maxNodeRadius;
-    const maxX = d3.max(dataNodes, (d: any) => d.x + buffer - 0) || 0;
-    const minX = d3.min(dataNodes, (d: any) => d.x - buffer) || 0;
+    const maxX = max(dataNodes, (d: any) => d.x + buffer - 0) || 0;
+    const minX = min(dataNodes, (d: any) => d.x - buffer) || 0;
     const rangeX = maxX - minX;
 
-    const maxY = d3.max(dataNodes, (d: any) => d.y + buffer - 0) || 0;
-    const minY = d3.min(dataNodes, (d: any) => d.y - buffer - 0) || 0;
+    const maxY = max(dataNodes, (d: any) => d.y + buffer - 0) || 0;
+    const minY = min(dataNodes, (d: any) => d.y - buffer - 0) || 0;
     const rangeY = maxY - minY;
 
     this.scale = 1 / Math.max(rangeX / this.width, rangeY / this.height);
@@ -89,9 +91,9 @@ export class TransformationHandler {
   };
 
   private registerZoom() {
-    const zoom = d3.zoom();
-    zoom.on('zoom', this.handleZoom);
-    this.group.call(zoom);
+    const z = zoom();
+    z.on('zoom', this.handleZoom);
+    this.group.call(z);
   }
 
 }

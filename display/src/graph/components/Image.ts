@@ -18,8 +18,7 @@ export class Image {
       .attr('class', 'imagecontainer')
       .selectAll('g.imageContainer')
       .data(nodes)
-      .enter()
-      .append('g');
+      .join('g');
 
     this.image = this.imageContainer
       .append('image')

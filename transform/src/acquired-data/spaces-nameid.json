@@ -1,99 +1,141 @@
 {
   "spaces": [
     {
-      "id": "ead1e513-e086-4032-bd27-93bdd47c9126",
-      "nameID": "eco1",
+      "id": "474a650a-e6a6-4070-b07e-530c8cf427c4",
+      "nameID": "building-alkemio-org",
       "about": {
         "profile": {
-          "displayName": "Default Space",
-          "tagline": "An empty space to be populated",
+          "displayName": "Building the A-team",
+          "tagline": "Strengthening the organization and the people working in it",
           "location": {
-            "country": null,
-            "city": null
+            "country": "",
+            "city": ""
           },
-          "url": "http://localhost:3000/eco1"
-        }
-      },
-      "community": {
-        "roleSet": {
-          "memberUsers": [],
-          "memberOrganizations": [
-            {
-              "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
-            }
-          ],
-          "leadOrganizations": [
-            {
-              "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
-            }
-          ],
-          "leadUsers": []
-        }
-      },
-      "subspaces": [],
-      "account": {
-        "host": {
-          "id": "59a685b0-86ff-485c-a2a1-a540470190bc"
-        }
-      }
-    },
-    {
-      "id": "0e7bac6d-a34d-4ed8-9726-6b1949511503",
-      "nameID": "test2",
-      "about": {
-        "profile": {
-          "displayName": "test2",
-          "tagline": "",
-          "location": {
-            "country": null,
-            "city": null
-          },
-          "url": "http://localhost:3000/test2"
+          "url": "https://alkem.io/building-alkemio-org"
         }
       },
       "community": {
         "roleSet": {
           "memberUsers": [
             {
-              "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+            },
+            {
+              "id": "b9aa9f78-3f83-4a1a-be19-bde6b054f1dc"
+            },
+            {
+              "id": "3c82370e-a292-41d3-80b6-c6bf5cb1f246"
+            },
+            {
+              "id": "5aeb287c-f814-40a3-ba7a-859fe8a45fd8"
+            },
+            {
+              "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+            },
+            {
+              "id": "324ed25f-50ce-4b67-91d4-2890f1356d9e"
+            },
+            {
+              "id": "27b019e7-efa0-4fd6-b7f0-f250acf2e2e7"
+            },
+            {
+              "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+            },
+            {
+              "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+            },
+            {
+              "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+            },
+            {
+              "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+            },
+            {
+              "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+            },
+            {
+              "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+            },
+            {
+              "id": "d53fbfaf-f12d-42a3-b5e3-cdead3853580"
+            },
+            {
+              "id": "c3c843c1-a7eb-4a82-9491-0d01783f01ef"
+            },
+            {
+              "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+            },
+            {
+              "id": "d041ba87-3610-4421-a5d0-50d5df34bef5"
+            },
+            {
+              "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+            },
+            {
+              "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+            },
+            {
+              "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+            },
+            {
+              "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+            },
+            {
+              "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+            },
+            {
+              "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+            },
+            {
+              "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
             }
           ],
-          "memberOrganizations": [],
-          "leadOrganizations": [],
-          "leadUsers": [
+          "memberOrganizations": [
             {
-              "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+              "id": "bb876843-200e-48f9-a82a-27cb62b974f8"
             }
-          ]
+          ],
+          "leadOrganizations": [
+            {
+              "id": "9b943b1e-b8a8-4169-bc96-0da778b295bd"
+            },
+            {
+              "id": "bb876843-200e-48f9-a82a-27cb62b974f8"
+            }
+          ],
+          "leadUsers": []
         }
       },
       "subspaces": [
         {
-          "id": "a6101805-98ce-4cfa-85fd-c05988dc7be5",
-          "nameID": "asdfsadf",
+          "id": "73762d4d-5a9f-4db2-872f-6c76ec3c930c",
+          "nameID": "addressablemarket-8615",
           "about": {
             "profile": {
-              "displayName": "asdfsadf",
-              "tagline": "",
+              "displayName": "Addressable Market",
+              "tagline": "Estimating the size of Alkemio's addressable market",
               "location": {
-                "country": null,
-                "city": null
+                "country": "",
+                "city": ""
               },
-              "url": "http://localhost:3000/test2/challenges/asdfsadf"
+              "url": "https://alkem.io/building-alkemio-org/challenges/addressablemarket-8615"
             }
           },
           "community": {
             "roleSet": {
               "memberUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
                 }
               ],
               "memberOrganizations": [],
               "leadOrganizations": [],
               "leadUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
                 }
               ]
             }
@@ -101,31 +143,37 @@
           "subspaces": []
         },
         {
-          "id": "b1edfd03-0f76-4503-87b8-ba90de70c905",
-          "nameID": "ddddd",
+          "id": "b3cd3559-9397-4747-bd9d-641e3bf60be0",
+          "nameID": "aiworkshopnovember2024",
           "about": {
             "profile": {
-              "displayName": "ddddd",
-              "tagline": "",
+              "displayName": "AI Workshop November 2024",
+              "tagline": "AI Workshop November 2024",
               "location": {
                 "country": null,
                 "city": null
               },
-              "url": "http://localhost:3000/test2/challenges/ddddd"
+              "url": "https://alkem.io/building-alkemio-org/challenges/aiworkshopnovember2024"
             }
           },
           "community": {
             "roleSet": {
               "memberUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                },
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
                 }
               ],
               "memberOrganizations": [],
               "leadOrganizations": [],
               "leadUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
                 }
               ]
             }
@@ -133,31 +181,31 @@
           "subspaces": []
         },
         {
-          "id": "6659f8ee-18bc-492b-b110-de59db5f31cc",
-          "nameID": "newspace4",
+          "id": "401bdb20-c437-410e-8eed-c72da2f69e46",
+          "nameID": "alkemiochat",
           "about": {
             "profile": {
-              "displayName": "newspace4",
-              "tagline": "",
+              "displayName": "AlkemioChat",
+              "tagline": "A more capable, cost efficient and private AI chatbot for Alkemio.",
               "location": {
                 "country": null,
                 "city": null
               },
-              "url": "http://localhost:3000/test2/challenges/newspace4"
+              "url": "https://alkem.io/building-alkemio-org/challenges/alkemiochat"
             }
           },
           "community": {
             "roleSet": {
               "memberUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
                 }
               ],
               "memberOrganizations": [],
               "leadOrganizations": [],
               "leadUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
                 }
               ]
             }
@@ -165,76 +213,3828 @@
           "subspaces": []
         },
         {
-          "id": "f33941d7-f9ef-49a7-a9bc-495beca672d1",
-          "nameID": "ss1vi",
+          "id": "72bc17ed-5a3c-4915-864a-0227e7f54eeb",
+          "nameID": "careerdevelopment-7397",
           "about": {
             "profile": {
-              "displayName": "ss1",
-              "tagline": "",
+              "displayName": "Career Development",
+              "tagline": "Career advancement opportunities that aligns your current skills and aspirations with industry trends and emerging opportunities",
               "location": {
-                "country": null,
-                "city": null
+                "country": "",
+                "city": ""
               },
-              "url": "http://localhost:3000/test2/challenges/ss1vi"
+              "url": "https://alkem.io/building-alkemio-org/challenges/careerdevelopment-7397"
             }
           },
           "community": {
             "roleSet": {
               "memberUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
                 }
               ],
               "memberOrganizations": [],
               "leadOrganizations": [],
               "leadUsers": [
                 {
-                  "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "248bf6b6-d463-485a-830e-3c061b921673",
+              "nameID": "creativethinkingco-1497",
+              "about": {
+                "profile": {
+                  "displayName": "Creative Thinking Course",
+                  "tagline": "Creative Thinking Course on Coursera",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/careerdevelopment-7397/opportunities/creativethinkingco-1497"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                    },
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "d5070340-9fa2-4260-9051-5da49126b746",
+          "nameID": "communicationflows-3220",
+          "about": {
+            "profile": {
+              "displayName": "Communications",
+              "tagline": "How can we improve our communications on internal and external platforms?",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/communicationflows-3220"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "2aa00e73-9a45-4164-a500-1db7382602a1"
+                },
+                {
+                  "id": "b895975f-1c91-4040-a3ab-8ce677554a3e"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "f4616273-96b2-4f5e-a217-5c6adf70e1f5",
+              "nameID": "events-8437",
+              "about": {
+                "profile": {
+                  "displayName": "Events",
+                  "tagline": "Overview of upcoming events that are (or might be) relevant to Alkemio.",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/communicationflows-3220/opportunities/events-8437"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    },
+                    {
+                      "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "f2029ca0-35be-4ce5-a702-9caadae1d3db",
+              "nameID": "mockenvironmentpo-9540",
+              "about": {
+                "profile": {
+                  "displayName": "Mock Environment (post creation)",
+                  "tagline": "environment to create material for posts",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/communicationflows-3220/opportunities/mockenvironmentpo-9540"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "ab519f43-261b-4e94-8ca4-fb76a537b3ba",
+              "nameID": "monthlycomms-472",
+              "about": {
+                "profile": {
+                  "displayName": "Monthly Comms",
+                  "tagline": "Monthly Comms materials and related insights",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/communicationflows-3220/opportunities/monthlycomms-472"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                    },
+                    {
+                      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                    },
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "5590f836-6f61-4d8f-8362-cb45d63b86e6",
+              "nameID": "newsletter-4143",
+              "about": {
+                "profile": {
+                  "displayName": "Newsletter",
+                  "tagline": "Organising newsletter-related topics.",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/communicationflows-3220/opportunities/newsletter-4143"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "49db2dfb-a09b-4678-9122-651f5bdde2e8",
+              "nameID": "techfest2025",
+              "about": {
+                "profile": {
+                  "displayName": "Tech Fest 2025",
+                  "tagline": "",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/communicationflows-3220/opportunities/techfest2025"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1722b7d1-6577-4b93-a810-84e3d4fb426b",
+          "nameID": "crmsystem-1182",
+          "about": {
+            "profile": {
+              "displayName": "CRM System",
+              "tagline": "Research into the most effective system for our organization",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/crmsystem-1182"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
                 }
               ]
             }
           },
           "subspaces": []
+        },
+        {
+          "id": "a7b7fd65-14b0-4a8b-9485-28f80e3843ab",
+          "nameID": "communitystrategy2-1125",
+          "about": {
+            "profile": {
+              "displayName": "Customer Success",
+              "tagline": "How can we ensure that our customers become successful and Alkemio champions?",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/communitystrategy2-1125"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "fe59066b-aa6d-42d0-9c59-8f7ffea2289f",
+          "nameID": "designingalkemio-3330",
+          "about": {
+            "profile": {
+              "displayName": "Designing Alkemio",
+              "tagline": "Gathering all official and unofficial designers to share & ask for tips and tricks on text, Figma, etc.",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/designingalkemio-3330"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "dd97f4e9-d756-4224-a868-5491f1e575cd",
+          "nameID": "devonboarding-3176",
+          "about": {
+            "profile": {
+              "displayName": "Dev Onboarding",
+              "tagline": "Dev Onboarding Process",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/devonboarding-3176"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "226ebaaa-b3f0-4aa9-b26a-8b136956e43f"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                },
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "ce8b5e9e-a760-49fe-a64b-1b79d6d3774a",
+          "nameID": "devretrospectives",
+          "about": {
+            "profile": {
+              "displayName": "Dev Sprints",
+              "tagline": "A centralized hub for all Sprint-related content, including retrospective whiteboards and more.",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/devretrospectives"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                },
+                {
+                  "id": "5aeb287c-f814-40a3-ba7a-859fe8a45fd8"
+                },
+                {
+                  "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                },
+                {
+                  "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                },
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "2be63528-af1c-4bee-bb69-0fb4b124ccf6",
+          "nameID": "devprodoffsitejune202",
+          "about": {
+            "profile": {
+              "displayName": "Dev/Prod offsite June 2024",
+              "tagline": "Coding Dreams, Sofia Bound",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/devprodoffsitejune202"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "226ebaaa-b3f0-4aa9-b26a-8b136956e43f"
+                },
+                {
+                  "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "21b9c5f6-1538-469c-b798-5a06cbbdd6c1",
+          "nameID": "funding2024-7965",
+          "about": {
+            "profile": {
+              "displayName": "Funding 2025",
+              "tagline": "Raising capital to scale in 2025",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/funding2024-7965"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+                },
+                {
+                  "id": "324ed25f-50ce-4b67-91d4-2890f1356d9e"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "6bb96d44-8381-4df3-8bae-6ae83cae904e",
+          "nameID": "growthcoordination",
+          "about": {
+            "profile": {
+              "displayName": "Growth Coordination",
+              "tagline": "",
+              "location": {
+                "country": null,
+                "city": null
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/growthcoordination"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "03857da9-6388-45f3-8151-e17a66cf57cb",
+          "nameID": "hrfms",
+          "about": {
+            "profile": {
+              "displayName": "HR 🤓",
+              "tagline": "From hiring to growth",
+              "location": {
+                "country": null,
+                "city": null
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/hrfms"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "ddbce34d-0a58-4338-b929-cc85db3809e0",
+          "nameID": "alkemioimpact-8657",
+          "about": {
+            "profile": {
+              "displayName": "Impact ",
+              "tagline": "How can we explain and measure the impact that Alkemio is making? ",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/alkemioimpact-8657"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "2aa00e73-9a45-4164-a500-1db7382602a1"
+                },
+                {
+                  "id": "b895975f-1c91-4040-a3ab-8ce677554a3e"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "2aa00e73-9a45-4164-a500-1db7382602a1"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "5c19f171-9ad5-4497-ae4e-9543302e0c87",
+          "nameID": "improvingtheusere-6400",
+          "about": {
+            "profile": {
+              "displayName": "Improving the user experience",
+              "tagline": "Gathering insights on the ways we can smoothen using the platform for all kinds of users",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/improvingtheusere-6400"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "95bcf62e-6a71-4a12-a9cb-7667de6aeb14"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "35b7ecc6-6fc2-4e2f-9898-1b7affdd4733"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "6cc01b23-c646-4fbe-aabf-bf43cee48c77"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                },
+                {
+                  "id": "b895975f-1c91-4040-a3ab-8ce677554a3e"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": []
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "571262dc-2030-420b-937b-15fb9d21ef17",
+          "nameID": "infrastructure",
+          "about": {
+            "profile": {
+              "displayName": "Infrastructure",
+              "tagline": "Hosting the Alkemio Platform",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/infrastructure"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "1b4fc247-57f3-434d-8ce7-357839c38bd4",
+          "nameID": "itarchitecturesetu-2973",
+          "about": {
+            "profile": {
+              "displayName": "IT Architecture Setup",
+              "tagline": "Clear & manageble",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/itarchitecturesetu-2973"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "91582cb2-4bb7-40f6-a34c-7a3c31750223",
+          "nameID": "knowledge-sharingin-4005",
+          "about": {
+            "profile": {
+              "displayName": "Knowledge-sharing in the the dev-team",
+              "tagline": "Sharing best-practices and solutions used in different parts of the application",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/knowledge-sharingin-4005"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "cb112644-1e94-4f37-997b-0ddca0b336d7",
+          "nameID": "newlandingpage-626",
+          "about": {
+            "profile": {
+              "displayName": "New Landing Page",
+              "tagline": "Who needs a revamp? The landing page, of course :)",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/newlandingpage-626"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "3cbb7015-c918-4181-bb0b-4e93bef4dcc2",
+          "nameID": "offsiteapril2024-4307",
+          "about": {
+            "profile": {
+              "displayName": "Offsite April 2024",
+              "tagline": "Let's get together!",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/offsiteapril2024-4307"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "308a18bd-29c0-4b13-9326-4a7df2a23abb"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                },
+                {
+                  "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                },
+                {
+                  "id": "75ef37ff-d50d-4222-9e46-9ae206f2b858"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "226ebaaa-b3f0-4aa9-b26a-8b136956e43f"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                },
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                },
+                {
+                  "id": "c52d1f29-6b9f-48d3-b8b2-cbd556010fa9"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "c9bfd83f-4262-443e-a0bd-c9cde4b80010",
+          "nameID": "operationalmonitoring",
+          "about": {
+            "profile": {
+              "displayName": "Operational Monitoring",
+              "tagline": "understanding product + platform usage",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/operationalmonitoring"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "b61ee11c-1362-433b-ab3c-963b65e2061d",
+              "nameID": "whiteboardconnectivity",
+              "about": {
+                "profile": {
+                  "displayName": "Whiteboard Connectivity",
+                  "tagline": "About the issue experienced on 23Jan25",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/operationalmonitoring/opportunities/whiteboardconnectivity"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "62546b4c-f68a-446d-9d5f-12a34d7b1b6e",
+          "nameID": "operations",
+          "about": {
+            "profile": {
+              "displayName": "Operations",
+              "tagline": "Coordinating and running the business",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/operations"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "b41a1b9b-c0cf-4e1f-92cf-272d6f99dce9",
+          "nameID": "pillarsofalkemio-8960",
+          "about": {
+            "profile": {
+              "displayName": "Pillars of Alkemio",
+              "tagline": "Agreeing on the key pillars of Alkemio, which we can then use as a base for sales, events, communications, etc.",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/pillarsofalkemio-8960"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "d7b7ddc9-dbd1-4702-b018-19581f6132ad",
+          "nameID": "planning-6988",
+          "about": {
+            "profile": {
+              "displayName": "Planning",
+              "tagline": "Coordinating the functional areas in Alkemio Org",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/planning-6988"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "8a1b1640-e6aa-4001-8254-355766142910",
+          "nameID": "platformdocumentation",
+          "about": {
+            "profile": {
+              "displayName": "Platform Documentation",
+              "tagline": "Creating Clear Documentation for Alkemio Users",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/platformdocumentation"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                },
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "5f959ba3-63f4-4d60-8ef5-92a6952e1941",
+          "nameID": "platformmanagement-9815",
+          "about": {
+            "profile": {
+              "displayName": "Platform management",
+              "tagline": "For drafting platform notifications, templates, etc.",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/platformmanagement-9815"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "7679d9c7-503a-4c3e-9027-76a62169d35d",
+              "nameID": "defaultcallouts-3990",
+              "about": {
+                "profile": {
+                  "displayName": "Default Callouts",
+                  "tagline": "Offering Guidance where it's needed the most",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/platformmanagement-9815/opportunities/defaultcallouts-3990"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "dc501266-82d4-4708-a9d7-8906be91246f",
+              "nameID": "templates",
+              "about": {
+                "profile": {
+                  "displayName": "Templates",
+                  "tagline": "The wonderful building blocks",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/platformmanagement-9815/opportunities/templates"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "400023e5-a857-4c82-af5c-55a135001915",
+              "nameID": "yourvirtualcontrib-1183",
+              "about": {
+                "profile": {
+                  "displayName": "Your Virtual Contributor",
+                  "tagline": "Making your knowledge and expertise available through your self-made virtual community member",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/platformmanagement-9815/opportunities/yourvirtualcontrib-1183"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                    },
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "4b87f824-504b-4005-9640-6c0934b015a8",
+          "nameID": "privacy",
+          "about": {
+            "profile": {
+              "displayName": "Privacy",
+              "tagline": "What steps can we take to ensure high privacy standards on our platform?",
+              "location": {
+                "country": "",
+                "city": null
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/privacy"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "fad14233-d798-4427-aa72-fff6277a8d09",
+          "nameID": "product",
+          "about": {
+            "profile": {
+              "displayName": "Product",
+              "tagline": "All things related to the Product Team, Product Management, etc.",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/product"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "34543ccc-b2c4-470d-84ac-bfb685776dcc",
+              "nameID": "1-dayoffsite",
+              "about": {
+                "profile": {
+                  "displayName": "1-Day Offsite",
+                  "tagline": "Unplug, Innovate, Ignite",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/product/opportunities/1-dayoffsite"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                    },
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    },
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    },
+                    {
+                      "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "8772a609-6643-4304-908b-cef34a2228b9",
+              "nameID": "gatheringfeedback",
+              "about": {
+                "profile": {
+                  "displayName": "Gathering feedback",
+                  "tagline": "Gathering feedback",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/product/opportunities/gatheringfeedback"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    },
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "88ef584e-eda1-4691-802c-54936a1be2c4",
+              "nameID": "playingwithaisafely",
+              "about": {
+                "profile": {
+                  "displayName": "Playing with AI, safely",
+                  "tagline": "What can we offer?",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/product/opportunities/playingwithaisafely"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": []
+                }
+              }
+            },
+            {
+              "id": "27f793d2-db51-4a43-8126-4b8497e5fd92",
+              "nameID": "sprints",
+              "about": {
+                "profile": {
+                  "displayName": "Sprints",
+                  "tagline": "Sprints",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/product/opportunities/sprints"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "9d85760e-c4c0-4757-afde-5b297220562f",
+              "nameID": "trustsessions",
+              "about": {
+                "profile": {
+                  "displayName": "Trust sessions",
+                  "tagline": "Together Realizing Unity, Strength, and Trust",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/product/opportunities/trustsessions"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "8bb62e65-8ee5-48ca-839d-0355ff059375",
+          "nameID": "purposehour-4878",
+          "about": {
+            "profile": {
+              "displayName": "Purpose Hour",
+              "tagline": "Alkemio's Purpose Hour to create impact while learning by doing ;-)",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/purposehour-4878"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "f38588ba-ea22-436c-a5b5-56ee750f18fd",
+          "nameID": "raisingthealkemio-1972",
+          "about": {
+            "profile": {
+              "displayName": "Raising the Alkemio profile",
+              "tagline": "building the Alkemio brand, growing the engaged community",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/raisingthealkemio-1972"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "ffa1aa66-a1d6-4737-9b8b-c307678ac232",
+              "nameID": "impactfest2023-5292",
+              "about": {
+                "profile": {
+                  "displayName": "ImpactFest 2023",
+                  "tagline": "engaging the impact economy in The Hague",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/raisingthealkemio-1972/opportunities/impactfest2023-5292"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "0deb0f08-f4ac-410a-a7f3-c160dd6c0279",
+          "nameID": "recruitingthenext-6318",
+          "about": {
+            "profile": {
+              "displayName": "Recruiting the next level of leaders",
+              "tagline": "Getting the a players onto the a tema",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/recruitingthenext-6318"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d041ba87-3610-4421-a5d0-50d5df34bef5"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "4765b3ec-75cb-4fcb-b080-ada6af20e6d4",
+          "nameID": "saasmarket-7387",
+          "about": {
+            "profile": {
+              "displayName": "SaaS market",
+              "tagline": "To benchmark Alkemio versus other SaaS companies and learn from them",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/saasmarket-7387"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "bac90a2b-bab1-4dac-84f9-e81e8ee7778d",
+          "nameID": "shapingtheroadmap-7141",
+          "about": {
+            "profile": {
+              "displayName": "Shaping the Roadmap",
+              "tagline": "Prioiritizing the right work at the right time",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/shapingtheroadmap-7141"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "bc413cf2-ebb3-4fea-8c07-cf8ac02a58bb",
+          "nameID": "sprintplanning-5120",
+          "about": {
+            "profile": {
+              "displayName": "Sprint Planning",
+              "tagline": "aligning efforts for the coming sprints",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/sprintplanning-5120"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "abb5e8ee-97ac-4eff-87b7-ed2929884348",
+          "nameID": "strategysessionq4-8873",
+          "about": {
+            "profile": {
+              "displayName": "Strategy sessions",
+              "tagline": "A Roadmap to Excellence",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/strategysessionq4-8873"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "eae10246-0fa0-4ccc-a569-887d064887d4",
+          "nameID": "subscriptions-6138",
+          "about": {
+            "profile": {
+              "displayName": "Subscriptions",
+              "tagline": "How these play forward in designs and communications",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/subscriptions-6138"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "0d90530c-2cdf-4e4f-b99a-6a56eb7e9a59",
+              "nameID": "wingback",
+              "about": {
+                "profile": {
+                  "displayName": "Wingback",
+                  "tagline": "How to effectively manage our subscriptions?",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/subscriptions-6138/opportunities/wingback"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2ffa118a-981e-47c8-9828-8c941d54346c",
+          "nameID": "teamoffsiteseptemb-9083",
+          "about": {
+            "profile": {
+              "displayName": "Team Offsite 11-15 September 23 ",
+              "tagline": "This September the A-team will be going to Belgium for the offsite! Let's start collaborating!",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/teamoffsiteseptemb-9083"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "75ef37ff-d50d-4222-9e46-9ae206f2b858"
+                },
+                {
+                  "id": "35b7ecc6-6fc2-4e2f-9898-1b7affdd4733"
+                },
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "b895975f-1c91-4040-a3ab-8ce677554a3e"
+                },
+                {
+                  "id": "2aa00e73-9a45-4164-a500-1db7382602a1"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "6cc01b23-c646-4fbe-aabf-bf43cee48c77"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                }
+              ],
+              "memberOrganizations": [
+                {
+                  "id": "9b943b1e-b8a8-4169-bc96-0da778b295bd"
+                }
+              ],
+              "leadOrganizations": [
+                {
+                  "id": "9b943b1e-b8a8-4169-bc96-0da778b295bd"
+                }
+              ],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "b895975f-1c91-4040-a3ab-8ce677554a3e"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "5200e670-4012-4dac-9055-4a85cd791d2d",
+              "nameID": "buildingthealkemio-9704",
+              "about": {
+                "profile": {
+                  "displayName": "Building the Alkemio Culture",
+                  "tagline": "Let's build the culture of Alkemio, together!",
+                  "location": {
+                    "country": "BE",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/teamoffsiteseptemb-9083/opportunities/buildingthealkemio-9704"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "c5703f41-e703-466d-8dbe-b32d0ebf05b8",
+          "nameID": "technicaldesigns-9853",
+          "about": {
+            "profile": {
+              "displayName": "Technical designs",
+              "tagline": "To brainstorm about, create, and store diagrams and visualizations ",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/technicaldesigns-9853"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "6cc01b23-c646-4fbe-aabf-bf43cee48c77"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "02d0b511-b934-43b0-8e87-a34caef98278",
+              "nameID": "challenge3-3987",
+              "about": {
+                "profile": {
+                  "displayName": "Challenge 3",
+                  "tagline": "Preparation for the Hackaton",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/technicaldesigns-9853/opportunities/challenge3-3987"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "a675d99e-e535-4b77-88e6-68ad23aadb90",
+              "nameID": "notifications",
+              "about": {
+                "profile": {
+                  "displayName": "Notifications",
+                  "tagline": "Everything technical about notification can be found here",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/technicaldesigns-9853/opportunities/notifications"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "6102e949-0cf3-41d0-973d-3f5ae0a4bfb7",
+          "nameID": "technicalroadmapof-3702",
+          "about": {
+            "profile": {
+              "displayName": "Technical Roadmap Offsite - Jan 2024",
+              "tagline": "Short and mid term technical architecture and priorities",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/technicalroadmapof-3702"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": []
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "b88bd3ff-4676-431a-bfc0-8fdf5d229489",
+          "nameID": "templatechallenge-9480",
+          "about": {
+            "profile": {
+              "displayName": "Template Challenge",
+              "tagline": "A Challenge that can be reused when in need of a Challenge template",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/templatechallenge-9480"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "78bf35b7-b03d-46d7-94cc-4621829584da",
+          "nameID": "termsconditions-4330",
+          "about": {
+            "profile": {
+              "displayName": "Terms & Conditions",
+              "tagline": "Updating and simplifying our legal documents",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/termsconditions-4330"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "52af76c1-8c27-4eb0-937b-25b40c4f0b6f",
+          "nameID": "testingexperiment-3692",
+          "about": {
+            "profile": {
+              "displayName": "Testing & Experimenting on site",
+              "tagline": "An environment to test functionalities, showcase possibilities, and experiment!",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "6cc01b23-c646-4fbe-aabf-bf43cee48c77"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                },
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                },
+                {
+                  "id": "35b7ecc6-6fc2-4e2f-9898-1b7affdd4733"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "c84ae8b0-e6a6-4938-bd57-59087c7af7ae",
+              "nameID": "allhandstesting--8474",
+              "about": {
+                "profile": {
+                  "displayName": "All hands testing - 17-08-2023",
+                  "tagline": "TBD",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/allhandstesting--8474"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                    },
+                    {
+                      "id": "65b33327-4db8-43ea-a091-a0208b82cb64"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "65b33327-4db8-43ea-a091-a0208b82cb64"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "de45958d-7071-445d-9609-bff84ec16d74",
+              "nameID": "automation-8582",
+              "about": {
+                "profile": {
+                  "displayName": "Automation",
+                  "tagline": "Scope is to define documents related to automation tests, processes and approaches",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/automation-8582"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "65b33327-4db8-43ea-a091-a0208b82cb64"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "65b33327-4db8-43ea-a091-a0208b82cb64"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "82d74d34-0d2c-4350-9049-6ab5b416966d",
+              "nameID": "designthinking",
+              "about": {
+                "profile": {
+                  "displayName": "Design thinking",
+                  "tagline": "",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/designthinking"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "96799f73-c0eb-46e4-8f43-c6ff56906fce",
+              "nameID": "growyourcommunitysubspace",
+              "about": {
+                "profile": {
+                  "displayName": "Grow Your Community Subspace",
+                  "tagline": "From first members to a thriving community—step by step",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/growyourcommunitysubspace"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "71f60f4a-b7df-4b5c-a6e1-9f0cc5c5fdeb",
+              "nameID": "innovationflow-484",
+              "about": {
+                "profile": {
+                  "displayName": "Innovation flow",
+                  "tagline": "Innovation flow! YEAH",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/innovationflow-484"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "9e79ffbc-f6f7-48ba-a7c0-2d51b1606b3f",
+              "nameID": "sve-test",
+              "about": {
+                "profile": {
+                  "displayName": "sve-test",
+                  "tagline": "this is where sve tests stuff",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/sve-test"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": []
+                }
+              }
+            },
+            {
+              "id": "77943067-49d9-45c4-b584-746376821812",
+              "nameID": "testa",
+              "about": {
+                "profile": {
+                  "displayName": "test",
+                  "tagline": "test",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/testa"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "add3aa25-b7ec-4df3-9f39-4d9066425590",
+              "nameID": "testingtutorials",
+              "about": {
+                "profile": {
+                  "displayName": "Testing tutorials",
+                  "tagline": "",
+                  "location": {
+                    "country": null,
+                    "city": null
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/testingexperiment-3692/opportunities/testingtutorials"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1b5a9377-2b0c-4688-a43f-29a26002bec5",
+          "nameID": "thefullpackage",
+          "about": {
+            "profile": {
+              "displayName": "The 'Full Package'",
+              "tagline": "What can we offer our communities?",
+              "location": {
+                "country": null,
+                "city": null
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/thefullpackage"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "4186c2c9-6838-449d-aca2-c6a9203304e6",
+          "nameID": "offsites",
+          "about": {
+            "profile": {
+              "displayName": "The Alkemio Offsites",
+              "tagline": "From Anywhere to Here: Alkemio Offsites",
+              "location": {
+                "country": "",
+                "city": null
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/offsites"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                },
+                {
+                  "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                },
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                },
+                {
+                  "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "3c82370e-a292-41d3-80b6-c6bf5cb1f246"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                },
+                {
+                  "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                },
+                {
+                  "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                },
+                {
+                  "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                },
+                {
+                  "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "36a19386-b6e8-472f-ad38-8520adc6321a",
+              "nameID": "2025devjuneoffsite",
+              "about": {
+                "profile": {
+                  "displayName": "2025 Dev June offsite",
+                  "tagline": "Looking forward!!!",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/offsites/opportunities/2025devjuneoffsite"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                    },
+                    {
+                      "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "14dce5c1-3836-4eeb-bc33-66760d797a03",
+              "nameID": "2025teamoffsite",
+              "about": {
+                "profile": {
+                  "displayName": "2025 Team Offsite",
+                  "tagline": "Welcome to the space for our 2025 Alkemio Offsite! 🎉",
+                  "location": {
+                    "country": "NL",
+                    "city": "Sevenum"
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/offsites/opportunities/2025teamoffsite"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e"
+                    },
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    },
+                    {
+                      "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                    },
+                    {
+                      "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                    },
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                    },
+                    {
+                      "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                    },
+                    {
+                      "id": "3c82370e-a292-41d3-80b6-c6bf5cb1f246"
+                    },
+                    {
+                      "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                    },
+                    {
+                      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b"
+                    },
+                    {
+                      "id": "91b7e044-61ff-468b-a705-1672b0bda510"
+                    },
+                    {
+                      "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                    },
+                    {
+                      "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                    },
+                    {
+                      "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e"
+                    },
+                    {
+                      "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+                    },
+                    {
+                      "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                    },
+                    {
+                      "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    },
+                    {
+                      "id": "3673c32a-5180-4466-9d8b-6768ac108be6"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "1abfc157-06b2-47d0-8e2a-a91bbdfe8c6e",
+              "nameID": "2025teamoffsite-thedevext",
+              "about": {
+                "profile": {
+                  "displayName": "2025 Team Offsite - The Dev Extension",
+                  "tagline": "First In, Last Out",
+                  "location": {
+                    "country": "NL",
+                    "city": "Sevenum"
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/offsites/opportunities/2025teamoffsite-thedevext"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720"
+                    },
+                    {
+                      "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf"
+                    },
+                    {
+                      "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                    },
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "099e8f3b-a9d2-466e-a1f6-03190bee665b",
+          "nameID": "vccampaignjun24-9768",
+          "about": {
+            "profile": {
+              "displayName": "VC Campaign Jun'24",
+              "tagline": "Design and execution of the campaign introducing VC's to (new) users May-July '24",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/vccampaignjun24-9768"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "c8e6a2ff-a861-4a7e-ba90-c3b259e4dcfb",
+              "nameID": "campaigncommunitysuppor",
+              "about": {
+                "profile": {
+                  "displayName": "Campaign Community Supporter VC",
+                  "tagline": "This space is used to train the Community Supporter VC for the campaign",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/vccampaignjun24-9768/opportunities/campaigncommunitysuppor"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "0b1fe5dc-babc-4183-87dc-5bed44b8e609",
+              "nameID": "grantcoordinationcampai",
+              "about": {
+                "profile": {
+                  "displayName": "Grant Coordination Campaign",
+                  "tagline": "July/August- 2nd small campaign",
+                  "location": {
+                    "country": "NL",
+                    "city": "The Hague"
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/vccampaignjun24-9768/opportunities/grantcoordinationcampai"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    },
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "d8885ae2-7f6b-4a6c-9693-2b0b84074aca",
+              "nameID": "marketingexpertvc",
+              "about": {
+                "profile": {
+                  "displayName": "Marketing Expert VC",
+                  "tagline": "This space is used to train the Marketing Expert VC for the campaign",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/vccampaignjun24-9768/opportunities/marketingexpertvc"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    },
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "c489dd18-73f8-49f3-ba93-e2d9733a12e7",
+              "nameID": "productreviewervc",
+              "about": {
+                "profile": {
+                  "displayName": "Product Reviewer VC",
+                  "tagline": "In this space we describe what this VC will be used for in detail and upload all information needed to train the VC.",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/vccampaignjun24-9768/opportunities/productreviewervc"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1e760635-6c4b-4f6c-b672-26e854679dad",
+          "nameID": "virtualcontributors-54",
+          "about": {
+            "profile": {
+              "displayName": "Virtual Contributors",
+              "tagline": "safely using AI via virtual contributor",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/virtualcontributors-54"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "5aeb287c-f814-40a3-ba7a-859fe8a45fd8"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "68880fa7-b519-47df-b6a9-c76b8999645a"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "7cdf6ca7-9a12-4296-9283-2527648dc0fe",
+          "nameID": "waysofworkingproc-9342",
+          "about": {
+            "profile": {
+              "displayName": "Ways of working process",
+              "tagline": "Definitions for ways of working - process oriented",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/waysofworkingproc-9342"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "65b33327-4db8-43ea-a091-a0208b82cb64"
+                },
+                {
+                  "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "65b33327-4db8-43ea-a091-a0208b82cb64"
+                }
+              ]
+            }
+          },
+          "subspaces": []
+        },
+        {
+          "id": "4f32ae57-0340-4957-ab97-5a8629455ef1",
+          "nameID": "welcomealkemio-6154",
+          "about": {
+            "profile": {
+              "displayName": "Welcome@Alkemio!",
+              "tagline": "Building a Space to get inspired, play around, and learn from the best!",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/welcomealkemio-6154"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "9ebac493-7968-4b02-9653-933012ba5496",
+              "nameID": "tryoutthenewinno-1264",
+              "about": {
+                "profile": {
+                  "displayName": "Try out the new Innovation Flow update here!",
+                  "tagline": "Want to learn more about how to use the Innovation Flow? Try it out for yourself here!",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/welcomealkemio-6154/opportunities/tryoutthenewinno-1264"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "31a586d4-bec2-41e1-8118-29bd79ae5298",
+          "nameID": "willingnesstopay-719",
+          "about": {
+            "profile": {
+              "displayName": "Willingness To Pay ",
+              "tagline": "Alkemio is transforming into a business: Its direction is based on customer needs. What are our customers willing to pay for?",
+              "location": {
+                "country": "",
+                "city": ""
+              },
+              "url": "https://alkem.io/building-alkemio-org/challenges/willingnesstopay-719"
+            }
+          },
+          "community": {
+            "roleSet": {
+              "memberUsers": [
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                },
+                {
+                  "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a"
+                },
+                {
+                  "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7"
+                },
+                {
+                  "id": "d1b73757-2e36-4883-b560-71a3805efe41"
+                },
+                {
+                  "id": "324ed25f-50ce-4b67-91d4-2890f1356d9e"
+                },
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19"
+                },
+                {
+                  "id": "a92a9063-6561-4949-ae44-74868c0bea1a"
+                }
+              ],
+              "memberOrganizations": [],
+              "leadOrganizations": [],
+              "leadUsers": [
+                {
+                  "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                },
+                {
+                  "id": "46216335-b218-4c56-b30a-f7c7cce1346a"
+                }
+              ]
+            }
+          },
+          "subspaces": [
+            {
+              "id": "8b7da671-b4d6-4c24-9a3f-757c7ee2cca8",
+              "nameID": "vctest",
+              "about": {
+                "profile": {
+                  "displayName": "VC test",
+                  "tagline": "Can a VC summarize all our insights?",
+                  "location": {
+                    "country": "",
+                    "city": ""
+                  },
+                  "url": "https://alkem.io/building-alkemio-org/challenges/willingnesstopay-719/opportunities/vctest"
+                }
+              },
+              "community": {
+                "roleSet": {
+                  "memberUsers": [
+                    {
+                      "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                    }
+                  ],
+                  "memberOrganizations": [],
+                  "leadOrganizations": [],
+                  "leadUsers": [
+                    {
+                      "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         }
       ],
       "account": {
         "host": {
-          "id": "626572d9-f1d3-4358-a545-e7003db180bb"
+          "id": "bb876843-200e-48f9-a82a-27cb62b974f8"
         }
       }
     }
   ],
   "users": [
     {
-      "id": "626572d9-f1d3-4358-a545-e7003db180bb",
-      "nameID": "admin-alkemio",
+      "id": "0c5597bf-eb29-46af-943b-0c62bdeedc16",
+      "nameID": "donna-duiker-5399",
       "profile": {
-        "displayName": "admin alkemio",
+        "displayName": "Donna Duiker",
         "avatar": {
-          "uri": "http://localhost:3000/api/private/rest/storage/document/117b4ae9-7777-4223-92a8-cbfbd18f989d"
+          "uri": "https://alkem.io/api/private/rest/storage/document/b30614fd-de2f-4d28-828d-b515c19a2470"
         },
         "location": {
-          "country": null,
-          "city": null
+          "country": "NL",
+          "city": "The Hague"
         },
-        "url": "http://localhost:3000/user/admin-alkemio"
+        "url": "https://alkem.io/user/donna-duiker-5399"
+      }
+    },
+    {
+      "id": "0e5fe6f6-847b-4865-a064-058d9dbaee19",
+      "nameID": "francesco-rosso-7290",
+      "profile": {
+        "displayName": "Francesco R.",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/6f23fefb-904a-485e-a535-73e0284a1c94"
+        },
+        "location": {
+          "country": "NL",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/francesco-rosso-7290"
+      }
+    },
+    {
+      "id": "0e6ed2ed-3d21-42f6-80c9-1abbe7a25720",
+      "nameID": "valentin-yanakiev-4309",
+      "profile": {
+        "displayName": "Valentin Yanakiev",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/374e3ffa-61bb-4b5b-8e6c-764122428168"
+        },
+        "location": {
+          "country": "",
+          "city": "Sofia"
+        },
+        "url": "https://alkem.io/user/valentin-yanakiev-4309"
+      }
+    },
+    {
+      "id": "226ebaaa-b3f0-4aa9-b26a-8b136956e43f",
+      "nameID": "emilia-pavlova-5013",
+      "profile": {
+        "displayName": "Emilia Pavlova",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/09320494-12b0-42c5-9d56-42b77ea1a436"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/emilia-pavlova-5013"
+      }
+    },
+    {
+      "id": "27b019e7-efa0-4fd6-b7f0-f250acf2e2e7",
+      "nameID": "denitsa-yanakieva-8719",
+      "profile": {
+        "displayName": "Denitsa Yanakieva",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/65386d02-9f11-4009-959b-f01f2a965336"
+        },
+        "location": {
+          "country": "BG",
+          "city": "Sofia"
+        },
+        "url": "https://alkem.io/user/denitsa-yanakieva-8719"
+      }
+    },
+    {
+      "id": "2aa00e73-9a45-4164-a500-1db7382602a1",
+      "nameID": "myrthe-zondag-2013",
+      "profile": {
+        "displayName": "Myrthe Zondag",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/b56f195c-f780-49e5-a25f-990f5c3434e7"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/myrthe-zondag-2013"
+      }
+    },
+    {
+      "id": "308a18bd-29c0-4b13-9326-4a7df2a23abb",
+      "nameID": "aleksandar-stojanovi-5369",
+      "profile": {
+        "displayName": "Aleksandar Stojanovic",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/151c7e85-d8c6-43d2-a233-9d6850fe2fbd"
+        },
+        "location": {
+          "country": "US",
+          "city": "New York"
+        },
+        "url": "https://alkem.io/user/aleksandar-stojanovi-5369"
+      }
+    },
+    {
+      "id": "324ed25f-50ce-4b67-91d4-2890f1356d9e",
+      "nameID": "michiel-vanputten-9280",
+      "profile": {
+        "displayName": "Michiel van Putten",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/04c708cf-aadd-46f4-a2f0-f00552c4fb32"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/michiel-vanputten-9280"
+      }
+    },
+    {
+      "id": "35b7ecc6-6fc2-4e2f-9898-1b7affdd4733",
+      "nameID": "kaylee-scholtes-7760",
+      "profile": {
+        "displayName": "Kaylee Scholtes",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/b9da8948-5fc8-4b24-a83c-ee13849dfb78"
+        },
+        "location": {
+          "country": "NL",
+          "city": "The Hague"
+        },
+        "url": "https://alkem.io/user/kaylee-scholtes-7760"
+      }
+    },
+    {
+      "id": "3673c32a-5180-4466-9d8b-6768ac108be6",
+      "nameID": "robin-tharakan-1",
+      "profile": {
+        "displayName": "Robin Z. Tharakan",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/d5122253-3289-494a-84f0-25fc9137d86a"
+        },
+        "location": {
+          "country": "NL",
+          "city": "Den Haag"
+        },
+        "url": "https://alkem.io/user/robin-tharakan-1"
+      }
+    },
+    {
+      "id": "3c82370e-a292-41d3-80b6-c6bf5cb1f246",
+      "nameID": "maloe-vandenhoogen",
+      "profile": {
+        "displayName": "Maloe van den Hoogen",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/0ffa117b-379c-43a4-ae39-403bbba282d3"
+        },
+        "location": {
+          "country": "NL",
+          "city": "Amsterdam"
+        },
+        "url": "https://alkem.io/user/maloe-vandenhoogen"
+      }
+    },
+    {
+      "id": "3fb42309-4cf3-4254-af96-7c4c80226ef7",
+      "nameID": "rene-honig-900",
+      "profile": {
+        "displayName": "René Honig",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/b18e5d71-6bdd-4060-be4f-935e4b79f1a2"
+        },
+        "location": {
+          "country": "FR",
+          "city": "Paris"
+        },
+        "url": "https://alkem.io/user/rene-honig-900"
+      }
+    },
+    {
+      "id": "46216335-b218-4c56-b30a-f7c7cce1346a",
+      "nameID": "denise-larsson-487",
+      "profile": {
+        "displayName": "Denise Larsson",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/908dbd58-f7cc-4714-851c-9ed1ece89e18"
+        },
+        "location": {
+          "country": "NL",
+          "city": "Amsterdam"
+        },
+        "url": "https://alkem.io/user/denise-larsson-487"
+      }
+    },
+    {
+      "id": "5aeb287c-f814-40a3-ba7a-859fe8a45fd8",
+      "nameID": "vladimir-aleksiev-7217",
+      "profile": {
+        "displayName": "Vladimir Aleksiev",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/1a14d308-47cb-45ad-bd74-f2245977df99"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/vladimir-aleksiev-7217"
+      }
+    },
+    {
+      "id": "5e0abbe9-0e13-4077-b37f-c35f510d27f6",
+      "nameID": "evgeni-dimitrov",
+      "profile": {
+        "displayName": "Evgeni Dimitrov",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/289c8e05-d444-4011-b4d4-de360f7d6c4f"
+        },
+        "location": {
+          "country": "",
+          "city": "Sofia"
+        },
+        "url": "https://alkem.io/user/evgeni-dimitrov"
+      }
+    },
+    {
+      "id": "65b33327-4db8-43ea-a091-a0208b82cb64",
+      "nameID": "evgeni-admin-6698",
+      "profile": {
+        "displayName": "Evgeni Admin",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/9606d282-b2e4-4ed4-a5d5-4252836e0529"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/evgeni-admin-6698"
+      }
+    },
+    {
+      "id": "68880fa7-b519-47df-b6a9-c76b8999645a",
+      "nameID": "vladimir-aleksiev-8504",
+      "profile": {
+        "displayName": "Vladimir Aleksiev",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/3b105e68-3003-4330-8db2-d8ce64100558"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/vladimir-aleksiev-8504"
+      }
+    },
+    {
+      "id": "6cc01b23-c646-4fbe-aabf-bf43cee48c77",
+      "nameID": "aleksandar-stojanovi-5132",
+      "profile": {
+        "displayName": "Aleksandar Stojanovic",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/e04e5879-26a2-4c1c-88b4-daf098d81c8a"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/aleksandar-stojanovi-5132"
+      }
+    },
+    {
+      "id": "75ef37ff-d50d-4222-9e46-9ae206f2b858",
+      "nameID": "andrew-pazniak-6850",
+      "profile": {
+        "displayName": "Andrew Pazniak",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/1414ed0b-dfdd-429b-a0cc-11bb4d58186a"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/andrew-pazniak-6850"
+      }
+    },
+    {
+      "id": "8006ca67-59ff-460a-b38a-ebdb0a39fbbf",
+      "nameID": "borislav-kolev-9684",
+      "profile": {
+        "displayName": "Borislav Kolev",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/085df2cc-2a6e-4877-b919-0a5bbb764f4f"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/borislav-kolev-9684"
+      }
+    },
+    {
+      "id": "811acdeb-df55-4e0a-a80f-c7b9b0b3bd2e",
+      "nameID": "fintan-smyth-5901",
+      "profile": {
+        "displayName": "Fintan Smyth",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/7e49ee58-3dc4-445a-9d60-c0bf584ea960"
+        },
+        "location": {
+          "country": "JP",
+          "city": "Tokyo"
+        },
+        "url": "https://alkem.io/user/fintan-smyth-5901"
+      }
+    },
+    {
+      "id": "83c6da9d-304e-48a2-a9da-5e57e8b80feb",
+      "nameID": "stefan-kunst-3495",
+      "profile": {
+        "displayName": "Stefan Kunst",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/ad09abee-a0b0-411b-abb7-e535e669abed"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/stefan-kunst-3495"
+      }
+    },
+    {
+      "id": "8aa7a5a1-54d3-4f1f-93fd-9baa0ae4066a",
+      "nameID": "neil-smyth-admin",
+      "profile": {
+        "displayName": "Neil  Andrew Smyth",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/0d4564f7-2194-42e4-b4c1-60314765a3e0"
+        },
+        "location": {
+          "country": "NL",
+          "city": "Leidschendam"
+        },
+        "url": "https://alkem.io/user/neil-smyth-admin"
+      }
+    },
+    {
+      "id": "91b7e044-61ff-468b-a705-1672b0bda510",
+      "nameID": "valentinadmin-yanak-5936",
+      "profile": {
+        "displayName": "Valentin Admin Yanakiev",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/d3cf51c0-861f-4907-8f07-09927d5f1c21"
+        },
+        "location": {
+          "country": "BG",
+          "city": "Pancharevo"
+        },
+        "url": "https://alkem.io/user/valentinadmin-yanak-5936"
+      }
+    },
+    {
+      "id": "91e47c4f-2133-4a2f-ad1f-818b8a339c3e",
+      "nameID": "carlos-cano-977",
+      "profile": {
+        "displayName": "Carlos Cano",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/93e00bf8-7309-4ea1-9c45-546ad53ef0e7"
+        },
+        "location": {
+          "country": "ES",
+          "city": "Madrid"
+        },
+        "url": "https://alkem.io/user/carlos-cano-977"
+      }
+    },
+    {
+      "id": "95bcf62e-6a71-4a12-a9cb-7667de6aeb14",
+      "nameID": "senna-sjambar-2997",
+      "profile": {
+        "displayName": "Senna S",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/c16da84c-4e94-4d33-9edf-7522fb6fab35"
+        },
+        "location": {
+          "country": "NL",
+          "city": "The Hague"
+        },
+        "url": "https://alkem.io/user/senna-sjambar-2997"
+      }
+    },
+    {
+      "id": "a92a9063-6561-4949-ae44-74868c0bea1a",
+      "nameID": "jeroen-nijkamp-7062",
+      "profile": {
+        "displayName": "Jeroen Nijkamp",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/8c8d5747-d7c3-407c-aece-310a5536c4c4"
+        },
+        "location": {
+          "country": "",
+          "city": "'s-gravenhage"
+        },
+        "url": "https://alkem.io/user/jeroen-nijkamp-7062"
+      }
+    },
+    {
+      "id": "b895975f-1c91-4040-a3ab-8ce677554a3e",
+      "nameID": "marina-dapaiva-8069",
+      "profile": {
+        "displayName": "Marina de Paiva",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/7b95d73e-d021-4cf5-9c1e-035afb705648"
+        },
+        "location": {
+          "country": "NL",
+          "city": "The Hague"
+        },
+        "url": "https://alkem.io/user/marina-dapaiva-8069"
+      }
+    },
+    {
+      "id": "b9aa9f78-3f83-4a1a-be19-bde6b054f1dc",
+      "nameID": "rene-honig-4542",
+      "profile": {
+        "displayName": "René Honig",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/0fd81437-6fac-4b48-983b-877752653111"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/rene-honig-4542"
+      }
+    },
+    {
+      "id": "c3c843c1-a7eb-4a82-9491-0d01783f01ef",
+      "nameID": "paul-skinner",
+      "profile": {
+        "displayName": "Paul Skinner",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/069023eb-822d-4044-b55b-e0db6780d5b7"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/paul-skinner"
+      }
+    },
+    {
+      "id": "c52d1f29-6b9f-48d3-b8b2-cbd556010fa9",
+      "nameID": "donna-duiker-9001",
+      "profile": {
+        "displayName": "Donna R. Duiker",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/58176fa9-b454-442d-a2b7-5389cfc8660d"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/donna-duiker-9001"
+      }
+    },
+    {
+      "id": "d041ba87-3610-4421-a5d0-50d5df34bef5",
+      "nameID": "denitsa-yanakieva-5732",
+      "profile": {
+        "displayName": "Denitsa Yanakieva",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/2de042e2-d911-4a2e-b874-bd8217fda483"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/denitsa-yanakieva-5732"
+      }
+    },
+    {
+      "id": "d1b73757-2e36-4883-b560-71a3805efe41",
+      "nameID": "simone-rietmeijer-3706",
+      "profile": {
+        "displayName": "Simone Rietmeijer",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/bb3cdf9c-2c83-441b-977e-85517e7f64c2"
+        },
+        "location": {
+          "country": "NL",
+          "city": "Vinkeveen"
+        },
+        "url": "https://alkem.io/user/simone-rietmeijer-3706"
+      }
+    },
+    {
+      "id": "d53fbfaf-f12d-42a3-b5e3-cdead3853580",
+      "nameID": "marcus-jung-5697",
+      "profile": {
+        "displayName": "Marcus Jung",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/285a1a5a-6eff-4d30-a3c8-b3c0270276b9"
+        },
+        "location": {
+          "country": "",
+          "city": ""
+        },
+        "url": "https://alkem.io/user/marcus-jung-5697"
+      }
+    },
+    {
+      "id": "e3fe085d-4f03-42a1-bc46-a3b019a9a31b",
+      "nameID": "svetoslav-petkov-1125",
+      "profile": {
+        "displayName": "Svetoslav Petkov 😎",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/9238c4e3-d620-4418-ba1c-8b3e0b427e0d"
+        },
+        "location": {
+          "country": "BG",
+          "city": "Sofia"
+        },
+        "url": "https://alkem.io/user/svetoslav-petkov-1125"
       }
     }
   ],
   "organizations": [
     {
-      "id": "59a685b0-86ff-485c-a2a1-a540470190bc",
-      "nameID": "eco1host",
+      "id": "bb876843-200e-48f9-a82a-27cb62b974f8",
+      "nameID": "alkemio",
       "profile": {
-        "displayName": "Eco1 Host",
+        "displayName": "Alkemio BV",
         "avatar": {
-          "uri": "http://localhost:3000/api/private/rest/storage/document/60f65e93-fae5-4f5c-a8ce-8308989fa77e"
+          "uri": "https://alkem.io/api/private/rest/storage/document/fd6ab82b-c817-4db5-ac19-7ac212b41769"
         },
         "location": {
-          "country": null,
-          "city": null
+          "country": "NL",
+          "city": "The Hague"
         },
-        "url": "http://localhost:3000/organization/eco1host"
+        "url": "https://alkem.io/organization/alkemio"
+      }
+    },
+    {
+      "id": "9b943b1e-b8a8-4169-bc96-0da778b295bd",
+      "nameID": "alkemio-foundation",
+      "profile": {
+        "displayName": "Alkemio Foundation",
+        "avatar": {
+          "uri": "https://alkem.io/api/private/rest/storage/document/630590a4-1c53-480b-a59e-0128e6006436"
+        },
+        "location": {
+          "country": "NL",
+          "city": "Den Haag"
+        },
+        "url": "https://alkem.io/organization/alkemio-foundation"
       }
     }
   ]

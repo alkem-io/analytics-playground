@@ -284,7 +284,8 @@ export class AlkemioGraphTransformer {
         opportunities: spaceL2Nodes,
       },
     };
-    return data;
+    // save the results to files
+    fs.writeFileSync(TRANSFORMED_DATA_FILE, JSON.stringify(data));
   }
 
 

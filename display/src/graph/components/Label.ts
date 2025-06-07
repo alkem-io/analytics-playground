@@ -19,15 +19,12 @@ export class Label {
     const maxWeight = d3Max(weights) || 10;
     const fontSizeScale = scaleLinear<number, number>().domain([0, maxWeight]).range([7, 12]);
 
-    const textContainer = this.svg
+    this.textContainer = this.svg
       .append('g')
       .attr('class', 'textContainer')
       .selectAll('g.label')
       .data(nodes)
-      .enter()
-      .append('g');
-
-    textContainer
+      .join('g')
       .append('text')
       .text((d: any) => d.name)
       .attr('font-size', (d: any) => fontSizeScale(d.weight))

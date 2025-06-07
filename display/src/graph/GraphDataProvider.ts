@@ -1,5 +1,4 @@
 import { json } from 'd3-fetch';
-import { node } from 'webpack';
 import { IData } from './model/data.interface';
 import { IEdge } from './model/edge.interface';
 import { INode } from './model/node.interface';

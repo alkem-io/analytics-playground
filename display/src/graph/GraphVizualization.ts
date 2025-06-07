@@ -124,8 +124,7 @@ export class GraphVizualization {
     this.node = this.nodesGroup
       .selectAll('circle')
       .data(this.graphDataProvider.getFilteredNodes(), (d: any) => d.id)
-      .enter()
-      .append('circle')
+      .join('circle')
       .attr('id', (d: any) => d.id)
       .attr('r', (d: any) => this.nodeScale(d.weight))
       .attr('stroke', '#251607 ')
@@ -144,8 +143,7 @@ export class GraphVizualization {
     this.link = this.linksGroup
       .selectAll('path')
       .data(this.graphDataProvider.getFilteredEdges(), (d: any) => d.id)
-      .enter()
-      .append('path')
+      .join('path')
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
       //.attr("stroke-dasharray", (d) => linkDashScale(d.weight))
@@ -156,7 +154,6 @@ export class GraphVizualization {
         switch (d.type) {
           case 'lead':
             return `url(#${this.defMarkerArrowName})`;
-
           default:
             return 'none';
         }

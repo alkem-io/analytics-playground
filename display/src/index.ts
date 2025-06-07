@@ -1,10 +1,11 @@
-import { select, Selection } from 'd3-selection';
+import { select } from 'd3-selection';
 import { GraphDataProvider } from './graph/GraphDataProvider';
 import { GraphVizualization } from './graph/GraphVizualization';
 import { GraphVizualizationControls } from './graph/GraphVizualizationControls';
 import { MapDataProvider } from './graph/MapDataProvider';
 import { LifecycleDataProvider } from './lifecycle/LifecycleDataProvider';
 import { LifecycleVisualization } from './lifecycle/LifecycleVisualization';
+import { NodeType } from '../../transform/src/common/node.type';
 
 // Make the DOM locations available
 const graphSvg = select('#graph-svg');
@@ -93,13 +94,13 @@ graphZoomMin.on('click', (e: any) => {
   forceGraph.zoomMin();
 });
 graphFixContributorsToLocation.on('click', (e: any) => {
-  forceGraph.fixLocationToMap('user');
-  forceGraph.fixLocationToMap('organization');
+  forceGraph.fixLocationToMap(NodeType.USER);
+  forceGraph.fixLocationToMap(NodeType.ORGANIZATION);
 });
 graphFixSpacesToLocation.on('click', (e: any) => {
-  forceGraph.fixLocationToMap('space');
-  forceGraph.fixLocationToMap('challenge');
-  forceGraph.fixLocationToMap('opportunity');
+  forceGraph.fixLocationToMap(NodeType.SPACE_L0);
+  forceGraph.fixLocationToMap(NodeType.SPACE_L1);
+  forceGraph.fixLocationToMap(NodeType.SPACE_L2);
 });
 
 

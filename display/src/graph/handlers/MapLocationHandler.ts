@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import { drag, DragBehavior } from 'd3-drag';
 import { Simulation } from 'd3-force';
 import { TransformationHandler } from './TransformationHandler';
 
@@ -21,8 +20,8 @@ export class MapLocationHandler {
     const nodesData = nodes.data();
     for (const node of nodesData) {
       if (nodeType == node.type) {
-        const lon = node.lon;
-        const lat = node.lat;
+        const lon = node.location?.lon || '';
+        const lat = node.location?.lat || '';
         if (this.isValidLocation(lon, lat)) {
           const fixedLocation = this.transformationHandler.projection([
             lon,

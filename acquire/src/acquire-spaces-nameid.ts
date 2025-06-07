@@ -2,6 +2,8 @@ import { createLogger } from "./util/create-logger";
 import { createConfigUsingEnvVars } from "./util/create-config-using-envvars";
 import { AlkemioAnalyticsClient } from "./AlkemioAnalyticsClient";
 import fs from "fs";
+import { OrganizationModel, UserModel } from "./model/fullDataModel";
+import { mapUserDataToUserModel, mapOrganizationDataToOrganizationModel } from "./util/mapUserAndOrgDataToModel";
 
 // TODO: Replace with your actual list of space nameIDs
 const SPACE_NAMEIDS = ["test2", "eco1"];
@@ -36,19 +38,19 @@ class SpacesByNameIDAcquirer {
     }
     spaces.forEach(collectContributors);
 
-    // 3. Fetch user details
+    // 3. Fetch user details and map
     const userIDs = Array.from(userIDsSet);
     const usersResponseData = await this.alkemioAnalyticsClient.sdkClient.usersByIDs({
       ids: userIDs,
     });
-    const users: any[] = usersResponseData.data.users || [];
+    const users: UserModel[] = (usersResponseData.data.users || []).map(mapUserDataToUserModel);
 
-    // 4. Fetch organization details
-    const organizations: any[] = [];
+    // 4. Fetch organization details and map
+    const organizations: OrganizationModel[] = [];
     for (const orgID of orgIDs) {
       const org = await this.alkemioAnalyticsClient.sdkClient.organizationByID({ id: orgID });
       if (org.data.lookup.organization) {
-        organizations.push(org.data.lookup.organization);
+        organizations.push(mapOrganizationDataToOrganizationModel(org.data.lookup.organization));
       }
     }
 

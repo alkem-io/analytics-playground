@@ -1,0 +1,20 @@
+# Accepts an array of user IDs as input
+query organizationByID($id: UUID!) {
+  lookup {
+    organization(ID: $id) {
+    id
+    nameID
+    profile {
+      displayName
+      avatar: visual(type: AVATAR) {
+        uri
+      }
+      location {
+        country
+        city
+      }
+      url
+    }
+  }
+}
+}

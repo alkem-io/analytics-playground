@@ -18216,6 +18216,29 @@ export type MeQuery = {
   };
 };
 
+export type OrganizationByIdQueryVariables = SchemaTypes.Exact<{
+  id: SchemaTypes.Scalars["UUID"]["input"];
+}>;
+
+export type OrganizationByIdQuery = {
+  lookup: {
+    organization?:
+      | {
+          id: string;
+          nameID: string;
+          profile: {
+            displayName: string;
+            url: string;
+            avatar?: { uri: string } | undefined;
+            location?:
+              | { country?: string | undefined; city?: string | undefined }
+              | undefined;
+          };
+        }
+      | undefined;
+  };
+};
+
 export type OrganizationsQueryVariables = SchemaTypes.Exact<{
   [key: string]: never;
 }>;
@@ -18233,6 +18256,112 @@ export type OrganizationsQuery = {
         | undefined;
     };
   }>;
+};
+
+export type SpaceByNameQueryVariables = SchemaTypes.Exact<{
+  nameId: SchemaTypes.Scalars["NameID"]["input"];
+}>;
+
+export type SpaceByNameQuery = {
+  lookupByName: {
+    space?:
+      | {
+          id: string;
+          nameID: string;
+          subspaces: Array<{
+            id: string;
+            nameID: string;
+            subspaces: Array<{
+              id: string;
+              nameID: string;
+              about: {
+                profile: {
+                  displayName: string;
+                  tagline?: string | undefined;
+                  url: string;
+                  location?:
+                    | {
+                        country?: string | undefined;
+                        city?: string | undefined;
+                      }
+                    | undefined;
+                };
+              };
+              community: {
+                roleSet: {
+                  memberUsers: Array<{ id: string }>;
+                  memberOrganizations: Array<{ id: string }>;
+                  leadOrganizations: Array<{ id: string }>;
+                  leadUsers: Array<{ id: string }>;
+                };
+              };
+            }>;
+            about: {
+              profile: {
+                displayName: string;
+                tagline?: string | undefined;
+                url: string;
+                location?:
+                  | { country?: string | undefined; city?: string | undefined }
+                  | undefined;
+              };
+            };
+            community: {
+              roleSet: {
+                memberUsers: Array<{ id: string }>;
+                memberOrganizations: Array<{ id: string }>;
+                leadOrganizations: Array<{ id: string }>;
+                leadUsers: Array<{ id: string }>;
+              };
+            };
+          }>;
+          account: {
+            host?: { id: string } | { id: string } | { id: string } | undefined;
+          };
+          about: {
+            profile: {
+              displayName: string;
+              tagline?: string | undefined;
+              url: string;
+              location?:
+                | { country?: string | undefined; city?: string | undefined }
+                | undefined;
+            };
+          };
+          community: {
+            roleSet: {
+              memberUsers: Array<{ id: string }>;
+              memberOrganizations: Array<{ id: string }>;
+              leadOrganizations: Array<{ id: string }>;
+              leadUsers: Array<{ id: string }>;
+            };
+          };
+        }
+      | undefined;
+  };
+};
+
+export type SpaceByNameFragmentFragment = {
+  id: string;
+  nameID: string;
+  about: {
+    profile: {
+      displayName: string;
+      tagline?: string | undefined;
+      url: string;
+      location?:
+        | { country?: string | undefined; city?: string | undefined }
+        | undefined;
+    };
+  };
+  community: {
+    roleSet: {
+      memberUsers: Array<{ id: string }>;
+      memberOrganizations: Array<{ id: string }>;
+      leadOrganizations: Array<{ id: string }>;
+      leadUsers: Array<{ id: string }>;
+    };
+  };
 };
 
 export type SpaceRolesL0QueryVariables = SchemaTypes.Exact<{
@@ -18362,6 +18491,60 @@ export type UsersQuery = {
   }>;
 };
 
+export type UsersByIDsQueryVariables = SchemaTypes.Exact<{
+  ids:
+    | Array<SchemaTypes.Scalars["UUID"]["input"]>
+    | SchemaTypes.Scalars["UUID"]["input"];
+}>;
+
+export type UsersByIDsQuery = {
+  users: Array<{
+    id: string;
+    nameID: string;
+    profile: {
+      displayName: string;
+      url: string;
+      avatar?: { uri: string } | undefined;
+      location?:
+        | { country?: string | undefined; city?: string | undefined }
+        | undefined;
+    };
+  }>;
+};
+
+export const SpaceByNameFragmentFragmentDoc = gql`
+  fragment SpaceByNameFragment on Space {
+    id
+    nameID
+    about {
+      profile {
+        displayName
+        tagline
+        location {
+          country
+          city
+        }
+        url
+      }
+    }
+    community {
+      roleSet {
+        memberUsers: usersInRole(role: MEMBER) {
+          id
+        }
+        memberOrganizations: organizationsInRole(role: MEMBER) {
+          id
+        }
+        leadOrganizations: organizationsInRole(role: LEAD) {
+          id
+        }
+        leadUsers: usersInRole(role: LEAD) {
+          id
+        }
+      }
+    }
+  }
+`;
 export const MeDocument = gql`
   query me {
     me {
@@ -18384,6 +18567,27 @@ export const MeDocument = gql`
     }
   }
 `;
+export const OrganizationByIdDocument = gql`
+  query organizationByID($id: UUID!) {
+    lookup {
+      organization(ID: $id) {
+        id
+        nameID
+        profile {
+          displayName
+          avatar: visual(type: AVATAR) {
+            uri
+          }
+          location {
+            country
+            city
+          }
+          url
+        }
+      }
+    }
+  }
+`;
 export const OrganizationsDocument = gql`
   query organizations {
     organizations {
@@ -18402,6 +18606,27 @@ export const OrganizationsDocument = gql`
       }
     }
   }
+`;
+export const SpaceByNameDocument = gql`
+  query spaceByName($nameId: NameID!) {
+    lookupByName {
+      space(NAMEID: $nameId) {
+        ...SpaceByNameFragment
+        subspaces {
+          ...SpaceByNameFragment
+          subspaces {
+            ...SpaceByNameFragment
+          }
+        }
+        account {
+          host {
+            id
+          }
+        }
+      }
+    }
+  }
+  ${SpaceByNameFragmentFragmentDoc}
 `;
 export const SpaceRolesL0Document = gql`
   query spaceRolesL0 {
@@ -18564,6 +18789,25 @@ export const UsersDocument = gql`
     }
   }
 `;
+export const UsersByIDsDocument = gql`
+  query usersByIDs($ids: [UUID!]!) {
+    users(IDs: $ids) {
+      id
+      nameID
+      profile {
+        displayName
+        avatar: visual(type: AVATAR) {
+          uri
+        }
+        location {
+          country
+          city
+        }
+        url
+      }
+    }
+  }
+`;
 
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
@@ -18579,11 +18823,14 @@ const defaultWrapper: SdkFunctionWrapper = (
   _variables,
 ) => action();
 const MeDocumentString = print(MeDocument);
+const OrganizationByIdDocumentString = print(OrganizationByIdDocument);
 const OrganizationsDocumentString = print(OrganizationsDocument);
+const SpaceByNameDocumentString = print(SpaceByNameDocument);
 const SpaceRolesL0DocumentString = print(SpaceRolesL0Document);
 const SpaceRolesL1DocumentString = print(SpaceRolesL1Document);
 const SpaceRolesL2DocumentString = print(SpaceRolesL2Document);
 const UsersDocumentString = print(UsersDocument);
+const UsersByIDsDocumentString = print(UsersByIDsDocument);
 export function getSdk(
   client: GraphQLClient,
   withWrapper: SdkFunctionWrapper = defaultWrapper,
@@ -18610,6 +18857,28 @@ export function getSdk(
         variables,
       );
     },
+    organizationByID(
+      variables: SchemaTypes.OrganizationByIdQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+    ): Promise<{
+      data: SchemaTypes.OrganizationByIdQuery;
+      errors?: GraphQLError[];
+      extensions?: any;
+      headers: Headers;
+      status: number;
+    }> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.rawRequest<SchemaTypes.OrganizationByIdQuery>(
+            OrganizationByIdDocumentString,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders },
+          ),
+        "organizationByID",
+        "query",
+        variables,
+      );
+    },
     organizations(
       variables?: SchemaTypes.OrganizationsQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
@@ -18628,6 +18897,28 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
         "organizations",
+        "query",
+        variables,
+      );
+    },
+    spaceByName(
+      variables: SchemaTypes.SpaceByNameQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+    ): Promise<{
+      data: SchemaTypes.SpaceByNameQuery;
+      errors?: GraphQLError[];
+      extensions?: any;
+      headers: Headers;
+      status: number;
+    }> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.rawRequest<SchemaTypes.SpaceByNameQuery>(
+            SpaceByNameDocumentString,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders },
+          ),
+        "spaceByName",
         "query",
         variables,
       );
@@ -18716,6 +19007,28 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders },
           ),
         "users",
+        "query",
+        variables,
+      );
+    },
+    usersByIDs(
+      variables: SchemaTypes.UsersByIDsQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+    ): Promise<{
+      data: SchemaTypes.UsersByIDsQuery;
+      errors?: GraphQLError[];
+      extensions?: any;
+      headers: Headers;
+      status: number;
+    }> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.rawRequest<SchemaTypes.UsersByIDsQuery>(
+            UsersByIDsDocumentString,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders },
+          ),
+        "usersByIDs",
         "query",
         variables,
       );

@@ -1,0 +1,50 @@
+query spaceByName($nameId: NameID!) {
+  lookupByName {
+    space(NAMEID: $nameId) {
+      ...SpaceByNameFragment
+      subspaces {
+        ...SpaceByNameFragment
+        subspaces {
+          ...SpaceByNameFragment
+        }
+      }
+      account {
+        host {
+          id
+        }
+      }
+    }
+  }
+}
+
+fragment SpaceByNameFragment on Space {
+  id
+  nameID
+  about {
+    profile {
+      displayName
+      tagline
+      location {
+        country
+        city
+      }
+      url
+    }
+  }
+  community {
+    roleSet {
+      memberUsers: usersInRole(role: MEMBER) {
+        id
+      }
+      memberOrganizations: organizationsInRole(role: MEMBER) {
+        id
+      }
+      leadOrganizations: organizationsInRole(role: LEAD) {
+        id
+      }
+      leadUsers: usersInRole(role: LEAD) {
+        id
+      }
+    }
+  }
+}

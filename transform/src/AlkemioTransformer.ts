@@ -31,9 +31,9 @@ export class AlkemioGraphTransformer {
 
   async transformData() {
     // create the graph
-    const spaceNodes: NodeChallenge[] = [];
-    const challengeNodes: NodeChallenge[] = [];
-    const opportunityNodes: NodeChallenge[] = [];
+    const spaceL0Nodes: NodeChallenge[] = [];
+    const spaceL1Nodes: NodeChallenge[] = [];
+    const spaceL2Nodes: NodeChallenge[] = [];
     const contributorNodes: NodeContributor[] = [];
     const edges: Edge[] = [];
 
@@ -119,7 +119,7 @@ export class AlkemioGraphTransformer {
         locationExact[1]
       );
 
-      spaceNodes.push(spaceNode);
+      spaceL0Nodes.push(spaceNode);
       this.addCommunityRoleEdges(
         space,
         space.community.roleSet.memberUsers,
@@ -175,7 +175,7 @@ export class AlkemioGraphTransformer {
           locationExact[1]
         );
 
-        challengeNodes.push(challengeNode);
+        spaceL1Nodes.push(challengeNode);
 
         const edge = new Edge(
           spaceL1.id,
@@ -243,7 +243,7 @@ export class AlkemioGraphTransformer {
             locationExact[1]
           );
 
-          opportunityNodes.push(opportunityNode);
+          spaceL2Nodes.push(opportunityNode);
 
           const edge = new Edge(
             spaceL2.id,
@@ -290,9 +290,9 @@ export class AlkemioGraphTransformer {
       edges: edges,
       nodes: {
         contributors: contributorNodes,
-        spaces: spaceNodes,
-        challenges: challengeNodes,
-        opportunities: opportunityNodes,
+        spaces: spaceL0Nodes,
+        challenges: spaceL1Nodes,
+        opportunities: spaceL2Nodes,
       },
     };
 

@@ -1,4 +1,4 @@
-export class Edge {
+export class GraphEdgeModel {
   sourceID: string;
   targetID: string;
   source: string;

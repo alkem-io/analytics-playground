@@ -1,9 +1,8 @@
-import { IEdge } from "./edge.interface";
-import { INode } from "./node.interface";
-
+import { GraphNodeSpaceModel } from '../../../../transform/src/model/graph/graphNodeSpace';
+import { GraphNodeContributorModel } from '../../../../transform/src/model/graph/graphNodeContributor';
 export interface IDataNodes {
-  spacesL0: INode[];
-  spacesL1: INode[];
-  spacesL2: INode[];
-  contributors: INode[];
+  spacesL0: GraphNodeSpaceModel[];
+  spacesL1: GraphNodeSpaceModel[];
+  spacesL2: GraphNodeSpaceModel[];
+  contributors: GraphNodeContributorModel[];
 }

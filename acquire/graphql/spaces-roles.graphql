@@ -25,6 +25,10 @@ fragment SpaceFragment on Space {
       location {
         country
         city
+        geoLocation {
+          latitude
+          longitude
+        }
       }
       url
     }

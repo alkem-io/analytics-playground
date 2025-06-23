@@ -4,19 +4,35 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
 
-  "configurations": [
-    {
-      "name": "GenerateGraph",
+  "configurations": [{
+    "name": "Transform",
+      "type": "node",
       "request": "launch",
+      "cwd": "${workspaceFolder}/transform",
+      "runtimeExecutable": "tsx",
+      "env": {
+        "NODE_ENV": "test"
+      },
       "runtimeArgs": [
-        "run",
-        "generate-graph"
+        "src/transform-data-single-file.ts"
       ],
-      "runtimeExecutable": "npm",
-      "skipFiles": [
-        "<node_internals>/**"
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {"name": "Acquire",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/acquire",
+      "runtimeExecutable": "tsx",
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "runtimeArgs": [
+        "src/acquire-spaces-nameid.ts",
+        "building-alkemio-org"
       ],
-      "type": "pwa-node"
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     },
     {
       "name": "AcquireSpaces",
@@ -29,7 +45,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "type": "pwa-node",
+      "type": "node",
       "cwd": "${workspaceFolder}//acquire"
     },
     {
@@ -43,20 +59,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "type": "pwa-node"
-    },
-    {
-      "name": "GenerateTxData",
-      "request": "launch",
-      "runtimeArgs": [
-        "run",
-        "generate-graph"
-      ],
-      "runtimeExecutable": "npm",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "type": "pwa-node"
+      "type": "node"
     },
   ]
 }

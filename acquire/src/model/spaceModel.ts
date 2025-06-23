@@ -14,11 +14,17 @@ export interface About {
 export interface Profile {
   displayName: string;
   tagline: string;
-  location: {
-    country: string;
-    city: string;
-  };
+  location: LocationModel;
   url: string;
+}
+
+export interface LocationModel {
+  country: string;
+  city: string;
+  geoLocation: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface Community {
@@ -41,4 +47,3 @@ export interface Account {
     id: string;
   };
 }
-

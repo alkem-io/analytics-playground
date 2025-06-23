@@ -140,8 +140,8 @@ export class GraphDataProvider {
 
   private getChangeNodesFilteredByGroup() {
     if (!this.showSingleSpace()) return this.spaceNodes;
-
-    return this.spaceNodes.filter(node => node.group === this.showSingleSpaceID);
+    // Only include the node with the selected ID
+    return this.spaceNodes.filter(node => node.id === this.showSingleSpaceID);
   }
 
   showSpecificSpace(spaceID: string) {

@@ -3,6 +3,8 @@
  * place where that Node is arranged by the force directed graph.
  */
 
+// DEPRECATED: This component is no longer used for node rendering. All logic has been replaced by simple circle rendering.
+/*
 export class Image {
   svg: any;
   imageContainer: any;
@@ -29,7 +31,7 @@ export class Image {
         (d: any) =>
           `translate(${-nodeScale(d.weight) / 2}, ${-nodeScale(d.weight) / 2})`
       )
-      .attr('href', (d: any, i: any) => `image/img-0.png`);
+      .attr('href', (d: any) => d.avatar || 'image/img-0.png');
   }
 
   animate() {
@@ -39,3 +41,4 @@ export class Image {
     );
   }
 }
+*/

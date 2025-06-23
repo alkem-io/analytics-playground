@@ -11,6 +11,10 @@ query usersByIDs($ids: [UUID!]!) {
       location {
         country
         city
+        geoLocation {
+          latitude
+          longitude
+        }
       }
       url
     }

@@ -11,6 +11,10 @@ query me {
         location {
           country
           city
+          geoLocation {
+            latitude
+            longitude
+          }
         }
         url
       }

@@ -905,6 +905,7 @@ export type AuthorizationPrivilege =
   | "READ_USER_SETTINGS"
   | "ROLESET_ENTRY_ROLE_APPLY"
   | "ROLESET_ENTRY_ROLE_ASSIGN"
+  | "ROLESET_ENTRY_ROLE_ASSIGN_ORGANIZATION"
   | "ROLESET_ENTRY_ROLE_INVITE"
   | "ROLESET_ENTRY_ROLE_INVITE_ACCEPT"
   | "ROLESET_ENTRY_ROLE_JOIN"
@@ -969,7 +970,13 @@ export type CalendarEvent = {
   wholeDay: Scalars["Boolean"]["output"];
 };
 
-export type CalendarEventType = "EVENT" | "MILESTONE" | "OTHER" | "TRAINING";
+export type CalendarEventType =
+  | "DEADLINE"
+  | "EVENT"
+  | "MEETING"
+  | "MILESTONE"
+  | "OTHER"
+  | "TRAINING";
 
 export type Callout = {
   /** The activity for this Callout. */
@@ -1347,7 +1354,7 @@ export type CommunityGuidelines = {
   createdDate: Scalars["DateTime"]["output"];
   /** The ID of the entity */
   id: Scalars["UUID"]["output"];
-  /** The details of the guidelilnes */
+  /** The details of the guidelines */
   profile: Profile;
   /** The date at which the entity was last updated. */
   updatedDate: Scalars["DateTime"]["output"];
@@ -1869,6 +1876,8 @@ export type CreateReferenceOnProfileInput = {
 };
 
 export type CreateSpaceAboutInput = {
+  /** The CommunityGuidelines for the Space */
+  guidelines?: InputMaybe<CreateCommunityGuidelinesInput>;
   profileData: CreateProfileInput;
   when?: InputMaybe<Scalars["Markdown"]["input"]>;
   who?: InputMaybe<Scalars["Markdown"]["input"]>;
@@ -2383,6 +2392,13 @@ export type ForumDiscussionPrivacy = "AUTHENTICATED" | "AUTHOR" | "PUBLIC";
 export type Geo = {
   /** Endpoint where geo information is consumed from. */
   endpoint: Scalars["String"]["output"];
+};
+
+export type GeoLocation = {
+  /** The Latitude for this Location, derived from (City, Country) if those are set. */
+  latitude?: Maybe<Scalars["Float"]["output"]>;
+  /** The Longitude for this Location, derived from (City, Country) if those are set. */
+  longitude?: Maybe<Scalars["Float"]["output"]>;
 };
 
 export type GrantAuthorizationCredentialInput = {
@@ -2933,6 +2949,8 @@ export type Location = {
   country?: Maybe<Scalars["String"]["output"]>;
   /** The date at which the entity was created. */
   createdDate: Scalars["DateTime"]["output"];
+  /** The GeoLocation for this Location, derived from (City, Country) if those are set. */
+  geoLocation: GeoLocation;
   /** The ID of the entity */
   id: Scalars["UUID"]["output"];
   postalCode?: Maybe<Scalars["String"]["output"]>;
@@ -3528,6 +3546,8 @@ export type Mutation = {
   adminSearchIngestFromScratch: Scalars["String"]["output"];
   /** Update the Avatar on the Profile with the spedified profileID to be stored as a Document. */
   adminUpdateContributorAvatars: Profile;
+  /** Updates the GeoLocation data where required on the platform. */
+  adminUpdateGeoLocationData: Scalars["Boolean"]["output"];
   /** Remove the Kratos account associated with the specified User. Note: the Users profile on the platform is not deleted. */
   adminUserAccountDelete: User;
   /** Create a test customer on wingback. */
@@ -8182,6 +8202,7 @@ export type ResolversTypes = {
   ForumDiscussionCategory: SchemaTypes.ForumDiscussionCategory;
   ForumDiscussionPrivacy: SchemaTypes.ForumDiscussionPrivacy;
   Geo: ResolverTypeWrapper<SchemaTypes.Geo>;
+  GeoLocation: ResolverTypeWrapper<SchemaTypes.GeoLocation>;
   GrantAuthorizationCredentialInput: SchemaTypes.GrantAuthorizationCredentialInput;
   GrantOrganizationAuthorizationCredentialInput: SchemaTypes.GrantOrganizationAuthorizationCredentialInput;
   Groupable: ResolverTypeWrapper<
@@ -8554,8 +8575,8 @@ export type ResolversTypes = {
   PreferenceType: SchemaTypes.PreferenceType;
   PreferenceValueType: SchemaTypes.PreferenceValueType;
   Profile: ResolverTypeWrapper<
-    Omit<SchemaTypes.Profile, "location" | "storageBucket"> & {
-      location?: SchemaTypes.Maybe<ResolversTypes["Location"]>;
+    Omit<SchemaTypes.Profile, "references" | "storageBucket"> & {
+      references?: SchemaTypes.Maybe<Array<ResolversTypes["Reference"]>>;
       storageBucket: ResolversTypes["StorageBucket"];
     }
   >;
@@ -9468,6 +9489,7 @@ export type ResolversParentTypes = {
   };
   ForumCreateDiscussionInput: SchemaTypes.ForumCreateDiscussionInput;
   Geo: SchemaTypes.Geo;
+  GeoLocation: SchemaTypes.GeoLocation;
   GrantAuthorizationCredentialInput: SchemaTypes.GrantAuthorizationCredentialInput;
   GrantOrganizationAuthorizationCredentialInput: SchemaTypes.GrantOrganizationAuthorizationCredentialInput;
   Groupable: ResolversInterfaceTypes<ResolversParentTypes>["Groupable"];
@@ -9787,8 +9809,8 @@ export type ResolversParentTypes = {
   };
   Preference: SchemaTypes.Preference;
   PreferenceDefinition: SchemaTypes.PreferenceDefinition;
-  Profile: Omit<SchemaTypes.Profile, "location" | "storageBucket"> & {
-    location?: SchemaTypes.Maybe<ResolversParentTypes["Location"]>;
+  Profile: Omit<SchemaTypes.Profile, "references" | "storageBucket"> & {
+    references?: SchemaTypes.Maybe<Array<ResolversParentTypes["Reference"]>>;
     storageBucket: ResolversParentTypes["StorageBucket"];
   };
   ProfileCredentialVerified: SchemaTypes.ProfileCredentialVerified;
@@ -12373,6 +12395,24 @@ export type GeoResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type GeoLocationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["GeoLocation"] = ResolversParentTypes["GeoLocation"],
+> = {
+  latitude?: Resolver<
+    SchemaTypes.Maybe<ResolversTypes["Float"]>,
+    ParentType,
+    ContextType
+  >;
+  longitude?: Resolver<
+    SchemaTypes.Maybe<ResolversTypes["Float"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type GroupableResolvers<
   ContextType = any,
   ParentType extends
@@ -13149,6 +13189,11 @@ export type LocationResolvers<
     ContextType
   >;
   createdDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  geoLocation?: Resolver<
+    ResolversTypes["GeoLocation"],
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes["UUID"], ParentType, ContextType>;
   postalCode?: Resolver<
     SchemaTypes.Maybe<ResolversTypes["String"]>,
@@ -13929,6 +13974,11 @@ export type MutationResolvers<
       SchemaTypes.MutationAdminUpdateContributorAvatarsArgs,
       "profileID"
     >
+  >;
+  adminUpdateGeoLocationData?: Resolver<
+    ResolversTypes["Boolean"],
+    ParentType,
+    ContextType
   >;
   adminUserAccountDelete?: Resolver<
     ResolversTypes["User"],
@@ -18041,6 +18091,7 @@ export type Resolvers<ContextType = any> = {
   FormQuestion?: FormQuestionResolvers<ContextType>;
   Forum?: ForumResolvers<ContextType>;
   Geo?: GeoResolvers<ContextType>;
+  GeoLocation?: GeoLocationResolvers<ContextType>;
   Groupable?: GroupableResolvers<ContextType>;
   ISearchCategoryResult?: ISearchCategoryResultResolvers<ContextType>;
   ISearchResults?: ISearchResultsResolvers<ContextType>;
@@ -18208,7 +18259,14 @@ export type MeQuery = {
             url: string;
             avatar?: { uri: string } | undefined;
             location?:
-              | { country?: string | undefined; city?: string | undefined }
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
               | undefined;
           };
         }
@@ -18231,7 +18289,14 @@ export type OrganizationByIdQuery = {
             url: string;
             avatar?: { uri: string } | undefined;
             location?:
-              | { country?: string | undefined; city?: string | undefined }
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
               | undefined;
           };
         }
@@ -18252,7 +18317,14 @@ export type OrganizationsQuery = {
       url: string;
       avatar?: { uri: string } | undefined;
       location?:
-        | { country?: string | undefined; city?: string | undefined }
+        | {
+            country?: string | undefined;
+            city?: string | undefined;
+            geoLocation: {
+              latitude?: number | undefined;
+              longitude?: number | undefined;
+            };
+          }
         | undefined;
     };
   }>;
@@ -18283,6 +18355,10 @@ export type SpaceByNameQuery = {
                     | {
                         country?: string | undefined;
                         city?: string | undefined;
+                        geoLocation: {
+                          latitude?: number | undefined;
+                          longitude?: number | undefined;
+                        };
                       }
                     | undefined;
                 };
@@ -18302,7 +18378,14 @@ export type SpaceByNameQuery = {
                 tagline?: string | undefined;
                 url: string;
                 location?:
-                  | { country?: string | undefined; city?: string | undefined }
+                  | {
+                      country?: string | undefined;
+                      city?: string | undefined;
+                      geoLocation: {
+                        latitude?: number | undefined;
+                        longitude?: number | undefined;
+                      };
+                    }
                   | undefined;
               };
             };
@@ -18324,7 +18407,14 @@ export type SpaceByNameQuery = {
               tagline?: string | undefined;
               url: string;
               location?:
-                | { country?: string | undefined; city?: string | undefined }
+                | {
+                    country?: string | undefined;
+                    city?: string | undefined;
+                    geoLocation: {
+                      latitude?: number | undefined;
+                      longitude?: number | undefined;
+                    };
+                  }
                 | undefined;
             };
           };
@@ -18350,7 +18440,14 @@ export type SpaceByNameFragmentFragment = {
       tagline?: string | undefined;
       url: string;
       location?:
-        | { country?: string | undefined; city?: string | undefined }
+        | {
+            country?: string | undefined;
+            city?: string | undefined;
+            geoLocation: {
+              latitude?: number | undefined;
+              longitude?: number | undefined;
+            };
+          }
         | undefined;
     };
   };
@@ -18384,7 +18481,14 @@ export type SpaceRolesL0Query = {
             tagline?: string | undefined;
             url: string;
             location?:
-              | { country?: string | undefined; city?: string | undefined }
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
               | undefined;
           };
         };
@@ -18403,7 +18507,14 @@ export type SpaceRolesL0Query = {
           tagline?: string | undefined;
           url: string;
           location?:
-            | { country?: string | undefined; city?: string | undefined }
+            | {
+                country?: string | undefined;
+                city?: string | undefined;
+                geoLocation: {
+                  latitude?: number | undefined;
+                  longitude?: number | undefined;
+                };
+              }
             | undefined;
         };
       };
@@ -18425,7 +18536,14 @@ export type SpaceRolesL0Query = {
         tagline?: string | undefined;
         url: string;
         location?:
-          | { country?: string | undefined; city?: string | undefined }
+          | {
+              country?: string | undefined;
+              city?: string | undefined;
+              geoLocation: {
+                latitude?: number | undefined;
+                longitude?: number | undefined;
+              };
+            }
           | undefined;
       };
     };
@@ -18449,7 +18567,14 @@ export type SpaceFragmentFragment = {
       tagline?: string | undefined;
       url: string;
       location?:
-        | { country?: string | undefined; city?: string | undefined }
+        | {
+            country?: string | undefined;
+            city?: string | undefined;
+            geoLocation: {
+              latitude?: number | undefined;
+              longitude?: number | undefined;
+            };
+          }
         | undefined;
     };
   };
@@ -18474,7 +18599,14 @@ export type UsersQuery = {
       url: string;
       avatar?: { uri: string } | undefined;
       location?:
-        | { country?: string | undefined; city?: string | undefined }
+        | {
+            country?: string | undefined;
+            city?: string | undefined;
+            geoLocation: {
+              latitude?: number | undefined;
+              longitude?: number | undefined;
+            };
+          }
         | undefined;
     };
   }>;
@@ -18495,7 +18627,14 @@ export type UsersByIDsQuery = {
       url: string;
       avatar?: { uri: string } | undefined;
       location?:
-        | { country?: string | undefined; city?: string | undefined }
+        | {
+            country?: string | undefined;
+            city?: string | undefined;
+            geoLocation: {
+              latitude?: number | undefined;
+              longitude?: number | undefined;
+            };
+          }
         | undefined;
     };
   }>;
@@ -18512,6 +18651,10 @@ export const SpaceByNameFragmentFragmentDoc = gql`
         location {
           country
           city
+          geoLocation {
+            latitude
+            longitude
+          }
         }
         url
       }
@@ -18545,6 +18688,10 @@ export const SpaceFragmentFragmentDoc = gql`
         location {
           country
           city
+          geoLocation {
+            latitude
+            longitude
+          }
         }
         url
       }
@@ -18581,6 +18728,10 @@ export const MeDocument = gql`
           location {
             country
             city
+            geoLocation {
+              latitude
+              longitude
+            }
           }
           url
         }
@@ -18603,6 +18754,10 @@ export const OrganizationByIdDocument = gql`
           location {
             country
             city
+            geoLocation {
+              latitude
+              longitude
+            }
           }
           url
         }
@@ -18623,6 +18778,10 @@ export const OrganizationsDocument = gql`
         location {
           country
           city
+          geoLocation {
+            latitude
+            longitude
+          }
         }
         url
       }
@@ -18682,6 +18841,10 @@ export const UsersDocument = gql`
         location {
           country
           city
+          geoLocation {
+            latitude
+            longitude
+          }
         }
         url
       }
@@ -18701,6 +18864,10 @@ export const UsersByIDsDocument = gql`
         location {
           country
           city
+          geoLocation {
+            latitude
+            longitude
+          }
         }
         url
       }

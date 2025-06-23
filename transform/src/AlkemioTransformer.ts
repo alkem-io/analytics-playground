@@ -7,37 +7,23 @@ import { NodeGroup } from '@lib/common/node.group';
 import { NodeWeight } from '@lib/common/node.weight';
 import { EdgeWeight } from '@lib/common/edge.weight';
 import { EdgeType } from '@lib/common/edge.type';
-import { GeoapifyGeocodeHandler } from './handlers/GeoapifyGeocodeHandler';
 import { Logger } from 'winston';
 import { IDisplayData } from '../../display/src/graph/model/data.interface';
 import {
   ContributorModel,
   SpaceModel,
 } from '../../acquire/src/model/spaceModel';
-import countries from 'i18n-iso-countries';
 import { GraphLocationModel } from '@lib/graph/graphLocationModel';
 import { GraphProfileModel } from '../../lib/src/graph/graphProfileModel';
-
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const TRANSFORMED_DATA_FILE =
   '../display/public/data/transformed-graph-data.json';
 
-function resolveCountryName(codeOrName: string): string {
-  if (!codeOrName) return '';
-  const code = codeOrName.trim().toUpperCase();
-  // Try ISO-2 and ISO-3
-  const name = countries.getName(code, 'en');
-  return name || codeOrName;
-}
-
 export class AlkemioGraphTransformer {
   logger: Logger;
-  geocodeHandler: GeoapifyGeocodeHandler;
 
-  constructor(logger: Logger, geocodeHandler: GeoapifyGeocodeHandler) {
+  constructor(logger: Logger) {
     this.logger = logger;
-    this.geocodeHandler = geocodeHandler;
   }
 
   // Helper to create a NodeSpace for any level
@@ -49,24 +35,6 @@ export class AlkemioGraphTransformer {
     url: string,
     leadOrgCount: number
   ): Promise<GraphNodeSpaceModel> {
-    const locationData = space.about.profile.location;
-    const countryName = resolveCountryName(locationData.country || '');
-    const locationExact = await this.geocodeHandler.lookup(
-      countryName,
-      locationData.city || '',
-      space.nameID
-    );
-    const locationModel: GraphLocationModel = new GraphLocationModel(
-      locationData.country || '',
-      locationData.city || '',
-      locationExact[0],
-      locationExact[1]
-    );
-    const profileModel: GraphProfileModel = new GraphProfileModel(
-      space.about.profile.displayName,
-      space.about.profile.url || '',
-      locationModel
-    );
     return new GraphNodeSpaceModel(
       space.id,
       space.nameID,
@@ -75,7 +43,7 @@ export class AlkemioGraphTransformer {
       nodeWeight,
       leadOrgCount,
       url,
-      profileModel
+      this.createProfileModel(space.about.profile)
     );
   }
 
@@ -99,24 +67,7 @@ export class AlkemioGraphTransformer {
     // Nodes for users + orgs
     for (let i = 0; i < users.length; i++) {
       const contributor = users[i];
-      const locationData = contributor.profile.location;
-      const countryName = resolveCountryName(locationData.country || '');
-      const locationExact = await this.geocodeHandler.lookup(
-        countryName,
-        locationData.city || '',
-        contributor.nameID
-      );
-      const locationModel: GraphLocationModel = new GraphLocationModel(
-        locationData.country || '',
-        locationData.city || '',
-        locationExact[0],
-        locationExact[1]
-      );
-      const profileModel: GraphProfileModel = new GraphProfileModel(
-        contributor.profile.displayName,
-        contributor.profile.url || '',
-        locationModel
-      );
+
       const contributorNode = new GraphNodeContributorModel(
         contributor.id,
         `${contributor.nameID}`,
@@ -124,31 +75,14 @@ export class AlkemioGraphTransformer {
         NodeGroup.CONTRIBUTORS,
         NodeWeight.USER,
         contributor.profile.avatar?.uri,
-        profileModel
+        this.createProfileModel(contributor.profile)
       );
       contributorNodes.push(contributorNode);
     }
 
     for (let i = 0; i < organizations.length; i++) {
       const contributor = organizations[i];
-      const locationData = contributor.profile.location;
-      const countryName = resolveCountryName(locationData.country || '');
-      const locationExact = await this.geocodeHandler.lookup(
-        countryName,
-        locationData.city || '',
-        contributor.nameID
-      );
-      const locationModel: GraphLocationModel = new GraphLocationModel(
-        locationData.country || '',
-        locationData.city || '',
-        locationExact[0],
-        locationExact[1]
-      );
-      const profileModel: GraphProfileModel = new GraphProfileModel(
-        contributor.profile.displayName,
-        contributor.profile.url || '',
-        locationModel
-      );
+
       const contributorNode = new GraphNodeContributorModel(
         contributor.id,
         `${contributor.nameID}`,
@@ -156,7 +90,7 @@ export class AlkemioGraphTransformer {
         NodeGroup.CONTRIBUTORS,
         NodeWeight.ORGANIZATION,
         contributor.profile.avatar?.uri,
-        profileModel
+        this.createProfileModel(contributor.profile)
       );
       contributorNodes.push(contributorNode);
     }
@@ -236,6 +170,22 @@ export class AlkemioGraphTransformer {
     };
     // save the results to files
     fs.writeFileSync(TRANSFORMED_DATA_FILE, JSON.stringify(data));
+  }
+
+  private createProfileModel(profileData: any): GraphProfileModel {
+    const locationData = profileData.location;
+    const locationModel: GraphLocationModel = new GraphLocationModel(
+      locationData.country || '',
+      locationData.city || '',
+      locationData.geoLocation.latitude,
+      locationData.geoLocation.longitude
+    );
+    const profileModel: GraphProfileModel = new GraphProfileModel(
+      profileData.displayName,
+      profileData.url || '',
+      locationModel
+    );
+    return profileModel;
   }
 
   // Helper to add all community role edges for a space node

@@ -14,9 +14,7 @@
     "start": "tbd",
     "codegen": "graphql-codegen --config codegen.ts",
     "validate-connection": "tsx src/validate-connection.ts",
-    "acquire-spaces": "tsx src/acquire-spaces-level-0-1-2.ts",
-    "acquire-spaces-nameid": "tsx src/acquire-spaces-nameid.ts building-alkemio-org",
-    "acquire-contributors": "tsx src/acquire-contributors.ts"
+    "acquire-spaces": "tsx src/acquire-spaces-nameid.ts digicampus aiconl"
   },
   "dependencies": {
     "@alkemio/client-lib": "^0.35.0",

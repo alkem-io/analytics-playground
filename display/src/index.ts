@@ -25,6 +25,9 @@ const graphMapSelector = select('#graph-map-selector');
 const lifecycleSvg = select('#lifecycle-svg');
 const lifecycleSelectionControl = select('#lifecycle-selector');
 
+// Search box
+const graphSearchBox = select('#graph-search');
+
 // Load
 const graphDataFileLocation = 'data/transformed-graph-data.json';
 const spaceID = ''; //"c4111e11-edad-48f6-916f-20e11f468848";
@@ -54,13 +57,25 @@ const forceGraph = new GraphVizualization(
   graphSvg,
   graphDataProvider,
   mapDataProvider,
-  800,
-  600
+  2000, // width (increased)
+  1000, // height (increased)
 );
 
 graphSpaceSelectionControl.on('change', function () {
   const selectedSpaceOption = select(this);
-  const selectedSpaceID = selectedSpaceOption.property('value');
+  let selectedSpaceID = selectedSpaceOption.property('value');
+  // Defensive: check if selectedSpaceID is valid
+  const allSpaces = [
+    ...graphDataProvider.getRawSpaceNodes(),
+    ...(graphDataProvider.data?.nodes.spacesL1 || []),
+    ...(graphDataProvider.data?.nodes.spacesL2 || [])
+  ];
+  const validSpaceIDs = new Set(allSpaces.map((s: any) => s.id));
+  if (!validSpaceIDs.has(selectedSpaceID)) {
+    // Reset to first valid space if invalid
+    selectedSpaceID = allSpaces.length > 0 ? allSpaces[0].id : '';
+    graphSpaceSelectionControl.property('value', selectedSpaceID);
+  }
   graphDataProvider.showSpecificSpace(selectedSpaceID);
   forceGraph.refreshDisplayedGraph();
 });
@@ -93,16 +108,44 @@ graphZoomPlus.on('click', (e: any) => {
 graphZoomMin.on('click', (e: any) => {
   forceGraph.zoomMin();
 });
-graphFixContributorsToLocation.on('click', (e: any) => {
-  forceGraph.fixLocationToMap(NodeType.USER);
-  forceGraph.fixLocationToMap(NodeType.ORGANIZATION);
+graphFixContributorsToLocation.on('change', (e: any) => {
+  const checked = e.target.checked;
+  if (checked) {
+    forceGraph.fixLocationToMap(NodeType.USER);
+    forceGraph.fixLocationToMap(NodeType.ORGANIZATION);
+  } else {
+    forceGraph.unfixLocationFromMap(NodeType.USER);
+    forceGraph.unfixLocationFromMap(NodeType.ORGANIZATION);
+  }
 });
-graphFixSpacesToLocation.on('click', (e: any) => {
-  forceGraph.fixLocationToMap(NodeType.SPACE_L0);
-  forceGraph.fixLocationToMap(NodeType.SPACE_L1);
-  forceGraph.fixLocationToMap(NodeType.SPACE_L2);
+graphFixSpacesToLocation.on('change', (e: any) => {
+  const checked = e.target.checked;
+  if (checked) {
+    forceGraph.fixLocationToMap(NodeType.SPACE_L0);
+    forceGraph.fixLocationToMap(NodeType.SPACE_L1);
+    forceGraph.fixLocationToMap(NodeType.SPACE_L2);
+  } else {
+    forceGraph.unfixLocationFromMap(NodeType.SPACE_L0);
+    forceGraph.unfixLocationFromMap(NodeType.SPACE_L1);
+    forceGraph.unfixLocationFromMap(NodeType.SPACE_L2);
+  }
 });
 
+graphSearchBox.on('input', function () {
+  const searchTerm = graphSearchBox.property('value').toLowerCase();
+  // Filter nodes by displayName or nameID
+  const filteredNodes = graphDataProvider.getFilteredNodes().filter((node: any) => {
+    return (
+      (node.profile?.displayName && node.profile.displayName.toLowerCase().includes(searchTerm)) ||
+      (node.nameID && node.nameID.toLowerCase().includes(searchTerm))
+    );
+  });
+  // Highlight matching nodes
+  select('#graph-svg').selectAll('circle')
+    .style('stroke', (d: any) => filteredNodes.some((n: any) => n.id === d.id) ? '#068293' : '#251607 ')
+    .style('stroke-width', (d: any) => filteredNodes.some((n: any) => n.id === d.id) ? 5 : 1.5)
+    .style('opacity', (d: any) => filteredNodes.length === 0 || filteredNodes.some((n: any) => n.id === d.id) ? 1 : 0.2);
+});
 
 
 /// Lifecycle ///////////////////////

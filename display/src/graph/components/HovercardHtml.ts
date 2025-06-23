@@ -55,15 +55,16 @@ export class HovercardHtml {
   }
 
   updateHtmlText(node: GraphNodeModel) {
-    let tdImage = ''
-    if (node.avatar ) {
-      tdImage = `<td><img src="${node.avatar}" width="50" height="50" vertical-align="top"></td>`;
-    }
+    // Show avatar image if available (use node.avatar, not profile)
+    const avatarUrl = node.avatar || '';
+    const avatarImg = avatarUrl ? `<img src="${avatarUrl}" alt="avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:6px;box-shadow:0 2px 8px #bbb;" />` : '';
     return `
     <table style="width:100%">
       <tr>
-        ${tdImage}
-        <td><b>${node.profile?.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.profile?.url}" target=”_blank”>Link</a></td>
+        <td style="text-align:center;vertical-align:top;">${avatarImg}</td>
+      </tr>
+      <tr>
+        <td><b>${node.profile?.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.profile?.url}" target="_blank">Link</a></td>
       </tr>
     </table>`;
   }

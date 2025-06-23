@@ -41,6 +41,19 @@ export class MapLocationHandler {
     this.simulation.alpha(1).restart();
   }
 
+  unfixNodeLocationFromMap(nodes: any, nodeType: string) {
+    const nodesData = nodes.data();
+    for (const node of nodesData) {
+      if (nodeType == node.type) {
+        node.fx = null;
+        node.fy = null;
+        node.fixedLocation = false;
+      }
+    }
+    nodes.classed('fixed-location', (d:any) => d.fixedLocation);
+    this.simulation.alpha(1).restart();
+  }
+
   private isValidLocation(lon: number, lat: number): boolean {
     if (!lon || !lat) return false;
     if (lon === 0 || lat === 0) return false;

@@ -2,68 +2,109 @@
   <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 <body>
+<!-- Node Info Side Panel (hidden by default) -->
+<div id="node-info-panel" class="node-info-panel" style="display:none;">
+  <div class="node-info-panel-header">
+    <span id="node-info-panel-title">Node Info</span>
+    <button id="node-info-panel-close" title="Close">&times;</button>
+  </div>
+  <div id="node-info-panel-content" class="node-info-panel-content">
+    <!-- Node info will be injected here -->
+  </div>
+</div>
+<!-- End Node Info Side Panel -->
 <div class="container mt-5">
-  <h1>
-      Alkemio Analytics Demo
-  </h1>
+  <h1>Alkemio Analytics Demo</h1>
   <div class="graph">
-    <h2>Force Directed graph</h2>
+    <h2>Force Directed Graph</h2>
+    <!-- Add Clear Selection button and move legend above controls -->
+    <div class="graph-top-bar">
+      <div class="legend">
+        <b>Legend:</b> <span style="color:#068293;">●</span> Space &nbsp; <span style="color:#f39c12;">●</span> Organization &nbsp; <span style="color:#8e44ad;">●</span> User
+      </div>
+      <button id="graph-clear-selection" class="clear-selection-btn" type="button" title="Clear selection">Clear selection</button>
+    </div>
+    <!-- Search bar moved to top of graph card -->
+    <div class="search-bar-top">
+      <input type="text" id="graph-search" placeholder="🔍 Search nodes by name or ID..." autofocus>
+    </div>
     <div class="graph-controls">
-      <br/>
-      <b>Data Controls</b>
-      <br>
-      <label>Select a single Space:
-        <select id="graph-space-selector" width="80">
-          <option id="all" value="" selected="true">All</option>
-        </select>
-      </label>
-      <br/>
-      Display contributors: <input type="checkbox" id="graph-checkbox-show-contributors" name="show-contributors">
-      <br/>
-      <b>Zooming</b>
-      <br/>
-        <button type="button" id="graph-zoom-fit">Fit to screen</button>
-        <button type="button" id="graph-zoom-plus">Zoom ++</button>
-        <button type="button" id="graph-zoom-min">Zoom --</button>
-      <br/>
-      <b>Map Controls</b>
-      <br/>
-      Display map: <input type="checkbox" id="graph-display-map" name="display-map">
-      <br/>
-      <label>Select Map:
-        <select id="graph-map-selector" width="80">
-          <option id="europe" value="maps/europe_geo.json" selected="true">Europe</option>
-          <option id="netherlands" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
-          <option id="ireland" value="maps/ireland-with-counties_geo.json" >Ireland</option>
-        </select>
-      </label>
-      <br/>
-      <button type="button" id="graph-contributors-to-location">Move contributors to location</button>
-      <button type="button" id="graph-spaces-to-location">Move spaces etc to location</button>
-      <br/>
+      <div>
+        <b>Data Controls</b>
+        <label style="margin-left:1em;">Select a single Space:
+          <select id="graph-space-selector" width="80">
+            <option id="all" value="" selected="true">All</option>
+          </select>
+        </label>
+        <label style="margin-left:1em;">Display contributors:
+          <input type="checkbox" id="graph-checkbox-show-contributors" name="show-contributors">
+        </label>
+      </div>
+      <div>
+        <b>Zoom</b>
+        <button type="button" id="graph-zoom-fit" title="Fit to screen">🔲</button>
+        <button type="button" id="graph-zoom-plus" title="Zoom in">＋</button>
+        <button type="button" id="graph-zoom-min" title="Zoom out">－</button>
+      </div>
+      <div>
+        <b>Map Controls</b>
+        <label style="margin-left:1em;">Display map:
+          <input type="checkbox" id="graph-display-map" name="display-map">
+        </label>
+        <label style="margin-left:1em;">Select Map:
+          <select id="graph-map-selector" width="80">
+            <option id="europe" value="maps/europe_geo.json" selected="true">Europe</option>
+            <option id="netherlands" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
+            <option id="ireland" value="maps/ireland-with-counties_geo.json" >Ireland</option>
+          </select>
+        </label>
+        <label style="margin-left:1em;">Move contributors to location:
+          <input type="checkbox" id="graph-contributors-to-location" name="move-contributors">
+        </label>
+        <label style="margin-left:1em;">Move spaces etc to location:
+          <input type="checkbox" id="graph-spaces-to-location" name="move-spaces">
+        </label>
+      </div>
     </div>
+    <!-- Graph Controls Help -->
+    <div id="graph-controls-help-container"></div>
+    <script>
+      fetch('graph-controls-help.html').then(r => r.text()).then(html => {
+        document.getElementById('graph-controls-help-container').innerHTML = html;
+      });
+    </script>
+    <!-- End Graph Controls Help -->
     <div class="graph-container">
-      <svg id="graph-svg"></svg>
+      <svg id="graph-svg" viewBox="0 0 2000 1000" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
-</div>
-<p></p>
-<div class="lifecycle">
-  <h2>Lifecycle Visualization</h2>
-  <div class="lifecycle-controls">
-    <label>Select Lifecycle:
-      <select id="lifecycle-selector" width="80">
-        <option id="Innovation Flow" value="data/lifecycle/innovation-flow.json" >Innovation Flow</option>
-        <option id="User Application" value="data/lifecycle/user-application.json" selected="true">User Application</option>
-        <option id="Organization Verification" value="data/lifecycle/organization-verification.json" >Organization Verification</option>
-      </select>
-    </label>
-    <br/>
+    <!-- Cluster Side Panel (hidden by default) -->
+    <div id="cluster-panel" class="cluster-panel" style="display:none;">
+      <div class="cluster-panel-header">
+        <span id="cluster-panel-title">Cluster Members</span>
+        <button id="cluster-panel-close" title="Close">&times;</button>
+      </div>
+      <div id="cluster-panel-content" class="cluster-panel-content">
+        <!-- Member list will be injected here -->
+      </div>
+    </div>
+    <!-- End Cluster Side Panel -->
   </div>
-  <div class="lifecycle-container">
-    <svg id="lifecycle-svg"></svg>
+  <div class="lifecycle">
+    <h2>Lifecycle Visualization</h2>
+    <div class="lifecycle-controls">
+      <label>Select Lifecycle:
+        <select id="lifecycle-selector" width="80">
+          <option id="Innovation Flow" value="data/lifecycle/innovation-flow.json" >Innovation Flow</option>
+          <option id="User Application" value="data/lifecycle/user-application.json" selected="true">User Application</option>
+          <option id="Organization Verification" value="data/lifecycle/organization-verification.json" >Organization Verification</option>
+        </select>
+      </label>
+      <br/>
+    </div>
+    <div class="lifecycle-container">
+      <svg id="lifecycle-svg"></svg>
+    </div>
   </div>
 </div>
-
 <script type="module" src="./bundle.js"></script>
-
 </body>

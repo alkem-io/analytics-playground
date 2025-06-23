@@ -20,6 +20,10 @@ export class TransformationHandler {
   projection: GeoConicProjection;
   geoGenerator: any;
 
+  private d3Zoom: any = null;
+  private svgElem: any = null;
+  private currentTransform: any = null;
+
   constructor(width: number, height: number, group: any) {
     this.width = width;
     this.height = height;
@@ -33,7 +37,10 @@ export class TransformationHandler {
   }
 
   projectionExtent(geoJson: any) {
-    this.projection.fitExtent([ [0, 0], [ this.width, this.height]], geoJson);
+    // Increase the map scale by expanding the fitExtent area
+    // Old: this.projection.fitExtent([ [0, 0], [ this.width, this.height]], geoJson);
+    const scaleFactor = 1.3; // Moderate separation
+    this.projection.fitExtent([[0, 0], [this.width * scaleFactor, this.height * scaleFactor]], geoJson);
   }
 
   transformCoordinates(x: number, y: number) {
@@ -70,12 +77,38 @@ export class TransformationHandler {
     this.translate = [-minX * this.scale, -minY * this.scale];
   }
 
-  zoomPlus() {
-    this.scale = this.scale * (1 + this.scaleFactor);
+  public zoomPlus() {
+    if (this.svgElem && this.d3Zoom) {
+      // Get the current center of the viewport in SVG coordinates
+      const center = this.currentTransform
+        ? [
+            (this.width / 2 - this.currentTransform.x) / this.currentTransform.k,
+            (this.height / 2 - this.currentTransform.y) / this.currentTransform.k
+          ]
+        : [this.width / 2, this.height / 2];
+      this.svgElem.transition().duration(400).call(
+        this.d3Zoom.scaleBy,
+        1 + this.scaleFactor,
+        center
+      );
+    }
   }
 
-  zoomMin() {
-    this.scale = this.scale * (1 - this.scaleFactor);
+  public zoomMin() {
+    if (this.svgElem && this.d3Zoom) {
+      // Get the current center of the viewport in SVG coordinates
+      const center = this.currentTransform
+        ? [
+            (this.width / 2 - this.currentTransform.x) / this.currentTransform.k,
+            (this.height / 2 - this.currentTransform.y) / this.currentTransform.k
+          ]
+        : [this.width / 2, this.height / 2];
+      this.svgElem.transition().duration(400).call(
+        this.d3Zoom.scaleBy,
+        1 - this.scaleFactor,
+        center
+      );
+    }
   }
 
   transformDisplay(duration: number) {
@@ -85,15 +118,16 @@ export class TransformationHandler {
       .attr('transform', `translate(${this.translate})scale(${this.scale})`);
   }
 
-  private handleZoom = (e: any) => {
-    this.group.attr('transform', e.transform);
-    console.log(`zoom called: ${e}`);
-  };
-
-  private registerZoom() {
-    const z = zoom();
-    z.on('zoom', this.handleZoom);
-    this.group.call(z);
+  // Make registerZoom public and accept the svg as an argument
+  public registerZoom(svg: any) {
+    this.svgElem = svg;
+    this.d3Zoom = zoom()
+      .scaleExtent([0.2, 10]) // Allow more zoom in and out
+      .on('zoom', (e: any) => {
+        this.currentTransform = e.transform;
+        this.group.attr('transform', e.transform);
+      });
+    svg.call(this.d3Zoom);
   }
 
 }

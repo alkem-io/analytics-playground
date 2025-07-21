@@ -19,7 +19,7 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
-    {"name": "Acquire",
+    {"name": "Acquire My Space Memberships",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}/acquire",
@@ -28,8 +28,7 @@
         "NODE_ENV": "test"
       },
       "runtimeArgs": [
-        "src/acquire-spaces-nameid.ts",
-        "building-alkemio-org"
+        "src/acquire-my-space-memberships.ts"
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"

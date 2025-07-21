@@ -77,7 +77,6 @@ export class GraphDataProvider {
     if (!contributorNode) {
       const spaceNode = this.spaceNodesMap.get(nodeID);
       if (!spaceNode) {
-        console.log(`Unable to find node with ID: ${nodeID}`);
         return false;
       }
     }
@@ -118,16 +117,6 @@ export class GraphDataProvider {
     this.filteredNodes = JSON.parse(nodesJson);
     const edgesJson = JSON.stringify(this.filteredEdges);
     this.filteredEdges = JSON.parse(edgesJson);
-
-    console.log(
-      `Single Space[${this.showSingleSpace()}], contributors (${
-        this.showContributorsFlag
-      }), contributors without roles (${
-        this.showContributorsWithoutRolesFlag
-      }): Data consists of ${changeNodesFiltered.length} change nodes, ${
-        contributors.length
-      } contributors, ${this.filteredEdges.length} edges`
-    );
   }
 
   getFilteredEdges(): GraphEdgeModel[] {
@@ -197,9 +186,6 @@ export class GraphDataProvider {
       const contributorID = edge.sourceID;
       const contributorNode = this.contributorNodesMap.get(contributorID);
       if (!contributorNode) {
-        console.log(
-          `Identified edge with unknown contributor:${contributorID} - type: ${edge.type}`
-        );
         continue;
       }
       contributorResultsMap.set(contributorID, contributorNode);
@@ -239,5 +225,27 @@ export class GraphDataProvider {
       }
     }
     return result;
+  }
+
+  /**
+   * Returns a Set of node IDs that are neighbors of the given node ID within the specified jump distance (1 or 2).
+   */
+  getNeighbors(nodeId: string, jump: number = 1): Set<string> {
+    const edges = this.getFilteredEdges();
+    const neighbors1 = new Set<string>();
+    edges.forEach(edge => {
+      if (edge.sourceID === nodeId) neighbors1.add(edge.targetID);
+      if (edge.targetID === nodeId) neighbors1.add(edge.sourceID);
+    });
+    if (jump === 1) return neighbors1;
+    // For 2-jump, collect neighbors of neighbors
+    const neighbors2 = new Set<string>();
+    neighbors1.forEach(n1 => {
+      edges.forEach(edge => {
+        if (edge.sourceID === n1 && edge.targetID !== nodeId && !neighbors1.has(edge.targetID)) neighbors2.add(edge.targetID);
+        if (edge.targetID === n1 && edge.sourceID !== nodeId && !neighbors1.has(edge.sourceID)) neighbors2.add(edge.sourceID);
+      });
+    });
+    return new Set([...neighbors1, ...neighbors2]);
   }
 }

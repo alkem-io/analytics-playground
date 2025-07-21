@@ -42,22 +42,4 @@ export class AlkemioAnalyticsClient {
     );
   }
 
-  async acquireUsers() {
-    const usersResponse = await this.sdkClient.users();
-    this.logger.info(
-      `Acquired data on Users: '${usersResponse.data.users.length}'`,
-    );
-    fs.writeFileSync(this.config.files.users, JSON.stringify(usersResponse));
-  }
-
-  async acquireOrganizations() {
-    const organizationsResponse = await this.sdkClient.organizations();
-    this.logger.info(
-      `Acquired data on Organizations: '${organizationsResponse.data.organizations.length}'`,
-    );
-    fs.writeFileSync(
-      this.config.files.organizations,
-      JSON.stringify(organizationsResponse),
-    );
-  }
 }

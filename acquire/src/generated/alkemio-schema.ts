@@ -998,7 +998,7 @@ export enum CalendarEventType {
 }
 
 export type Callout = {
-  /** The activity for this Callout. */
+  /** The activity for this Callout. The number of Contributions if the callout allows contributions, or the number of comments if it does not. */
   activity: Scalars["Float"]["output"];
   /** The authorization rules for the entity */
   authorization?: Maybe<Authorization>;
@@ -1008,8 +1008,6 @@ export type Callout = {
   comments?: Maybe<Room>;
   /** The Contribution Defaults for this Callout. */
   contributionDefaults: CalloutContributionDefaults;
-  /** The ContributionPolicy for this Callout. */
-  contributionPolicy: CalloutContributionPolicy;
   /** The Contributions that have been made to this Callout. */
   contributions: Array<CalloutContribution>;
   /** The user that created this Callout */
@@ -1030,14 +1028,14 @@ export type Callout = {
   publishedBy?: Maybe<User>;
   /** The timestamp for the publishing of this Callout. */
   publishedDate?: Maybe<Scalars["Float"]["output"]>;
+  /** The Callout Settings associated with this Callout. */
+  settings: CalloutSettings;
   /** The sorting order for this Callout. */
   sortOrder: Scalars["Float"]["output"];
-  /** The Callout type, e.g. Post, Whiteboard, Discussion */
+  /** The type of this Callout. WARNING. This field is deprecated and will be removed in the future. Use `framing.type` + `settings.contribution.allowedTypes` instead. */
   type: CalloutType;
   /** The date at which the entity was last updated. */
   updatedDate: Scalars["DateTime"]["output"];
-  /** Visibility of the Callout. */
-  visibility: CalloutVisibility;
 };
 
 export type CalloutContributionsArgs = {
@@ -1045,6 +1043,12 @@ export type CalloutContributionsArgs = {
   limit?: InputMaybe<Scalars["Float"]["input"]>;
   shuffle?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
+
+export enum CalloutAllowedContributors {
+  Admins = "ADMINS",
+  Members = "MEMBERS",
+  None = "NONE",
+}
 
 export type CalloutContribution = {
   /** The authorization rules for the entity */
@@ -1070,6 +1074,8 @@ export type CalloutContribution = {
 export type CalloutContributionDefaults = {
   /** The date at which the entity was created. */
   createdDate: Scalars["DateTime"]["output"];
+  /** The default title to use for new contributions. */
+  defaultDisplayName?: Maybe<Scalars["String"]["output"]>;
   /** The ID of the entity */
   id: Scalars["UUID"]["output"];
   /** The default description to use for new contributions. */
@@ -1078,19 +1084,6 @@ export type CalloutContributionDefaults = {
   updatedDate: Scalars["DateTime"]["output"];
   /** The default whiteboard content for whiteboard responses. */
   whiteboardContent?: Maybe<Scalars["WhiteboardContent"]["output"]>;
-};
-
-export type CalloutContributionPolicy = {
-  /** The allowed contribution types for this callout. */
-  allowedContributionTypes: Array<CalloutContributionType>;
-  /** The date at which the entity was created. */
-  createdDate: Scalars["DateTime"]["output"];
-  /** The ID of the entity */
-  id: Scalars["UUID"]["output"];
-  /** State of the Callout. */
-  state: CalloutState;
-  /** The date at which the entity was last updated. */
-  updatedDate: Scalars["DateTime"]["output"];
 };
 
 export enum CalloutContributionType {
@@ -1108,11 +1101,18 @@ export type CalloutFraming = {
   id: Scalars["UUID"]["output"];
   /** The Profile for framing the associated Callout. */
   profile: Profile;
+  /** The type of the Callout Framing, the additional content attached to this callout */
+  type: CalloutFramingType;
   /** The date at which the entity was last updated. */
   updatedDate: Scalars["DateTime"]["output"];
   /** The Whiteboard for framing the associated Callout. */
   whiteboard?: Maybe<Whiteboard>;
 };
+
+export enum CalloutFramingType {
+  None = "NONE",
+  Whiteboard = "WHITEBOARD",
+}
 
 export type CalloutPostCreated = {
   /** The identifier of the Callout on which the post was created. */
@@ -1125,11 +1125,30 @@ export type CalloutPostCreated = {
   sortOrder: Scalars["Float"]["output"];
 };
 
-export enum CalloutState {
-  Archived = "ARCHIVED",
-  Closed = "CLOSED",
-  Open = "OPEN",
-}
+export type CalloutSettings = {
+  /** Callout Contribution Settings. */
+  contribution: CalloutSettingsContribution;
+  /** Callout Framing Settings. */
+  framing: CalloutSettingsFraming;
+  /** Callout Visibility. */
+  visibility: CalloutVisibility;
+};
+
+export type CalloutSettingsContribution = {
+  /** The allowed contribution types for this callout. */
+  allowedTypes: Array<CalloutContributionType>;
+  /** Indicate who can add more contributions to the callout. */
+  canAddContributions: CalloutAllowedContributors;
+  /** Can comment to contributions callout. */
+  commentsEnabled: Scalars["Boolean"]["output"];
+  /** Can add contributions to the Callout. Allowed Contribution types is going to be readOnly, so this field can be used to enable or disable the contribution temporarily instead of setting allowedTypes to None. */
+  enabled: Scalars["Boolean"]["output"];
+};
+
+export type CalloutSettingsFraming = {
+  /** Can comment to callout framing. */
+  commentsEnabled: Scalars["Boolean"]["output"];
+};
 
 export enum CalloutType {
   LinkCollection = "LINK_COLLECTION",
@@ -1167,7 +1186,7 @@ export type CalloutsSetCalloutsArgs = {
   limit?: InputMaybe<Scalars["Float"]["input"]>;
   shuffle?: InputMaybe<Scalars["Boolean"]["input"]>;
   sortByActivity?: InputMaybe<Scalars["Boolean"]["input"]>;
-  types?: InputMaybe<Array<CalloutType>>;
+  withContributionTypes?: InputMaybe<Array<CalloutContributionType>>;
 };
 
 export enum CalloutsSetType {
@@ -1589,95 +1608,143 @@ export type CreateCalendarEventOnCalendarInput = {
   wholeDay: Scalars["Boolean"]["input"];
 };
 
+export type CreateCalloutContributionData = {
+  link?: Maybe<CreateLinkData>;
+  post?: Maybe<CreatePostData>;
+  /** The sort order to assign to this Contribution. */
+  sortOrder?: Maybe<Scalars["Float"]["output"]>;
+  whiteboard?: Maybe<CreateWhiteboardData>;
+};
+
 export type CreateCalloutContributionDefaultsData = {
+  /** The default title to use for new contributions. */
+  defaultDisplayName?: Maybe<Scalars["String"]["output"]>;
   /** The default description to use for new Post contributions. */
   postDescription?: Maybe<Scalars["Markdown"]["output"]>;
   whiteboardContent?: Maybe<Scalars["WhiteboardContent"]["output"]>;
 };
 
 export type CreateCalloutContributionDefaultsInput = {
+  /** The default title to use for new contributions. */
+  defaultDisplayName?: InputMaybe<Scalars["String"]["input"]>;
   /** The default description to use for new Post contributions. */
   postDescription?: InputMaybe<Scalars["Markdown"]["input"]>;
   whiteboardContent?: InputMaybe<Scalars["WhiteboardContent"]["input"]>;
 };
 
-export type CreateCalloutContributionPolicyData = {
-  /** State of the callout. */
-  state?: Maybe<CalloutState>;
-};
-
-export type CreateCalloutContributionPolicyInput = {
-  /** State of the callout. */
-  state?: InputMaybe<CalloutState>;
+export type CreateCalloutContributionInput = {
+  link?: InputMaybe<CreateLinkInput>;
+  post?: InputMaybe<CreatePostInput>;
+  /** The sort order to assign to this Contribution. */
+  sortOrder?: InputMaybe<Scalars["Float"]["input"]>;
+  whiteboard?: InputMaybe<CreateWhiteboardInput>;
 };
 
 export type CreateCalloutData = {
   classification?: Maybe<CreateClassificationData>;
   contributionDefaults?: Maybe<CreateCalloutContributionDefaultsData>;
-  contributionPolicy?: Maybe<CreateCalloutContributionPolicyData>;
-  /** Controls if the comments are enabled for this Callout. Defaults to false. */
-  enableComments?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Contributions to be created with this Callout. */
+  contributions?: Maybe<Array<CreateCalloutContributionData>>;
   framing: CreateCalloutFramingData;
   /** A readable identifier, unique within the containing scope. */
   nameID?: Maybe<Scalars["NameID"]["output"]>;
   /** Send notification if this flag is true and visibility is PUBLISHED. Defaults to false. */
   sendNotification?: Maybe<Scalars["Boolean"]["output"]>;
+  settings?: Maybe<CreateCalloutSettingsData>;
   /** The sort order to assign to this Callout. */
   sortOrder?: Maybe<Scalars["Float"]["output"]>;
-  /** Callout type. */
-  type: CalloutType;
-  /** Visibility of the Callout. Defaults to DRAFT. */
-  visibility?: Maybe<CalloutVisibility>;
 };
 
 export type CreateCalloutFramingData = {
   profile: CreateProfileData;
   tags?: Maybe<Array<Scalars["String"]["output"]>>;
+  /** The type of additional content attached to the framing of the callout. Defaults to None. */
+  type?: Maybe<CalloutFramingType>;
   whiteboard?: Maybe<CreateWhiteboardData>;
 };
 
 export type CreateCalloutFramingInput = {
   profile: CreateProfileInput;
   tags?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  /** The type of additional content attached to the framing of the callout. Defaults to None. */
+  type?: InputMaybe<CalloutFramingType>;
   whiteboard?: InputMaybe<CreateWhiteboardInput>;
 };
 
 export type CreateCalloutInput = {
   classification?: InputMaybe<CreateClassificationInput>;
   contributionDefaults?: InputMaybe<CreateCalloutContributionDefaultsInput>;
-  contributionPolicy?: InputMaybe<CreateCalloutContributionPolicyInput>;
-  /** Controls if the comments are enabled for this Callout. Defaults to false. */
-  enableComments?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Contributions to be created with this Callout. */
+  contributions?: InputMaybe<Array<CreateCalloutContributionInput>>;
   framing: CreateCalloutFramingInput;
   /** A readable identifier, unique within the containing scope. */
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
   /** Send notification if this flag is true and visibility is PUBLISHED. Defaults to false. */
   sendNotification?: InputMaybe<Scalars["Boolean"]["input"]>;
+  settings?: InputMaybe<CreateCalloutSettingsInput>;
   /** The sort order to assign to this Callout. */
   sortOrder?: InputMaybe<Scalars["Float"]["input"]>;
-  /** Callout type. */
-  type: CalloutType;
-  /** Visibility of the Callout. Defaults to DRAFT. */
-  visibility?: InputMaybe<CalloutVisibility>;
 };
 
 export type CreateCalloutOnCalloutsSetInput = {
   calloutsSetID: Scalars["UUID"]["input"];
   classification?: InputMaybe<CreateClassificationInput>;
   contributionDefaults?: InputMaybe<CreateCalloutContributionDefaultsInput>;
-  contributionPolicy?: InputMaybe<CreateCalloutContributionPolicyInput>;
-  /** Controls if the comments are enabled for this Callout. Defaults to false. */
-  enableComments?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Contributions to be created with this Callout. */
+  contributions?: InputMaybe<Array<CreateCalloutContributionInput>>;
   framing: CreateCalloutFramingInput;
   /** A readable identifier, unique within the containing scope. */
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
   /** Send notification if this flag is true and visibility is PUBLISHED. Defaults to false. */
   sendNotification?: InputMaybe<Scalars["Boolean"]["input"]>;
+  settings?: InputMaybe<CreateCalloutSettingsInput>;
   /** The sort order to assign to this Callout. */
   sortOrder?: InputMaybe<Scalars["Float"]["input"]>;
-  /** Callout type. */
-  type: CalloutType;
-  /** Visibility of the Callout. Defaults to DRAFT. */
+};
+
+export type CreateCalloutSettingsContributionData = {
+  /** Allowed Contribution types. */
+  allowedTypes?: Maybe<Array<CalloutContributionType>>;
+  /** Indicate who can add more contributions to the callout. */
+  canAddContributions?: Maybe<CalloutAllowedContributors>;
+  /** Can comment to contributions callout. */
+  commentsEnabled?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Can add contributions to the Callout. Allowed Contribution types is going to be readOnly, so this field can be used to enable or disable the contribution temporarily instead of setting allowedTypes to None. */
+  enabled?: Maybe<Scalars["Boolean"]["output"]>;
+};
+
+export type CreateCalloutSettingsContributionInput = {
+  /** Allowed Contribution types. */
+  allowedTypes?: InputMaybe<Array<CalloutContributionType>>;
+  /** Indicate who can add more contributions to the callout. */
+  canAddContributions?: InputMaybe<CalloutAllowedContributors>;
+  /** Can comment to contributions callout. */
+  commentsEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Can add contributions to the Callout. Allowed Contribution types is going to be readOnly, so this field can be used to enable or disable the contribution temporarily instead of setting allowedTypes to None. */
+  enabled?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type CreateCalloutSettingsData = {
+  contribution?: Maybe<CreateCalloutSettingsContributionData>;
+  framing?: Maybe<CreateCalloutSettingsFramingData>;
+  /** Visibility of the Callout. Defaults to PUBLISHED. */
+  visibility?: Maybe<CalloutVisibility>;
+};
+
+export type CreateCalloutSettingsFramingData = {
+  /** Can comment to callout framing. */
+  commentsEnabled?: Maybe<Scalars["Boolean"]["output"]>;
+};
+
+export type CreateCalloutSettingsFramingInput = {
+  /** Can comment to callout framing. */
+  commentsEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type CreateCalloutSettingsInput = {
+  contribution?: InputMaybe<CreateCalloutSettingsContributionInput>;
+  framing?: InputMaybe<CreateCalloutSettingsFramingInput>;
+  /** Visibility of the Callout. Defaults to PUBLISHED. */
   visibility?: InputMaybe<CalloutVisibility>;
 };
 
@@ -1825,6 +1892,11 @@ export type CreateLicensePlanOnLicensingFrameworkInput = {
   type: LicensingCredentialBasedPlanType;
 };
 
+export type CreateLinkData = {
+  profile: CreateProfileData;
+  uri?: Maybe<Scalars["String"]["output"]>;
+};
+
 export type CreateLinkInput = {
   profile: CreateProfileInput;
   uri?: InputMaybe<Scalars["String"]["input"]>;
@@ -1862,6 +1934,10 @@ export type CreateOrganizationInput = {
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
   profileData: CreateProfileInput;
   website?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type CreatePostData = {
+  tags?: Maybe<Array<Scalars["String"]["output"]>>;
 };
 
 export type CreatePostInput = {
@@ -1936,8 +2012,6 @@ export type CreateSpaceOnAccountInput = {
   licensePlanID?: InputMaybe<Scalars["UUID"]["input"]>;
   /** A readable identifier, unique within the containing scope. */
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
-  /** Pick up a different platform template. */
-  platformTemplate?: InputMaybe<TemplateDefaultType>;
   settings?: InputMaybe<CreateSpaceSettingsInput>;
   /** The Template to use for instantiating the Collaboration. */
   spaceTemplateID?: InputMaybe<Scalars["UUID"]["input"]>;
@@ -1980,8 +2054,6 @@ export type CreateSubspaceInput = {
   collaborationData: CreateCollaborationOnSpaceInput;
   /** A readable identifier, unique within the containing scope. */
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
-  /** Pick up a different platform template. */
-  platformTemplate?: InputMaybe<TemplateDefaultType>;
   settings?: InputMaybe<CreateSpaceSettingsInput>;
   spaceID: Scalars["UUID"]["input"];
   /** The Template to use for instantiating the Collaboration. */
@@ -2013,12 +2085,25 @@ export type CreateTemplateContentSpaceInput = {
   level: SpaceLevel;
   /** Create the settings for the Space. */
   settings: CreateSpaceSettingsInput;
+  subspaces?: InputMaybe<Array<CreateTemplateContentSpaceInput>>;
+};
+
+export type CreateTemplateFromContentSpaceOnTemplatesSetInput = {
+  /** The ID of the ContentSpace to use as for the Template. */
+  contentSpaceID: Scalars["UUID"]["input"];
+  /** A readable identifier, unique within the containing scope. */
+  nameID?: InputMaybe<Scalars["NameID"]["input"]>;
+  profileData: CreateProfileInput;
+  tags?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  templatesSetID: Scalars["UUID"]["input"];
 };
 
 export type CreateTemplateFromSpaceOnTemplatesSetInput = {
   /** A readable identifier, unique within the containing scope. */
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
   profileData: CreateProfileInput;
+  /** Whether to reproduce the hierarchy or just the space. */
+  recursive?: InputMaybe<Scalars["Boolean"]["input"]>;
   /** The ID of the Space to use as the content for the Template. */
   spaceID: Scalars["UUID"]["input"];
   tags?: InputMaybe<Array<Scalars["String"]["input"]>>;
@@ -3710,6 +3795,8 @@ export type Mutation = {
   createTagsetOnProfile: Tagset;
   /** Creates a new Template on the specified TemplatesSet. */
   createTemplate: Template;
+  /** Creates a new Template on the specified TemplatesSet using the provided ContentSpace as content. */
+  createTemplateFromContentSpace: Template;
   /** Creates a new Template on the specified TemplatesSet using the provided Space as content. */
   createTemplateFromSpace: Template;
   /** Creates a new User on the platform. */
@@ -3724,6 +3811,8 @@ export type Mutation = {
   deleteCalendarEvent: CalendarEvent;
   /** Delete a Callout. */
   deleteCallout: Callout;
+  /** Deletes a contribution. */
+  deleteContribution: CalloutContribution;
   /** Deletes the specified Discussion. */
   deleteDiscussion: Discussion;
   /** Deletes the specified Document. */
@@ -4123,6 +4212,10 @@ export type MutationCreateTemplateArgs = {
   templateData: CreateTemplateOnTemplatesSetInput;
 };
 
+export type MutationCreateTemplateFromContentSpaceArgs = {
+  templateData: CreateTemplateFromContentSpaceOnTemplatesSetInput;
+};
+
 export type MutationCreateTemplateFromSpaceArgs = {
   templateData: CreateTemplateFromSpaceOnTemplatesSetInput;
 };
@@ -4145,6 +4238,10 @@ export type MutationDeleteCalendarEventArgs = {
 
 export type MutationDeleteCalloutArgs = {
   deleteData: DeleteCalloutInput;
+};
+
+export type MutationDeleteContributionArgs = {
+  contributionID: Scalars["String"]["input"];
 };
 
 export type MutationDeleteDiscussionArgs = {
@@ -5578,8 +5675,10 @@ export type RoleSet = {
   usersInRole: Array<User>;
   /** All users that have a Role in this RoleSet in the specified Roles. */
   usersInRoles: Array<UsersInRolesResponse>;
-  /** All virtuals that have the specified Role in this Community. */
+  /** All Virtual Contributors that have the specified Role in this Community. */
   virtualContributorsInRole: Array<VirtualContributor>;
+  /** All Virtual Contributors that are available from the current or parent RoleSets. */
+  virtualContributorsInRoleInHierarchy: Array<VirtualContributor>;
   /** All VirtualContributors that have a role in this RoleSet in the specified Roles. */
   virtualContributorsInRoles: Array<VirtualContributorsInRolesResponse>;
 };
@@ -5635,6 +5734,10 @@ export type RoleSetUsersInRolesArgs = {
 };
 
 export type RoleSetVirtualContributorsInRoleArgs = {
+  role: RoleName;
+};
+
+export type RoleSetVirtualContributorsInRoleInHierarchyArgs = {
   role: RoleName;
 };
 
@@ -6439,6 +6542,8 @@ export type TemplateContentSpace = {
   level: SpaceLevel;
   /** The settings for this TemplateContentSpace. */
   settings: SpaceSettings;
+  /** The template subspaces for the Template Content Space. */
+  subspaces: Array<TemplateContentSpace>;
   /** The date at which the entity was last updated. */
   updatedDate: Scalars["DateTime"]["output"];
 };
@@ -6621,27 +6726,24 @@ export type UpdateCalendarEventInput = {
 };
 
 export type UpdateCalloutContributionDefaultsInput = {
+  /** The default title to use for new contributions. */
+  defaultDisplayName?: InputMaybe<Scalars["String"]["input"]>;
   /** The default description to use for new Post contributions. */
   postDescription?: InputMaybe<Scalars["Markdown"]["input"]>;
   /** The default description to use for new Whiteboard contributions. */
   whiteboardContent?: InputMaybe<Scalars["WhiteboardContent"]["input"]>;
 };
 
-export type UpdateCalloutContributionPolicyInput = {
-  /** State of the callout. */
-  state?: InputMaybe<CalloutState>;
-};
-
 export type UpdateCalloutEntityInput = {
   ID: Scalars["UUID"]["input"];
   classification?: InputMaybe<UpdateClassificationInput>;
   contributionDefaults?: InputMaybe<UpdateCalloutContributionDefaultsInput>;
-  contributionPolicy?: InputMaybe<UpdateCalloutContributionPolicyInput>;
   framing?: InputMaybe<UpdateCalloutFramingInput>;
   /** Set Group for this Callout. */
   groupName?: InputMaybe<Scalars["String"]["input"]>;
   /** A display identifier, unique within the containing scope. Note: updating the nameID will affect URL on the client. */
   nameID?: InputMaybe<Scalars["NameID"]["input"]>;
+  settings?: InputMaybe<UpdateCalloutSettingsInput>;
   /** The sort order to assign to this Callout. */
   sortOrder?: InputMaybe<Scalars["Float"]["input"]>;
 };
@@ -6649,6 +6751,8 @@ export type UpdateCalloutEntityInput = {
 export type UpdateCalloutFramingInput = {
   /** The Profile of the Template. */
   profile?: InputMaybe<UpdateProfileInput>;
+  /** The type of additional content attached to the framing of the callout. */
+  type?: InputMaybe<CalloutFramingType>;
   /** The new content to be used. */
   whiteboardContent?: InputMaybe<Scalars["WhiteboardContent"]["input"]>;
 };
@@ -6660,6 +6764,27 @@ export type UpdateCalloutPublishInfoInput = {
   publishDate?: InputMaybe<Scalars["Float"]["input"]>;
   /** The identifier of the publisher of the Callout. */
   publisherID?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type UpdateCalloutSettingsContributionInput = {
+  /** Indicate who can add more contributions to the callout. */
+  canAddContributions?: InputMaybe<CalloutAllowedContributors>;
+  /** Can comment to contributions callout. */
+  commentsEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Can add contributions to the Callout. Allowed Contribution types is going to be readOnly, so this field can be used to enable or disable the contribution temporarily instead of setting allowedTypes to None. */
+  enabled?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type UpdateCalloutSettingsFramingInput = {
+  /** Can comment to callout framing. */
+  commentsEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type UpdateCalloutSettingsInput = {
+  contribution?: InputMaybe<UpdateCalloutSettingsContributionInput>;
+  framing?: InputMaybe<UpdateCalloutSettingsFramingInput>;
+  /** Visibility of the Callout. */
+  visibility?: InputMaybe<CalloutVisibility>;
 };
 
 export type UpdateCalloutVisibilityInput = {
@@ -8066,6 +8191,7 @@ export type ResolversTypes = {
       publishedBy?: Maybe<ResolversTypes["User"]>;
     }
   >;
+  CalloutAllowedContributors: CalloutAllowedContributors;
   CalloutContribution: ResolverTypeWrapper<
     Omit<CalloutContribution, "createdBy" | "link" | "post" | "whiteboard"> & {
       createdBy?: Maybe<ResolversTypes["User"]>;
@@ -8075,7 +8201,6 @@ export type ResolversTypes = {
     }
   >;
   CalloutContributionDefaults: ResolverTypeWrapper<CalloutContributionDefaults>;
-  CalloutContributionPolicy: ResolverTypeWrapper<CalloutContributionPolicy>;
   CalloutContributionType: CalloutContributionType;
   CalloutFraming: ResolverTypeWrapper<
     Omit<CalloutFraming, "profile" | "whiteboard"> & {
@@ -8083,10 +8208,13 @@ export type ResolversTypes = {
       whiteboard?: Maybe<ResolversTypes["Whiteboard"]>;
     }
   >;
+  CalloutFramingType: CalloutFramingType;
   CalloutPostCreated: ResolverTypeWrapper<
     Omit<CalloutPostCreated, "post"> & { post: ResolversTypes["Post"] }
   >;
-  CalloutState: CalloutState;
+  CalloutSettings: ResolverTypeWrapper<CalloutSettings>;
+  CalloutSettingsContribution: ResolverTypeWrapper<CalloutSettingsContribution>;
+  CalloutSettingsFraming: ResolverTypeWrapper<CalloutSettingsFraming>;
   CalloutType: CalloutType;
   CalloutVisibility: CalloutVisibility;
   CalloutsSet: ResolverTypeWrapper<
@@ -8184,15 +8312,21 @@ export type ResolversTypes = {
   CreateAiPersonaInput: CreateAiPersonaInput;
   CreateAiPersonaServiceInput: CreateAiPersonaServiceInput;
   CreateCalendarEventOnCalendarInput: CreateCalendarEventOnCalendarInput;
+  CreateCalloutContributionData: ResolverTypeWrapper<CreateCalloutContributionData>;
   CreateCalloutContributionDefaultsData: ResolverTypeWrapper<CreateCalloutContributionDefaultsData>;
   CreateCalloutContributionDefaultsInput: CreateCalloutContributionDefaultsInput;
-  CreateCalloutContributionPolicyData: ResolverTypeWrapper<CreateCalloutContributionPolicyData>;
-  CreateCalloutContributionPolicyInput: CreateCalloutContributionPolicyInput;
+  CreateCalloutContributionInput: CreateCalloutContributionInput;
   CreateCalloutData: ResolverTypeWrapper<CreateCalloutData>;
   CreateCalloutFramingData: ResolverTypeWrapper<CreateCalloutFramingData>;
   CreateCalloutFramingInput: CreateCalloutFramingInput;
   CreateCalloutInput: CreateCalloutInput;
   CreateCalloutOnCalloutsSetInput: CreateCalloutOnCalloutsSetInput;
+  CreateCalloutSettingsContributionData: ResolverTypeWrapper<CreateCalloutSettingsContributionData>;
+  CreateCalloutSettingsContributionInput: CreateCalloutSettingsContributionInput;
+  CreateCalloutSettingsData: ResolverTypeWrapper<CreateCalloutSettingsData>;
+  CreateCalloutSettingsFramingData: ResolverTypeWrapper<CreateCalloutSettingsFramingData>;
+  CreateCalloutSettingsFramingInput: CreateCalloutSettingsFramingInput;
+  CreateCalloutSettingsInput: CreateCalloutSettingsInput;
   CreateCalloutsSetData: ResolverTypeWrapper<CreateCalloutsSetData>;
   CreateCalloutsSetInput: CreateCalloutsSetInput;
   CreateClassificationData: ResolverTypeWrapper<CreateClassificationData>;
@@ -8211,11 +8345,13 @@ export type ResolversTypes = {
   CreateInnovationPackOnAccountInput: CreateInnovationPackOnAccountInput;
   CreateKnowledgeBaseInput: CreateKnowledgeBaseInput;
   CreateLicensePlanOnLicensingFrameworkInput: CreateLicensePlanOnLicensingFrameworkInput;
+  CreateLinkData: ResolverTypeWrapper<CreateLinkData>;
   CreateLinkInput: CreateLinkInput;
   CreateLocationData: ResolverTypeWrapper<CreateLocationData>;
   CreateLocationInput: CreateLocationInput;
   CreateNVPInput: CreateNvpInput;
   CreateOrganizationInput: CreateOrganizationInput;
+  CreatePostData: ResolverTypeWrapper<CreatePostData>;
   CreatePostInput: CreatePostInput;
   CreateProfileData: ResolverTypeWrapper<CreateProfileData>;
   CreateProfileInput: CreateProfileInput;
@@ -8233,6 +8369,7 @@ export type ResolversTypes = {
   CreateTagsetInput: CreateTagsetInput;
   CreateTagsetOnProfileInput: CreateTagsetOnProfileInput;
   CreateTemplateContentSpaceInput: CreateTemplateContentSpaceInput;
+  CreateTemplateFromContentSpaceOnTemplatesSetInput: CreateTemplateFromContentSpaceOnTemplatesSetInput;
   CreateTemplateFromSpaceOnTemplatesSetInput: CreateTemplateFromSpaceOnTemplatesSetInput;
   CreateTemplateOnTemplatesSetInput: CreateTemplateOnTemplatesSetInput;
   CreateUserGroupInput: CreateUserGroupInput;
@@ -8726,6 +8863,7 @@ export type ResolversTypes = {
       | "usersInRole"
       | "usersInRoles"
       | "virtualContributorsInRole"
+      | "virtualContributorsInRoleInHierarchy"
       | "virtualContributorsInRoles"
     > & {
       applications: Array<ResolversTypes["Application"]>;
@@ -8741,6 +8879,9 @@ export type ResolversTypes = {
       usersInRole: Array<ResolversTypes["User"]>;
       usersInRoles: Array<ResolversTypes["UsersInRolesResponse"]>;
       virtualContributorsInRole: Array<ResolversTypes["VirtualContributor"]>;
+      virtualContributorsInRoleInHierarchy: Array<
+        ResolversTypes["VirtualContributor"]
+      >;
       virtualContributorsInRoles: Array<
         ResolversTypes["VirtualContributorsInRolesResponse"]
       >;
@@ -8928,9 +9069,10 @@ export type ResolversTypes = {
     }
   >;
   TemplateContentSpace: ResolverTypeWrapper<
-    Omit<TemplateContentSpace, "about" | "collaboration"> & {
+    Omit<TemplateContentSpace, "about" | "collaboration" | "subspaces"> & {
       about: ResolversTypes["SpaceAbout"];
       collaboration: ResolversTypes["Collaboration"];
+      subspaces: Array<ResolversTypes["TemplateContentSpace"]>;
     }
   >;
   TemplateDefault: ResolverTypeWrapper<
@@ -8984,10 +9126,12 @@ export type ResolversTypes = {
   UpdateApplicationFormOnRoleSetInput: UpdateApplicationFormOnRoleSetInput;
   UpdateCalendarEventInput: UpdateCalendarEventInput;
   UpdateCalloutContributionDefaultsInput: UpdateCalloutContributionDefaultsInput;
-  UpdateCalloutContributionPolicyInput: UpdateCalloutContributionPolicyInput;
   UpdateCalloutEntityInput: UpdateCalloutEntityInput;
   UpdateCalloutFramingInput: UpdateCalloutFramingInput;
   UpdateCalloutPublishInfoInput: UpdateCalloutPublishInfoInput;
+  UpdateCalloutSettingsContributionInput: UpdateCalloutSettingsContributionInput;
+  UpdateCalloutSettingsFramingInput: UpdateCalloutSettingsFramingInput;
+  UpdateCalloutSettingsInput: UpdateCalloutSettingsInput;
   UpdateCalloutVisibilityInput: UpdateCalloutVisibilityInput;
   UpdateCalloutsSortOrderInput: UpdateCalloutsSortOrderInput;
   UpdateClassificationInput: UpdateClassificationInput;
@@ -9337,7 +9481,6 @@ export type ResolversParentTypes = {
     whiteboard?: Maybe<ResolversParentTypes["Whiteboard"]>;
   };
   CalloutContributionDefaults: CalloutContributionDefaults;
-  CalloutContributionPolicy: CalloutContributionPolicy;
   CalloutFraming: Omit<CalloutFraming, "profile" | "whiteboard"> & {
     profile: ResolversParentTypes["Profile"];
     whiteboard?: Maybe<ResolversParentTypes["Whiteboard"]>;
@@ -9345,6 +9488,9 @@ export type ResolversParentTypes = {
   CalloutPostCreated: Omit<CalloutPostCreated, "post"> & {
     post: ResolversParentTypes["Post"];
   };
+  CalloutSettings: CalloutSettings;
+  CalloutSettingsContribution: CalloutSettingsContribution;
+  CalloutSettingsFraming: CalloutSettingsFraming;
   CalloutsSet: Omit<CalloutsSet, "callouts"> & {
     callouts: Array<ResolversParentTypes["Callout"]>;
   };
@@ -9425,15 +9571,21 @@ export type ResolversParentTypes = {
   CreateAiPersonaInput: CreateAiPersonaInput;
   CreateAiPersonaServiceInput: CreateAiPersonaServiceInput;
   CreateCalendarEventOnCalendarInput: CreateCalendarEventOnCalendarInput;
+  CreateCalloutContributionData: CreateCalloutContributionData;
   CreateCalloutContributionDefaultsData: CreateCalloutContributionDefaultsData;
   CreateCalloutContributionDefaultsInput: CreateCalloutContributionDefaultsInput;
-  CreateCalloutContributionPolicyData: CreateCalloutContributionPolicyData;
-  CreateCalloutContributionPolicyInput: CreateCalloutContributionPolicyInput;
+  CreateCalloutContributionInput: CreateCalloutContributionInput;
   CreateCalloutData: CreateCalloutData;
   CreateCalloutFramingData: CreateCalloutFramingData;
   CreateCalloutFramingInput: CreateCalloutFramingInput;
   CreateCalloutInput: CreateCalloutInput;
   CreateCalloutOnCalloutsSetInput: CreateCalloutOnCalloutsSetInput;
+  CreateCalloutSettingsContributionData: CreateCalloutSettingsContributionData;
+  CreateCalloutSettingsContributionInput: CreateCalloutSettingsContributionInput;
+  CreateCalloutSettingsData: CreateCalloutSettingsData;
+  CreateCalloutSettingsFramingData: CreateCalloutSettingsFramingData;
+  CreateCalloutSettingsFramingInput: CreateCalloutSettingsFramingInput;
+  CreateCalloutSettingsInput: CreateCalloutSettingsInput;
   CreateCalloutsSetData: CreateCalloutsSetData;
   CreateCalloutsSetInput: CreateCalloutsSetInput;
   CreateClassificationData: CreateClassificationData;
@@ -9452,11 +9604,13 @@ export type ResolversParentTypes = {
   CreateInnovationPackOnAccountInput: CreateInnovationPackOnAccountInput;
   CreateKnowledgeBaseInput: CreateKnowledgeBaseInput;
   CreateLicensePlanOnLicensingFrameworkInput: CreateLicensePlanOnLicensingFrameworkInput;
+  CreateLinkData: CreateLinkData;
   CreateLinkInput: CreateLinkInput;
   CreateLocationData: CreateLocationData;
   CreateLocationInput: CreateLocationInput;
   CreateNVPInput: CreateNvpInput;
   CreateOrganizationInput: CreateOrganizationInput;
+  CreatePostData: CreatePostData;
   CreatePostInput: CreatePostInput;
   CreateProfileData: CreateProfileData;
   CreateProfileInput: CreateProfileInput;
@@ -9474,6 +9628,7 @@ export type ResolversParentTypes = {
   CreateTagsetInput: CreateTagsetInput;
   CreateTagsetOnProfileInput: CreateTagsetOnProfileInput;
   CreateTemplateContentSpaceInput: CreateTemplateContentSpaceInput;
+  CreateTemplateFromContentSpaceOnTemplatesSetInput: CreateTemplateFromContentSpaceOnTemplatesSetInput;
   CreateTemplateFromSpaceOnTemplatesSetInput: CreateTemplateFromSpaceOnTemplatesSetInput;
   CreateTemplateOnTemplatesSetInput: CreateTemplateOnTemplatesSetInput;
   CreateUserGroupInput: CreateUserGroupInput;
@@ -9893,6 +10048,7 @@ export type ResolversParentTypes = {
     | "usersInRole"
     | "usersInRoles"
     | "virtualContributorsInRole"
+    | "virtualContributorsInRoleInHierarchy"
     | "virtualContributorsInRoles"
   > & {
     applications: Array<ResolversParentTypes["Application"]>;
@@ -9908,6 +10064,9 @@ export type ResolversParentTypes = {
     usersInRole: Array<ResolversParentTypes["User"]>;
     usersInRoles: Array<ResolversParentTypes["UsersInRolesResponse"]>;
     virtualContributorsInRole: Array<
+      ResolversParentTypes["VirtualContributor"]
+    >;
+    virtualContributorsInRoleInHierarchy: Array<
       ResolversParentTypes["VirtualContributor"]
     >;
     virtualContributorsInRoles: Array<
@@ -10069,10 +10228,11 @@ export type ResolversParentTypes = {
   };
   TemplateContentSpace: Omit<
     TemplateContentSpace,
-    "about" | "collaboration"
+    "about" | "collaboration" | "subspaces"
   > & {
     about: ResolversParentTypes["SpaceAbout"];
     collaboration: ResolversParentTypes["Collaboration"];
+    subspaces: Array<ResolversParentTypes["TemplateContentSpace"]>;
   };
   TemplateDefault: Omit<TemplateDefault, "template"> & {
     template?: Maybe<ResolversParentTypes["Template"]>;
@@ -10118,10 +10278,12 @@ export type ResolversParentTypes = {
   UpdateApplicationFormOnRoleSetInput: UpdateApplicationFormOnRoleSetInput;
   UpdateCalendarEventInput: UpdateCalendarEventInput;
   UpdateCalloutContributionDefaultsInput: UpdateCalloutContributionDefaultsInput;
-  UpdateCalloutContributionPolicyInput: UpdateCalloutContributionPolicyInput;
   UpdateCalloutEntityInput: UpdateCalloutEntityInput;
   UpdateCalloutFramingInput: UpdateCalloutFramingInput;
   UpdateCalloutPublishInfoInput: UpdateCalloutPublishInfoInput;
+  UpdateCalloutSettingsContributionInput: UpdateCalloutSettingsContributionInput;
+  UpdateCalloutSettingsFramingInput: UpdateCalloutSettingsFramingInput;
+  UpdateCalloutSettingsInput: UpdateCalloutSettingsInput;
   UpdateCalloutVisibilityInput: UpdateCalloutVisibilityInput;
   UpdateCalloutsSortOrderInput: UpdateCalloutsSortOrderInput;
   UpdateClassificationInput: UpdateClassificationInput;
@@ -11136,11 +11298,6 @@ export type CalloutResolvers<
     ParentType,
     ContextType
   >;
-  contributionPolicy?: Resolver<
-    ResolversTypes["CalloutContributionPolicy"],
-    ParentType,
-    ContextType
-  >;
   contributions?: Resolver<
     Array<ResolversTypes["CalloutContribution"]>,
     ParentType,
@@ -11168,14 +11325,14 @@ export type CalloutResolvers<
     ParentType,
     ContextType
   >;
-  sortOrder?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes["CalloutType"], ParentType, ContextType>;
-  updatedDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
-  visibility?: Resolver<
-    ResolversTypes["CalloutVisibility"],
+  settings?: Resolver<
+    ResolversTypes["CalloutSettings"],
     ParentType,
     ContextType
   >;
+  sortOrder?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["CalloutType"], ParentType, ContextType>;
+  updatedDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -11210,6 +11367,11 @@ export type CalloutContributionDefaultsResolvers<
     ResolversParentTypes["CalloutContributionDefaults"] = ResolversParentTypes["CalloutContributionDefaults"],
 > = {
   createdDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  defaultDisplayName?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes["UUID"], ParentType, ContextType>;
   postDescription?: Resolver<
     Maybe<ResolversTypes["Markdown"]>,
@@ -11222,23 +11384,6 @@ export type CalloutContributionDefaultsResolvers<
     ParentType,
     ContextType
   >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type CalloutContributionPolicyResolvers<
-  ContextType = any,
-  ParentType extends
-    ResolversParentTypes["CalloutContributionPolicy"] = ResolversParentTypes["CalloutContributionPolicy"],
-> = {
-  allowedContributionTypes?: Resolver<
-    Array<ResolversTypes["CalloutContributionType"]>,
-    ParentType,
-    ContextType
-  >;
-  createdDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes["UUID"], ParentType, ContextType>;
-  state?: Resolver<ResolversTypes["CalloutState"], ParentType, ContextType>;
-  updatedDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -11255,6 +11400,11 @@ export type CalloutFramingResolvers<
   createdDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["UUID"], ParentType, ContextType>;
   profile?: Resolver<ResolversTypes["Profile"], ParentType, ContextType>;
+  type?: Resolver<
+    ResolversTypes["CalloutFramingType"],
+    ParentType,
+    ContextType
+  >;
   updatedDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   whiteboard?: Resolver<
     Maybe<ResolversTypes["Whiteboard"]>,
@@ -11273,6 +11423,66 @@ export type CalloutPostCreatedResolvers<
   contributionID?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   post?: Resolver<ResolversTypes["Post"], ParentType, ContextType>;
   sortOrder?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CalloutSettingsResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CalloutSettings"] = ResolversParentTypes["CalloutSettings"],
+> = {
+  contribution?: Resolver<
+    ResolversTypes["CalloutSettingsContribution"],
+    ParentType,
+    ContextType
+  >;
+  framing?: Resolver<
+    ResolversTypes["CalloutSettingsFraming"],
+    ParentType,
+    ContextType
+  >;
+  visibility?: Resolver<
+    ResolversTypes["CalloutVisibility"],
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CalloutSettingsContributionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CalloutSettingsContribution"] = ResolversParentTypes["CalloutSettingsContribution"],
+> = {
+  allowedTypes?: Resolver<
+    Array<ResolversTypes["CalloutContributionType"]>,
+    ParentType,
+    ContextType
+  >;
+  canAddContributions?: Resolver<
+    ResolversTypes["CalloutAllowedContributors"],
+    ParentType,
+    ContextType
+  >;
+  commentsEnabled?: Resolver<
+    ResolversTypes["Boolean"],
+    ParentType,
+    ContextType
+  >;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CalloutSettingsFramingResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CalloutSettingsFraming"] = ResolversParentTypes["CalloutSettingsFraming"],
+> = {
+  commentsEnabled?: Resolver<
+    ResolversTypes["Boolean"],
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -11694,11 +11904,40 @@ export type ContributorRolesResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CreateCalloutContributionDataResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CreateCalloutContributionData"] = ResolversParentTypes["CreateCalloutContributionData"],
+> = {
+  link?: Resolver<
+    Maybe<ResolversTypes["CreateLinkData"]>,
+    ParentType,
+    ContextType
+  >;
+  post?: Resolver<
+    Maybe<ResolversTypes["CreatePostData"]>,
+    ParentType,
+    ContextType
+  >;
+  sortOrder?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  whiteboard?: Resolver<
+    Maybe<ResolversTypes["CreateWhiteboardData"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CreateCalloutContributionDefaultsDataResolvers<
   ContextType = any,
   ParentType extends
     ResolversParentTypes["CreateCalloutContributionDefaultsData"] = ResolversParentTypes["CreateCalloutContributionDefaultsData"],
 > = {
+  defaultDisplayName?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   postDescription?: Resolver<
     Maybe<ResolversTypes["Markdown"]>,
     ParentType,
@@ -11706,19 +11945,6 @@ export type CreateCalloutContributionDefaultsDataResolvers<
   >;
   whiteboardContent?: Resolver<
     Maybe<ResolversTypes["WhiteboardContent"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type CreateCalloutContributionPolicyDataResolvers<
-  ContextType = any,
-  ParentType extends
-    ResolversParentTypes["CreateCalloutContributionPolicyData"] = ResolversParentTypes["CreateCalloutContributionPolicyData"],
-> = {
-  state?: Resolver<
-    Maybe<ResolversTypes["CalloutState"]>,
     ParentType,
     ContextType
   >;
@@ -11740,13 +11966,8 @@ export type CreateCalloutDataResolvers<
     ParentType,
     ContextType
   >;
-  contributionPolicy?: Resolver<
-    Maybe<ResolversTypes["CreateCalloutContributionPolicyData"]>,
-    ParentType,
-    ContextType
-  >;
-  enableComments?: Resolver<
-    Maybe<ResolversTypes["Boolean"]>,
+  contributions?: Resolver<
+    Maybe<Array<ResolversTypes["CreateCalloutContributionData"]>>,
     ParentType,
     ContextType
   >;
@@ -11761,13 +11982,12 @@ export type CreateCalloutDataResolvers<
     ParentType,
     ContextType
   >;
-  sortOrder?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes["CalloutType"], ParentType, ContextType>;
-  visibility?: Resolver<
-    Maybe<ResolversTypes["CalloutVisibility"]>,
+  settings?: Resolver<
+    Maybe<ResolversTypes["CreateCalloutSettingsData"]>,
     ParentType,
     ContextType
   >;
+  sortOrder?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -11786,8 +12006,73 @@ export type CreateCalloutFramingDataResolvers<
     ParentType,
     ContextType
   >;
+  type?: Resolver<
+    Maybe<ResolversTypes["CalloutFramingType"]>,
+    ParentType,
+    ContextType
+  >;
   whiteboard?: Resolver<
     Maybe<ResolversTypes["CreateWhiteboardData"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateCalloutSettingsContributionDataResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CreateCalloutSettingsContributionData"] = ResolversParentTypes["CreateCalloutSettingsContributionData"],
+> = {
+  allowedTypes?: Resolver<
+    Maybe<Array<ResolversTypes["CalloutContributionType"]>>,
+    ParentType,
+    ContextType
+  >;
+  canAddContributions?: Resolver<
+    Maybe<ResolversTypes["CalloutAllowedContributors"]>,
+    ParentType,
+    ContextType
+  >;
+  commentsEnabled?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  enabled?: Resolver<Maybe<ResolversTypes["Boolean"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateCalloutSettingsDataResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CreateCalloutSettingsData"] = ResolversParentTypes["CreateCalloutSettingsData"],
+> = {
+  contribution?: Resolver<
+    Maybe<ResolversTypes["CreateCalloutSettingsContributionData"]>,
+    ParentType,
+    ContextType
+  >;
+  framing?: Resolver<
+    Maybe<ResolversTypes["CreateCalloutSettingsFramingData"]>,
+    ParentType,
+    ContextType
+  >;
+  visibility?: Resolver<
+    Maybe<ResolversTypes["CalloutVisibility"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateCalloutSettingsFramingDataResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CreateCalloutSettingsFramingData"] = ResolversParentTypes["CreateCalloutSettingsFramingData"],
+> = {
+  commentsEnabled?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
     ParentType,
     ContextType
   >;
@@ -11883,6 +12168,20 @@ export type CreateInnovationFlowStateDataResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CreateLinkDataResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CreateLinkData"] = ResolversParentTypes["CreateLinkData"],
+> = {
+  profile?: Resolver<
+    ResolversTypes["CreateProfileData"],
+    ParentType,
+    ContextType
+  >;
+  uri?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CreateLocationDataResolvers<
   ContextType = any,
   ParentType extends
@@ -11907,6 +12206,19 @@ export type CreateLocationDataResolvers<
   >;
   stateOrProvince?: Resolver<
     Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreatePostDataResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CreatePostData"] = ResolversParentTypes["CreatePostData"],
+> = {
+  tags?: Resolver<
+    Maybe<Array<ResolversTypes["String"]>>,
     ParentType,
     ContextType
   >;
@@ -14010,6 +14322,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationCreateTemplateArgs, "templateData">
   >;
+  createTemplateFromContentSpace?: Resolver<
+    ResolversTypes["Template"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateTemplateFromContentSpaceArgs, "templateData">
+  >;
   createTemplateFromSpace?: Resolver<
     ResolversTypes["Template"],
     ParentType,
@@ -14053,6 +14371,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationDeleteCalloutArgs, "deleteData">
+  >;
+  deleteContribution?: Resolver<
+    ResolversTypes["CalloutContribution"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteContributionArgs, "contributionID">
   >;
   deleteDiscussion?: Resolver<
     ResolversTypes["Discussion"],
@@ -15844,6 +16168,12 @@ export type RoleSetResolvers<
     ContextType,
     RequireFields<RoleSetVirtualContributorsInRoleArgs, "role">
   >;
+  virtualContributorsInRoleInHierarchy?: Resolver<
+    Array<ResolversTypes["VirtualContributor"]>,
+    ParentType,
+    ContextType,
+    RequireFields<RoleSetVirtualContributorsInRoleInHierarchyArgs, "role">
+  >;
   virtualContributorsInRoles?: Resolver<
     Array<ResolversTypes["VirtualContributorsInRolesResponse"]>,
     ParentType,
@@ -16730,6 +17060,11 @@ export type TemplateContentSpaceResolvers<
   id?: Resolver<ResolversTypes["UUID"], ParentType, ContextType>;
   level?: Resolver<ResolversTypes["SpaceLevel"], ParentType, ContextType>;
   settings?: Resolver<ResolversTypes["SpaceSettings"], ParentType, ContextType>;
+  subspaces?: Resolver<
+    Array<ResolversTypes["TemplateContentSpace"]>,
+    ParentType,
+    ContextType
+  >;
   updatedDate?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -17496,9 +17831,11 @@ export type Resolvers<ContextType = any> = {
   Callout?: CalloutResolvers<ContextType>;
   CalloutContribution?: CalloutContributionResolvers<ContextType>;
   CalloutContributionDefaults?: CalloutContributionDefaultsResolvers<ContextType>;
-  CalloutContributionPolicy?: CalloutContributionPolicyResolvers<ContextType>;
   CalloutFraming?: CalloutFramingResolvers<ContextType>;
   CalloutPostCreated?: CalloutPostCreatedResolvers<ContextType>;
+  CalloutSettings?: CalloutSettingsResolvers<ContextType>;
+  CalloutSettingsContribution?: CalloutSettingsContributionResolvers<ContextType>;
+  CalloutSettingsFraming?: CalloutSettingsFramingResolvers<ContextType>;
   CalloutsSet?: CalloutsSetResolvers<ContextType>;
   Classification?: ClassificationResolvers<ContextType>;
   Collaboration?: CollaborationResolvers<ContextType>;
@@ -17519,17 +17856,22 @@ export type Resolvers<ContextType = any> = {
   Contributor?: ContributorResolvers<ContextType>;
   ContributorRolePolicy?: ContributorRolePolicyResolvers<ContextType>;
   ContributorRoles?: ContributorRolesResolvers<ContextType>;
+  CreateCalloutContributionData?: CreateCalloutContributionDataResolvers<ContextType>;
   CreateCalloutContributionDefaultsData?: CreateCalloutContributionDefaultsDataResolvers<ContextType>;
-  CreateCalloutContributionPolicyData?: CreateCalloutContributionPolicyDataResolvers<ContextType>;
   CreateCalloutData?: CreateCalloutDataResolvers<ContextType>;
   CreateCalloutFramingData?: CreateCalloutFramingDataResolvers<ContextType>;
+  CreateCalloutSettingsContributionData?: CreateCalloutSettingsContributionDataResolvers<ContextType>;
+  CreateCalloutSettingsData?: CreateCalloutSettingsDataResolvers<ContextType>;
+  CreateCalloutSettingsFramingData?: CreateCalloutSettingsFramingDataResolvers<ContextType>;
   CreateCalloutsSetData?: CreateCalloutsSetDataResolvers<ContextType>;
   CreateClassificationData?: CreateClassificationDataResolvers<ContextType>;
   CreateCollaborationData?: CreateCollaborationDataResolvers<ContextType>;
   CreateCommunityGuidelinesData?: CreateCommunityGuidelinesDataResolvers<ContextType>;
   CreateInnovationFlowData?: CreateInnovationFlowDataResolvers<ContextType>;
   CreateInnovationFlowStateData?: CreateInnovationFlowStateDataResolvers<ContextType>;
+  CreateLinkData?: CreateLinkDataResolvers<ContextType>;
   CreateLocationData?: CreateLocationDataResolvers<ContextType>;
+  CreatePostData?: CreatePostDataResolvers<ContextType>;
   CreateProfileData?: CreateProfileDataResolvers<ContextType>;
   CreateReferenceData?: CreateReferenceDataResolvers<ContextType>;
   CreateTagsetData?: CreateTagsetDataResolvers<ContextType>;
@@ -17704,6 +18046,69 @@ export type Resolvers<ContextType = any> = {
   WhiteboardContent?: GraphQLScalarType;
 };
 
+export type CommunityRolesFragmentFragment = {
+  id: string;
+  roleSet: {
+    memberUsers: Array<{ id: string }>;
+    memberOrganizations: Array<{ id: string }>;
+    leadOrganizations: Array<{ id: string }>;
+    leadUsers: Array<{ id: string }>;
+  };
+};
+
+export type SpaceAboutFragmentFragment = {
+  id: string;
+  profile: {
+    id: string;
+    displayName: string;
+    tagline?: string | undefined;
+    url: string;
+    location?:
+      | {
+          country?: string | undefined;
+          city?: string | undefined;
+          geoLocation: {
+            latitude?: number | undefined;
+            longitude?: number | undefined;
+          };
+        }
+      | undefined;
+  };
+};
+
+export type SpaceGraphInfoFragmentFragment = {
+  id: string;
+  nameID: string;
+  about: {
+    id: string;
+    profile: {
+      id: string;
+      displayName: string;
+      tagline?: string | undefined;
+      url: string;
+      location?:
+        | {
+            country?: string | undefined;
+            city?: string | undefined;
+            geoLocation: {
+              latitude?: number | undefined;
+              longitude?: number | undefined;
+            };
+          }
+        | undefined;
+    };
+  };
+  community: {
+    id: string;
+    roleSet: {
+      memberUsers: Array<{ id: string }>;
+      memberOrganizations: Array<{ id: string }>;
+      leadOrganizations: Array<{ id: string }>;
+      leadUsers: Array<{ id: string }>;
+    };
+  };
+};
+
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
@@ -17730,6 +18135,139 @@ export type MeQuery = {
           };
         }
       | undefined;
+  };
+};
+
+export type MySpacesHierarchicalQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type MySpacesHierarchicalQuery = {
+  me: {
+    user?:
+      | {
+          id: string;
+          nameID: string;
+          email: string;
+          profile: {
+            displayName: string;
+            url: string;
+            avatar?: { uri: string } | undefined;
+            location?:
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
+              | undefined;
+          };
+        }
+      | undefined;
+    spaceMembershipsHierarchical: Array<{
+      space: {
+        id: string;
+        nameID: string;
+        about: {
+          id: string;
+          profile: {
+            id: string;
+            displayName: string;
+            tagline?: string | undefined;
+            url: string;
+            location?:
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
+              | undefined;
+          };
+        };
+        community: {
+          id: string;
+          roleSet: {
+            memberUsers: Array<{ id: string }>;
+            memberOrganizations: Array<{ id: string }>;
+            leadOrganizations: Array<{ id: string }>;
+            leadUsers: Array<{ id: string }>;
+          };
+        };
+      };
+      childMemberships: Array<{
+        space: {
+          id: string;
+          nameID: string;
+          about: {
+            id: string;
+            profile: {
+              id: string;
+              displayName: string;
+              tagline?: string | undefined;
+              url: string;
+              location?:
+                | {
+                    country?: string | undefined;
+                    city?: string | undefined;
+                    geoLocation: {
+                      latitude?: number | undefined;
+                      longitude?: number | undefined;
+                    };
+                  }
+                | undefined;
+            };
+          };
+          community: {
+            id: string;
+            roleSet: {
+              memberUsers: Array<{ id: string }>;
+              memberOrganizations: Array<{ id: string }>;
+              leadOrganizations: Array<{ id: string }>;
+              leadUsers: Array<{ id: string }>;
+            };
+          };
+        };
+        childMemberships: Array<{
+          space: {
+            id: string;
+            nameID: string;
+            about: {
+              id: string;
+              profile: {
+                id: string;
+                displayName: string;
+                tagline?: string | undefined;
+                url: string;
+                location?:
+                  | {
+                      country?: string | undefined;
+                      city?: string | undefined;
+                      geoLocation: {
+                        latitude?: number | undefined;
+                        longitude?: number | undefined;
+                      };
+                    }
+                  | undefined;
+              };
+            };
+            community: {
+              id: string;
+              roleSet: {
+                memberUsers: Array<{ id: string }>;
+                memberOrganizations: Array<{ id: string }>;
+                leadOrganizations: Array<{ id: string }>;
+                leadUsers: Array<{ id: string }>;
+              };
+            };
+          };
+        }>;
+      }>;
+    }>;
   };
 };
 
@@ -17763,30 +18301,6 @@ export type OrganizationByIdQuery = {
   };
 };
 
-export type OrganizationsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type OrganizationsQuery = {
-  organizations: Array<{
-    id: string;
-    nameID: string;
-    profile: {
-      displayName: string;
-      url: string;
-      avatar?: { uri: string } | undefined;
-      location?:
-        | {
-            country?: string | undefined;
-            city?: string | undefined;
-            geoLocation: {
-              latitude?: number | undefined;
-              longitude?: number | undefined;
-            };
-          }
-        | undefined;
-    };
-  }>;
-};
-
 export type SpaceByNameQueryVariables = Exact<{
   nameId: Scalars["NameID"]["input"];
 }>;
@@ -17804,7 +18318,9 @@ export type SpaceByNameQuery = {
               id: string;
               nameID: string;
               about: {
+                id: string;
                 profile: {
+                  id: string;
                   displayName: string;
                   tagline?: string | undefined;
                   url: string;
@@ -17821,6 +18337,7 @@ export type SpaceByNameQuery = {
                 };
               };
               community: {
+                id: string;
                 roleSet: {
                   memberUsers: Array<{ id: string }>;
                   memberOrganizations: Array<{ id: string }>;
@@ -17830,7 +18347,9 @@ export type SpaceByNameQuery = {
               };
             }>;
             about: {
+              id: string;
               profile: {
+                id: string;
                 displayName: string;
                 tagline?: string | undefined;
                 url: string;
@@ -17847,6 +18366,7 @@ export type SpaceByNameQuery = {
               };
             };
             community: {
+              id: string;
               roleSet: {
                 memberUsers: Array<{ id: string }>;
                 memberOrganizations: Array<{ id: string }>;
@@ -17859,7 +18379,9 @@ export type SpaceByNameQuery = {
             host?: { id: string } | { id: string } | { id: string } | undefined;
           };
           about: {
+            id: string;
             profile: {
+              id: string;
               displayName: string;
               tagline?: string | undefined;
               url: string;
@@ -17876,6 +18398,7 @@ export type SpaceByNameQuery = {
             };
           };
           community: {
+            id: string;
             roleSet: {
               memberUsers: Array<{ id: string }>;
               memberOrganizations: Array<{ id: string }>;
@@ -17886,185 +18409,6 @@ export type SpaceByNameQuery = {
         }
       | undefined;
   };
-};
-
-export type SpaceByNameFragmentFragment = {
-  id: string;
-  nameID: string;
-  about: {
-    profile: {
-      displayName: string;
-      tagline?: string | undefined;
-      url: string;
-      location?:
-        | {
-            country?: string | undefined;
-            city?: string | undefined;
-            geoLocation: {
-              latitude?: number | undefined;
-              longitude?: number | undefined;
-            };
-          }
-        | undefined;
-    };
-  };
-  community: {
-    roleSet: {
-      memberUsers: Array<{ id: string }>;
-      memberOrganizations: Array<{ id: string }>;
-      leadOrganizations: Array<{ id: string }>;
-      leadUsers: Array<{ id: string }>;
-    };
-  };
-};
-
-export type SpaceRolesL0QueryVariables = Exact<{ [key: string]: never }>;
-
-export type SpaceRolesL0Query = {
-  spaces: Array<{
-    id: string;
-    nameID: string;
-    subspaces: Array<{
-      id: string;
-      nameID: string;
-      subspaces: Array<{
-        id: string;
-        nameID: string;
-        about: {
-          profile: {
-            displayName: string;
-            tagline?: string | undefined;
-            url: string;
-            location?:
-              | {
-                  country?: string | undefined;
-                  city?: string | undefined;
-                  geoLocation: {
-                    latitude?: number | undefined;
-                    longitude?: number | undefined;
-                  };
-                }
-              | undefined;
-          };
-        };
-        community: {
-          roleSet: {
-            memberUsers: Array<{ id: string }>;
-            memberOrganizations: Array<{ id: string }>;
-            leadOrganizations: Array<{ id: string }>;
-            leadUsers: Array<{ id: string }>;
-          };
-        };
-      }>;
-      about: {
-        profile: {
-          displayName: string;
-          tagline?: string | undefined;
-          url: string;
-          location?:
-            | {
-                country?: string | undefined;
-                city?: string | undefined;
-                geoLocation: {
-                  latitude?: number | undefined;
-                  longitude?: number | undefined;
-                };
-              }
-            | undefined;
-        };
-      };
-      community: {
-        roleSet: {
-          memberUsers: Array<{ id: string }>;
-          memberOrganizations: Array<{ id: string }>;
-          leadOrganizations: Array<{ id: string }>;
-          leadUsers: Array<{ id: string }>;
-        };
-      };
-    }>;
-    account: {
-      host?: { id: string } | { id: string } | { id: string } | undefined;
-    };
-    about: {
-      profile: {
-        displayName: string;
-        tagline?: string | undefined;
-        url: string;
-        location?:
-          | {
-              country?: string | undefined;
-              city?: string | undefined;
-              geoLocation: {
-                latitude?: number | undefined;
-                longitude?: number | undefined;
-              };
-            }
-          | undefined;
-      };
-    };
-    community: {
-      roleSet: {
-        memberUsers: Array<{ id: string }>;
-        memberOrganizations: Array<{ id: string }>;
-        leadOrganizations: Array<{ id: string }>;
-        leadUsers: Array<{ id: string }>;
-      };
-    };
-  }>;
-};
-
-export type SpaceFragmentFragment = {
-  id: string;
-  nameID: string;
-  about: {
-    profile: {
-      displayName: string;
-      tagline?: string | undefined;
-      url: string;
-      location?:
-        | {
-            country?: string | undefined;
-            city?: string | undefined;
-            geoLocation: {
-              latitude?: number | undefined;
-              longitude?: number | undefined;
-            };
-          }
-        | undefined;
-    };
-  };
-  community: {
-    roleSet: {
-      memberUsers: Array<{ id: string }>;
-      memberOrganizations: Array<{ id: string }>;
-      leadOrganizations: Array<{ id: string }>;
-      leadUsers: Array<{ id: string }>;
-    };
-  };
-};
-
-export type UsersQueryVariables = Exact<{ [key: string]: never }>;
-
-export type UsersQuery = {
-  users: Array<{
-    id: string;
-    nameID: string;
-    profile: {
-      displayName: string;
-      url: string;
-      avatar?: { uri: string } | undefined;
-      location?:
-        | {
-            country?: string | undefined;
-            city?: string | undefined;
-            geoLocation: {
-              latitude?: number | undefined;
-              longitude?: number | undefined;
-            };
-          }
-        | undefined;
-    };
-  }>;
 };
 
 export type UsersByIDsQueryVariables = Exact<{

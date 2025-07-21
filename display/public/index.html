@@ -2,92 +2,101 @@
   <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 <body>
-<!-- Node Info Side Panel (hidden by default) -->
-<div id="node-info-panel" class="node-info-panel" style="display:none;">
-  <div class="node-info-panel-header">
-    <span id="node-info-panel-title">Node Info</span>
-    <button id="node-info-panel-close" title="Close">&times;</button>
-  </div>
-  <div id="node-info-panel-content" class="node-info-panel-content">
-    <!-- Node info will be injected here -->
-  </div>
-</div>
-<!-- End Node Info Side Panel -->
 <div class="container mt-5">
   <h1>Alkemio Analytics Demo</h1>
   <div class="graph">
     <h2>Force Directed Graph</h2>
-    <!-- Add Clear Selection button and move legend above controls -->
-    <div class="graph-top-bar">
-      <div class="legend">
-        <b>Legend:</b> <span style="color:#068293;">●</span> Space &nbsp; <span style="color:#f39c12;">●</span> Organization &nbsp; <span style="color:#8e44ad;">●</span> User
-      </div>
-      <button id="graph-clear-selection" class="clear-selection-btn" type="button" title="Clear selection">Clear selection</button>
-    </div>
-    <!-- Search bar moved to top of graph card -->
-    <div class="search-bar-top">
-      <input type="text" id="graph-search" placeholder="🔍 Search nodes by name or ID..." autofocus>
-    </div>
-    <div class="graph-controls">
-      <div>
-        <b>Data Controls</b>
-        <label style="margin-left:1em;">Select a single Space:
-          <select id="graph-space-selector" width="80">
-            <option id="all" value="" selected="true">All</option>
-          </select>
-        </label>
-        <label style="margin-left:1em;">Display contributors:
-          <input type="checkbox" id="graph-checkbox-show-contributors" name="show-contributors">
-        </label>
-      </div>
-      <div>
-        <b>Zoom</b>
-        <button type="button" id="graph-zoom-fit" title="Fit to screen">🔲</button>
-        <button type="button" id="graph-zoom-plus" title="Zoom in">＋</button>
-        <button type="button" id="graph-zoom-min" title="Zoom out">－</button>
-      </div>
-      <div>
-        <b>Map Controls</b>
-        <label style="margin-left:1em;">Display map:
-          <input type="checkbox" id="graph-display-map" name="display-map">
-        </label>
-        <label style="margin-left:1em;">Select Map:
-          <select id="graph-map-selector" width="80">
-            <option id="europe" value="maps/europe_geo.json" selected="true">Europe</option>
-            <option id="netherlands" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
-            <option id="ireland" value="maps/ireland-with-counties_geo.json" >Ireland</option>
-          </select>
-        </label>
-        <label style="margin-left:1em;">Move contributors to location:
-          <input type="checkbox" id="graph-contributors-to-location" name="move-contributors">
-        </label>
-        <label style="margin-left:1em;">Move spaces etc to location:
-          <input type="checkbox" id="graph-spaces-to-location" name="move-spaces">
-        </label>
-      </div>
-    </div>
-    <!-- Graph Controls Help -->
-    <div id="graph-controls-help-container"></div>
-    <script>
-      fetch('graph-controls-help.html').then(r => r.text()).then(html => {
-        document.getElementById('graph-controls-help-container').innerHTML = html;
-      });
-    </script>
-    <!-- End Graph Controls Help -->
     <div class="graph-container">
+      <!-- Fullscreen Toolbar (only visible in fullscreen) -->
+      <div id="fullscreen-toolbar" style="display:none;">
+        <label style="margin-left:0;">Select Map:
+          <select id="graph-map-selector-fs" width="80">
+            <option id="europe-fs" value="maps/europe_geo.json" selected="true">Europe</option>
+            <option id="netherlands-fs" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
+            <option id="ireland-fs" value="maps/ireland-with-counties_geo.json" >Ireland</option>
+          </select>
+        </label>
+        <label>Display Map
+          <input type="checkbox" id="graph-display-map-fs" name="display-map-fs">
+        </label>
+        <label>Display Contributors
+          <input type="checkbox" id="graph-checkbox-show-contributors-fs" name="show-contributors-fs">
+        </label>
+        <label>Move Contributors to Location
+          <input type="checkbox" id="graph-contributors-to-location-fs" name="move-contributors-fs">
+        </label>
+        <label>Move Spaces etc to location
+          <input type="checkbox" id="graph-spaces-to-location-fs" name="move-spaces-fs">
+        </label>
+        <label>3D View
+          <input type="checkbox" id="graph-3d-toggle-fs" name="graph-3d-toggle-fs">
+        </label>
+        <button id="fullscreen-exit-btn" title="Exit Fullscreen">⤫</button>
+      </div>
+      <!-- Controls bar (compact, only map controls) -->
+      <div id="floating-graph-controls" style="margin-bottom: 1.5rem;">
+        <div style="background:rgba(255,255,255,0.95);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:10px 24px;display:inline-block;pointer-events:auto;min-width:0;">
+          <div class="graph-controls" style="gap:1.2em;">
+            <label style="margin-left:0;">Select Map:
+              <select id="graph-map-selector" width="80">
+                <option id="europe" value="maps/europe_geo.json" selected="true">Europe</option>
+                <option id="netherlands" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
+                <option id="ireland" value="maps/ireland-with-counties_geo.json" >Ireland</option>
+              </select>
+            </label>
+            <label>Display Map
+              <input type="checkbox" id="graph-display-map" name="display-map">
+            </label>
+            <label>Display Contributors
+              <input type="checkbox" id="graph-checkbox-show-contributors" name="show-contributors">
+            </label>
+            <label>Move Contributors to Location
+              <input type="checkbox" id="graph-contributors-to-location" name="move-contributors">
+            </label>
+            <label>Move Spaces etc to location
+              <input type="checkbox" id="graph-spaces-to-location" name="move-spaces">
+            </label>
+            <label>3D View
+              <input type="checkbox" id="graph-3d-toggle" name="graph-3d-toggle">
+            </label>
+          </div>
+          <div style="display:inline-block;vertical-align:middle;">
+            <button id="graph-fullscreen-toggle" style="margin-left:1em;">Fullscreen</button>
+          </div>
+        </div>
+      </div>
+      <!-- SVG and 3D containers -->
       <svg id="graph-svg" viewBox="0 0 2000 1000" preserveAspectRatio="xMidYMid meet"></svg>
-    </div>
-    <!-- Cluster Side Panel (hidden by default) -->
-    <div id="cluster-panel" class="cluster-panel" style="display:none;">
-      <div class="cluster-panel-header">
-        <span id="cluster-panel-title">Cluster Members</span>
-        <button id="cluster-panel-close" title="Close">&times;</button>
+      <div id="graph-3d-container" style="display:none; width:100%; height:600px; position:relative;"></div>
+      <!-- Search Bar (below graph, non-fullscreen) -->
+      <div id="graph-search-bar" class="search-bar-top">
+        <input id="graph-search-input" type="text" placeholder="Search nodes or clusters..." />
       </div>
-      <div id="cluster-panel-content" class="cluster-panel-content">
-        <!-- Member list will be injected here -->
+      <!-- Clear Selection Button (below graph, non-fullscreen) -->
+      <div id="graph-clear-selection-bar" class="clear-selection-bar">
+        <button id="graph-clear-selection" class="clear-selection-btn" type="button" title="Clear selection">Clear selection</button>
       </div>
-    </div>
-    <!-- End Cluster Side Panel -->
+      <!-- Info Panel (left side, always present in DOM) -->
+      <div id="graph-info-panel" class="info-panel">
+        <div class="info-panel-header">
+          <span id="graph-info-title">Node Info</span>
+          <button id="graph-info-close" title="Close panel">&times;</button>
+        </div>
+        <div id="graph-info-content" class="info-panel-content">
+          <!-- Node details will be injected here -->
+        </div>
+      </div>
+      <!-- Cluster Panel (right side, always present in DOM) -->
+      <div id="cluster-panel" class="cluster-panel">
+        <div class="cluster-panel-header">
+          <span id="cluster-panel-title">Cluster Members</span>
+          <button id="cluster-panel-close" title="Close">&times;</button>
+        </div>
+        <div id="cluster-panel-content" class="cluster-panel-content">
+          <!-- Member list will be injected here -->
+        </div>
+      </div>
+    </div> <!-- end .graph-container -->
   </div>
   <div class="lifecycle">
     <h2>Lifecycle Visualization</h2>
@@ -107,4 +116,78 @@
   </div>
 </div>
 <script type="module" src="./bundle.js"></script>
+<script type="module">
+// Show/hide search bar and clear button depending on fullscreen
+function updateSearchBarPosition() {
+  const fs = document.fullscreenElement || document.webkitFullscreenElement;
+  document.getElementById('graph-search-bar').style.display = fs ? 'none' : '';
+  document.getElementById('graph-clear-selection-bar').style.display = fs ? 'none' : '';
+  // Always set display:flex for fullscreen toolbar in fullscreen
+  document.getElementById('fullscreen-toolbar').style.display = fs ? 'flex' : 'none';
+}
+document.addEventListener('fullscreenchange', updateSearchBarPosition);
+document.addEventListener('webkitfullscreenchange', updateSearchBarPosition);
+window.addEventListener('DOMContentLoaded', updateSearchBarPosition);
+
+// --- Unified search logic for both normal and fullscreen search bars ---
+function setupGraphSearch(input) {
+  if (!input) return;
+  input.addEventListener('input', function(e) {
+    const value = e.target.value.trim().toLowerCase();
+    const svg = document.getElementById('graph-svg');
+    if (!svg) return;
+    // Remove previous highlights
+    svg.querySelectorAll('.node').forEach(el => {
+      el.setAttribute('opacity', '1');
+      el.setAttribute('stroke', '#0A6E8A');
+      el.setAttribute('stroke-width', '1.2');
+    });
+    svg.querySelectorAll('line').forEach(el => {
+      el.setAttribute('opacity', '0.85');
+      el.setAttribute('stroke', '#bfc9d1');
+      el.setAttribute('stroke-width', '2');
+    });
+    if (!value) return;
+    // Highlight matching nodes and their links
+    let found = false;
+    svg.querySelectorAll('.node').forEach(el => {
+      const d = el.__data__ || {};
+      const label = (d.label || d.name || d.id || '').toLowerCase();
+      if (label.includes(value)) {
+        el.setAttribute('stroke', '#FFD600');
+        el.setAttribute('stroke-width', '4');
+        el.setAttribute('opacity', '1');
+        found = true;
+        // Highlight connected links
+        svg.querySelectorAll('line').forEach(line => {
+          const ld = line.__data__ || {};
+          if (ld.source && ld.target && (ld.source.id === d.id || ld.target.id === d.id)) {
+            line.setAttribute('stroke', '#FFD600');
+            line.setAttribute('stroke-width', '3');
+            line.setAttribute('opacity', '1');
+          }
+        });
+      } else {
+        el.setAttribute('opacity', '0.15');
+      }
+    });
+    if (found) {
+      svg.querySelectorAll('.node').forEach(el => {
+        if (el.getAttribute('stroke') !== '#FFD600') {
+          el.setAttribute('opacity', '0.15');
+        }
+      });
+      svg.querySelectorAll('line').forEach(line => {
+        if (line.getAttribute('stroke') !== '#FFD600') {
+          line.setAttribute('opacity', '0.08');
+        }
+      });
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  setupGraphSearch(document.getElementById('graph-search-input'));
+});
+</script>
 </body>

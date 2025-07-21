@@ -1,11 +1,11 @@
 query spaceByName($nameId: NameID!) {
   lookupByName {
     space(NAMEID: $nameId) {
-      ...SpaceByNameFragment
+      ...SpaceGraphInfoFragment
       subspaces {
-        ...SpaceByNameFragment
+        ...SpaceGraphInfoFragment
         subspaces {
-          ...SpaceByNameFragment
+          ...SpaceGraphInfoFragment
         }
       }
       account {
@@ -17,38 +17,4 @@ query spaceByName($nameId: NameID!) {
   }
 }
 
-fragment SpaceByNameFragment on Space {
-  id
-  nameID
-  about {
-    profile {
-      displayName
-      tagline
-      location {
-        country
-        city
-        geoLocation {
-          latitude
-          longitude
-        }
-      }
-      url
-    }
-  }
-  community {
-    roleSet {
-      memberUsers: usersInRole(role: MEMBER) {
-        id
-      }
-      memberOrganizations: organizationsInRole(role: MEMBER) {
-        id
-      }
-      leadOrganizations: organizationsInRole(role: LEAD) {
-        id
-      }
-      leadUsers: usersInRole(role: LEAD) {
-        id
-      }
-    }
-  }
-}
+

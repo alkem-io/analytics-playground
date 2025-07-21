@@ -58,6 +58,25 @@ export class HovercardHtml {
     // Show avatar image if available (use node.avatar, not profile)
     const avatarUrl = node.avatar || '';
     const avatarImg = avatarUrl ? `<img src="${avatarUrl}" alt="avatar" style="width:48px;height:48px;border-radius:50%;margin-bottom:6px;box-shadow:0 2px 8px #bbb;" />` : '';
+    // Show direct connections (1-jump neighbors)
+    let connectionsHtml = '';
+    if (window && (window as any).graphDataProvider) {
+      const provider = (window as any).graphDataProvider;
+      const edges = provider.getFilteredEdges();
+      const neighbors = new Set<string>();
+      edges.forEach((e: any) => {
+        if (e.source.id === node.id) neighbors.add(e.target.id);
+        else if (e.target.id === node.id) neighbors.add(e.source.id);
+      });
+      const nodes = provider.getFilteredNodes();
+      const neighborList = nodes.filter((n: any) => neighbors.has(n.id));
+      if (neighborList.length > 0) {
+        connectionsHtml = `<div style='margin-top:6px;'><b>Direct connections:</b><ul style='margin:2px 0 0 1em;padding:0;font-size:0.97em;'>` +
+          neighborList.slice(0, 5).map((n: any) => `<li>${n.profile?.displayName || n.nameID || n.id}</li>`).join('') +
+          (neighborList.length > 5 ? `<li>...and ${neighborList.length - 5} more</li>` : '') +
+          `</ul></div>`;
+      }
+    }
     return `
     <table style="width:100%">
       <tr>
@@ -66,6 +85,9 @@ export class HovercardHtml {
       <tr>
         <td><b>${node.profile?.displayName}</b><br/>- ${node.nameID}<br/><a href="${node.profile?.url}" target="_blank">Link</a></td>
       </tr>
+      <tr><td style="font-size:0.97em;">Type: ${node.type || ''} &nbsp; Group: ${node.group || ''} &nbsp; Role: ${(node as any).role || ''}</td></tr>
+      <tr><td style="font-size:0.97em;">Location: ${node.profile?.location?.city || ''} ${node.profile?.location?.country || ''}</td></tr>
+      <tr><td>${connectionsHtml}</td></tr>
     </table>`;
   }
 

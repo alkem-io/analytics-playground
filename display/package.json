@@ -18,14 +18,15 @@
   },
   "dependencies": {
     "@xstate/graph": "^3.0.4",
+    "3d-force-graph": "^1.77.0",
     "copy-webpack-plugin": "^13.0.0",
     "d3": "^7.9.0",
     "d3-array": "^3.2.4",
+    "d3-force": "^3.0.0",
+    "d3-geo": "^3.1.1",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
-    "d3-force": "^3.0.0",
     "d3-zoom": "^3.0.0",
-    "d3-geo": "^3.1.1",
     "ts-loader": "^9.5.2",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
@@ -34,12 +35,13 @@
   "devDependencies": {
     "@types/d3": "^7.4.3",
     "@types/geojson": "^7946.0.12",
-    "webpack-dev-server": "^5.2.2",
+    "@types/three": "^0.178.0",
+    "rimraf": "^6.0.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
-    "rimraf": "^6.0.1"
+    "webpack-dev-server": "^5.2.2"
   },
-   "engines": {
+  "engines": {
     "node": ">=20.9.0",
     "npm": ">=10"
   }

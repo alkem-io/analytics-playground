@@ -18109,9 +18109,11 @@ export type SpaceGraphInfoFragmentFragment = {
   };
 };
 
-export type MeQueryVariables = Exact<{ [key: string]: never }>;
+export type MySpacesHierarchicalQueryVariables = Exact<{
+  [key: string]: never;
+}>;
 
-export type MeQuery = {
+export type MySpacesHierarchicalQuery = {
   me: {
     user?:
       | {
@@ -18135,6 +18137,108 @@ export type MeQuery = {
           };
         }
       | undefined;
+    spaceMembershipsHierarchical: Array<{
+      space: {
+        id: string;
+        nameID: string;
+        about: {
+          id: string;
+          profile: {
+            id: string;
+            displayName: string;
+            tagline?: string | undefined;
+            url: string;
+            location?:
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
+              | undefined;
+          };
+        };
+        community: {
+          id: string;
+          roleSet: {
+            memberUsers: Array<{ id: string }>;
+            memberOrganizations: Array<{ id: string }>;
+            leadOrganizations: Array<{ id: string }>;
+            leadUsers: Array<{ id: string }>;
+          };
+        };
+      };
+      childMemberships: Array<{
+        space: {
+          id: string;
+          nameID: string;
+          about: {
+            id: string;
+            profile: {
+              id: string;
+              displayName: string;
+              tagline?: string | undefined;
+              url: string;
+              location?:
+                | {
+                    country?: string | undefined;
+                    city?: string | undefined;
+                    geoLocation: {
+                      latitude?: number | undefined;
+                      longitude?: number | undefined;
+                    };
+                  }
+                | undefined;
+            };
+          };
+          community: {
+            id: string;
+            roleSet: {
+              memberUsers: Array<{ id: string }>;
+              memberOrganizations: Array<{ id: string }>;
+              leadOrganizations: Array<{ id: string }>;
+              leadUsers: Array<{ id: string }>;
+            };
+          };
+        };
+        childMemberships: Array<{
+          space: {
+            id: string;
+            nameID: string;
+            about: {
+              id: string;
+              profile: {
+                id: string;
+                displayName: string;
+                tagline?: string | undefined;
+                url: string;
+                location?:
+                  | {
+                      country?: string | undefined;
+                      city?: string | undefined;
+                      geoLocation: {
+                        latitude?: number | undefined;
+                        longitude?: number | undefined;
+                      };
+                    }
+                  | undefined;
+              };
+            };
+            community: {
+              id: string;
+              roleSet: {
+                memberUsers: Array<{ id: string }>;
+                memberOrganizations: Array<{ id: string }>;
+                leadOrganizations: Array<{ id: string }>;
+                leadUsers: Array<{ id: string }>;
+              };
+            };
+          };
+        }>;
+      }>;
+    }>;
   };
 };
 

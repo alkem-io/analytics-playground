@@ -18668,9 +18668,11 @@ export type SpaceGraphInfoFragmentFragment = {
   };
 };
 
-export type MeQueryVariables = SchemaTypes.Exact<{ [key: string]: never }>;
+export type MySpacesHierarchicalQueryVariables = SchemaTypes.Exact<{
+  [key: string]: never;
+}>;
 
-export type MeQuery = {
+export type MySpacesHierarchicalQuery = {
   me: {
     user?:
       | {
@@ -18694,6 +18696,108 @@ export type MeQuery = {
           };
         }
       | undefined;
+    spaceMembershipsHierarchical: Array<{
+      space: {
+        id: string;
+        nameID: string;
+        about: {
+          id: string;
+          profile: {
+            id: string;
+            displayName: string;
+            tagline?: string | undefined;
+            url: string;
+            location?:
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
+              | undefined;
+          };
+        };
+        community: {
+          id: string;
+          roleSet: {
+            memberUsers: Array<{ id: string }>;
+            memberOrganizations: Array<{ id: string }>;
+            leadOrganizations: Array<{ id: string }>;
+            leadUsers: Array<{ id: string }>;
+          };
+        };
+      };
+      childMemberships: Array<{
+        space: {
+          id: string;
+          nameID: string;
+          about: {
+            id: string;
+            profile: {
+              id: string;
+              displayName: string;
+              tagline?: string | undefined;
+              url: string;
+              location?:
+                | {
+                    country?: string | undefined;
+                    city?: string | undefined;
+                    geoLocation: {
+                      latitude?: number | undefined;
+                      longitude?: number | undefined;
+                    };
+                  }
+                | undefined;
+            };
+          };
+          community: {
+            id: string;
+            roleSet: {
+              memberUsers: Array<{ id: string }>;
+              memberOrganizations: Array<{ id: string }>;
+              leadOrganizations: Array<{ id: string }>;
+              leadUsers: Array<{ id: string }>;
+            };
+          };
+        };
+        childMemberships: Array<{
+          space: {
+            id: string;
+            nameID: string;
+            about: {
+              id: string;
+              profile: {
+                id: string;
+                displayName: string;
+                tagline?: string | undefined;
+                url: string;
+                location?:
+                  | {
+                      country?: string | undefined;
+                      city?: string | undefined;
+                      geoLocation: {
+                        latitude?: number | undefined;
+                        longitude?: number | undefined;
+                      };
+                    }
+                  | undefined;
+              };
+            };
+            community: {
+              id: string;
+              roleSet: {
+                memberUsers: Array<{ id: string }>;
+                memberOrganizations: Array<{ id: string }>;
+                leadOrganizations: Array<{ id: string }>;
+                leadUsers: Array<{ id: string }>;
+              };
+            };
+          };
+        }>;
+      }>;
+    }>;
   };
 };
 
@@ -18917,8 +19021,8 @@ export const SpaceGraphInfoFragmentFragmentDoc = gql`
   ${SpaceAboutFragmentFragmentDoc}
   ${CommunityRolesFragmentFragmentDoc}
 `;
-export const MeDocument = gql`
-  query me {
+export const MySpacesHierarchicalDocument = gql`
+  query mySpacesHierarchical {
     me {
       user {
         id
@@ -18940,8 +19044,24 @@ export const MeDocument = gql`
         }
         email
       }
+      spaceMembershipsHierarchical {
+        space {
+          ...SpaceGraphInfoFragment
+        }
+        childMemberships {
+          space {
+            ...SpaceGraphInfoFragment
+          }
+          childMemberships {
+            space {
+              ...SpaceGraphInfoFragment
+            }
+          }
+        }
+      }
     }
   }
+  ${SpaceGraphInfoFragmentFragmentDoc}
 `;
 export const OrganizationByIdDocument = gql`
   query organizationByID($id: UUID!) {
@@ -19026,7 +19146,7 @@ const defaultWrapper: SdkFunctionWrapper = (
   _operationType,
   _variables,
 ) => action();
-const MeDocumentString = print(MeDocument);
+const MySpacesHierarchicalDocumentString = print(MySpacesHierarchicalDocument);
 const OrganizationByIdDocumentString = print(OrganizationByIdDocument);
 const SpaceByNameDocumentString = print(SpaceByNameDocument);
 const UsersByIDsDocumentString = print(UsersByIDsDocument);
@@ -19035,11 +19155,11 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper,
 ) {
   return {
-    me(
-      variables?: SchemaTypes.MeQueryVariables,
+    mySpacesHierarchical(
+      variables?: SchemaTypes.MySpacesHierarchicalQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
     ): Promise<{
-      data: SchemaTypes.MeQuery;
+      data: SchemaTypes.MySpacesHierarchicalQuery;
       errors?: GraphQLError[];
       extensions?: any;
       headers: Headers;
@@ -19047,11 +19167,12 @@ export function getSdk(
     }> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.rawRequest<SchemaTypes.MeQuery>(MeDocumentString, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        "me",
+          client.rawRequest<SchemaTypes.MySpacesHierarchicalQuery>(
+            MySpacesHierarchicalDocumentString,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders },
+          ),
+        "mySpacesHierarchical",
         "query",
         variables,
       );

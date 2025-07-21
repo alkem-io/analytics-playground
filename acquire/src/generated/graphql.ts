@@ -18668,6 +18668,35 @@ export type SpaceGraphInfoFragmentFragment = {
   };
 };
 
+export type MeQueryVariables = SchemaTypes.Exact<{ [key: string]: never }>;
+
+export type MeQuery = {
+  me: {
+    user?:
+      | {
+          id: string;
+          nameID: string;
+          email: string;
+          profile: {
+            displayName: string;
+            url: string;
+            avatar?: { uri: string } | undefined;
+            location?:
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
+              | undefined;
+          };
+        }
+      | undefined;
+  };
+};
+
 export type MySpacesHierarchicalQueryVariables = SchemaTypes.Exact<{
   [key: string]: never;
 }>;
@@ -19021,6 +19050,32 @@ export const SpaceGraphInfoFragmentFragmentDoc = gql`
   ${SpaceAboutFragmentFragmentDoc}
   ${CommunityRolesFragmentFragmentDoc}
 `;
+export const MeDocument = gql`
+  query me {
+    me {
+      user {
+        id
+        nameID
+        profile {
+          displayName
+          avatar: visual(type: AVATAR) {
+            uri
+          }
+          location {
+            country
+            city
+            geoLocation {
+              latitude
+              longitude
+            }
+          }
+          url
+        }
+        email
+      }
+    }
+  }
+`;
 export const MySpacesHierarchicalDocument = gql`
   query mySpacesHierarchical {
     me {
@@ -19146,6 +19201,7 @@ const defaultWrapper: SdkFunctionWrapper = (
   _operationType,
   _variables,
 ) => action();
+const MeDocumentString = print(MeDocument);
 const MySpacesHierarchicalDocumentString = print(MySpacesHierarchicalDocument);
 const OrganizationByIdDocumentString = print(OrganizationByIdDocument);
 const SpaceByNameDocumentString = print(SpaceByNameDocument);
@@ -19155,6 +19211,27 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper,
 ) {
   return {
+    me(
+      variables?: SchemaTypes.MeQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+    ): Promise<{
+      data: SchemaTypes.MeQuery;
+      errors?: GraphQLError[];
+      extensions?: any;
+      headers: Headers;
+      status: number;
+    }> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.rawRequest<SchemaTypes.MeQuery>(MeDocumentString, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        "me",
+        "query",
+        variables,
+      );
+    },
     mySpacesHierarchical(
       variables?: SchemaTypes.MySpacesHierarchicalQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,

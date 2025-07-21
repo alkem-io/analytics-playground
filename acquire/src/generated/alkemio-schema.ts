@@ -18109,6 +18109,35 @@ export type SpaceGraphInfoFragmentFragment = {
   };
 };
 
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MeQuery = {
+  me: {
+    user?:
+      | {
+          id: string;
+          nameID: string;
+          email: string;
+          profile: {
+            displayName: string;
+            url: string;
+            avatar?: { uri: string } | undefined;
+            location?:
+              | {
+                  country?: string | undefined;
+                  city?: string | undefined;
+                  geoLocation: {
+                    latitude?: number | undefined;
+                    longitude?: number | undefined;
+                  };
+                }
+              | undefined;
+          };
+        }
+      | undefined;
+  };
+};
+
 export type MySpacesHierarchicalQueryVariables = Exact<{
   [key: string]: never;
 }>;

@@ -270,6 +270,7 @@ h1, h2 {
   min-width: 0;
   min-height: 0;
   display: block;
+  background: none !important; /* Ensure no background */
 }
 
 #graph-svg:fullscreen,
@@ -278,7 +279,7 @@ h1, h2 {
   height: 100vh !important;
   max-width: 100vw !important;
   max-height: 100vh !important;
-  background: #fff !important; /* White background for 2D mode */
+  background: none !important; /* No background in fullscreen either */
 }
 
 .legend {
@@ -772,3 +773,58 @@ image {
   display: none !important;
 }
 */
+
+/* Smart Insights Section Styles */
+.insights-section .insight-card {
+  transition: all 0.3s ease;
+}
+
+.insights-section .insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+  border-color: #0A6E8A !important;
+}
+
+.insights-section .metric-card {
+  transition: all 0.2s ease;
+}
+
+.insights-section .metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.insights-section .insight-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(10,110,138,0.4) !important;
+}
+
+.insights-section button[style*="background: white"]:hover {
+  background: #f8fbfd !important;
+  transform: translateY(-1px);
+}
+
+/* Responsive design for insights grid */
+@media (max-width: 768px) {
+  .insights-section {
+    padding: 24px 16px !important;
+  }
+  
+  .insights-section h2 {
+    font-size: 24px !important;
+  }
+  
+  .insights-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  #network-metrics-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #network-metrics-cards {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -12,6 +12,8 @@ import { TransformationHandler } from './handlers/TransformationHandler';
 import { MapDataProvider } from './MapDataProvider';
 import { MapLocationHandler } from './handlers/MapLocationHandler';
 import { HovercardHtml } from './components/HovercardHtml';
+import { NetworkInsightEngine } from './NetworkInsightEngine';
+import { SmartSearch } from './SmartSearch';
 import { zoomIdentity } from 'd3';
 
 // RESTORE POINT: Created before Kumu-style improvements on 2025-06-23
@@ -47,6 +49,14 @@ export class GraphVizualization {
   private fannedCluster: any = null;
   private fannedNodes: any[] = [];
   private selectedNodeId: string | null = null;
+  private isSimulationRunning: boolean = false;
+
+  // Kumu.io-inspired features
+  private insightEngine!: NetworkInsightEngine;
+  private smartSearch: SmartSearch | null = null;
+  private currentVisualMode: 'default' | 'centrality' | 'community' | 'geographic' = 'default';
+  private communityColors: Map<string, string> = new Map();
+  private controlPanelOpen: boolean = false;
 
   constructor(
     svg: any,
@@ -80,17 +90,38 @@ export class GraphVizualization {
       this.transformationHandler
     );
     this.hovercard = new HovercardHtml(svg, 0, 0);
+
+    // Initialize Kumu.io-inspired features
+    this.insightEngine = new NetworkInsightEngine(this.graphDataProvider);
+    this.initializeControlPanel();
+
     this.refreshDisplayedGraph();
     setTimeout(() => {
       const clearBtn = document.getElementById('graph-clear-selection');
       if (clearBtn) {
         clearBtn.addEventListener('click', () => this.clearSelection());
       }
+
+      // Add event handlers for main insights section
+      const refreshInsightsBtn = document.getElementById('refresh-insights-main');
+      if (refreshInsightsBtn) {
+        refreshInsightsBtn.addEventListener('click', () => {
+          this.updateNetworkMetrics();
+          this.generateSmartInsights();
+        });
+      }
+
+      const exportInsightsBtn = document.getElementById('export-insights');
+      if (exportInsightsBtn) {
+        exportInsightsBtn.addEventListener('click', () => this.exportInsights());
+      }
     }, 0);
   } // <-- Ensure constructor is closed here
 
   refreshDisplayedGraph() {
     this.simulation.stop();
+    this.isSimulationRunning = false;
+
     // Remove nodes group before links group to ensure correct stacking order
     if (this.nodesGroup) this.nodesGroup.remove();
     if (this.linksGroup) this.linksGroup.remove();
@@ -117,6 +148,18 @@ export class GraphVizualization {
     this.simulation.nodes(this.graphDataProvider.getFilteredNodes());
     this.simulation.force('link').links(this.graphDataProvider.getFilteredEdges());
     this.simulation.alpha(1).restart();
+    this.isSimulationRunning = true;
+
+    // Performance optimization: Add timeout to stop simulation after reasonable time
+    const nodeCount = this.graphDataProvider.getFilteredNodes().length;
+    const timeoutMs = nodeCount > 200 ? 10000 : 30000; // 10s for large graphs, 30s for small
+    setTimeout(() => {
+      if (this.simulation && this.isSimulationRunning) {
+        this.simulation.stop();
+        this.isSimulationRunning = false;
+        console.log('Force simulation stopped after timeout to improve performance');
+      }
+    }, timeoutMs);
 
     this.simulate();
     this.hovercard.registerHovercard(
@@ -161,6 +204,23 @@ export class GraphVizualization {
         });
       });
     }, 0);
+
+    // Update insights engine with new data
+    if (this.insightEngine) {
+      this.insightEngine.updateData();
+      this.updateNetworkMetrics();
+      this.generateSmartInsights();
+
+      // Also update control panel if it's open
+      if (this.controlPanelOpen) {
+        this.updateNetworkMetrics();
+      }
+    }
+
+    // Refresh smart search
+    if (this.smartSearch) {
+      this.smartSearch.refresh();
+    }
   }
 
   clearSelection() {
@@ -186,9 +246,18 @@ export class GraphVizualization {
     const clusterPanel = document.getElementById('cluster-panel');
     if (clusterPanel) clusterPanel.classList.remove('visible');
     this.selectedNodeId = null;
-    // Restart simulation to relax layout
-    if (this.simulation) {
-      this.simulation.alpha(1).restart();
+    // Restart simulation to relax layout only if not already running
+    if (this.simulation && !this.isSimulationRunning) {
+      this.simulation.alpha(0.3).restart(); // Gentle restart
+      this.isSimulationRunning = true;
+
+      // Auto-stop after a short time to prevent performance issues
+      setTimeout(() => {
+        if (this.simulation && this.isSimulationRunning) {
+          this.simulation.stop();
+          this.isSimulationRunning = false;
+        }
+      }, 3000);
     }
   }
 
@@ -216,74 +285,74 @@ export class GraphVizualization {
   simulate() {
     // Gravity determines how strongly the nodes push / pull each other.
     // In effect, the lower the number goes, the more spread out the graph will be.
-    const gravity = -40;
-
-    const forceManyBodyInstance = forceManyBody().strength(gravity);
-
-    const forceLinkInstance = forceLink(this.graphDataProvider.getFilteredEdges())
-      .id((d: any) => d.id)
-      .distance(150)
-      .strength((edge: any) => {
-        // Want space-challenge-opp links to dominate
-        if (edge.type === 'child') {
-          return 0.7;
-        }
-        return 0.2;
-      });
-
-    const spaceEdges = this.graphDataProvider.getSpaceEdges();
-
-    const forceLinkSpacesInstance = forceLink(spaceEdges)
-      .id((d: any) => d.id)
-      .distance(1500)
-      .strength(1);
-
-    const forceCollisionInstance = forceCollide()
-      .radius((d: any) => {
-        if (d.type === 'space') {
-          return d.r * 5;
-        }
-        return d.r;
-      })
-      .strength(100)
-      .iterations(1);
-
     const filteredNodes: any = this.graphDataProvider.getFilteredNodes();
+    const nodeCount = filteredNodes.length;
+
+    // Performance optimization: adjust forces based on node count
+    const isLargeGraph = nodeCount > 200;
+    const gravity = isLargeGraph ? -20 : -40; // Weaker gravity for large graphs
+
     // Defensive: filter out links whose source/target is not in filteredNodes
     const nodeIds = new Set(filteredNodes.map((n: any) => n.id));
     const safeEdges = this.graphDataProvider.getFilteredEdges().filter((e: any) => nodeIds.has(e.sourceID) && nodeIds.has(e.targetID));
     const safeSpaceEdges = this.graphDataProvider.getSpaceEdges().filter((e: any) => nodeIds.has(e.sourceID) && nodeIds.has(e.targetID));
+
+    // Performance optimization: adjust simulation parameters based on node count
+    const alphaDecay = isLargeGraph ? 0.05 : 0.0228; // Much faster convergence for large graphs
+    const velocityDecay = isLargeGraph ? 0.8 : 0.4; // Higher friction for large graphs
+    const alphaMin = isLargeGraph ? 0.1 : 0.001; // Stop much earlier for large graphs
+
     this.simulation = forceSimulation(filteredNodes)
+      .alphaDecay(alphaDecay)
+      .velocityDecay(velocityDecay)
+      .alphaMin(alphaMin)
       .force('link', forceLink(safeEdges)
         .id((d: any) => d.id)
-        .distance(150)
+        .distance(isLargeGraph ? 100 : 150) // Shorter links for large graphs
         .strength((edge: any) => {
+          const baseStrength = isLargeGraph ? 0.1 : 0.2; // Weaker links for large graphs
           if (edge.type === 'child') {
-            return 0.7;
+            return baseStrength * 3.5; // Maintain ratio
           }
-          return 0.2;
+          return baseStrength;
         }))
       .force('linkSpaces', forceLink(safeSpaceEdges)
         .id((d: any) => d.id)
-        .distance(1500)
-        .strength(1))
+        .distance(isLargeGraph ? 800 : 1500) // Shorter space links for large graphs
+        .strength(isLargeGraph ? 0.5 : 1)) // Weaker space links
       .force('charge', forceManyBody().strength(gravity))
       .force('collision', forceCollide()
         .radius((d: any) => {
           if (d.type === 'space') {
-            return d.r * 5;
+            return d.r * (isLargeGraph ? 3 : 5); // Smaller collision radius for large graphs
           }
           return d.r;
         })
-        .strength(100)
+        .strength(isLargeGraph ? 50 : 100) // Weaker collision for large graphs
         .iterations(1))
       .force('center', forceCenter(this.width / 2, this.height / 2));
 
+    // Performance optimization: throttle animation updates for large graphs
+    let tickCounter = 0;
+    const tickSkip = isLargeGraph ? 5 : 1; // Skip more frames for large graphs
+
     this.simulation.on('tick', () => {
-      this.animateNode();
-      this.animateLinks();
+      tickCounter++;
+      if (tickCounter % tickSkip === 0) {
+        this.animateNode();
+        this.animateLinks();
+      }
     });
-    //this.simulation.tick(10);
+
+    this.simulation.on('end', () => {
+      this.isSimulationRunning = false;
+      console.log('Force simulation completed naturally');
+    });
+
+    // Performance optimization: pre-run simulation ticks for initial stabilization
+    if (isLargeGraph) {
+      this.simulation.tick(50); // More pre-calculated positions for large graphs
+    }
   }
 
   private displayNodes() {
@@ -386,15 +455,34 @@ export class GraphVizualization {
       .append('g')
       .attr('class', 'map')
       .style('opacity', 0);
+
+    // Check if this is a world map for styling
     const mapFeatures = this.mapDataProvider.getSelectedMap().features;
+    const selectedMapPath = this.mapDataProvider.getSelectedMapPath();
+    const isWorldMap = selectedMapPath.includes('world');
+
+    // For world maps, explicitly ensure no background sphere is rendered
+    // Remove any existing sphere/background elements
+    this.mapGroup.selectAll('.sphere, .background').remove();
+
     this.map = this.mapGroup
-      .selectAll('path')
-      .data(mapFeatures, (d: any) => d.properties.name_en)
+      .selectAll('path.country')
+      .data(mapFeatures, (d: any, i: number) => {
+        // Try different property names for different map formats
+        const name = d.properties?.name_en || d.properties?.NAME || d.properties?.name || d.id || i;
+        return name;
+      })
       .join('path')
-      .attr('id', (d: any) => d.properties.name_en)
+      .attr('class', 'country')
+      .attr('id', (d: any, i: number) => {
+        const name = d.properties?.name_en || d.properties?.NAME || d.properties?.name || d.id || i;
+        return String(name);
+      })
       .attr('d', this.transformationHandler.geoGenerator)
-      .attr('fill', 'lightgray')
-      .attr('stroke', 'white');
+      .attr('fill', isWorldMap ? '#B0B0B0' : 'rgba(200, 200, 200, 0.6)') // Grey for world map countries
+      .attr('stroke', isWorldMap ? '#FFFFFF' : '#333') // White borders for world map
+      .attr('stroke-width', isWorldMap ? '0.5px' : '0.5px')
+      .style('pointer-events', 'none'); // Ensure countries don't interfere with node interactions
   }
 
   showMap() {
@@ -420,46 +508,84 @@ export class GraphVizualization {
   }
 
   fixLocationToMap(nodeType: string) {
+    console.log(`Attempting to fix ${nodeType} nodes to map locations...`);
+
+    // Check if map is displayed - better approach using the actual mapGroup
+    if (!this.mapGroup || this.mapGroup.empty() || this.mapGroup.style('opacity') === '0') {
+      console.warn('Map is not displayed! Please enable "Display Map" first.');
+      alert('Please enable "Display Map" first before moving contributors to location.');
+      return;
+    }
+
+    // Count nodes with location data
+    const nodesData = this.node.data();
+    const nodesWithLocation = nodesData.filter((node: any) => {
+      if (node.type !== nodeType) return false;
+      const lon = node.profile?.location?.lon;
+      const lat = node.profile?.location?.lat;
+      return lon && lat && lon !== 0 && lat !== 0;
+    });
+
+    console.log(`Found ${nodesWithLocation.length} ${nodeType} nodes with location data out of ${nodesData.filter((n: any) => n.type === nodeType).length} total ${nodeType} nodes`);
+
+    if (nodesWithLocation.length === 0) {
+      console.warn(`No ${nodeType} nodes have location data (lon/lat). Cannot move to map positions.`);
+      //alert(`No ${nodeType} nodes have location data. Make sure your data includes latitude and longitude information.`);
+      return;
+    }
+
     this.mapLocationHandler.fixNodeLocationToMap(this.node, nodeType);
     this.mapLocationHandler.registerNodeExpansion(this.node);
     this.transformationHandler.transformDisplay(750);
+
+    console.log(`Successfully moved ${nodesWithLocation.length} ${nodeType} nodes to their map locations.`);
   }
 
   unfixLocationFromMap(nodeType: string) {
+    console.log(`Unfixing ${nodeType} nodes from map locations...`);
     this.mapLocationHandler.unfixNodeLocationFromMap(this.node, nodeType);
     this.transformationHandler.transformDisplay(750);
+    console.log(`${nodeType} nodes are now free to move based on force simulation.`);
   }
 
   private animateNode() {
-    // Group nodes by proximity (10px radius)
     const nodes = this.graphDataProvider.getFilteredNodes();
-    const clusters: { x: number, y: number, count: number, members: any[] }[] = [];
-    const assigned = new Set();
-    const radius = 10;
-    for (let i = 0; i < nodes.length; i++) {
-      const ni = nodes[i] as any;
-      if (assigned.has(ni.id)) continue;
-      const group = [ni];
-      assigned.add(ni.id);
-      for (let j = i + 1; j < nodes.length; j++) {
-        const nj = nodes[j] as any;
-        if (assigned.has(nj.id)) continue;
-        const dx = ni.x - nj.x;
-        const dy = ni.y - nj.y;
-        if (Math.sqrt(dx * dx + dy * dy) < radius) {
-          group.push(nj);
-          assigned.add(nj.id);
+
+    // Performance optimization: Skip expensive clustering for large graphs or throttle it
+    const nodeCount = nodes.length;
+    const shouldCluster = nodeCount < 300; // Only cluster for smaller graphs
+
+    let clusters: { x: number, y: number, count: number, members: any[] }[] = [];
+
+    if (shouldCluster) {
+      // Group nodes by proximity (10px radius) - only for smaller graphs
+      const assigned = new Set();
+      const radius = 10;
+      for (let i = 0; i < nodes.length; i++) {
+        const ni = nodes[i] as any;
+        if (assigned.has(ni.id)) continue;
+        const group = [ni];
+        assigned.add(ni.id);
+        for (let j = i + 1; j < nodes.length; j++) {
+          const nj = nodes[j] as any;
+          if (assigned.has(nj.id)) continue;
+          const dx = ni.x - nj.x;
+          const dy = ni.y - nj.y;
+          if (Math.sqrt(dx * dx + dy * dy) < radius) {
+            group.push(nj);
+            assigned.add(nj.id);
+          }
         }
-      }
-      if (group.length > 1) {
-        // Compute average position
-        const avgX = group.reduce((sum, n) => sum + (n as any).x, 0) / group.length;
-        const avgY = group.reduce((sum, n) => sum + (n as any).y, 0) / group.length;
-        clusters.push({ x: avgX, y: avgY, count: group.length, members: group });
+        if (group.length > 1) {
+          // Compute average position
+          const avgX = group.reduce((sum, n) => sum + (n as any).x, 0) / group.length;
+          const avgY = group.reduce((sum, n) => sum + (n as any).y, 0) / group.length;
+          clusters.push({ x: avgX, y: avgY, count: group.length, members: group });
+        }
       }
     }
 
-    // Hide individual nodes in clusters, except if fanned out
+    // Update node positions
     this.node.attr('cx', (d: any) => (d as any).x)
       .attr('cy', (d: any) => (d as any).y)
       .style('display', (d: any) => {
@@ -467,80 +593,96 @@ export class GraphVizualization {
         if (this.fannedNodes && this.fannedNodes.length > 0) {
           if (this.fannedNodes.find((n: any) => n.id === d.id)) return '';
         }
-        // Otherwise, hide nodes that are in a cluster
-        for (const c of clusters) {
-          if (c.members.find((n: any) => n.id === d.id)) return 'none';
+        // Only hide nodes in clusters if clustering is enabled
+        if (shouldCluster) {
+          for (const c of clusters) {
+            if (c.members.find((n: any) => n.id === d.id)) return 'none';
+          }
         }
         return '';
       });
 
-    // Remove previous clusters
-    if (this.clusterGroup) this.clusterGroup.remove();
-    // Append cluster group directly to graphGroup, after nodesGroup, so clusters are on top
-    this.clusterGroup = this.graphGroup.append('g').attr('class', 'clusters');
-    // Draw cluster circles and badges
-    const self = this;
-    const clusterSelection = this.clusterGroup.selectAll('g.cluster')
-      .data(clusters)
-      .join('g')
-      .attr('class', 'cluster')
-      // Hide the cluster circle if it's fanned out
-      .style('display', (d: any) => {
-        if (this.fannedNodes && this.fannedNodes.length > 0 && this.fannedCluster === d) return 'none';
-        return '';
-      });
+    // Only create cluster visualizations for smaller graphs
+    if (shouldCluster) {
+      // Remove previous clusters
+      if (this.clusterGroup) this.clusterGroup.remove();
+      // Append cluster group directly to graphGroup, after nodesGroup, so clusters are on top
+      this.clusterGroup = this.graphGroup.append('g').attr('class', 'clusters');
 
-    // Draw/Update cluster circles (with larger invisible hitbox and hover effect)
-    clusterSelection.selectAll('circle.cluster-hitbox')
-      .data((d: any) => [d])
-      .join('circle')
-      .attr('class', 'cluster-hitbox')
-      .attr('cx', (d: any) => d.x)
-      .attr('cy', (d: any) => d.y)
-      .attr('r', 28) // Larger than visible badge
-      .attr('fill', 'transparent')
-      .style('cursor', 'pointer')
-      .on('click', (event: any, d: any) => {
-        event.stopPropagation();
-        self.showClusterPanel(d);
-      });
+      // Draw cluster circles and badges
+      const self = this;
+      const clusterSelection = this.clusterGroup.selectAll('g.cluster')
+        .data(clusters)
+        .join('g')
+        .attr('class', 'cluster')
+        // Hide the cluster circle if it's fanned out
+        .style('display', (d: any) => {
+          if (this.fannedNodes && this.fannedNodes.length > 0 && this.fannedCluster === d) return 'none';
+          return '';
+        });
 
-    clusterSelection.selectAll('circle.cluster-badge')
-      .data((d: any) => [d])
-      .join('circle')
-      .attr('class', 'cluster-badge')
-      .attr('cx', (d: any) => d.x)
-      .attr('cy', (d: any) => d.y)
-      .attr('r', 18)
-      .attr('fill', '#eee')
-      .attr('stroke', '#333')
-      .attr('stroke-width', 2)
-      .style('cursor', 'pointer')
-      .on('click', (event: any, d: any) => {
-        event.stopPropagation();
-        self.showClusterPanel(d);
-      })
-      .on('mouseover', function (this: SVGCircleElement) { d3.select(this).attr('stroke', '#007bff').attr('stroke-width', 4); })
-      .on('mouseout', function (this: SVGCircleElement) { d3.select(this).attr('stroke', '#333').attr('stroke-width', 2); });
+      // Draw/Update cluster circles (with larger invisible hitbox and hover effect)
+      clusterSelection.selectAll('circle.cluster-hitbox')
+        .data((d: any) => [d])
+        .join('circle')
+        .attr('class', 'cluster-hitbox')
+        .attr('cx', (d: any) => d.x)
+        .attr('cy', (d: any) => d.y)
+        .attr('r', 28) // Larger than visible badge
+        .attr('fill', 'transparent')
+        .style('cursor', 'pointer')
+        .on('click', (event: any, d: any) => {
+          event.stopPropagation();
+          self.showClusterPanel(d);
+        });
 
-    // Draw/Update cluster badges (show +count)
-    clusterSelection.selectAll('text')
-      .data((d: any) => [d])
-      .join('text')
-      .attr('x', (d: any) => d.x)
-      .attr('y', (d: any) => d.y + 5)
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '1.1em')
-      .attr('font-weight', 'bold')
-      .attr('fill', '#333')
-      .text((d: any) => '+' + d.count);
+      clusterSelection.selectAll('circle.cluster-badge')
+        .data((d: any) => [d])
+        .join('circle')
+        .attr('class', 'cluster-badge')
+        .attr('cx', (d: any) => d.x)
+        .attr('cy', (d: any) => d.y)
+        .attr('r', 18)
+        .attr('fill', '#eee')
+        .attr('stroke', '#333')
+        .attr('stroke-width', 2)
+        .style('cursor', 'pointer')
+        .on('click', (event: any, d: any) => {
+          event.stopPropagation();
+          self.showClusterPanel(d);
+        })
+        .on('mouseover', function (this: SVGCircleElement) { d3.select(this).attr('stroke', '#007bff').attr('stroke-width', 4); })
+        .on('mouseout', function (this: SVGCircleElement) { d3.select(this).attr('stroke', '#333').attr('stroke-width', 2); });
 
-    // After drawing clusters, move clusterGroup to end of graphGroup to ensure on top
-    if (this.clusterGroup) this.graphGroup.node().appendChild(this.clusterGroup.node());
+      // Draw/Update cluster badges (show +count)
+      clusterSelection.selectAll('text')
+        .data((d: any) => [d])
+        .join('text')
+        .attr('x', (d: any) => d.x)
+        .attr('y', (d: any) => d.y + 5)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '1.1em')
+        .attr('font-weight', 'bold')
+        .attr('fill', '#333')
+        .text((d: any) => '+' + d.count);
+
+      // After drawing clusters, move clusterGroup to end of graphGroup to ensure on top
+      if (this.clusterGroup) this.graphGroup.node().appendChild(this.clusterGroup.node());
+    }
   }
 
   private animateLinks() {
+    // Performance optimization: simplify link drawing for large graphs
+    const nodeCount = this.graphDataProvider.getFilteredNodes().length;
+    const isLargeGraph = nodeCount > 200;
+
     this.link.attr('d', (d: any) => {
+      // For large graphs, use straight lines to improve performance
+      if (isLargeGraph) {
+        return `M${d.source.x},${d.source.y}L${d.target.x},${d.target.y}`;
+      }
+
+      // For smaller graphs, keep the curved links
       const mid: [number, number] = [
         (d.source.x + d.target.x) / 2,
         (d.source.y + d.target.y) / 2,
@@ -597,9 +739,18 @@ export class GraphVizualization {
       n.fy = cluster.y + 60 * Math.sin(angle);
       self.fannedNodes.push(n);
     });
-    // Restart simulation to animate nodes to new positions
-    if (self.simulation) {
-      self.simulation.alpha(1).restart();
+    // Restart simulation to animate nodes to new positions - but gently
+    if (self.simulation && !self.isSimulationRunning) {
+      self.simulation.alpha(0.5).restart();
+      self.isSimulationRunning = true;
+
+      // Auto-stop after animation time
+      setTimeout(() => {
+        if (self.simulation && self.isSimulationRunning) {
+          self.simulation.stop();
+          self.isSimulationRunning = false;
+        }
+      }, 5000);
     }
     // On background click, reset
     self.svg.on('click.fanout', function () {
@@ -783,4 +934,530 @@ export class GraphVizualization {
       })
       .style('filter', ''); // Remove glow from links
   }
+
+  // =================================
+  // KUMU.IO-INSPIRED FEATURES
+  // =================================
+
+  private initializeControlPanel() {
+    // Create control panel toggle button if it doesn't exist
+    if (!document.getElementById('control-panel-toggle')) {
+      this.createControlPanelToggle();
+    }
+
+    // Load control panel HTML if it doesn't exist
+    if (!document.getElementById('network-control-panel')) {
+      this.loadControlPanel();
+    }
+
+    // Search bar functionality is handled by existing JavaScript in index.html
+    // SmartSearch component (which creates overlay divs) is only used in control panel
+  }
+
+  private createControlPanelToggle() {
+    const toggle = document.createElement('button');
+    toggle.id = 'control-panel-toggle';
+    toggle.innerHTML = '⚙️';
+    toggle.title = 'Open Network Analysis Panel';
+    toggle.style.cssText = `
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      z-index: 1001;
+      background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(10,110,138,0.3);
+      transition: all 0.2s;
+    `;
+
+    toggle.addEventListener('click', () => this.toggleControlPanel());
+    document.body.appendChild(toggle);
+  }
+
+  private async loadControlPanel() {
+    try {
+      // Load CSS
+      const cssLink = document.createElement('link');
+      cssLink.rel = 'stylesheet';
+      cssLink.href = 'network-control-panel.css';
+      document.head.appendChild(cssLink);
+
+      const smartSearchCss = document.createElement('link');
+      smartSearchCss.rel = 'stylesheet';
+      smartSearchCss.href = 'smart-search.css';
+      document.head.appendChild(smartSearchCss);
+
+      // Load HTML
+      const response = await fetch('network-control-panel.html');
+      const html = await response.text();
+      document.body.insertAdjacentHTML('beforeend', html);
+
+      // Initialize control panel functionality
+      this.setupControlPanelEvents();
+      this.updateNetworkMetrics();
+
+    } catch (error) {
+      console.warn('Could not load control panel:', error);
+      // Create a basic inline control panel as fallback (without insights section)
+      this.createInlineControlPanel();
+    }
+  }
+
+  private createInlineControlPanel() {
+    const panelHtml = `
+      <div id="network-control-panel" class="network-control-panel" style="
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 320px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+        z-index: 1000;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        font-family: 'Inter', sans-serif;
+      ">
+        <div style="padding: 20px; background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%); color: white;">
+          <h2 style="margin: 0; font-size: 18px;">Network Explorer</h2>
+          <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 13px;">Control your network visualization</p>
+        </div>
+        <div style="padding: 16px 20px;">
+          <h3 style="margin: 0 0 12px 0; color: #0A6E8A; font-size: 14px; font-weight: 600;">Visual Controls</h3>
+          <button onclick="window.graphVisualization?.updateVisualMode?.('centrality')" style="
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+            color: white;
+            cursor: pointer;
+            margin-bottom: 8px;
+          ">📊 Centrality View</button>
+          <button onclick="window.graphVisualization?.updateVisualMode?.('community')" style="
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+            color: white;
+            cursor: pointer;
+            margin-bottom: 8px;
+          ">🏘️ Communities</button>
+          <button onclick="window.graphVisualization?.updateVisualMode?.('geographic')" style="
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+            color: white;
+            cursor: pointer;
+          ">🌍 Geographic</button>
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', panelHtml);
+    this.setupControlPanelEvents();
+  }
+
+  private setupControlPanelEvents() {
+    // Update metrics periodically
+    setInterval(() => {
+      this.updateNetworkMetrics();
+    }, 5000);
+
+    // Setup filter controls
+    const nodeTypeFilters = document.querySelectorAll('[data-type]');
+    nodeTypeFilters.forEach(filter => {
+      filter.addEventListener('change', () => this.updateFilters());
+    });
+
+    // Setup visual controls
+    const nodeSizeMetric = document.getElementById('node-size-metric') as HTMLSelectElement;
+    if (nodeSizeMetric) {
+      nodeSizeMetric.addEventListener('change', () => {
+        this.updateVisualMode('centrality');
+      });
+    }
+  }
+
+  private toggleControlPanel() {
+    this.controlPanelOpen = !this.controlPanelOpen;
+    const panel = document.getElementById('network-control-panel');
+    if (panel) {
+      if (this.controlPanelOpen) {
+        panel.classList.add('open');
+        panel.style.transform = 'translateX(0)';
+        this.updateNetworkMetrics();
+      } else {
+        panel.classList.remove('open');
+        panel.style.transform = 'translateX(100%)';
+      }
+    }
+  }
+
+  public updateNetworkMetrics() {
+    const metrics = this.insightEngine.getNetworkMetrics();
+
+    // Update main insights section metrics cards
+    const metricsCardsContainer = document.getElementById('network-metrics-cards');
+    if (metricsCardsContainer) {
+      metricsCardsContainer.innerHTML = `
+        <div class="metric-card" style="
+          background: white;
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+          border: 1px solid #e8f1f5;
+        ">
+          <div style="font-size: 32px; font-weight: 700; color: #0A6E8A; margin-bottom: 4px;">${metrics.totalNodes}</div>
+          <div style="color: #556B7D; font-size: 14px; font-weight: 500;">Total Nodes</div>
+        </div>
+        <div class="metric-card" style="
+          background: white;
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+          border: 1px solid #e8f1f5;
+        ">
+          <div style="font-size: 32px; font-weight: 700; color: #0A6E8A; margin-bottom: 4px;">${metrics.totalEdges}</div>
+          <div style="color: #556B7D; font-size: 14px; font-weight: 500;">Connections</div>
+        </div>
+        <div class="metric-card" style="
+          background: white;
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+          border: 1px solid #e8f1f5;
+        ">
+          <div style="font-size: 32px; font-weight: 700; color: #0A6E8A; margin-bottom: 4px;">${metrics.avgDegree}</div>
+          <div style="color: #556B7D; font-size: 14px; font-weight: 500;">Avg. Connections</div>
+        </div>
+        <div class="metric-card" style="
+          background: white;
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+          border: 1px solid #e8f1f5;
+        ">
+          <div style="font-size: 32px; font-weight: 700; color: #0A6E8A; margin-bottom: 4px;">${metrics.density}%</div>
+          <div style="color: #556B7D; font-size: 14px; font-weight: 500;">Network Density</div>
+        </div>
+      `;
+    }
+
+    // Update control panel metrics (smaller version)
+    const totalNodesEl = document.getElementById('total-nodes');
+    const totalEdgesEl = document.getElementById('total-edges');
+    const avgDegreeEl = document.getElementById('avg-degree');
+    const densityEl = document.getElementById('density');
+
+    if (totalNodesEl) totalNodesEl.textContent = metrics.totalNodes.toString();
+    if (totalEdgesEl) totalEdgesEl.textContent = metrics.totalEdges.toString();
+    if (avgDegreeEl) avgDegreeEl.textContent = metrics.avgDegree.toString();
+    if (densityEl) densityEl.textContent = `${metrics.density}%`;
+  }
+
+  public generateSmartInsights() {
+    const insights = this.insightEngine.generateBasicInsights();
+
+    // Update main insights section only
+    const mainContainer = document.getElementById('insights-container-main');
+    if (mainContainer) {
+      mainContainer.innerHTML = insights.map(insight => `
+        <div class="insight-card" onclick="window.graphVisualization?.highlightInsight?.('${insight.type}', ${JSON.stringify(insight.nodes).replace(/"/g, '&quot;')})" style="
+          background: white;
+          border-radius: 12px;
+          padding: 24px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+          border: 1px solid #e8f1f5;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          position: relative;
+          overflow: hidden;
+        ">
+          <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+          "></div>
+          <div style="
+            font-size: 12px;
+            font-weight: 700;
+            color: #068293;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+          ">
+            ${insight.type.replace('_', ' ')}
+          </div>
+          <div style="
+            font-size: 18px;
+            font-weight: 600;
+            color: #2C3E50;
+            line-height: 1.4;
+            margin-bottom: 12px;
+          ">
+            ${insight.title}
+          </div>
+          <div style="
+            font-size: 14px;
+            color: #556B7D;
+            line-height: 1.5;
+          ">
+            ${insight.description || 'Click to highlight these nodes in the network'}
+          </div>
+          <div style="
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e8f1f5;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            font-size: 12px;
+            color: #068293;
+            font-weight: 600;
+          ">
+            <span>${insight.nodes.length} nodes affected</span>
+            <span style="margin-left: auto;">Click to explore →</span>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  public highlightInsight(type: string, nodeIds: string[]) {
+    // Clear previous highlights
+    this.clearSelection();
+
+    // Highlight the insight nodes
+    if (this.node) {
+      (this.node as any).transition().duration(300)
+        .style('opacity', (d: any) => nodeIds.includes(d.id) ? 1 : 0.3)
+        .attr('stroke', (d: any) => nodeIds.includes(d.id) ? '#e74c3c' : '#bfc9d1')
+        .attr('stroke-width', (d: any) => nodeIds.includes(d.id) ? 4 : 1);
+    }
+
+    // Zoom to fit the highlighted nodes if there are few enough
+    if (nodeIds.length <= 10) {
+      this.zoomToNodes(nodeIds);
+    }
+  }
+
+  private zoomToNodes(nodeIds: string[]) {
+    const nodes = this.graphDataProvider.getFilteredNodes().filter((n: any) => nodeIds.includes(n.id));
+    if (nodes.length === 0) return;
+
+    // Calculate bounding box
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    nodes.forEach((node: any) => {
+      if (node.x < minX) minX = node.x;
+      if (node.x > maxX) maxX = node.x;
+      if (node.y < minY) minY = node.y;
+      if (node.y > maxY) maxY = node.y;
+    });
+
+    // Add padding
+    const padding = 100;
+    minX -= padding;
+    maxX += padding;
+    minY -= padding;
+    maxY += padding;
+
+    // Calculate center and scale
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+    const width = maxX - minX;
+    const height = maxY - minY;
+    const scale = Math.min(this.width / width, this.height / height) * 0.8;
+
+    // Apply zoom
+    if (this.transformationHandler && this.svg) {
+      this.svg.transition().duration(750).call(
+        this.transformationHandler['d3Zoom'].transform,
+        d3.zoomIdentity
+          .translate(this.width / 2, this.height / 2)
+          .scale(scale)
+          .translate(-centerX, -centerY)
+      );
+    }
+  }
+
+  public updateVisualMode(mode: 'default' | 'centrality' | 'community' | 'geographic') {
+    this.currentVisualMode = mode;
+    this.updateNodeStyling();
+  }
+
+  private updateNodeStyling() {
+    if (!this.node) return;
+
+    switch (this.currentVisualMode) {
+      case 'centrality':
+        this.applyCentralityBasedStyling();
+        break;
+      case 'community':
+        this.applyCommunityBasedStyling();
+        break;
+      case 'geographic':
+        this.applyGeographicBasedStyling();
+        break;
+      default:
+        this.applyDefaultStyling();
+        break;
+    }
+  }
+
+  private applyCentralityBasedStyling() {
+    if (!this.node) return;
+
+    // Calculate centrality for all nodes
+    const centralityData = this.graphDataProvider.getFilteredNodes().map((node: any) => ({
+      ...node,
+      centrality: this.insightEngine.calculateNodeCentrality(node.id)
+    }));
+
+    // Create scale for centrality-based sizing
+    const maxCentrality = Math.max(...centralityData.map(n => n.centrality.degree));
+    const centralityScale = scaleLinear()
+      .domain([0, maxCentrality])
+      .range([8, this.maxNodeRadius * 1.5]);
+
+    // Apply centrality-based styling
+    (this.node as any).select('circle')
+      .transition().duration(500)
+      .attr('r', (d: any) => {
+        const nodeData = centralityData.find(n => n.id === d.id);
+        return nodeData ? centralityScale(nodeData.centrality.degree) : 14;
+      })
+      .attr('fill', (d: any) => {
+        const nodeData = centralityData.find(n => n.id === d.id);
+        if (!nodeData) return '#7dafff';
+
+        const normalizedCentrality = nodeData.centrality.normalized;
+        if (normalizedCentrality > 0.1) return '#e74c3c'; // High centrality - red
+        if (normalizedCentrality > 0.05) return '#f39c12'; // Medium centrality - orange
+        return '#3498db'; // Low centrality - blue
+      })
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2);
+  }
+
+  private applyCommunityBasedStyling() {
+    // This would implement community detection and color coding
+    // For now, use a simplified version based on node types
+    if (!this.node) return;
+
+    const communityColors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#34495e'];
+    let colorIndex = 0;
+
+    const nodeTypes = new Set(this.graphDataProvider.getFilteredNodes().map((n: any) => n.type));
+    const typeColorMap = new Map();
+
+    nodeTypes.forEach(type => {
+      typeColorMap.set(type, communityColors[colorIndex % communityColors.length]);
+      colorIndex++;
+    });
+
+    (this.node as any).select('circle')
+      .transition().duration(500)
+      .attr('fill', (d: any) => typeColorMap.get(d.type) || '#7dafff');
+  }
+
+  private applyGeographicBasedStyling() {
+    if (!this.node) return;
+
+    const locationColors = new Map();
+    const locations = new Set(this.graphDataProvider.getFilteredNodes()
+      .map((n: any) => n.profile?.location?.city || 'Unknown'));
+
+    const geoColors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c'];
+    let colorIndex = 0;
+
+    locations.forEach(location => {
+      locationColors.set(location, geoColors[colorIndex % geoColors.length]);
+      colorIndex++;
+    });
+
+    (this.node as any).select('circle')
+      .transition().duration(500)
+      .attr('fill', (d: any) => {
+        const location = d.profile?.location?.city || 'Unknown';
+        return locationColors.get(location) || '#7dafff';
+      });
+  }
+
+  private applyDefaultStyling() {
+    if (!this.node) return;
+
+    (this.node as any).select('circle')
+      .transition().duration(500)
+      .attr('r', (d: any) => this.nodeScale(d.weight) || 14)
+      .attr('fill', (d: any) => this.nodeColorScale(d.group || d.type) || '#7dafff')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2);
+  }
+
+  private handleSearchResult(result: any) {
+    if (result.type === 'node') {
+      // Focus on the selected node
+      this.selectedNodeId = result.item.id;
+      this.showNodeInfoPanel(result.item);
+      this.highlightNodeNeighbors(result.item);
+      this.zoomToNode(result.item);
+    } else if (result.type === 'insight') {
+      // Highlight the insight
+      this.highlightInsight(result.item.type, result.item.nodes);
+    }
+  }
+
+  private updateFilters() {
+    // This would update the graph filters based on control panel settings
+    // For now, just refresh the display
+    this.refreshDisplayedGraph();
+    if (this.smartSearch) {
+      this.smartSearch.refresh();
+    }
+  }
+
+  private exportInsights() {
+    const insights = this.insightEngine.generateBasicInsights();
+    const metrics = this.insightEngine.getNetworkMetrics();
+
+    const exportData = {
+      timestamp: new Date().toISOString(),
+      networkMetrics: metrics,
+      insights: insights.map(insight => ({
+        type: insight.type,
+        title: insight.title,
+        description: insight.description,
+        affectedNodes: insight.nodes.length,
+        nodes: insight.nodes
+      }))
+    };
+
+    // Create and download JSON file
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `network-insights-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // Override the original refreshDisplayedGraph to update insights
 }

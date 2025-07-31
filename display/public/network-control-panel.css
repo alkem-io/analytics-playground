@@ -1,0 +1,260 @@
+/* Enhanced Network Control Panel - Kumu.io inspired */
+
+.network-control-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 320px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+  z-index: 1000;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.network-control-panel.open {
+  transform: translateX(0);
+}
+
+.control-panel-header {
+  padding: 20px;
+  background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.control-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8f1f5;
+}
+
+.control-section h3 {
+  margin: 0 0 12px 0;
+  color: #0A6E8A;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Network Metrics Display */
+.network-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metric-card {
+  background: #f8fbfd;
+  border: 1px solid #e8f1f5;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0A6E8A;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Filter Controls */
+.filter-group {
+  margin-bottom: 16px;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1e3ea;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #068293;
+}
+
+/* Multi-select for node types */
+.multi-select {
+  border: 1px solid #d1e3ea;
+  border-radius: 6px;
+  background: white;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.multi-select-option {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s;
+}
+
+.multi-select-option:hover {
+  background: #f0f8fa;
+}
+
+.multi-select-option.selected {
+  background: #e6f3f7;
+  color: #0A6E8A;
+}
+
+/* Range sliders */
+.range-slider {
+  width: 100%;
+  margin: 8px 0;
+}
+
+.range-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Action buttons */
+.action-button {
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+}
+
+.action-button.primary {
+  background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+  color: white;
+}
+
+.action-button.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(6, 130, 147, 0.3);
+}
+
+.action-button.secondary {
+  background: #f8fbfd;
+  color: #0A6E8A;
+  border: 1px solid #d1e3ea;
+}
+
+.action-button.secondary:hover {
+  background: #f0f8fa;
+  border-color: #068293;
+}
+
+/* Insights panel */
+.insights-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.insight-item {
+  padding: 10px;
+  background: #f8fbfd;
+  border: 1px solid #e8f1f5;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.insight-item:hover {
+  background: #f0f8fa;
+  border-color: #d1e3ea;
+  transform: translateY(-1px);
+}
+
+.insight-type {
+  font-size: 11px;
+  font-weight: 600;
+  color: #068293;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.insight-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Toggle switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #068293;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}

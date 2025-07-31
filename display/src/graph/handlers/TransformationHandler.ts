@@ -1,6 +1,6 @@
 import { zoom, ZoomBehavior } from 'd3-zoom';
 import { drag, DragBehavior } from 'd3-drag';
-import { geoAlbers, geoPath, GeoConicProjection } from 'd3-geo';
+import { geoAlbers, geoPath, GeoConicProjection, geoNaturalEarth1 } from 'd3-geo';
 import { max, min } from 'd3-array';
 
 export class TransformationHandler {
@@ -17,7 +17,7 @@ export class TransformationHandler {
   scale: number;
   translate: [number, number];
 
-  projection: GeoConicProjection;
+  projection: any; // Changed from GeoConicProjection to any to support different projection types
   geoGenerator: any;
 
   private d3Zoom: any = null;
@@ -32,15 +32,90 @@ export class TransformationHandler {
 
     this.scale = this.defaultScale;
     this.translate = this.defaultTranslation;
-    this.projection = geoAlbers().rotate([-30, 0, 0]);
+    this.projection = geoAlbers().rotate([-30, 0, 0]); // Default regional projection
     this.geoGenerator = geoPath().projection(this.projection);
   }
 
   projectionExtent(geoJson: any) {
-    // Increase the map scale by expanding the fitExtent area
-    // Old: this.projection.fitExtent([ [0, 0], [ this.width, this.height]], geoJson);
-    const scaleFactor = 1.3; // Moderate separation
-    this.projection.fitExtent([[0, 0], [this.width * scaleFactor, this.height * scaleFactor]], geoJson);
+    // Determine if this is a world map based on coordinate extent
+    const features = geoJson.features || [];
+    let minLng = Infinity, maxLng = -Infinity, minLat = Infinity, maxLat = -Infinity;
+    
+    // Calculate coordinate bounds
+    features.forEach((feature: any) => {
+      if (feature.geometry && feature.geometry.coordinates) {
+        this.extractCoordinates(feature.geometry.coordinates).forEach(([lng, lat]: [number, number]) => {
+          minLng = Math.min(minLng, lng);
+          maxLng = Math.max(maxLng, lng);
+          minLat = Math.min(minLat, lat);
+          maxLat = Math.max(maxLat, lat);
+        });
+      }
+    });
+
+    // Check if this is a world map (covers most of the globe)
+    const lngSpan = maxLng - minLng;
+    const latSpan = maxLat - minLat;
+    const isWorldMap = lngSpan > 300 || (lngSpan > 200 && latSpan > 100);
+    
+    console.log('TransformationHandler: Coordinate bounds:', { minLng, maxLng, minLat, maxLat });
+    console.log('TransformationHandler: Spans:', { lngSpan, latSpan });
+    console.log('TransformationHandler: Is world map:', isWorldMap);
+
+    // Use appropriate projection
+    if (isWorldMap) {
+      console.log('TransformationHandler: Using Natural Earth projection for world map');
+      this.projection = geoNaturalEarth1();
+    } else {
+      console.log('TransformationHandler: Using Albers projection for regional map');
+      this.projection = geoAlbers().rotate([-30, 0, 0]);
+    }
+    
+    this.geoGenerator = geoPath().projection(this.projection);
+    // Fit the projection to the actual SVG dimensions
+    // Leave some margin for positioning nodes around the map
+    const margin = 100; // pixels of margin
+    
+    console.log('TransformationHandler: Setting up projection with dimensions:', this.width, 'x', this.height);
+    console.log('TransformationHandler: Projection extent will be:', [margin, margin], 'to', [this.width - margin, this.height - margin]);
+    
+    this.projection.fitExtent([
+      [margin, margin], 
+      [this.width - margin, this.height - margin]
+    ], geoJson);
+    
+    // Test projection with known coordinates after setup
+    const testCoords = [
+      [4.3113461, 52.0799838], // Rotterdam
+      [4.8924534, 52.3730796], // Amsterdam  
+      [11.5753822, 48.1371079], // Munich
+    ];
+    
+    console.log('TransformationHandler: Testing projection after setup:');
+    testCoords.forEach(([lon, lat], index) => {
+      const projected = this.projection([lon, lat]);
+      const locationName = ['Rotterdam', 'Amsterdam', 'Munich'][index];
+      console.log(`  ${locationName} [${lon}, ${lat}] -> [${projected ? projected[0].toFixed(2) : 'null'}, ${projected ? projected[1].toFixed(2) : 'null'}]`);
+    });
+  }
+
+  // Helper method to recursively extract all coordinates from geometry
+  private extractCoordinates(coords: any): [number, number][] {
+    const result: [number, number][] = [];
+    
+    if (Array.isArray(coords)) {
+      if (coords.length === 2 && typeof coords[0] === 'number' && typeof coords[1] === 'number') {
+        // This is a coordinate pair [lng, lat]
+        result.push([coords[0], coords[1]]);
+      } else {
+        // This is an array of coordinates or coordinate arrays
+        coords.forEach(coord => {
+          result.push(...this.extractCoordinates(coord));
+        });
+      }
+    }
+    
+    return result;
   }
 
   transformCoordinates(x: number, y: number) {

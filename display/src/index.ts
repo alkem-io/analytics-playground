@@ -41,7 +41,13 @@ await graphDataProvider.loadData(graphDataFileLocation);
 
 
 const mapDataProvider = new MapDataProvider();
-const mapsToLoad = [ "maps/europe_geo.json", "maps/netherlands-with-regions_geo.json","maps/ireland-with-counties_geo.json"];
+
+const mapsToLoad = [
+  "maps/europe_geo.json",
+  "maps/netherlands-with-regions_geo.json",
+  "maps/ireland-with-counties_geo.json",
+  "maps/world.geo.json"
+];
 for (let i = 0; i < mapsToLoad.length; i++) {
   await mapDataProvider.loadMap(mapsToLoad[i]);
 }
@@ -64,6 +70,10 @@ const forceGraph = new GraphVizualization(
   2000, // width (increased)
   1000, // height (increased)
 );
+
+// Make the graph visualization globally accessible for the control panel
+(window as any).graphVisualization = forceGraph;
+(window as any).graphViz = forceGraph;
 
 graphSpaceSelectionControl.on('change', function () {
   const selectedSpaceOption = select(this);
@@ -218,7 +228,7 @@ if (graphSearchInputFS) {
   });
 }
 
-/// Lifecycle ///////////////////////
+/// Info Panels and Fullscreen Controls ///////////////////////
 
 // Hide info panels on load
 const nodeInfoPanel = document.getElementById('node-info-panel');

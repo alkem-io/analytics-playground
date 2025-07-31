@@ -1,5 +1,7 @@
 <head>
   <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="network-control-panel.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="smart-search.css" />
 </head>
 <body>
 <div class="container mt-5">
@@ -14,6 +16,7 @@
             <option id="europe-fs" value="maps/europe_geo.json" selected="true">Europe</option>
             <option id="netherlands-fs" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
             <option id="ireland-fs" value="maps/ireland-with-counties_geo.json" >Ireland</option>
+            <option id="world-fs" value="maps/world.geo.json">World</option>
           </select>
         </label>
         <label>Display Map
@@ -42,6 +45,7 @@
                 <option id="europe" value="maps/europe_geo.json" selected="true">Europe</option>
                 <option id="netherlands" value="maps/netherlands-with-regions_geo.json">Netherlands</option>
                 <option id="ireland" value="maps/ireland-with-counties_geo.json" >Ireland</option>
+                <option id="world" value="maps/world.geo.json">World</option>
               </select>
             </label>
             <label>Display Map
@@ -96,22 +100,126 @@
           <!-- Member list will be injected here -->
         </div>
       </div>
+      
+      <!-- Network Control Panel -->
+      <div id="network-control-panel" class="network-control-panel">
+        <div class="panel-header">
+          <h3>Network Analysis</h3>
+          <button id="panel-close" class="panel-close">&times;</button>
+        </div>
+        
+        <!-- Smart Search Section -->
+        <div class="panel-section smart-search-container">
+          <h4>Smart Search</h4>
+          <input type="text" id="smart-search-input" placeholder="Search nodes, patterns, or ask questions...">
+          <div id="smart-search-results" class="smart-search-results"></div>
+          <div id="search-filter-chips" class="filter-chips"></div>
+        </div>
+        
+        <!-- Visual Controls -->
+        <div class="panel-section">
+          <h4>Visual Mode</h4>
+          <div class="control-group">
+            <label>
+              <input type="radio" name="visual-mode" value="default" checked>
+              Default
+            </label>
+            <label>
+              <input type="radio" name="visual-mode" value="centrality">
+              Centrality
+            </label>
+            <label>
+              <input type="radio" name="visual-mode" value="community">
+              Communities
+            </label>
+            <label>
+              <input type="radio" name="visual-mode" value="geographic">
+              Geographic
+            </label>
+          </div>
+        </div>
+        
+        <!-- Network Metrics -->
+        <div class="panel-section">
+          <h4>Network Metrics</h4>
+          <div id="network-metrics" class="metrics-grid">
+            <!-- Metrics will be populated here -->
+          </div>
+        </div>
+        
+        <!-- Analysis Tools -->
+        <div class="panel-section">
+          <h4>Analysis Tools</h4>
+          <div class="tool-grid">
+            <button id="find-super-connectors" class="tool-btn">Find Super Connectors</button>
+            <button id="detect-communities" class="tool-btn">Detect Communities</button>
+            <button id="analyze-centrality" class="tool-btn">Analyze Centrality</button>
+            <button id="identify-bridges" class="tool-btn">Find Bridges</button>
+          </div>
+        </div>
+      </div>
+      
     </div> <!-- end .graph-container -->
   </div>
-  <div class="lifecycle">
-    <h2>Lifecycle Visualization</h2>
-    <div class="lifecycle-controls">
-      <label>Select Lifecycle:
-        <select id="lifecycle-selector" width="80">
-          <option id="Innovation Flow" value="data/lifecycle/innovation-flow.json" >Innovation Flow</option>
-          <option id="User Application" value="data/lifecycle/user-application.json" selected="true">User Application</option>
-          <option id="Organization Verification" value="data/lifecycle/organization-verification.json" >Organization Verification</option>
-        </select>
-      </label>
-      <br/>
-    </div>
-    <div class="lifecycle-container">
-      <svg id="lifecycle-svg"></svg>
+  
+  <!-- Smart Insights Section -->
+  <div class="insights-section" style="
+    background: linear-gradient(135deg, #f8fbfd 0%, #eef7fa 100%);
+    border-top: 2px solid #e1f0f5;
+    padding: 32px 24px;
+    margin: 0;
+  ">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+          <h2 style="margin: 0; color: #0A6E8A; font-size: 28px; font-weight: 700;">Smart Network Insights</h2>
+          <p style="margin: 8px 0 0 0; color: #556B7D; font-size: 16px;">Discover patterns and key relationships in your network</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button id="refresh-insights-main" class="insight-btn" style="
+            background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(10,110,138,0.25);
+            transition: all 0.2s;
+          ">🔍 Generate Insights</button>
+          <button id="export-insights" class="insight-btn" style="
+            background: white;
+            color: #0A6E8A;
+            border: 2px solid #0A6E8A;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+          ">📊 Export</button>
+        </div>
+      </div>
+      
+      <!-- Network Metrics Cards -->
+      <div id="network-metrics-cards" style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      ">
+        <!-- Metrics cards will be populated here -->
+      </div>
+      
+      <!-- Insights Grid -->
+      <div id="insights-container-main" class="insights-grid" style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
+      ">
+        <!-- Insights will be populated here -->
+      </div>
     </div>
   </div>
 </div>
@@ -190,4 +298,5 @@ window.addEventListener('DOMContentLoaded', function() {
   setupGraphSearch(document.getElementById('graph-search-input'));
 });
 </script>
+<script src="control-panel-integration.js"></script>
 </body>

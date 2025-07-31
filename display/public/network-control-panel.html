@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<div id="network-control-panel" class="network-control-panel">
+  <div class="control-panel-header">
+    <h2 style="margin: 0; font-size: 18px;">Network Explorer</h2>
+    <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 13px;">Discover insights in your network</p>
+  </div>
+
+  <!-- Network Overview Metrics -->
+  <div class="control-section">
+    <h3>Network Overview</h3>
+    <div class="network-metrics">
+      <div class="metric-card">
+        <div class="metric-value" id="total-nodes">420</div>
+        <div class="metric-label">Nodes</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="total-edges">1,247</div>
+        <div class="metric-label">Connections</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="avg-degree">5.9</div>
+        <div class="metric-label">Avg Degree</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="density">2.8%</div>
+        <div class="metric-label">Density</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smart Insights -->
+  <div class="control-section">
+    <h3>📊 Smart Insights</h3>
+    <div class="insights-list">
+      <div class="insight-item" onclick="highlightBridgeNodes()">
+        <div class="insight-type">Bridge Connectors</div>
+        <div class="insight-text">12 people connect different communities</div>
+      </div>
+      <div class="insight-item" onclick="highlightInfluencers()">
+        <div class="insight-type">Super Connectors</div>
+        <div class="insight-text">Top 5% most connected individuals</div>
+      </div>
+      <div class="insight-item" onclick="showGeographicClusters()">
+        <div class="insight-type">Geographic Clusters</div>
+        <div class="insight-text">3 major location-based groups found</div>
+      </div>
+      <div class="insight-item" onclick="detectCommunities()">
+        <div class="insight-type">Communities</div>
+        <div class="insight-text">7 distinct communities detected</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Focus & Filter -->
+  <div class="control-section">
+    <h3>🔍 Focus & Filter</h3>
+    
+    <div class="filter-group">
+      <label class="filter-label">Show Node Types:</label>
+      <div class="multi-select">
+        <div class="multi-select-option selected" data-type="user">
+          <input type="checkbox" checked> Contributors
+        </div>
+        <div class="multi-select-option selected" data-type="space">
+          <input type="checkbox" checked> Spaces
+        </div>
+        <div class="multi-select-option selected" data-type="organization">
+          <input type="checkbox" checked> Organizations
+        </div>
+        <div class="multi-select-option" data-type="subspace">
+          <input type="checkbox"> Subspaces
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Minimum Connections:</label>
+      <input type="range" class="range-slider" min="0" max="20" value="0" id="degree-filter">
+      <div class="range-values">
+        <span>0</span>
+        <span id="degree-value">0+</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">
+        <input type="checkbox" id="hide-isolated"> Hide Isolated Nodes
+      </label>
+      <label class="filter-label">
+        <input type="checkbox" id="focus-selection"> Focus on Selection
+      </label>
+    </div>
+  </div>
+
+  <!-- Visual Controls -->
+  <div class="control-section">
+    <h3>🎨 Visual Style</h3>
+    
+    <div class="filter-group">
+      <label class="filter-label">Node Size Based On:</label>
+      <select class="filter-input" id="node-size-metric">
+        <option value="degree">Connection Count</option>
+        <option value="betweenness">Betweenness Centrality</option>
+        <option value="weight">Weight/Influence</option>
+        <option value="uniform">Uniform Size</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Node Color Based On:</label>
+      <select class="filter-input" id="node-color-metric">
+        <option value="type">Node Type</option>
+        <option value="community">Community</option>
+        <option value="location">Geographic Location</option>
+        <option value="activity">Activity Level</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Link Thickness Based On:</label>
+      <select class="filter-input" id="link-width-metric">
+        <option value="weight">Connection Strength</option>
+        <option value="frequency">Interaction Frequency</option>
+        <option value="uniform">Uniform Width</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Layout Controls -->
+  <div class="control-section">
+    <h3>⚙️ Layout</h3>
+    
+    <div class="filter-group">
+      <label class="filter-label">Force Layout:</label>
+      <select class="filter-input" id="layout-algorithm">
+        <option value="force-directed">Force Directed</option>
+        <option value="circular">Circular</option>
+        <option value="hierarchical">Hierarchical</option>
+        <option value="geographic">Geographic</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Clustering:</label>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 13px;">Enable Smart Clustering</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="enable-clustering" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <button class="action-button primary" onclick="optimizeLayout()">
+      🎯 Optimize Layout
+    </button>
+  </div>
+
+  <!-- Analysis Tools -->
+  <div class="control-section">
+    <h3>📈 Analysis</h3>
+    
+    <button class="action-button secondary" onclick="findShortestPath()">
+      🛤️ Find Shortest Path
+    </button>
+    <button class="action-button secondary" onclick="analyzeInfluence()">
+      📊 Influence Analysis
+    </button>
+    <button class="action-button secondary" onclick="communityDetection()">
+      🏘️ Community Detection
+    </button>
+    <button class="action-button secondary" onclick="exportNetwork()">
+      📤 Export Network
+    </button>
+  </div>
+
+  <!-- Saved Views -->
+  <div class="control-section">
+    <h3>💾 Saved Views</h3>
+    
+    <div class="filter-group">
+      <input type="text" class="filter-input" placeholder="Save current view as..." id="view-name-input">
+      <button class="action-button secondary" onclick="saveCurrentView()" style="margin-top: 8px;">
+        💾 Save View
+      </button>
+    </div>
+
+    <div id="saved-views-list">
+      <div class="insight-item" onclick="loadView('overview')">
+        <div class="insight-type">Overview</div>
+        <div class="insight-text">Full network view</div>
+      </div>
+      <div class="insight-item" onclick="loadView('influencers')">
+        <div class="insight-type">Key Influencers</div>
+        <div class="insight-text">Most connected nodes</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Control Panel Toggle Button -->
+<button id="control-panel-toggle" style="
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1001;
+  background: linear-gradient(135deg, #0A6E8A 0%, #068293 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10,110,138,0.3);
+  transition: all 0.2s;
+">
+  ⚙️
+</button>

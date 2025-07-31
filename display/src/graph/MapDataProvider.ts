@@ -47,4 +47,8 @@ export class MapDataProvider {
     return loadedMap;
   }
 
+  getSelectedMapPath() {
+    return this.selectedMap;
+  }
+
 }

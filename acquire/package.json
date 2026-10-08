@@ -2,7 +2,7 @@
   "name": "@alkemio/analytics-playground-display-acquire",
   "version": "0.1.0",
   "description": "Alkemio Analytics display tool, enabling users to explore analytics + visualizations of data",
-  "author": "Alkemio Foundation",
+  "author": "Alkemio",
   "repository": {
     "type": "git",
     "url": "https://github.com/alkem-io/alkemio-playground.git"

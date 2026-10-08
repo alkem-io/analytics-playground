@@ -2,7 +2,7 @@
   "name": "@alkemio/visualizations",
   "version": "0.1.0",
   "description": "Alkemio Visualizations, enabling users to explore analytics + visualizations of data",
-  "author": "Alkemio Foundation",
+  "author": "Alkemio",
   "private": false,
   "license": "EUPL-1.2",
   "main": "dist/index.js",

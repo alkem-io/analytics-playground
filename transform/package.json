@@ -2,7 +2,7 @@
   "name": "@alkemio/analytics-playground-generate",
   "version": "0.1.0",
   "description": "Alkemio Analytics playground, for evaluating new ways of extracting value from the Alkemio domain model data",
-  "author": "Alkemio Foundation",
+  "author": "Alkemio",
   "private": false,
   "license": "EUPL-1.2",
   "main": "dist/index.js",
